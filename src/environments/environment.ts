@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    api_route: 'https://us-central1-milagros-0.cloudfunctions.net/'
 };
 
 /*
