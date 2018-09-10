@@ -1,21 +1,41 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-
-const httpHeaders = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
     constructor(
-        private http: HttpClient
+        public database: AngularFirestore,
+        public fireAuth: AngularFireAuth
     ) {}
 
-    index() {
-        const path = environment.api_route + 'helloWorld';
-        return this.http.get(path, httpHeaders);
+    current() {
+        return new Promise<any>((resolve, reject) => {
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    resolve(user);
+                } else {
+                    reject('No user logged');
+                }
+            });
+        });
+    }
+
+    update(value: any) {
+        return new Promise<any>((resolve, reject) => {
+            const user = firebase.auth().currentUser;
+
+            user.updateProfile({
+                displayName: value.name,
+                photoURL: user.photoURL
+            }).then(response => {
+                resolve(response);
+            }, error => {
+                reject(error);
+            });
+        });
     }
 }

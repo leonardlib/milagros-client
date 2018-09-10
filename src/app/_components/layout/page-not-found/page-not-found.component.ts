@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../../_services/user.service';
 
 @Component({
     selector: 'app-page-not-found',
@@ -7,15 +6,7 @@ import { UserService } from '../../../_services/user.service';
     styleUrls: ['./page-not-found.component.scss']
 })
 export class PageNotFoundComponent implements OnInit {
-    public users: any = [];
+    constructor() {}
 
-    constructor(
-        private userService: UserService
-    ) {}
-
-    ngOnInit() {
-        this.userService.index().subscribe(response => {
-            console.log(response);
-        });
-    }
+    ngOnInit() {}
 }

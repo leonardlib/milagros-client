@@ -1,4 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import '_variables.scss';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 .m-top-30p {
     margin-top: 30px;
+}
+
+.p-2 {
+    padding: 2%;
+}
+
+.p-5 {
+    padding: 5% !important;
+}
+
+.max-h-100 {
+    max-height: 100% !important;
+}
+
+
+.bg-primary {
+    background-color: $primary-color !important;
+}
+
+.text-primary {
+    color: $primary-color !important;
+}
+
+.text-black {
+    color: $black-color !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* label focus color */
+.input-field input:focus + label {
+    color: $primary-color !important;
+}
+/* label underline focus color */
+.input-field input:focus {
+    border-bottom: 1px solid $primary-color !important;
+    box-shadow: 0 1px 0 0 $primary-color !important;
 }
