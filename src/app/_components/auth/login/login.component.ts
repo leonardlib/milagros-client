@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private router: Router,
-        private utilsService: UtilsService
+        public utilsService: UtilsService
     ) {}
 
     ngOnInit() {
@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         this.authService.login(this.user).then(response => {
             this.router.navigate(['/home']);
         }, error => {
-            this.utilsService.showSnackbar('¡Ops!, verifica que la información sea correcta');
+            this.utilsService.showSnackbar('¡Ops!, verifica que la información sea correcta.');
         });
     }
 }

@@ -27,14 +27,16 @@
           <div class="col s12 center-align"><span>Puedes iniciar sesión con</span></div>
         </div>
         <div class="row">
-          <div class="col s12 m6"><a class="btn waves-effect blue darken-1 btn-block waves-block">Facebook</a></div>
-          <div class="col s12 m6"><a class="btn waves-effect deep-orange darken-2 btn-block waves-block">Google</a></div>
+          <div class="col s12 m6"><a class="btn waves-effect blue darken-1 btn-block waves-block" (click)="utilsService.facebookLogin()"><i class="fa fa-facebook"></i>&nbsp;
+              Facebook</a></div>
+          <div class="col s12 m6"><a class="btn waves-effect deep-orange darken-2 btn-block waves-block" (click)="utilsService.googleLogin()"><i class="fa fa-google"></i>&nbsp;
+              Google</a></div>
         </div>
         <div class="row">
-          <div class="col s12 center-align"><a class="text-primary cursor-pointer">¿No tengo cuenta?</a></div>
+          <div class="col s12 center-align"><a class="text-primary cursor-pointer" [routerLink]="['/auth/register']">¿No tengo cuenta?</a></div>
         </div>
         <div class="row">
-          <div class="col s12 center-align"><a class="text-black cursor-pointer">Olvidé mi contraseña</a></div>
+          <div class="col s12 center-align"><a class="text-black cursor-pointer" [routerLink]="['/auth/forgot-password']">Olvidé mi contraseña</a></div>
         </div>
       </form>
     </div>

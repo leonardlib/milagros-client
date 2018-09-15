@@ -7,6 +7,7 @@ import { PageNotFoundComponent } from './_components/layout/page-not-found/page-
 import { LoginComponent } from './_components/auth/login/login.component';
 import { RegisterComponent } from './_components/auth/register/register.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { SendPasswordResetEmailComponent } from './_components/auth/send-password-reset-email/send-password-reset-email.component';
 
 const routes: Routes = [
     {
@@ -14,7 +15,8 @@ const routes: Routes = [
             {
                 path: 'auth', children: [
                     { path: '', component: LoginComponent },
-                    { path: 'register', component: RegisterComponent }
+                    { path: 'register', component: RegisterComponent },
+                    { path: 'forgot-password', component: SendPasswordResetEmailComponent }
                 ]
             },
 

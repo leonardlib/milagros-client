@@ -26,13 +26,19 @@
                         span Puedes iniciar sesión con
                 .row
                     .col.s12.m6
-                        a.btn.waves-effect.blue.darken-1.btn-block.waves-block Facebook
+                        a.btn.waves-effect.blue.darken-1.btn-block.waves-block((click)="utilsService.facebookLogin()")
+                            i.fa.fa-facebook
+                            | &nbsp;
+                            | Facebook
                     .col.s12.m6
-                        a.btn.waves-effect.deep-orange.darken-2.btn-block.waves-block Google
+                        a.btn.waves-effect.deep-orange.darken-2.btn-block.waves-block((click)="utilsService.googleLogin()")
+                            i.fa.fa-google
+                            | &nbsp;
+                            | Google
                 .row
                     .col.s12.center-align
-                        a.text-primary.cursor-pointer ¿No tengo cuenta?
+                        a.text-primary.cursor-pointer([routerLink]="['/auth/register']") ¿No tengo cuenta?
                 .row
                     .col.s12.center-align
-                        a.text-black.cursor-pointer Olvidé mi contraseña
+                        a.text-black.cursor-pointer([routerLink]="['/auth/forgot-password']") Olvidé mi contraseña
 

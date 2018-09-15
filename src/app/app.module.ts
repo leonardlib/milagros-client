@@ -19,7 +19,8 @@ import { UserService } from './_services/user.service';
 import { LoginComponent } from './_components/auth/login/login.component';
 import { RegisterComponent } from './_components/auth/register/register.component';
 import { AuthService } from './_services/auth.service';
-import {AuthGuard} from './_guards/auth.guard';
+import { AuthGuard } from './_guards/auth.guard';
+import { SendPasswordResetEmailComponent } from './_components/auth/send-password-reset-email/send-password-reset-email.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import {AuthGuard} from './_guards/auth.guard';
         StartComponent,
         PageNotFoundComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        SendPasswordResetEmailComponent
     ],
     imports: [
         BrowserModule,

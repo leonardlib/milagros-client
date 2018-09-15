@@ -63,6 +63,16 @@ export class AuthService {
         });
     }
 
+    sendResetPasswordMail(user: User) {
+        return new Promise<any>((resolve, reject) => {
+            firebase.auth().sendPasswordResetEmail(user.email).then(response => {
+                resolve(response);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+
     logout(){
         return new Promise((resolve, reject) => {
             if (firebase.auth().currentUser) {

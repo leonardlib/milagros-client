@@ -2,6 +2,18 @@
 @import '_variables.scss';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+/* Font awesome icons */
+i {
+    font-family: FontAwesome !important;
+    font-style: normal !important;
+    vertical-align: top !important;
+}
+
+.fa-1-5x {
+    font-size: 1.5em !important;
+}
+/* End of font awesome icons */
+
 .m-top-30p {
     margin-top: 30px;
 }
