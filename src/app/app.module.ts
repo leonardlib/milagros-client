@@ -21,6 +21,8 @@ import { RegisterComponent } from './_components/auth/register/register.componen
 import { AuthService } from './_services/auth.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { SendPasswordResetEmailComponent } from './_components/auth/send-password-reset-email/send-password-reset-email.component';
+import { NavbarComponent } from './_components/layout/navbar/navbar.component';
+import { FooterComponent } from './_components/layout/footer/footer.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +32,9 @@ import { SendPasswordResetEmailComponent } from './_components/auth/send-passwor
         PageNotFoundComponent,
         LoginComponent,
         RegisterComponent,
-        SendPasswordResetEmailComponent
+        SendPasswordResetEmailComponent,
+        NavbarComponent,
+        FooterComponent
     ],
     imports: [
         BrowserModule,

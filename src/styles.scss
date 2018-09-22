@@ -14,22 +14,49 @@ i {
 }
 /* End of font awesome icons */
 
+/* Responsive footer */
+.min-height-100vh {
+    min-height: calc(100vh - 230px);
+}
+
+.page-footer {
+    background-color: transparent !important;
+    border-top: solid 5px $primary-color !important;
+    color: $black-color !important;
+}
+
+.footer-copyright {
+    background-color: $primary-color !important;
+}
+/* End of responsive footer */
+
 .m-top-30p {
     margin-top: 30px;
 }
 
 .p-2 {
-    padding: 2%;
+    padding: 2% !important;
 }
 
 .p-5 {
     padding: 5% !important;
 }
 
+.p-left-5 {
+    padding-left: 5% !important;
+}
+
+.p-right-5 {
+    padding-right: 5% !important;
+}
+
 .max-h-100 {
     max-height: 100% !important;
 }
 
+.m-bottom-0 {
+    margin-bottom: 0 !important;
+}
 
 .bg-primary {
     background-color: $primary-color !important;
@@ -45,6 +72,15 @@ i {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.brand-logo {
+    max-height: 64px !important;
+    padding: 10px 0!important;
+}
+
+.footer-logo {
+    max-height: 128px !important;
 }
 
 /* label focus color */

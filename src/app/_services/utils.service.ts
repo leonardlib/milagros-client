@@ -29,7 +29,7 @@ export class UtilsService {
 
     facebookLogin() {
         this.authService.facebookLogin().then(response => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/']);
         }, error => {
             this.showSnackbar('¡Ops!, ocurrió un error. Intenta de nuevo.');
         });
@@ -37,7 +37,7 @@ export class UtilsService {
 
     googleLogin() {
         this.authService.googleLogin().then(response => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/']);
         }, error => {
             this.showSnackbar('¡Ops!, ocurrió un error. Intenta de nuevo.');
         });

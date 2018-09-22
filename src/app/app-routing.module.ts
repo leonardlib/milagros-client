@@ -11,22 +11,19 @@ import { SendPasswordResetEmailComponent } from './_components/auth/send-passwor
 
 const routes: Routes = [
     {
-        path: '', component: UserInterfaceComponent, children: [
-            {
-                path: 'auth', children: [
-                    { path: '', component: LoginComponent },
-                    { path: 'register', component: RegisterComponent },
-                    { path: 'forgot-password', component: SendPasswordResetEmailComponent }
-                ]
-            },
-
-            { path: 'home', component: StartComponent, canActivate: [AuthGuard] },
-
-            { path: 'blank', component: PageNotFoundComponent },
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: '**', redirectTo: 'blank' },
+        path: 'auth', children: [
+            { path: '', component: LoginComponent },
+            { path: 'register', component: RegisterComponent },
+            { path: 'forgot-password', component: SendPasswordResetEmailComponent }
         ]
-    }
+    },
+    {
+        path: '', component: UserInterfaceComponent, children: [
+            { path: '', component: StartComponent, canActivate: [AuthGuard] },
+        ]
+    },
+    { path: 'blank', component: PageNotFoundComponent },
+    { path: '**', redirectTo: 'blank' },
 ];
 
 @NgModule({

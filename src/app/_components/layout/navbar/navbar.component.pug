@@ -1,0 +1,15 @@
+.navbar-fixed
+    nav
+        .nav-wrapper.p-left-5.p-right-5
+            img.cursor-pointer.brand-logo(src="assets/img/logo-2.png")
+            ul.right.hide-on-med-and-down(id="nav-mobile")
+                li([routerLinkActive]="'active'")
+                    a.cursor-pointer([routerLink]="['/']") Inicio
+                li([routerLinkActive]="'active'")
+                    a.cursor-pointer([routerLink]="['/pets']") Mascotas
+                li([routerLinkActive]="'active'")
+                    a.cursor-pointer([routerLink]="['/gift']") Donar
+                li([routerLinkActive]="'active'")
+                    a.cursor-pointer([routerLink]="['/milagros']") ¿Quiénes somos?
+                li([routerLinkActive]="'active'")
+                    a.cursor-pointer([routerLink]="['/login']") Iniciar sesión

@@ -23,11 +23,14 @@ export class RegisterComponent implements OnInit {
     }
 
     register() {
+        this.utilsService.showSnackbar('Registrando...');
         this.authService.register(this.user).then(response => {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/']);
         }, error => {
             if (error.code === 'auth/email-already-in-use') {
                 this.utilsService.showSnackbar('¡Ops!, este correo ya está siendo utilizado.');
+            } else if (error.code === 'auth/weak-password') {
+                this.utilsService.showSnackbar('¡Ops!, la contraseña debe ser mayor a 6 caracteres.');
             } else {
                 this.utilsService.showSnackbar('¡Ops!, ocurrió un error. Intenta de nuevo.');
             }

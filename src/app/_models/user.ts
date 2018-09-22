@@ -4,10 +4,12 @@ export class User {
     provider: string;
     email: string;
     password: string;
+    admin?: boolean;
 
     constructor() {
         this.name = '';
         this.image = '';
         this.provider = '';
+        this.admin = false;
     }
 }
