@@ -1,1 +1,10 @@
+gallery([items]="images", [thumb]="false", [autoPlay]="true", [counter]="false", [playerInterval]="5000",
+    [imageSize]="contain", [itemTemplate]="itemTemplate")
+ng-template(#itemTemplate="", let-index="index", let-type="type", let-data="data", let-currIndex="currIndex")
+    .container.h-100(*ngIf="type === 'image' && index === currIndex")
+        .row.bottom-align
+            .col.s12.left-align
+                h4 {{ data.title }}
+                a.btn.btn-block.waves-effect.bg-primary.white-text.waves-block() Ver Más
+
 .container.min-height-100vh

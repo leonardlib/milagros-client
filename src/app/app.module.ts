@@ -8,8 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { GalleryModule } from '@ngx-gallery/core';
+import { LightboxModule } from '@ngx-gallery/lightbox';
+import { GallerizeModule } from '@ngx-gallery/gallerize';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -23,6 +27,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { SendPasswordResetEmailComponent } from './_components/auth/send-password-reset-email/send-password-reset-email.component';
 import { NavbarComponent } from './_components/layout/navbar/navbar.component';
 import { FooterComponent } from './_components/layout/footer/footer.component';
+import { PostService } from './_services/post.service';
 
 @NgModule({
     declarations: [
@@ -46,13 +51,18 @@ import { FooterComponent } from './_components/layout/footer/footer.component';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
         AngularFireAuthModule,
+        AngularFireDatabaseModule,
         MatSnackBarModule,
+        GalleryModule.forRoot(),
+        LightboxModule.forRoot(),
+        GallerizeModule,
         AppRoutingModule
     ],
     providers: [
         UserService,
         AuthService,
-        AuthGuard
+        AuthGuard,
+        PostService
     ],
     bootstrap: [AppComponent]
 })
