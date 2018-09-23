@@ -1,5 +1,5 @@
 
-<gallery [items]="images" [thumb]="false" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" [itemTemplate]="itemTemplate"></gallery>
+<gallery id="postGallery" [items]="images" [thumb]="false" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" [itemTemplate]="itemTemplate"></gallery>
 <ng-template #itemTemplate="" let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
   <div class="container h-100" *ngIf="type === 'image' &amp;&amp; index === currIndex">
     <div class="row bottom-align">
@@ -9,4 +9,8 @@
     </div>
   </div>
 </ng-template>
-<div class="container min-height-100vh"></div>
+<div class="container min-height-100vh">
+  <ul>
+    <li *ngFor="let post of posts">{{ post | json }}</li>
+  </ul>
+</div>

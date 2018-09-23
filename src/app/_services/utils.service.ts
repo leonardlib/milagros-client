@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import {AuthService} from './auth.service';
-import {Router} from '@angular/router';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
+import { AngularFireList } from '@angular/fire/database';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -41,5 +43,15 @@ export class UtilsService {
         }, error => {
             this.showSnackbar('¡Ops!, ocurrió un error. Intenta de nuevo.');
         });
+    }
+
+    setKeys(ref: AngularFireList<any>) {
+        return ref.snapshotChanges().pipe(
+            map(changes =>
+                changes.map(c => ({
+                    key: c.payload.key, ...c.payload.val()
+                }))
+            )
+        );
     }
 }

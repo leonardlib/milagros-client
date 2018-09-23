@@ -5,10 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaterializeModule } from 'angular2-materialize';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { environment } from '../environments/environment';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GalleryModule } from '@ngx-gallery/core';

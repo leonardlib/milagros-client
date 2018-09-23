@@ -1,6 +1,7 @@
 export class Post {
+    key: number;
     title: string;
-    image_id: number;
+    main_image: any;
     content: string;
     author: string;
     date: string;
