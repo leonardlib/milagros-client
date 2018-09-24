@@ -60,6 +60,22 @@ i {
     margin-bottom: 0 !important;
 }
 
+.m-bottom-10p {
+    margin-bottom: 10px !important;
+}
+
+.m-top-10p {
+    margin-top: 10px !important;
+}
+
+.m-top-50p {
+    margin-top: 50px !important;
+}
+
+.m-bottom-50p {
+    margin-bottom: 50px !important;
+}
+
 .bg-primary {
     background-color: $primary-color !important;
 }
@@ -97,6 +113,39 @@ i {
     bottom: 0 !important;
     top: auto !important;
     position: absolute;
+}
+
+.text-justify {
+    text-align: justify !important;
+}
+
+/* Share buttons */
+.fb-bg-color {
+    background-color: #4267B2 !important;
+}
+
+.tw-bg-color {
+    background-color: #00acee !important;
+}
+
+.google-bg-color {
+    background-color: #DB4437 !important;
+}
+
+.wa-bg-color {
+    background-color: #25D366 !important;
+}
+
+.telegram-bg-color {
+    background-color: #0088cc !important;
+}
+
+.mail-bg-color {
+    background-color: #FF961C !important;
+}
+
+.link-bg-color {
+    background-color: #607D8B !important;
 }
 
 /* label focus color */

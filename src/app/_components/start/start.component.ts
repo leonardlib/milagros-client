@@ -40,7 +40,8 @@ export class StartComponent implements OnInit {
             this.galleryRef.addImage({
                 src: post.main_image.url,
                 thumb: post.main_image.url,
-                title: post.title
+                title: post.title,
+                uid: post.uid
             });
         });
     }

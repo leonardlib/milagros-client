@@ -8,6 +8,7 @@ import { LoginComponent } from './_components/auth/login/login.component';
 import { RegisterComponent } from './_components/auth/register/register.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { SendPasswordResetEmailComponent } from './_components/auth/send-password-reset-email/send-password-reset-email.component';
+import { PostContentComponent } from './_components/post/post-content/post-content.component';
 
 const routes: Routes = [
     {
@@ -20,6 +21,12 @@ const routes: Routes = [
     {
         path: '', component: UserInterfaceComponent, children: [
             { path: '', component: StartComponent, canActivate: [AuthGuard] },
+
+            {
+                path: 'post', children: [
+                    { path: 'content/:uid', component: PostContentComponent }
+                ]
+            }
         ]
     },
     { path: 'blank', component: PageNotFoundComponent },

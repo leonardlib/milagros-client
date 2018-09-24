@@ -1,16 +1,23 @@
 
 <gallery id="postGallery" [items]="images" [thumb]="false" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" [itemTemplate]="itemTemplate"></gallery>
 <ng-template #itemTemplate="" let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
-  <div class="container h-100" *ngIf="type === 'image' &amp;&amp; index === currIndex">
-    <div class="row bottom-align">
-      <div class="col s12 left-align">
-        <h4>{{ data.title }}</h4><a class="btn btn-block waves-effect bg-primary white-text waves-block">Ver Más</a>
-      </div>
+  <div class="row bottom-align" *ngIf="type === 'image' &amp;&amp; index === currIndex">
+    <div class="col s12 left-align">
+      <h4>{{ data.title }}</h4>
     </div>
+    <div class="col s12 left-align"><a class="btn waves-effect bg-primary white-text" (click)="postService.goToDetail(data.uid)">Ver Más</a></div>
   </div>
 </ng-template>
 <div class="container min-height-100vh">
-  <ul>
-    <li *ngFor="let post of posts">{{ post | json }}</li>
-  </ul>
+  <div class="row">
+    <div class="col s12 m6 m-top-30p" *ngFor="let post of posts">
+      <div class="card medium">
+        <div class="card-image"><img [src]="post.main_image.url"/><span class="card-title">{{ post.title }}</span></div>
+        <div class="card-content">
+          <p class="truncate" [innerHtml]="post.content"></p>
+        </div>
+        <div class="card-action"><a class="left text-primary cursor-pointer" (click)="postService.goToDetail(post.uid)">Ver más</a><span class="right">{{ post.date | amDateFormat: 'DD/MM/YYYY'}}</span></div>
+      </div>
+    </div>
+  </div>
 </div>

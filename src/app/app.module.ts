@@ -3,18 +3,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterializeModule } from 'angular2-materialize';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
 import { GallerizeModule } from '@ngx-gallery/gallerize';
+import { MomentModule } from 'angular2-moment';
+import { ShareModule } from '@ngx-share/core';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -29,6 +31,7 @@ import { SendPasswordResetEmailComponent } from './_components/auth/send-passwor
 import { NavbarComponent } from './_components/layout/navbar/navbar.component';
 import { FooterComponent } from './_components/layout/footer/footer.component';
 import { PostService } from './_services/post.service';
+import { PostContentComponent } from './_components/post/post-content/post-content.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +43,8 @@ import { PostService } from './_services/post.service';
         RegisterComponent,
         SendPasswordResetEmailComponent,
         NavbarComponent,
-        FooterComponent
+        FooterComponent,
+        PostContentComponent
     ],
     imports: [
         BrowserModule,
@@ -48,15 +52,19 @@ import { PostService } from './_services/post.service';
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
+        HttpClientJsonpModule,
         MaterializeModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
         AngularFireAuthModule,
         AngularFireDatabaseModule,
         MatSnackBarModule,
+        MatTooltipModule,
         GalleryModule.forRoot(),
         LightboxModule.forRoot(),
         GallerizeModule,
+        MomentModule,
+        ShareModule.forRoot(),
         AppRoutingModule
     ],
     providers: [

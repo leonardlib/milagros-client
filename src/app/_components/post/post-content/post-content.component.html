@@ -1,0 +1,40 @@
+
+<div class="container min-height-100vh">
+  <div class="row m-top-30p">
+    <div class="col s12 left-align">
+      <h3>{{ post.title }}</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 center-align"><img class="responsive-img" [src]="post.main_image.url"/>
+      <blockquote class="right">Foto por {{ post.main_image.author }}</blockquote>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <p class="text-justify" [innerHtml]="post.content"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12 left-align">
+      <blockquote>Escrito por {{ post.author }}</blockquote>
+    </div>
+  </div>
+  <div class="row left-align m-top-50p m-bottom-50p">
+    <div class="col s12"><span>Compartir esta publicación</span><br/>
+      <button class="btn waves-effect white-text fb-bg-color m-top-10p" shareButton="facebook" matTooltip="Compartir en Facebook" [matTooltipPosition]="'above'"><i class="fa fa-facebook-official fa-1-5x"></i></button>&nbsp;
+      &nbsp;
+      <button class="btn waves-effect white-text tw-bg-color m-top-10p" shareButton="twitter" matTooltip="Compartir en Twitter" [matTooltipPosition]="'above'"><i class="fa fa-twitter fa-1-5x"></i></button>&nbsp;
+      &nbsp;
+      <button class="btn waves-effect white-text google-bg-color m-top-10p" shareButton="google" matTooltip="Compartir en Google" [matTooltipPosition]="'above'"><i class="fa fa-google-plus-official fa-1-5x"></i></button>&nbsp;
+      &nbsp;
+      <button class="btn waves-effect white-text wa-bg-color m-top-10p" shareButton="whatsapp" matTooltip="Compartir en Whatsapp" [matTooltipPosition]="'above'"><i class="fa fa-whatsapp fa-1-5x"></i></button>&nbsp;
+      &nbsp;
+      <button class="btn waves-effect white-text telegram-bg-color m-top-10p" shareButton="telegram" matTooltip="Compartir en Telegram" [matTooltipPosition]="'above'"><i class="fa fa-telegram fa-1-5x"></i></button>&nbsp;
+      &nbsp;
+      <button class="btn waves-effect white-text mail-bg-color m-top-10p" shareButton="email" matTooltip="Compartir por correo" [matTooltipPosition]="'above'"><i class="fa fa-inbox fa-1-5x"></i></button>&nbsp;
+      &nbsp;
+      <button class="btn waves-effect white-text link-bg-color m-top-10p" shareButton="copy" matTooltip="Copiar enlace de la publicación" [matTooltipPosition]="'above'"><i class="fa fa-link fa-1-5x"></i></button>
+    </div>
+  </div>
+</div>

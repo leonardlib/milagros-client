@@ -1,0 +1,51 @@
+.container.min-height-100vh
+    .row.m-top-30p
+        .col.s12.left-align
+            h3 {{ post.title }}
+    .row
+        .col.s12.center-align
+            img.responsive-img([src]="post.main_image.url")
+            blockquote.right Foto por {{ post.main_image.author }}
+    .row
+        .col.s12
+            p.text-justify([innerHtml]="post.content")
+    .row
+        .col.s12.left-align
+            blockquote Escrito por {{ post.author }}
+    .row.left-align.m-top-50p.m-bottom-50p
+        .col.s12
+            span Compartir esta publicación
+            br
+            button.btn.waves-effect.white-text.fb-bg-color.m-top-10p(shareButton="facebook", matTooltip="Compartir en Facebook",
+                [matTooltipPosition]="'above'")
+                i.fa.fa-facebook-official.fa-1-5x
+            | &nbsp;
+            | &nbsp;
+            button.btn.waves-effect.white-text.tw-bg-color.m-top-10p(shareButton="twitter", matTooltip="Compartir en Twitter",
+                [matTooltipPosition]="'above'")
+                i.fa.fa-twitter.fa-1-5x
+            | &nbsp;
+            | &nbsp;
+            button.btn.waves-effect.white-text.google-bg-color.m-top-10p(shareButton="google", matTooltip="Compartir en Google",
+                [matTooltipPosition]="'above'")
+                i.fa.fa-google-plus-official.fa-1-5x
+            | &nbsp;
+            | &nbsp;
+            button.btn.waves-effect.white-text.wa-bg-color.m-top-10p(shareButton="whatsapp", matTooltip="Compartir en Whatsapp",
+                [matTooltipPosition]="'above'")
+                i.fa.fa-whatsapp.fa-1-5x
+            | &nbsp;
+            | &nbsp;
+            button.btn.waves-effect.white-text.telegram-bg-color.m-top-10p(shareButton="telegram", matTooltip="Compartir en Telegram",
+                [matTooltipPosition]="'above'")
+                i.fa.fa-telegram.fa-1-5x
+            | &nbsp;
+            | &nbsp;
+            button.btn.waves-effect.white-text.mail-bg-color.m-top-10p(shareButton="email", matTooltip="Compartir por correo",
+                [matTooltipPosition]="'above'")
+                i.fa.fa-inbox.fa-1-5x
+            | &nbsp;
+            | &nbsp;
+            button.btn.waves-effect.white-text.link-bg-color.m-top-10p(shareButton="copy", matTooltip="Copiar enlace de la publicación",
+                [matTooltipPosition]="'above'")
+                i.fa.fa-link.fa-1-5x

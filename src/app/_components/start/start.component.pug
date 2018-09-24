@@ -1,12 +1,21 @@
 gallery(id="postGallery", [items]="images", [thumb]="false", [autoPlay]="true", [counter]="false", [playerInterval]="5000",
     [imageSize]="contain", [itemTemplate]="itemTemplate")
 ng-template(#itemTemplate="", let-index="index", let-type="type", let-data="data", let-currIndex="currIndex")
-    .container.h-100(*ngIf="type === 'image' && index === currIndex")
-        .row.bottom-align
-            .col.s12.left-align
-                h4 {{ data.title }}
-                a.btn.btn-block.waves-effect.bg-primary.white-text.waves-block() Ver Más
+    .row.bottom-align(*ngIf="type === 'image' && index === currIndex")
+        .col.s12.left-align
+            h4 {{ data.title }}
+        .col.s12.left-align
+            a.btn.waves-effect.bg-primary.white-text((click)="postService.goToDetail(data.uid)") Ver Más
 
 .container.min-height-100vh
-    ul
-        li(*ngFor="let post of posts") {{ post | json }}
+    .row
+        .col.s12.m6.m-top-30p(*ngFor="let post of posts")
+            .card.medium
+                .card-image
+                    img([src]="post.main_image.url")
+                    span.card-title {{ post.title }}
+                .card-content
+                    p.truncate([innerHtml]="post.content")
+                .card-action
+                    a.left.text-primary.cursor-pointer((click)="postService.goToDetail(post.uid)") Ver más
+                    span.right {{ post.date | amDateFormat: 'DD/MM/YYYY'}}
