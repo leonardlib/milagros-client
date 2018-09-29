@@ -6,9 +6,10 @@ import { StartComponent } from './_components/start/start.component';
 import { PageNotFoundComponent } from './_components/layout/page-not-found/page-not-found.component';
 import { LoginComponent } from './_components/auth/login/login.component';
 import { RegisterComponent } from './_components/auth/register/register.component';
-import { AuthGuard } from './_guards/auth.guard';
 import { SendPasswordResetEmailComponent } from './_components/auth/send-password-reset-email/send-password-reset-email.component';
 import { PostContentComponent } from './_components/post/post-content/post-content.component';
+import { PetHomeComponent } from './_components/pet/pet-home/pet-home.component';
+import { PetCharacteristicsComponent } from './_components/pet/pet-characteristics/pet-characteristics.component';
 
 const routes: Routes = [
     {
@@ -19,18 +20,24 @@ const routes: Routes = [
         ]
     },
     {
-        path: '', component: UserInterfaceComponent, children: [
-            { path: '', component: StartComponent, canActivate: [AuthGuard] },
-
-            {
-                path: 'post', children: [
-                    { path: 'content/:uid', component: PostContentComponent }
-                ]
-            }
+        path: 'home', component: UserInterfaceComponent, children: [
+            { path: '', component: StartComponent }
+        ]
+    },
+    {
+        path: 'post', component: UserInterfaceComponent, children: [
+            { path: 'content/:uid', component: PostContentComponent }
+        ]
+    },
+    {
+        path: 'pet', component: UserInterfaceComponent, children: [
+            { path: '', component: PetHomeComponent },
+            { path: 'characteristics/:uid', component: PetCharacteristicsComponent }
         ]
     },
     { path: 'blank', component: PageNotFoundComponent },
     { path: '**', redirectTo: 'blank' },
+    { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({

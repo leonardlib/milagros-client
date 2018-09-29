@@ -32,6 +32,8 @@ import { NavbarComponent } from './_components/layout/navbar/navbar.component';
 import { FooterComponent } from './_components/layout/footer/footer.component';
 import { PostService } from './_services/post.service';
 import { PostContentComponent } from './_components/post/post-content/post-content.component';
+import { PetHomeComponent } from './_components/pet/pet-home/pet-home.component';
+import { PetCharacteristicsComponent } from './_components/pet/pet-characteristics/pet-characteristics.component';
 
 @NgModule({
     declarations: [
@@ -44,7 +46,9 @@ import { PostContentComponent } from './_components/post/post-content/post-conte
         SendPasswordResetEmailComponent,
         NavbarComponent,
         FooterComponent,
-        PostContentComponent
+        PostContentComponent,
+        PetHomeComponent,
+        PetCharacteristicsComponent
     ],
     imports: [
         BrowserModule,

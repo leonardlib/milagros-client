@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
     register() {
         this.utilsService.showSnackbar('Registrando...');
         this.authService.register(this.user).then(response => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/home']);
         }, error => {
             if (error.code === 'auth/email-already-in-use') {
                 this.utilsService.showSnackbar('¡Ops!, este correo ya está siendo utilizado.');
