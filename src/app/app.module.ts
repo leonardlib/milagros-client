@@ -34,6 +34,8 @@ import { PostService } from './_services/post.service';
 import { PostContentComponent } from './_components/post/post-content/post-content.component';
 import { PetHomeComponent } from './_components/pet/pet-home/pet-home.component';
 import { PetCharacteristicsComponent } from './_components/pet/pet-characteristics/pet-characteristics.component';
+import { DonateHomeComponent } from './_components/donate/donate-home/donate-home.component';
+import { ContactComponent } from './_components/contact/contact.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +50,9 @@ import { PetCharacteristicsComponent } from './_components/pet/pet-characteristi
         FooterComponent,
         PostContentComponent,
         PetHomeComponent,
-        PetCharacteristicsComponent
+        PetCharacteristicsComponent,
+        DonateHomeComponent,
+        ContactComponent
     ],
     imports: [
         BrowserModule,

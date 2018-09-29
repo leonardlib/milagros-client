@@ -10,6 +10,8 @@ import { SendPasswordResetEmailComponent } from './_components/auth/send-passwor
 import { PostContentComponent } from './_components/post/post-content/post-content.component';
 import { PetHomeComponent } from './_components/pet/pet-home/pet-home.component';
 import { PetCharacteristicsComponent } from './_components/pet/pet-characteristics/pet-characteristics.component';
+import { DonateHomeComponent } from './_components/donate/donate-home/donate-home.component';
+import { ContactComponent } from './_components/contact/contact.component';
 
 const routes: Routes = [
     {
@@ -33,6 +35,16 @@ const routes: Routes = [
         path: 'pet', component: UserInterfaceComponent, children: [
             { path: '', component: PetHomeComponent },
             { path: 'characteristics/:uid', component: PetCharacteristicsComponent }
+        ]
+    },
+    {
+        path: 'donate', component: UserInterfaceComponent, children: [
+            { path: '', component: DonateHomeComponent }
+        ]
+    },
+    {
+        path: 'about', component: UserInterfaceComponent, children: [
+            { path: '', component: ContactComponent }
         ]
     },
     { path: 'blank', component: PageNotFoundComponent },
