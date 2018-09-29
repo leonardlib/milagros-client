@@ -13,15 +13,11 @@
         .col.s12
             ul.tabs.tabs-fixed-width
                 li.tab
-                    a.cursor-pointer(href="#tienda") Donar en tienda
+                    a.cursor-pointer([routerLink]="['/donate']") Donar en tienda
                 li.tab
-                    a.cursor-pointer(href="#tarjeta") Donar con tarjeta de crédito o débito
+                    a.cursor-pointer([routerLink]="['/donate/card']") Donar con tarjeta de crédito o débito
                 li.tab
-                    a.cursor-pointer(href="#articulo") Donar artículo(s)
-            .col.s12.m-top-10p(id="tienda")
-                span Tiendas
-            .col.s12.m-top-10p(id="tarjeta")
-                span Tarjeta
-            .col.s12.m-top-10p(id="articulo")
-                span Artículo
+                    a.cursor-pointer([routerLink]="['/donate/item']") Donar artículo(s)
+            .col.s12.m-top-10p
+                router-outlet
 

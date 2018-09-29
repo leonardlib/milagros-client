@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { AngularFireList } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'

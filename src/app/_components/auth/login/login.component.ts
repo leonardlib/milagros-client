@@ -18,9 +18,7 @@ export class LoginComponent implements OnInit {
         public utilsService: UtilsService
     ) {}
 
-    ngOnInit() {
-        this.utilsService.showSnackbar('Cargando...');
-    }
+    ngOnInit() {}
 
     login() {
         this.authService.login(this.user).then(response => {

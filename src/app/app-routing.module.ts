@@ -12,6 +12,13 @@ import { PetHomeComponent } from './_components/pet/pet-home/pet-home.component'
 import { PetCharacteristicsComponent } from './_components/pet/pet-characteristics/pet-characteristics.component';
 import { DonateHomeComponent } from './_components/donate/donate-home/donate-home.component';
 import { ContactComponent } from './_components/contact/contact.component';
+import { AuthGuard } from './_guards/auth.guard';
+import { AdminGuard } from './_guards/admin.guard';
+import { ProfileHomeComponent } from './_components/profile/profile-home/profile-home.component';
+import { AdminHomeComponent } from './_components/admin/admin-home/admin-home.component';
+import { DonateStoreComponent } from './_components/donate/donate-store/donate-store.component';
+import { DonateCardComponent } from './_components/donate/donate-card/donate-card.component';
+import { DonateItemComponent } from './_components/donate/donate-item/donate-item.component';
 
 const routes: Routes = [
     {
@@ -39,12 +46,28 @@ const routes: Routes = [
     },
     {
         path: 'donate', component: UserInterfaceComponent, children: [
-            { path: '', component: DonateHomeComponent }
+            {
+                path: '', component: DonateHomeComponent, children: [
+                    { path: '', component: DonateStoreComponent },
+                    { path: 'card', component: DonateCardComponent },
+                    { path: 'item', component: DonateItemComponent }
+                ]
+            },
         ]
     },
     {
         path: 'about', component: UserInterfaceComponent, children: [
             { path: '', component: ContactComponent }
+        ]
+    },
+    {
+        path: 'profile', component: UserInterfaceComponent, canActivate: [AuthGuard], children: [
+            { path: '', component: ProfileHomeComponent }
+        ]
+    },
+    {
+        path: 'admin', component: UserInterfaceComponent, canActivate: [AdminGuard], children: [
+            { path: '', component: AdminHomeComponent }
         ]
     },
     { path: 'blank', component: PageNotFoundComponent },

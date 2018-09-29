@@ -18,9 +18,7 @@ export class RegisterComponent implements OnInit {
         public utilsService: UtilsService
     ) {}
 
-    ngOnInit() {
-        this.utilsService.showSnackbar('Cargando...');
-    }
+    ngOnInit() {}
 
     register() {
         this.utilsService.showSnackbar('Registrando...');

@@ -7,7 +7,9 @@
         <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/pet']">Mascotas</a></li>
         <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/donate']">Donar</a></li>
         <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/about']">¿Quiénes somos?</a></li>
-        <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/login']">Iniciar sesión</a></li>
+        <li [routerLinkActive]="'active'" *ngIf="!user.email"><a class="cursor-pointer" [routerLink]="['/auth']">Iniciar sesión</a></li>
+        <li [routerLinkActive]="'active'" *ngIf="user.email"><a class="cursor-pointer" [routerLink]="[profileRoute]">Mi perfil</a></li>
+        <li *ngIf="user.email"><a class="cursor-pointer" (click)="logout()">Cerrar sesión</a></li>
       </ul>
     </div>
   </nav>

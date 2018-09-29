@@ -5,7 +5,7 @@ import { UserService } from '../_services/user.service';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
     constructor(
         public userService: UserService,
         private router: Router
@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
     ): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.userService.current().then(user => {
-                return resolve(true);
+                return resolve(this.userService.verifyAdminEmail(user.email));
             }, error => {
                 this.router.navigate(['/auth']);
                 return resolve(false);

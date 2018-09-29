@@ -73,11 +73,11 @@ export class AuthService {
         });
     }
 
-    logout(){
+    logout() {
         return new Promise((resolve, reject) => {
             if (firebase.auth().currentUser) {
                 this.fireAuth.auth.signOut();
-                resolve();
+                resolve(true);
             } else {
                 reject();
             }

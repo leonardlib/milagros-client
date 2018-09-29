@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { environment } from '../../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -37,5 +38,18 @@ export class UserService {
                 reject(error);
             });
         });
+    }
+
+    verifyAdminEmail(email: string) {
+        let exists = false;
+
+        environment.admin_mails.forEach(adminMail => {
+            if (adminMail === email) {
+                exists = true;
+                return;
+            }
+        });
+
+        return exists;
     }
 }

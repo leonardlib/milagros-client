@@ -8,5 +8,8 @@ export const environment = {
         projectId: 'milagros-0',
         storageBucket: 'milagros-0.appspot.com',
         messagingSenderId: '446343513689'
-    }
+    },
+    admin_mails: [
+        'codatom.a@gmail.com'
+    ]
 };
