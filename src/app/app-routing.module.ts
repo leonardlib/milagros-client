@@ -19,6 +19,8 @@ import { AdminHomeComponent } from './_components/admin/admin-home/admin-home.co
 import { DonateStoreComponent } from './_components/donate/donate-store/donate-store.component';
 import { DonateCardComponent } from './_components/donate/donate-card/donate-card.component';
 import { DonateItemComponent } from './_components/donate/donate-item/donate-item.component';
+import { PetAdminListComponent } from './_components/pet/pet-admin-list/pet-admin-list.component';
+import {PostAdminListComponent} from './_components/post/post-admin-list/post-admin-list.component';
 
 const routes: Routes = [
     {
@@ -67,7 +69,12 @@ const routes: Routes = [
     },
     {
         path: 'admin', component: UserInterfaceComponent, canActivate: [AdminGuard], children: [
-            { path: '', component: AdminHomeComponent }
+            {
+                path: '', component: AdminHomeComponent, children: [
+                    { path: 'posts', component: PostAdminListComponent },
+                    { path: 'pets', component: PetAdminListComponent },
+                ]
+            },
         ]
     },
     { path: 'blank', component: PageNotFoundComponent },

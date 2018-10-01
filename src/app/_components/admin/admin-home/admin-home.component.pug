@@ -1,6 +1,18 @@
-.row
-    .col.s12.m3.grey.lighten-3.p-top-5.p-bottom-5
+.row.min-height-100vh
+    .col.s12.m3.bg-whitesmoke.p-top-2
         .row
             .col.s12
-                a.btn.btn-block.bg-primary.waves-effect.waves-block Menú
-    .col.s12.m9.p-top-5.p-bottom-5
+                span.cursor-pointer([routerLink]="['posts']", [routerLinkActive]="'text-primary'")
+                    i.fa.fa-newspaper-o.fa-1-5x
+                    | &nbsp;
+                    | &nbsp;
+                    | Publicaciones
+        .row
+            .col.s12
+                span.cursor-pointer([routerLink]="['pets']", [routerLinkActive]="'text-primary'")
+                    i.fa.fa-paw.fa-1-5x
+                    | &nbsp;
+                    | &nbsp;
+                    | Mascotas
+    .col.s12.m9.p-top-2
+        router-outlet

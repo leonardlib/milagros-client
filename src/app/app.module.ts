@@ -17,6 +17,7 @@ import { LightboxModule } from '@ngx-gallery/lightbox';
 import { GallerizeModule } from '@ngx-gallery/gallerize';
 import { MomentModule } from 'angular2-moment';
 import { ShareModule } from '@ngx-share/core';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -41,6 +42,8 @@ import { AdminHomeComponent } from './_components/admin/admin-home/admin-home.co
 import { DonateStoreComponent } from './_components/donate/donate-store/donate-store.component';
 import { DonateCardComponent } from './_components/donate/donate-card/donate-card.component';
 import { DonateItemComponent } from './_components/donate/donate-item/donate-item.component';
+import { PetAdminListComponent } from './_components/pet/pet-admin-list/pet-admin-list.component';
+import { PostAdminListComponent } from './_components/post/post-admin-list/post-admin-list.component';
 
 @NgModule({
     declarations: [
@@ -62,7 +65,9 @@ import { DonateItemComponent } from './_components/donate/donate-item/donate-ite
         AdminHomeComponent,
         DonateStoreComponent,
         DonateCardComponent,
-        DonateItemComponent
+        DonateItemComponent,
+        PetAdminListComponent,
+        PostAdminListComponent
     ],
     imports: [
         BrowserModule,
@@ -83,6 +88,7 @@ import { DonateItemComponent } from './_components/donate/donate-item/donate-ite
         GallerizeModule,
         MomentModule,
         ShareModule.forRoot(),
+        NgxDatatableModule,
         AppRoutingModule
     ],
     providers: [

@@ -1,0 +1,8 @@
+.row
+    .col.s12
+        h5 Mascotas
+.row
+    .col.s12
+        ngx-datatable.bootstrap([rows] = "rows", [loadingIndicator] = "loadingIndicator", [columns] = "columns",
+            [columnMode] = "'force'", [headerHeight] = "40", [summaryRow] = "true", [summaryPosition] = "'bottom'",
+            [footerHeight] = "40", [limit] = "10", [rowHeight] = "'auto'", [reorderable] = "reorderable")

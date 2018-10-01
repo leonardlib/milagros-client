@@ -3,6 +3,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~@ngx-gallery/core/styles/scss/gallery';
 @import '~@ngx-gallery/core/styles/scss/lightbox';
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
 
 /* Font awesome icons */
 i {
@@ -202,5 +205,20 @@ input[type="checkbox"].filled-in:checked + label:after {
     border: 2px solid $primary-color !important;
     background-color: $primary-color !important;
 }
-
 /* End of input colors */
+
+.bg-whitesmoke {
+    background-color: whitesmoke !important;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.m-0 {
+    margin: 0 !important;
+}
+
+.p-top-2 {
+    padding-top: 2% !important;
+}

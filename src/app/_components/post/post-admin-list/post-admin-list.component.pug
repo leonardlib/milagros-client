@@ -1,0 +1,15 @@
+.row
+    .col.s12
+        h5 Listado de publicaciones
+.row
+    .col.s12.m6.m-top-50p
+        a.btn.btn-block.waves-block.waves-effect.bg-primary() Nueva publicación
+    .input-field.col.s12.m6.m-top-50p
+        input(type="text", id="search", (keyup)="onFilter(search.value)", #search="")
+        label(for="search") Buscar publicación
+.row
+    .col.s12
+        ngx-datatable.bootstrap([rows]="rows", [loadingIndicator]="loadingIndicator", [columns]="columns",
+            [columnMode]="'force'", [headerHeight]="'auto'", [footerHeight]="'auto'", [limit]="10",
+            [rowHeight]="'auto'", [reorderable]="reorderable", #table="", [messages]="messages",
+            [selectionType]="'single'", (select)="onSelect($event)")
