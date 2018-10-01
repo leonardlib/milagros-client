@@ -16,7 +16,7 @@
         </div>
         <div class="row">
           <div class="col s12"><span class="text-primary">Autor(es)</span>
-            <ng-select [items]="authors" [addTag]="true" multiple="true" bindLabel="name" [(ngModel)]="selectedAuthors" bindValue="name"></ng-select>
+            <ng-select [items]="authors" [addTag]="true" multiple="true" bindLabel="name" [(ngModel)]="selectedAuthors" bindValue="name" [notFoundText]="'Sin autores, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar autor'"></ng-select>
           </div>
         </div>
       </form>

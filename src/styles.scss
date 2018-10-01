@@ -223,3 +223,29 @@ input[type="checkbox"].filled-in:checked + label:after {
 .p-top-2 {
     padding-top: 2% !important;
 }
+
+/* Ng select */
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+    background-color: $primary-color !important;
+}
+
+.ng-input input{
+    border-bottom: solid 0 !important;
+}
+
+.ng-select .ng-select-container:after {
+    transition: none !important;
+}
+
+.ng-select .ng-arrow-wrapper .ng-arrow {
+    color: $primary-color !important;
+}
+
+.ng-select.ng-select-focused .ng-select-container:after {
+    border-color: $primary-color !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+    color: $primary-color !important;
+}
+/* End of ng select */

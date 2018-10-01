@@ -15,4 +15,5 @@
                     .col.s12
                         span.text-primary Autor(es)
                         ng-select([items]="authors", [addTag]="true", multiple="true", bindLabel="name",
-                            [(ngModel)]="selectedAuthors", bindValue="name")
+                            [(ngModel)]="selectedAuthors", bindValue="name", [notFoundText]="'Sin autores, escribe para agregar'",
+                            [loading]="loading", [addTagText]="'Agregar autor'")
