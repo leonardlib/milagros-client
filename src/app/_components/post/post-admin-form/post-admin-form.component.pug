@@ -1,0 +1,18 @@
+.container.min-height-100vh
+    .row.m-top-30p
+        .col.s12
+            h4 Nueva publicación
+    .row.m-bottom-50p
+        .col.s12
+            form(#postForm="ngForm", (submit)="onSubmit()")
+                .row
+                    .input-field.col.s12
+                        input.validate(type="text", id="title", name="title", [(ngModel)]="post.title",
+                            #title="ngModel", required)
+                        label(for="title") Título
+                        span.red-text(*ngIf="title.invalid") Ingresa un título valido
+                .row
+                    .col.s12
+                        span.text-primary Autor(es)
+                        ng-select([items]="authors", [addTag]="true", multiple="true", bindLabel="name",
+                            [(ngModel)]="selectedAuthors", bindValue="name")

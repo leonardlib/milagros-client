@@ -5,7 +5,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col s12 m6 m-top-50p"><a class="btn btn-block waves-block waves-effect bg-primary">Nueva publicación</a></div>
+  <div class="col s12 m6 m-top-50p"><a class="btn btn-block waves-block waves-effect bg-primary" [routerLink]="['/post/new']">Nueva publicación</a></div>
   <div class="input-field col s12 m6 m-top-50p">
     <input type="text" id="search" (keyup)="onFilter(search.value)" #search=""/>
     <label for="search">Buscar publicación</label>

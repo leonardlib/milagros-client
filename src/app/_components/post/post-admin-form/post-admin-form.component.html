@@ -1,0 +1,25 @@
+
+<div class="container min-height-100vh">
+  <div class="row m-top-30p">
+    <div class="col s12">
+      <h4>Nueva publicación</h4>
+    </div>
+  </div>
+  <div class="row m-bottom-50p">
+    <div class="col s12">
+      <form #postForm="ngForm" (submit)="onSubmit()">
+        <div class="row">
+          <div class="input-field col s12">
+            <input class="validate" type="text" id="title" name="title" [(ngModel)]="post.title" #title="ngModel" required="required"/>
+            <label for="title">Título</label><span class="red-text" *ngIf="title.invalid">Ingresa un título valido</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12"><span class="text-primary">Autor(es)</span>
+            <ng-select [items]="authors" [addTag]="true" multiple="true" bindLabel="name" [(ngModel)]="selectedAuthors" bindValue="name"></ng-select>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

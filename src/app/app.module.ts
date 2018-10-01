@@ -18,6 +18,7 @@ import { GallerizeModule } from '@ngx-gallery/gallerize';
 import { MomentModule } from 'angular2-moment';
 import { ShareModule } from '@ngx-share/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -44,6 +45,7 @@ import { DonateCardComponent } from './_components/donate/donate-card/donate-car
 import { DonateItemComponent } from './_components/donate/donate-item/donate-item.component';
 import { PetAdminListComponent } from './_components/pet/pet-admin-list/pet-admin-list.component';
 import { PostAdminListComponent } from './_components/post/post-admin-list/post-admin-list.component';
+import { PostAdminFormComponent } from './_components/post/post-admin-form/post-admin-form.component';
 
 @NgModule({
     declarations: [
@@ -67,7 +69,8 @@ import { PostAdminListComponent } from './_components/post/post-admin-list/post-
         DonateCardComponent,
         DonateItemComponent,
         PetAdminListComponent,
-        PostAdminListComponent
+        PostAdminListComponent,
+        PostAdminFormComponent
     ],
     imports: [
         BrowserModule,
@@ -89,6 +92,7 @@ import { PostAdminListComponent } from './_components/post/post-admin-list/post-
         MomentModule,
         ShareModule.forRoot(),
         NgxDatatableModule,
+        NgSelectModule,
         AppRoutingModule
     ],
     providers: [

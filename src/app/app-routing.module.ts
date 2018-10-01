@@ -20,7 +20,8 @@ import { DonateStoreComponent } from './_components/donate/donate-store/donate-s
 import { DonateCardComponent } from './_components/donate/donate-card/donate-card.component';
 import { DonateItemComponent } from './_components/donate/donate-item/donate-item.component';
 import { PetAdminListComponent } from './_components/pet/pet-admin-list/pet-admin-list.component';
-import {PostAdminListComponent} from './_components/post/post-admin-list/post-admin-list.component';
+import { PostAdminListComponent } from './_components/post/post-admin-list/post-admin-list.component';
+import { PostAdminFormComponent } from './_components/post/post-admin-form/post-admin-form.component';
 
 const routes: Routes = [
     {
@@ -37,7 +38,9 @@ const routes: Routes = [
     },
     {
         path: 'post', component: UserInterfaceComponent, children: [
-            { path: 'content/:uid', component: PostContentComponent }
+            { path: 'content/:uid', component: PostContentComponent },
+            { path: 'new', component: PostAdminFormComponent },
+            { path: 'edit/:uid', component: PostAdminFormComponent }
         ]
     },
     {
