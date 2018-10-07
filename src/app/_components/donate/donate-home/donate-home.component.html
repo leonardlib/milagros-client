@@ -18,9 +18,9 @@
   <div class="row">
     <div class="col s12">
       <ul class="tabs tabs-fixed-width">
-        <li class="tab"><a class="cursor-pointer" [routerLink]="['/donate']">Donar en tienda</a></li>
-        <li class="tab"><a class="cursor-pointer" [routerLink]="['/donate/card']">Donar con tarjeta de crédito o débito</a></li>
-        <li class="tab"><a class="cursor-pointer" [routerLink]="['/donate/item']">Donar artículo(s)</a></li>
+        <li class="tab" [routerLinkActive]="'b-bottom-primary'"><a class="cursor-pointer" [routerLink]="['/donate/store']" [routerLinkActive]="'active'">Donar en tienda</a></li>
+        <li class="tab" [routerLinkActive]="'b-bottom-primary'"><a class="cursor-pointer" [routerLink]="['/donate/card']" [routerLinkActive]="'active'">Donar con tarjeta de crédito o débito</a></li>
+        <li class="tab" [routerLinkActive]="'b-bottom-primary'"><a class="cursor-pointer" [routerLink]="['/donate/item']" [routerLinkActive]="'active'">Donar artículo(s)</a></li>
       </ul>
       <div class="col s12 m-top-10p">
         <router-outlet></router-outlet>

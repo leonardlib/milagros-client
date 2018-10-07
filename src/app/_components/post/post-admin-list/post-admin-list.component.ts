@@ -56,7 +56,6 @@ export class PostAdminListComponent implements OnInit {
 
     onSelect(event: any) {
         const post = event.selected[0] as Post;
-        console.log(post);
         this.postService.goToDetail(post.uid);
     }
 }

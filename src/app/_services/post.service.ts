@@ -36,4 +36,23 @@ export class PostService {
     goToDetail(uid: string) {
         this.router.navigate(['/post/content/' + uid]);
     }
+
+    getMainImage(post: Post) {
+        return new Promise(resolve => {
+            this.utilsService.getFileFromUrl(post.main_image.url, 'main_image').then(resp => {
+                const res = resp as File;
+
+                this.utilsService.getDataURLFromFile(res).then(respo => {
+                    const data = {
+                        id: 0,
+                        file: res,
+                        icon: respo,
+                        size: '(' + (res.size / 1000).toFixed(0) + ' KB)'
+                    };
+
+                    resolve(data);
+                });
+            });
+        });
+    }
 }

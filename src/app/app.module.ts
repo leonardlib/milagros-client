@@ -19,6 +19,11 @@ import { MomentModule } from 'angular2-moment';
 import { ShareModule } from '@ngx-share/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
+import { InputFileConfig, InputFileModule } from 'ngx-input-file';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -46,6 +51,8 @@ import { DonateItemComponent } from './_components/donate/donate-item/donate-ite
 import { PetAdminListComponent } from './_components/pet/pet-admin-list/pet-admin-list.component';
 import { PostAdminListComponent } from './_components/post/post-admin-list/post-admin-list.component';
 import { PostAdminFormComponent } from './_components/post/post-admin-form/post-admin-form.component';
+
+const config: InputFileConfig = {};
 
 @NgModule({
     declarations: [
@@ -93,6 +100,12 @@ import { PostAdminFormComponent } from './_components/post/post-admin-form/post-
         ShareModule.forRoot(),
         NgxDatatableModule,
         NgSelectModule,
+        MatSidenavModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        InputFileModule.forRoot(config),
+        FroalaEditorModule.forRoot(),
+        FroalaViewModule.forRoot(),
         AppRoutingModule
     ],
     providers: [

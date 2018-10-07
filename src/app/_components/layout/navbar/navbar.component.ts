@@ -3,6 +3,7 @@ import { User } from '../../../_models/user';
 import { UserService } from '../../../_services/user.service';
 import { AuthService } from '../../../_services/auth.service';
 import { Router } from '@angular/router';
+declare var $: any;
 
 @Component({
     selector: 'app-navbar',
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        $('.button-collapse').sideNav();
         this.userService.current().then(user => {
             this.user = user;
 

@@ -24,6 +24,9 @@ import { PostAdminListComponent } from './_components/post/post-admin-list/post-
 import { PostAdminFormComponent } from './_components/post/post-admin-form/post-admin-form.component';
 
 const routes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'donate', redirectTo: 'donate/store', pathMatch: 'full' },
+    { path: 'admin', redirectTo: 'admin/posts', pathMatch: 'full' },
     {
         path: 'auth', children: [
             { path: '', component: LoginComponent },
@@ -53,7 +56,7 @@ const routes: Routes = [
         path: 'donate', component: UserInterfaceComponent, children: [
             {
                 path: '', component: DonateHomeComponent, children: [
-                    { path: '', component: DonateStoreComponent },
+                    { path: 'store', component: DonateStoreComponent },
                     { path: 'card', component: DonateCardComponent },
                     { path: 'item', component: DonateItemComponent }
                 ]
@@ -81,8 +84,7 @@ const routes: Routes = [
         ]
     },
     { path: 'blank', component: PageNotFoundComponent },
-    { path: '**', redirectTo: 'blank' },
-    { path: '', redirectTo: 'home', pathMatch: 'full' }
+    { path: '**', redirectTo: 'blank' }
 ];
 
 @NgModule({

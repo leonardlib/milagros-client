@@ -36,6 +36,10 @@ i {
 }
 /* End of responsive footer */
 
+.b-bottom-primary {
+    border-bottom: solid 2px $muted-color !important;
+}
+
 .m-top-30p {
     margin-top: 30px;
 }
@@ -84,8 +88,16 @@ i {
     margin-top: 50px !important;
 }
 
+.m-top-70p {
+    margin-top: 70px !important;
+}
+
 .m-bottom-50p {
     margin-bottom: 50px !important;
+}
+
+button:focus {
+    background-color: transparent !important;
 }
 
 .bg-primary {
@@ -248,4 +260,43 @@ input[type="checkbox"].filled-in:checked + label:after {
 .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
     color: $primary-color !important;
 }
+
+.ng-select .ng-select-container .ng-value-container .ng-input>input {
+    margin-bottom: 0 !important;
+}
 /* End of ng select */
+
+/* sidenav */
+#sidenav-overlay {
+    background-color: transparent !important;
+    z-index: 0 !important;
+}
+
+.side-nav li {
+    background-color: transparent !important;
+}
+
+.side-nav li.active {
+    background-color: $primary-color !important;
+}
+
+.side-nav li > a {
+    color: $primary-color !important;
+}
+
+.side-nav li.active > a {
+    color: white !important;
+}
+/* end of sidenav */
+
+/* File input */
+mat-icon {
+    color: $primary-color !important;
+}
+/* End of file input */
+
+/* Text editor */
+.fr-toolbar {
+    border-top: 5px solid $primary-color !important;
+}
+/* End of text editor */

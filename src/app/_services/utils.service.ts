@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { AngularFireList } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
-import {environment} from '../../environments/environment';
+declare var $: any;
 
 @Injectable({
     providedIn: 'root'
@@ -54,5 +54,40 @@ export class UtilsService {
                 }))
             )
         );
+    }
+
+    getFileFromUrl(path: string, name: string) {
+        return new Promise(resolve => {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('GET', path, true);
+            xhr.responseType = 'blob';
+            xhr.onload = (e) => {
+                if (xhr.status === 200) {
+                    const blob = xhr.response;
+
+                    blob['lastModifiedDate'] = new Date();
+                    blob['name'] = name;
+                    blob['webkitRelativePath'] = '';
+                    const file = blob as File;
+
+                    resolve(file);
+                }
+            };
+
+            xhr.send();
+        });
+    }
+
+    getDataURLFromFile(file: File) {
+        return new Promise(resolve => {
+            const reader = new FileReader();
+
+            reader.onload = (e: any) => {
+                resolve(e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        });
     }
 }

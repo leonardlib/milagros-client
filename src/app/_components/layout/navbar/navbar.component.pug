@@ -1,14 +1,33 @@
 .navbar-fixed
     nav
         .nav-wrapper.p-left-5.p-right-5
-            img.cursor-pointer.brand-logo(src="assets/img/logo-2.png")
+            img.cursor-pointer.brand-logo(src="assets/img/logo-2.png", [routerLink]="['/']")
+            a.button-collapse.cursor-pointer(data-activates="mobile")
+                i.fa.fa-bars.fa-1-5x
             ul.right.hide-on-med-and-down(id="nav-mobile")
                 li([routerLinkActive]="'active'")
                     a.cursor-pointer([routerLink]="['/home']") Inicio
                 li([routerLinkActive]="'active'")
                     a.cursor-pointer([routerLink]="['/pet']") Mascotas
                 li([routerLinkActive]="'active'")
-                    a.cursor-pointer([routerLink]="['/donate']") Donar
+                    a.cursor-pointer([routerLink]="['/donate/store']") Donar
+                li([routerLinkActive]="'active'")
+                    a.cursor-pointer([routerLink]="['/about']") ¿Quiénes somos?
+                li([routerLinkActive]="'active'", *ngIf="!user.email")
+                    a.cursor-pointer([routerLink]="['/auth']") Iniciar sesión
+                li([routerLinkActive]="'active'", *ngIf="user.email")
+                    a.cursor-pointer([routerLink]="[profileRoute]") Mi perfil
+                li(*ngIf="user.email")
+                    a.cursor-pointer((click)="logout()") Cerrar sesión
+            ul.side-nav(id="mobile")
+                li
+                    img.cursor-pointer.brand-logo(src="assets/img/logo-2.png", [routerLink]="['/']")
+                li.m-top-70p([routerLinkActive]="'active'")
+                    a.cursor-pointer([routerLink]="['/home']") Inicio
+                li([routerLinkActive]="'active'")
+                    a.cursor-pointer([routerLink]="['/pet']") Mascotas
+                li([routerLinkActive]="'active'")
+                    a.cursor-pointer([routerLink]="['/donate/store']") Donar
                 li([routerLinkActive]="'active'")
                     a.cursor-pointer([routerLink]="['/about']") ¿Quiénes somos?
                 li([routerLinkActive]="'active'", *ngIf="!user.email")

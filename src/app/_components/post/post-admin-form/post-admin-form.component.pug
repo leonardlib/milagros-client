@@ -4,16 +4,37 @@
             h4 Nueva publicación
     .row.m-bottom-50p
         .col.s12
-            form(#postForm="ngForm", (submit)="onSubmit()")
+            form
                 .row
                     .input-field.col.s12
                         input.validate(type="text", id="title", name="title", [(ngModel)]="post.title",
                             #title="ngModel", required)
                         label(for="title") Título
-                        span.red-text(*ngIf="title.invalid") Ingresa un título valido
                 .row
                     .col.s12
-                        span.text-primary Autor(es)
-                        ng-select([items]="authors", [addTag]="true", multiple="true", bindLabel="name",
+                        span.text-primary Autor(es) de la publicación
+                        ng-select([items]="authors", [addTag]="true", bindLabel="name",
                             [(ngModel)]="selectedAuthors", bindValue="name", [notFoundText]="'Sin autores, escribe para agregar'",
                             [loading]="loading", [addTagText]="'Agregar autor'")
+                .row
+                    .input-field.col.s12
+                        label(for="main_image") Imagen principal
+                .row
+                    .input-field.col.s12
+                        input-file([(ngModel)]="images", [fileAccept]="'image/*'", id="main_image", [fileLimit]="1")
+                .row
+                    .col.s12
+                        span.text-primary Autor de la imagen principal
+                        ng-select([items]="authors", [addTag]="true", bindLabel="name", [(ngModel)]="selectedImageAuthors",
+                            bindValue="name", [notFoundText]="'Sin autores, escribe para agregar'",
+                            [loading]="loading", [addTagText]="'Agregar autor'")
+                .row
+                    .input-field.col.s12
+                        label(for="content") Contenido
+                .row
+                    .col.s12.m-top-30p
+                        div([froalaEditor]="froalaOptions", id="content", name="content", [(ngModel)]="post.content",
+                            #content="ngModel")
+                .row
+                    .col.s12.m-top-50p
+                        a.btn.btn-block.bg-primary.waves-effect.waves-block((click)="onSubmit()") Guardar

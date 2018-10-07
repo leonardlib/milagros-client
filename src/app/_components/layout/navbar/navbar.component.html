@@ -1,11 +1,21 @@
 
 <div class="navbar-fixed">
   <nav>
-    <div class="nav-wrapper p-left-5 p-right-5"><img class="cursor-pointer brand-logo" src="assets/img/logo-2.png"/>
+    <div class="nav-wrapper p-left-5 p-right-5"><img class="cursor-pointer brand-logo" src="assets/img/logo-2.png" [routerLink]="['/']"/><a class="button-collapse cursor-pointer" data-activates="mobile"><i class="fa fa-bars fa-1-5x"></i></a>
       <ul class="right hide-on-med-and-down" id="nav-mobile">
         <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/home']">Inicio</a></li>
         <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/pet']">Mascotas</a></li>
-        <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/donate']">Donar</a></li>
+        <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/donate/store']">Donar</a></li>
+        <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/about']">¿Quiénes somos?</a></li>
+        <li [routerLinkActive]="'active'" *ngIf="!user.email"><a class="cursor-pointer" [routerLink]="['/auth']">Iniciar sesión</a></li>
+        <li [routerLinkActive]="'active'" *ngIf="user.email"><a class="cursor-pointer" [routerLink]="[profileRoute]">Mi perfil</a></li>
+        <li *ngIf="user.email"><a class="cursor-pointer" (click)="logout()">Cerrar sesión</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile">
+        <li><img class="cursor-pointer brand-logo" src="assets/img/logo-2.png" [routerLink]="['/']"/></li>
+        <li class="m-top-70p" [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/home']">Inicio</a></li>
+        <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/pet']">Mascotas</a></li>
+        <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/donate/store']">Donar</a></li>
         <li [routerLinkActive]="'active'"><a class="cursor-pointer" [routerLink]="['/about']">¿Quiénes somos?</a></li>
         <li [routerLinkActive]="'active'" *ngIf="!user.email"><a class="cursor-pointer" [routerLink]="['/auth']">Iniciar sesión</a></li>
         <li [routerLinkActive]="'active'" *ngIf="user.email"><a class="cursor-pointer" [routerLink]="[profileRoute]">Mi perfil</a></li>

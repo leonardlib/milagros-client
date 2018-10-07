@@ -12,12 +12,12 @@
     .row
         .col.s12
             ul.tabs.tabs-fixed-width
-                li.tab
-                    a.cursor-pointer([routerLink]="['/donate']") Donar en tienda
-                li.tab
-                    a.cursor-pointer([routerLink]="['/donate/card']") Donar con tarjeta de crédito o débito
-                li.tab
-                    a.cursor-pointer([routerLink]="['/donate/item']") Donar artículo(s)
+                li.tab([routerLinkActive]="'b-bottom-primary'")
+                    a.cursor-pointer([routerLink]="['/donate/store']", [routerLinkActive]="'active'") Donar en tienda
+                li.tab([routerLinkActive]="'b-bottom-primary'")
+                    a.cursor-pointer([routerLink]="['/donate/card']", [routerLinkActive]="'active'") Donar con tarjeta de crédito o débito
+                li.tab([routerLinkActive]="'b-bottom-primary'")
+                    a.cursor-pointer([routerLink]="['/donate/item']", [routerLinkActive]="'active'") Donar artículo(s)
             .col.s12.m-top-10p
                 router-outlet
 
