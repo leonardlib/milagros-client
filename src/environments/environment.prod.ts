@@ -11,5 +11,9 @@ export const environment = {
     },
     admin_mails: [
         'codatom.a@gmail.com'
-    ]
+    ],
+    imgur: {
+        route: 'https://api.imgur.com/3/image',
+        client_id: '972ec9ff5da3db2'
+    }
 };

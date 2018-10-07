@@ -4,6 +4,8 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { AngularFireList } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {environment} from '../../environments/environment';
 declare var $: any;
 
 @Injectable({
@@ -13,7 +15,8 @@ export class UtilsService {
     constructor(
         private snackbar: MatSnackBar,
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private http: HttpClient
     ) {}
 
     /**
@@ -88,6 +91,29 @@ export class UtilsService {
             };
 
             reader.readAsDataURL(file);
+        });
+    }
+
+    uploadImageToImgur(file: File) {
+        return new Promise(resolve => {
+            const data = {
+                image: file,
+                type: 'file'
+            };
+            const httpOptions = {
+                headers: new HttpHeaders({
+                    Authorization: 'Client-ID ' + environment.imgur.client_id,
+                    Accept: 'application/json'
+                })
+            };
+
+            this.http.post(environment.imgur.route, data, httpOptions).subscribe(response => {
+                if (response.success) {
+                    resolve(response.data.link);
+                } else {
+                    resolve('');
+                }
+            });
         });
     }
 }

@@ -16,10 +16,8 @@ import { ImageModel } from '../../../_models/image';
 export class PostAdminFormComponent implements OnInit {
     public post: Post = new Post();
     public authors: Author[] = [];
-    public selectedAuthors: Author[] = [];
-    public selectedImageAuthors: Author[] = [];
     public loading = false;
-    public images: any = [];
+    public images: any[] = [];
     public froalaOptions: any = {};
     public editar: boolean;
 
@@ -69,21 +67,39 @@ export class PostAdminFormComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.post);
-        console.log(this.selectedAuthors);
-        console.log(this.selectedImageAuthors);
-        console.log(this.images);
+        if (this.validData()) {
+            this.post.main_image['file'] = this.images[0].file;
 
-        if (
+            if (this.editar) {
+                this.postService.update(this.post).then(response => {
+                    if (response) {
+                        this.utilsService.showSnackbar('La publicación ha sido guardada');
+                    } else {
+                        this.utilsService.showSnackbar('Ocurrió un error al guardar. Intenta de nuevo');
+                    }
+                });
+            } else {
+                this.postService.create(this.post).then(response => {
+                    if (response) {
+                        this.editar = true;
+                        this.utilsService.showSnackbar('La publicación ha sido guardada');
+                    } else {
+                        this.utilsService.showSnackbar('Ocurrió un error al guardar. Intenta de nuevo');
+                    }
+                });
+            }
+        } else {
+            this.utilsService.showSnackbar('Verifica que la información este completa');
+        }
+    }
+
+    validData() {
+        return (
             this.post.title && this.post.title !== '' &&
             this.post.content && this.post.content !== '' &&
             this.images.length > 0 &&
-            this.selectedAuthors.length > 0 &&
-            this.selectedImageAuthors.length > 0
-        ) {
-            console.log('Guardar');
-        } else {
-            this.utilsService.showSnackbar('Verifica que la información este completa.');
-        }
+            this.post.author && this.post.author !== '' &&
+            this.post.main_image.author && this.post.main_image.author !== ''
+        );
     }
 }
