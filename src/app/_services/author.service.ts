@@ -27,9 +27,6 @@ export class AuthorService {
 
     create(author: Author) {
         return new Promise(resolve => {
-            this.setKey().then(key => {
-                author.key = +key;
-            });
             this.authorRef = this.fireDatabase.list<Author>(this.basePath);
             this.authors = this.utilsService.setKeys(this.authorRef);
 
@@ -58,18 +55,5 @@ export class AuthorService {
         });
         this.authors = this.utilsService.setKeys(this.authorRef);
         return this.authors;
-    }
-
-    setKey() {
-        return new Promise(resolve => {
-            this.authorRef = this.fireDatabase.list<Author>(this.basePath, ref => {
-                return ref.limitToLast(1);
-            });
-            this.authors = this.utilsService.setKeys(this.authorRef);
-            this.authors.subscribe(list => {
-                const lastAuthor = list[0] as Author;
-                resolve(lastAuthor.key + 1);
-            });
-        });
     }
 }

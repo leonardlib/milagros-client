@@ -94,22 +94,22 @@ export class UtilsService {
         });
     }
 
-    uploadImageToImgur(file: File) {
+    uploadImageToImgur(base64: string) {
         return new Promise(resolve => {
             const data = {
-                image: file,
-                type: 'file'
+                image: base64.substring(base64.indexOf('base64,') + 7, base64.length - 1),
+                type: 'base64'
             };
             const httpOptions = {
                 headers: new HttpHeaders({
-                    Authorization: 'Client-ID ' + environment.imgur.client_id,
-                    Accept: 'application/json'
+                    'Authorization': 'Client-ID ' + environment.imgur.client_id,
+                    'Accept': 'application/json'
                 })
             };
 
             this.http.post(environment.imgur.route, data, httpOptions).subscribe(response => {
-                if (response.success) {
-                    resolve(response.data.link);
+                if (response['success']) {
+                    resolve(response['data'].link);
                 } else {
                     resolve('');
                 }

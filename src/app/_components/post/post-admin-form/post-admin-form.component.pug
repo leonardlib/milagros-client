@@ -12,7 +12,7 @@
             .row
                 .col.s12
                     span.text-primary Autor de la publicación
-                    ng-select([items]="authors", [addTag]="true", bindLabel="name", [(ngModel)]="post.author",
+                    ng-select([items]="authors", [addTag]="true", bindLabel="name", [(ngModel)]="post.author.name",
                         bindValue="name", [notFoundText]="'Sin autores, escribe para agregar'",
                         [loading]="loading", [addTagText]="'Agregar autor'")
             .row
@@ -24,7 +24,7 @@
             .row
                 .col.s12
                     span.text-primary Autor de la imagen principal
-                    ng-select([items]="authors", [addTag]="true", bindLabel="name", [(ngModel)]="post.main_image.author",
+                    ng-select([items]="authors", [addTag]="true", bindLabel="name", [(ngModel)]="post.main_image.author.name",
                         bindValue="name", [notFoundText]="'Sin autores, escribe para agregar'",
                         [loading]="loading", [addTagText]="'Agregar autor'")
             .row

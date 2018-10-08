@@ -1,5 +1,7 @@
+import { Author } from './author';
+
 export class ImageModel {
-    author: string;
+    author: Author;
     url: string;
 
     constructor() {}

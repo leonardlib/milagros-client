@@ -45,6 +45,8 @@ export class PostAdminFormComponent implements OnInit {
         };
         this.editar = false;
         this.post.main_image = new ImageModel();
+        this.post.author = new Author();
+        this.post.main_image.author = new Author();
     }
 
     ngOnInit() {
@@ -68,11 +70,12 @@ export class PostAdminFormComponent implements OnInit {
 
     onSubmit() {
         if (this.validData()) {
-            this.post.main_image['file'] = this.images[0].file;
+            this.post.main_image.url = this.images[0].preview;
 
             if (this.editar) {
                 this.postService.update(this.post).then(response => {
                     if (response) {
+                        this.post = response as Post;
                         this.utilsService.showSnackbar('La publicación ha sido guardada');
                     } else {
                         this.utilsService.showSnackbar('Ocurrió un error al guardar. Intenta de nuevo');
@@ -81,6 +84,7 @@ export class PostAdminFormComponent implements OnInit {
             } else {
                 this.postService.create(this.post).then(response => {
                     if (response) {
+                        this.post = response as Post;
                         this.editar = true;
                         this.utilsService.showSnackbar('La publicación ha sido guardada');
                     } else {
@@ -98,8 +102,8 @@ export class PostAdminFormComponent implements OnInit {
             this.post.title && this.post.title !== '' &&
             this.post.content && this.post.content !== '' &&
             this.images.length > 0 &&
-            this.post.author && this.post.author !== '' &&
-            this.post.main_image.author && this.post.main_image.author !== ''
+            this.post.author && this.post.author.name !== '' &&
+            this.post.main_image.author && this.post.main_image.author.name !== ''
         );
     }
 }

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { UtilsService } from './utils.service';
 import { Router } from '@angular/router';
 import {Author} from '../_models/author';
+import {AuthorService} from './author.service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +18,8 @@ export class PostService {
     constructor(
         private fireDatabase: AngularFireDatabase,
         public utilsService: UtilsService,
-        private router: Router
+        private router: Router,
+        private authorService: AuthorService
     ) {}
 
     index(query: any = null) {
@@ -36,20 +38,21 @@ export class PostService {
 
     create(post: Post) {
         return new Promise(resolve => {
-            this.setKey().then(key => {
-                post.key = +key;
-            });
             this.postsRef = this.fireDatabase.list<Post>(this.basePath);
             this.posts = this.utilsService.setKeys(this.postsRef);
 
             // Upload main_image to imgur
-            this.utilsService.uploadImageToImgur(post.main_image['file']).then(res => {
+            this.utilsService.uploadImageToImgur(post.main_image.url).then(res => {
                 if (res !== '') {
                     post.main_image.url = res + '';
+
+                    this.authorService.create(post.author);
+                    this.authorService.create(post.main_image.author);
                     this.postsRef.push(post);
-                    resolve(true);
+
+                    resolve(post);
                 } else {
-                    resolve(false);
+                    resolve(null);
                 }
             });
         });
@@ -80,19 +83,6 @@ export class PostService {
 
                     resolve(data);
                 });
-            });
-        });
-    }
-
-    setKey() {
-        return new Promise(resolve => {
-            this.postsRef = this.fireDatabase.list<Post>(this.basePath, ref => {
-                return ref.limitToLast(1);
-            });
-            this.posts = this.utilsService.setKeys(this.postsRef);
-            this.posts.subscribe(list => {
-                const last = list[0] as Post;
-                resolve(last.key + 1);
             });
         });
     }

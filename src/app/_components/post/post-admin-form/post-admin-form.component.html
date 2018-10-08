@@ -15,7 +15,7 @@
       </div>
       <div class="row">
         <div class="col s12"><span class="text-primary">Autor de la publicación</span>
-          <ng-select [items]="authors" [addTag]="true" bindLabel="name" [(ngModel)]="post.author" bindValue="name" [notFoundText]="'Sin autores, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar autor'"></ng-select>
+          <ng-select [items]="authors" [addTag]="true" bindLabel="name" [(ngModel)]="post.author.name" bindValue="name" [notFoundText]="'Sin autores, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar autor'"></ng-select>
         </div>
       </div>
       <div class="row">
@@ -30,7 +30,7 @@
       </div>
       <div class="row">
         <div class="col s12"><span class="text-primary">Autor de la imagen principal</span>
-          <ng-select [items]="authors" [addTag]="true" bindLabel="name" [(ngModel)]="post.main_image.author" bindValue="name" [notFoundText]="'Sin autores, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar autor'"></ng-select>
+          <ng-select [items]="authors" [addTag]="true" bindLabel="name" [(ngModel)]="post.main_image.author.name" bindValue="name" [notFoundText]="'Sin autores, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar autor'"></ng-select>
         </div>
       </div>
       <div class="row">

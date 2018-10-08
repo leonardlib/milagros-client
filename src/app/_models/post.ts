@@ -1,4 +1,5 @@
 import { ImageModel } from './image';
+import { Author } from './author';
 
 export class Post {
     key: number;
@@ -6,7 +7,7 @@ export class Post {
     title: string;
     main_image: ImageModel;
     content: string;
-    author: string;
+    author: Author;
     date: string;
 
     constructor() {}
