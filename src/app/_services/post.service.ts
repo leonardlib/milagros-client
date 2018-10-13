@@ -103,7 +103,19 @@ export class PostService {
 
     destroy(post: Post) {
         return new Promise(resolve => {
-            resolve(true);
+            this.postsRef = this.fireDatabase.list<Post>(this.basePath);
+
+            this.utilsService.deleteImageFromImgur(post.main_image.delete_hash).then(res => {
+                if (res) {
+                    this.postsRef.remove(post.key + '').then(response => {
+                        resolve(true);
+                    }, error => {
+                        resolve(false);
+                    });
+                } else {
+                    resolve(false);
+                }
+            });
         });
     }
 

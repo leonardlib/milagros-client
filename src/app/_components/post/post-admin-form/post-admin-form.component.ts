@@ -124,8 +124,12 @@ export class PostAdminFormComponent implements OnInit {
     deletePost() {
         this.utilsService.showSnackbar('Eliminando...');
         this.postService.destroy(this.post).then(response => {
-            this.utilsService.showSnackbar('Publicación eliminada');
-            this.router.navigate(['/admin']);
+            if (response) {
+                this.utilsService.showSnackbar('Publicación eliminada');
+                this.router.navigate(['/admin']);
+            } else {
+                this.utilsService.showSnackbar('No se ha podido eliminar la publicación');
+            }
         });
     }
 
