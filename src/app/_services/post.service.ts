@@ -4,8 +4,10 @@ import { Post } from '../_models/post';
 import { Observable } from 'rxjs';
 import { UtilsService } from './utils.service';
 import { Router } from '@angular/router';
+import { AuthorService } from './author.service';
+import * as moment from 'moment';
+import {ImageModel} from '../_models/image';
 import {Author} from '../_models/author';
-import {AuthorService} from './author.service';
 
 @Injectable({
     providedIn: 'root'
@@ -39,15 +41,18 @@ export class PostService {
     create(post: Post) {
         return new Promise(resolve => {
             this.postsRef = this.fireDatabase.list<Post>(this.basePath);
-            this.posts = this.utilsService.setKeys(this.postsRef);
 
             // Upload main_image to imgur
             this.utilsService.uploadImageToImgur(post.main_image.url).then(res => {
                 if (res !== '') {
-                    post.main_image.url = res + '';
+                    post.main_image.url = res['link'] + '';
+                    post.main_image.delete_hash = res['deletehash'] + '';
+                    post.date = moment().locale('es').format('DD/MM/YYYY');
+                    post.uid = this.utilsService.generateRandomUid();
 
-                    this.authorService.create(post.author);
-                    this.authorService.create(post.main_image.author);
+                    this.authorService.create(post.author).then(response => {
+                        this.authorService.create(post.main_image.author);
+                    });
                     this.postsRef.push(post);
 
                     resolve(post);
@@ -59,6 +64,44 @@ export class PostService {
     }
 
     update(post: Post) {
+        return new Promise(resolve => {
+            this.postsRef = this.fireDatabase.list<Post>(this.basePath);
+
+            // Delete image from Imgur
+            this.utilsService.deleteImageFromImgur(post.main_image.delete_hash).then(res => {
+                if (res) {
+                    // Upload new image to Imgur
+                    this.utilsService.uploadImageToImgur(post['new_image']).then(res2 => {
+                        if (res2) {
+                            post.main_image.url = res2['link'] + '';
+                            post.main_image.delete_hash = res2['deletehash'] + '';
+                            post.date = moment().locale('es').format('DD/MM/YYYY');
+
+                            this.authorService.create(post.author).then(response => {
+                                this.authorService.create(post.main_image.author);
+                            });
+                            this.postsRef.update(post.key + '', {
+                                uid: post.uid,
+                                title: post.title,
+                                main_image: post.main_image,
+                                content: post.content,
+                                author: post.author,
+                                date: post.date
+                            });
+
+                            resolve(post);
+                        } else {
+                            resolve(null);
+                        }
+                    });
+                } else {
+                    resolve(null);
+                }
+            });
+        });
+    }
+
+    destroy(post: Post) {
         return new Promise(resolve => {
             resolve(true);
         });
@@ -75,10 +118,8 @@ export class PostService {
 
                 this.utilsService.getDataURLFromFile(res).then(respo => {
                     const data = {
-                        id: 0,
                         file: res,
-                        icon: respo,
-                        size: '(' + (res.size / 1000).toFixed(0) + ' KB)'
+                        preview: respo
                     };
 
                     resolve(data);

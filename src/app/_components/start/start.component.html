@@ -1,6 +1,6 @@
 
-<gallery id="postGallery" [items]="images" [thumb]="false" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" [itemTemplate]="itemTemplate"></gallery>
-<ng-template #itemTemplate="" let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+<gallery id="postGallery" [items]="images" [thumb]="false" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" [itemTemplate]="itemTemplate" *ngIf="posts.length &gt; 0"></gallery>
+<ng-template #itemTemplate="" let-index="index" let-type="type" let-data="data" let-currIndex="currIndex" *ngIf="posts.length &gt; 0">
   <div class="row bottom-align" *ngIf="type === 'image' &amp;&amp; index === currIndex">
     <div class="col s12 left-align">
       <h4>{{ data.title }}</h4>
@@ -9,14 +9,19 @@
   </div>
 </ng-template>
 <div class="container min-height-100vh">
-  <div class="row">
+  <div class="row" *ngIf="posts.length &lt;= 0">
+    <div class="col s12 center-align text-primary p-top-5">
+      <h4>¡Lo sentimos!, aún no tenemos noticias, vuelve pronto.</h4>
+    </div>
+  </div>
+  <div class="row" *ngIf="posts.length &gt; 0">
     <div class="col s12 m6 m-top-30p" *ngFor="let post of posts">
       <div class="card medium">
         <div class="card-image"><img [src]="post.main_image.url"/><span class="card-title">{{ post.title }}</span></div>
         <div class="card-content">
-          <p class="truncate" [innerHtml]="post.content"></p>
+          <p class="text-justify" innerHtml="{{ post.content | slice:0:200 }}{{ post.content.length &gt; 200 ? '...' : '' }}"></p>
         </div>
-        <div class="card-action"><a class="left text-primary cursor-pointer" (click)="postService.goToDetail(post.uid)">Ver más</a><span class="right">{{ post.date | amDateFormat: 'DD/MM/YYYY'}}</span></div>
+        <div class="card-action"><a class="left text-primary cursor-pointer" (click)="postService.goToDetail(post.uid)">Ver más</a><span class="right">{{ post.date }}</span></div>
       </div>
     </div>
   </div>

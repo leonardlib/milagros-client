@@ -1,6 +1,6 @@
 gallery(id="postGallery", [items]="images", [thumb]="false", [autoPlay]="true", [counter]="false", [playerInterval]="5000",
-    [imageSize]="contain", [itemTemplate]="itemTemplate")
-ng-template(#itemTemplate="", let-index="index", let-type="type", let-data="data", let-currIndex="currIndex")
+    [imageSize]="contain", [itemTemplate]="itemTemplate", *ngIf="posts.length > 0")
+ng-template(#itemTemplate="", let-index="index", let-type="type", let-data="data", let-currIndex="currIndex", *ngIf="posts.length > 0")
     .row.bottom-align(*ngIf="type === 'image' && index === currIndex")
         .col.s12.left-align
             h4 {{ data.title }}
@@ -8,14 +8,17 @@ ng-template(#itemTemplate="", let-index="index", let-type="type", let-data="data
             a.btn.waves-effect.bg-primary.white-text((click)="postService.goToDetail(data.uid)") Ver Más
 
 .container.min-height-100vh
-    .row
+    .row(*ngIf="posts.length <= 0")
+        .col.s12.center-align.text-primary.p-top-5
+            h4 ¡Lo sentimos!, aún no tenemos noticias, vuelve pronto.
+    .row(*ngIf="posts.length > 0")
         .col.s12.m6.m-top-30p(*ngFor="let post of posts")
             .card.medium
                 .card-image
                     img([src]="post.main_image.url")
                     span.card-title {{ post.title }}
                 .card-content
-                    p.truncate([innerHtml]="post.content")
+                    p.text-justify(innerHtml="{{ post.content | slice:0:200 }}{{ post.content.length > 200 ? '...' : '' }}")
                 .card-action
                     a.left.text-primary.cursor-pointer((click)="postService.goToDetail(post.uid)") Ver más
-                    span.right {{ post.date | amDateFormat: 'DD/MM/YYYY'}}
+                    span.right {{ post.date }}

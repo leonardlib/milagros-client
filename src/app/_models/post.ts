@@ -2,7 +2,7 @@ import { ImageModel } from './image';
 import { Author } from './author';
 
 export class Post {
-    key: number;
+    key: string;
     uid: string;
     title: string;
     main_image: ImageModel;

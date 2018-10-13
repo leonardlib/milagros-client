@@ -1,14 +1,15 @@
 .container.min-height-100vh
     .row.m-top-30p
         .col.s12
-            h4 Nueva publicación
+            h4(*ngIf="!editar") Nueva publicación
+            h4(*ngIf="editar") Editar publicación
     .row.m-bottom-50p
         .col.s12
             .row
                 .input-field.col.s12
                     input.validate(type="text", id="title", name="title", [(ngModel)]="post.title",
                         #title="ngModel", required)
-                    label(for="title") Título
+                    label(for="title", [class.active]="editar") Título
             .row
                 .col.s12
                     span.text-primary Autor de la publicación
@@ -35,5 +36,7 @@
                     div([froalaEditor]="froalaOptions", id="content", name="content", [(ngModel)]="post.content",
                         #content="ngModel")
             .row
-                .col.s12.m-top-50p
+                .col.s12.m6.m-top-50p(*ngIf="editar")
+                    a.btn.btn-block.waves-effect.waves-block.grey((click)="onDelete()") Eliminar
+                .col.s12.m-top-50p([class.m6]="editar")
                     a.btn.btn-block.bg-primary.waves-effect.waves-block((click)="onSubmit()") Guardar

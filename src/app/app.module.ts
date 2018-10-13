@@ -24,6 +24,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -51,6 +52,8 @@ import { DonateItemComponent } from './_components/donate/donate-item/donate-ite
 import { PetAdminListComponent } from './_components/pet/pet-admin-list/pet-admin-list.component';
 import { PostAdminListComponent } from './_components/post/post-admin-list/post-admin-list.component';
 import { PostAdminFormComponent } from './_components/post/post-admin-form/post-admin-form.component';
+import { ModalComponent } from './_components/layout/modal/modal.component';
+import { SafeHtmlPipe } from './_pipes/safe-html.pipe';
 
 const config: InputFileConfig = {};
 
@@ -77,7 +80,9 @@ const config: InputFileConfig = {};
         DonateItemComponent,
         PetAdminListComponent,
         PostAdminListComponent,
-        PostAdminFormComponent
+        PostAdminFormComponent,
+        ModalComponent,
+        SafeHtmlPipe
     ],
     imports: [
         BrowserModule,
@@ -106,6 +111,7 @@ const config: InputFileConfig = {};
         InputFileModule.forRoot(config),
         FroalaEditorModule.forRoot(),
         FroalaViewModule.forRoot(),
+        MatDialogModule,
         AppRoutingModule
     ],
     providers: [
@@ -113,6 +119,9 @@ const config: InputFileConfig = {};
         AuthService,
         AuthGuard,
         PostService
+    ],
+    entryComponents: [
+        ModalComponent
     ],
     bootstrap: [AppComponent]
 })

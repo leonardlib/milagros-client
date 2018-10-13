@@ -3,15 +3,17 @@ import { Post } from '../../../_models/post';
 import { Author } from '../../../_models/author';
 import { AuthorService } from '../../../_services/author.service';
 import { UtilsService } from '../../../_services/utils.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../../../_services/post.service';
 import { ImageModel } from '../../../_models/image';
+import { ModalComponent } from '../../layout/modal/modal.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     selector: 'app-post-admin-form',
     templateUrl: './post-admin-form.component.html',
     styleUrls: ['./post-admin-form.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Default,
+    changeDetection: ChangeDetectionStrategy.Default
 })
 export class PostAdminFormComponent implements OnInit {
     public post: Post = new Post();
@@ -25,7 +27,9 @@ export class PostAdminFormComponent implements OnInit {
         private authorService: AuthorService,
         private route: ActivatedRoute,
         private utilsService: UtilsService,
-        public postService: PostService
+        public postService: PostService,
+        private dialog: MatDialog,
+        private router: Router
     ) {
         const buttons = [
             'fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript',
@@ -42,6 +46,7 @@ export class PostAdminFormComponent implements OnInit {
             toolbarButtonsMD: buttons,
             toolbarButtonsSM: buttons,
             toolbarButtonsXS: buttons,
+            imageUploadURL: 'https://i.froala.com/upload?x'
         };
         this.editar = false;
         this.post.main_image = new ImageModel();
@@ -70,9 +75,9 @@ export class PostAdminFormComponent implements OnInit {
 
     onSubmit() {
         if (this.validData()) {
-            this.post.main_image.url = this.images[0].preview;
-
+            this.utilsService.showSnackbar('Guardando...');
             if (this.editar) {
+                this.post['new_image'] = this.images[0].preview;
                 this.postService.update(this.post).then(response => {
                     if (response) {
                         this.post = response as Post;
@@ -82,6 +87,7 @@ export class PostAdminFormComponent implements OnInit {
                     }
                 });
             } else {
+                this.post.main_image.url = this.images[0].preview;
                 this.postService.create(this.post).then(response => {
                     if (response) {
                         this.post = response as Post;
@@ -95,6 +101,32 @@ export class PostAdminFormComponent implements OnInit {
         } else {
             this.utilsService.showSnackbar('Verifica que la información este completa');
         }
+    }
+
+    onDelete() {
+        const dialogRef = this.dialog.open(ModalComponent, {
+            width: '300px',
+            data: {
+                title: '¿Estás seguro de eliminar la publicación?',
+                content: 'Esta acción no podrá revertirse, una vez eliminada no se podrá recuperar después.',
+                closeBtnText: 'Cancelar',
+                confirmBtnText: 'OK'
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.deletePost();
+            }
+        });
+    }
+
+    deletePost() {
+        this.utilsService.showSnackbar('Eliminando...');
+        this.postService.destroy(this.post).then(response => {
+            this.utilsService.showSnackbar('Publicación eliminada');
+            this.router.navigate(['/admin']);
+        });
     }
 
     validData() {

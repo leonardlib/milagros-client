@@ -5,13 +5,13 @@
     .row
         .col.s12.center-align
             img.responsive-img([src]="post.main_image.url")
-            blockquote.right Foto por {{ post.main_image.author }}
+            blockquote.right Foto por {{ post.main_image.author.name }}
     .row
         .col.s12
-            p.text-justify([innerHtml]="post.content")
+            p.text-justify([innerHtml]="post.content | safeHtml")
     .row
         .col.s12.left-align
-            blockquote Escrito por {{ post.author }}
+            blockquote Escrito por {{ post.author.name }}
     .row.left-align.m-top-50p.m-bottom-50p
         .col.s12
             span Compartir esta publicación

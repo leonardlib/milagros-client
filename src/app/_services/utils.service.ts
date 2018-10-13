@@ -109,11 +109,35 @@ export class UtilsService {
 
             this.http.post(environment.imgur.route, data, httpOptions).subscribe(response => {
                 if (response['success']) {
-                    resolve(response['data'].link);
+                    resolve(response['data']);
                 } else {
                     resolve('');
                 }
             });
         });
+    }
+
+    deleteImageFromImgur(delete_hash: string) {
+        return new Promise(resolve => {
+            const path = environment.imgur.route + '/' + delete_hash;
+            const httpOptions = {
+                headers: new HttpHeaders({
+                    'Authorization': 'Client-ID ' + environment.imgur.client_id,
+                    'Accept': 'application/json'
+                })
+            };
+
+            this.http.delete(path, httpOptions).subscribe(response => {
+                if (response['success']) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            });
+        });
+    }
+
+    generateRandomUid() {
+        return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
 }

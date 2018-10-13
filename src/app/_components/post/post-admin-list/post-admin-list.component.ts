@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PostService } from '../../../_services/post.service';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Post } from '../../../_models/post';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-post-admin-list',
@@ -17,7 +18,7 @@ export class PostAdminListComponent implements OnInit {
         prop: 'title',
         name: 'Título'
     }, {
-        prop: 'author',
+        prop: 'author.name',
         name: 'Autor'
     }, {
         prop: 'date',
@@ -27,7 +28,8 @@ export class PostAdminListComponent implements OnInit {
     public messages: any = {};
 
     constructor(
-        private postService: PostService
+        private postService: PostService,
+        private router: Router
     ) {}
 
     ngOnInit() {
@@ -56,6 +58,6 @@ export class PostAdminListComponent implements OnInit {
 
     onSelect(event: any) {
         const post = event.selected[0] as Post;
-        this.postService.goToDetail(post.uid);
+        this.router.navigate(['/post/edit/' + post.uid]);
     }
 }
