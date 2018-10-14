@@ -1,0 +1,66 @@
+
+<div class="container min-height-100vh">
+  <div class="row m-top-30p">
+    <div class="col s12">
+      <h4 *ngIf="!editar">Nueva mascota</h4>
+      <h4 *ngIf="editar">Editar mascota</h4>
+    </div>
+  </div>
+  <div class="row m-bottom-50p">
+    <div class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input class="validate" type="text" id="name" name="name" [(ngModel)]="pet.name" #name="ngModel" required="required"/>
+          <label for="name" [class.active]="editar">Nombre</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="description">Descripción</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m-top-30p">
+          <div [froalaEditor]="froalaOptions" id="description" name="description" [(ngModel)]="pet.description" #description="ngModel"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <label for="color">Color principal del pelaje</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 m-top-30p">
+          <color-slider [color]="'#000000'" (onChangeComplete)="onChangeColor($event)" id="color"></color-slider>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+.row
+    .col.s12
+        span.text-primary Autor de la publicación
+        ng-select([items]="authors", [addTag]="true", bindLabel="name", [(ngModel)]="post.author.name",
+        bindValue="name", [notFoundText]="'Sin autores, escribe para agregar'",
+        [loading]="loading", [addTagText]="'Agregar autor'")
+.row
+    .input-field.col.s12
+        label(for="main_image") Imagen principal
+.row
+    .input-field.col.s12
+        input-file([(ngModel)]="images", [fileAccept]="'image/*'", id="main_image", [fileLimit]="1")
+.row
+    .col.s12
+        span.text-primary Autor de la imagen principal
+        ng-select([items]="authors", [addTag]="true", bindLabel="name", [(ngModel)]="post.main_image.author.name",
+        bindValue="name", [notFoundText]="'Sin autores, escribe para agregar'",
+        [loading]="loading", [addTagText]="'Agregar autor'")
+
+
+.row
+    .col.s12.m6.m-top-50p(*ngIf="editar")
+        a.btn.btn-block.waves-effect.waves-block.grey((click)="onDelete()") Eliminar
+    .col.s12.m-top-50p([class.m6]="editar")
+        a.btn.btn-block.bg-primary.waves-effect.waves-block((click)="onSubmit()") Guardar
+-->

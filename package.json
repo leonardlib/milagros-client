@@ -45,6 +45,7 @@
         "jquery": "^3.3.1",
         "material-design-icons": "^3.0.1",
         "materialize-css": "^0.100.2",
+        "ngx-color": "^2.0.4",
         "ngx-input-file": "^2.1.4",
         "rxjs": "^6.3.2",
         "zone.js": "^0.8.26"

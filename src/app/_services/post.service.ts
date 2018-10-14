@@ -6,8 +6,6 @@ import { UtilsService } from './utils.service';
 import { Router } from '@angular/router';
 import { AuthorService } from './author.service';
 import * as moment from 'moment';
-import {ImageModel} from '../_models/image';
-import {Author} from '../_models/author';
 
 @Injectable({
     providedIn: 'root'

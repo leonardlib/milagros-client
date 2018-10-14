@@ -22,6 +22,7 @@ import { DonateItemComponent } from './_components/donate/donate-item/donate-ite
 import { PetAdminListComponent } from './_components/pet/pet-admin-list/pet-admin-list.component';
 import { PostAdminListComponent } from './_components/post/post-admin-list/post-admin-list.component';
 import { PostAdminFormComponent } from './_components/post/post-admin-form/post-admin-form.component';
+import { PetAdminFormComponent } from './_components/pet/pet-admin-form/pet-admin-form.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -49,7 +50,9 @@ const routes: Routes = [
     {
         path: 'pet', component: UserInterfaceComponent, children: [
             { path: '', component: PetHomeComponent },
-            { path: 'characteristics/:uid', component: PetCharacteristicsComponent }
+            { path: 'characteristics/:uid', component: PetCharacteristicsComponent },
+            { path: 'new', component: PetAdminFormComponent },
+            { path: 'edit/:uid', component: PetAdminFormComponent }
         ]
     },
     {

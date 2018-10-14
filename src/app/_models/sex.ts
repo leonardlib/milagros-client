@@ -1,4 +1,4 @@
-export class Author {
+export class Sex {
     key: number;
     name: string;
 

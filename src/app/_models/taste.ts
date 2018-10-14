@@ -1,4 +1,4 @@
-export class Author {
+export class Taste {
     key: number;
     name: string;
 

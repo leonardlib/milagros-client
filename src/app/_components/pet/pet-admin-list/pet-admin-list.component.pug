@@ -2,7 +2,14 @@
     .col.s12
         h5 Mascotas
 .row
+    .col.s12.m6.m-top-50p
+        a.btn.btn-block.waves-block.waves-effect.bg-primary.white-text([routerLink]="['/pet/new']") Nueva mascota
+    .input-field.col.s12.m6.m-top-50p
+        input(type="text", id="search", (keyup)="onFilter(search.value)", #search="")
+        label(for="search") Buscar mascota
+.row
     .col.s12
-        ngx-datatable.bootstrap([rows] = "rows", [loadingIndicator] = "loadingIndicator", [columns] = "columns",
-            [columnMode] = "'force'", [headerHeight] = "40", [summaryRow] = "true", [summaryPosition] = "'bottom'",
-            [footerHeight] = "40", [limit] = "10", [rowHeight] = "'auto'", [reorderable] = "reorderable")
+        ngx-datatable.bootstrap([rows]="rows", [loadingIndicator]="loadingIndicator", [columns]="columns",
+            [columnMode]="'force'", [headerHeight]="'auto'", [footerHeight]="'auto'", [limit]="10",
+            [rowHeight]="'auto'", [reorderable]="reorderable", #table="", [messages]="messages",
+            [selectionType]="'single'", (select)="onSelect($event)")

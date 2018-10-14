@@ -1,4 +1,4 @@
-export class Author {
+export class Fur {
     key: number;
     name: string;
 
