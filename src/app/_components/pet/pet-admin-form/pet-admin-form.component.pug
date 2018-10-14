@@ -19,32 +19,57 @@
                         #description="ngModel")
             .row
                 .input-field.col.s12
+                    label(for="tastes") Gustos
+            .row
+                .col.s12.m-top-30p
+                    ng-select([items]="tastes", [addTag]="true", [multiple]="true", bindLabel="name",
+                        [(ngModel)]="pet.tastes", bindValue="name", id="tastes",
+                        [notFoundText]="'No se encontraron gustos, escribe para agregar'", [loading]="loading",
+                        [addTagText]="'Agregar'")
+            .row
+                .input-field.col.s12
+                    label(for="images") Fotografías
+            .row
+                .input-field.col.s12
+                    input-file([(ngModel)]="images", [fileAccept]="'image/*'", id="images", [fileLimit]="100")
+            .row
+                .input-field.col.s12
+                    label(for="birthday") Fecha de nacimiento
+            .row
+                .input-field.col.s12
+                    input([matDatepicker]="datepicker", id="birthday", (focus)="datepicker.open()", name="birthday",
+                        #birthday="ngModel", [(ngModel)]="pet.birthday")
+                    mat-datepicker(#datepicker="")
+            .row
+                .input-field.col.s12
+                    label(for="sex") Sexo
+            .row
+                .col.s12.m-top-30p
+                    ng-select([items]="sexs", bindLabel="name", [(ngModel)]="pet.sex.name", bindValue="name", id="sex",
+                        [notFoundText]="'No se encontraron resultados'")
+            .row
+                .input-field.col.s12
+                    label(for="fur") Pelaje
+            .row
+                .col.s12.m-top-30p
+                    ng-select([items]="furs", [addTag]="true", bindLabel="name",
+                        [(ngModel)]="pet.fur.name", bindValue="name", id="fur",
+                        [notFoundText]="'No se encontraron tipos de pelaje, escribe para agregar'", [loading]="loading",
+                        [addTagText]="'Agregar'")
+            .row
+                .input-field.col.s12
                     label(for="color") Color principal del pelaje
             .row
                 .col.s12.m-top-30p
-                    color-slider([color]="'#000000'", (onChangeComplete)="onChangeColor($event)", id="color")
-
-//
-            .row
-                .col.s12
-                    span.text-primary Autor de la publicación
-                    ng-select([items]="authors", [addTag]="true", bindLabel="name", [(ngModel)]="post.author.name",
-                    bindValue="name", [notFoundText]="'Sin autores, escribe para agregar'",
-                    [loading]="loading", [addTagText]="'Agregar autor'")
+                    color-sketch([color]="'#000000'", (onChangeComplete)="onChangeColor($event)", id="color")
             .row
                 .input-field.col.s12
-                    label(for="main_image") Imagen principal
+                    label(for="admission_date") Fecha de admisión
             .row
                 .input-field.col.s12
-                    input-file([(ngModel)]="images", [fileAccept]="'image/*'", id="main_image", [fileLimit]="1")
-            .row
-                .col.s12
-                    span.text-primary Autor de la imagen principal
-                    ng-select([items]="authors", [addTag]="true", bindLabel="name", [(ngModel)]="post.main_image.author.name",
-                    bindValue="name", [notFoundText]="'Sin autores, escribe para agregar'",
-                    [loading]="loading", [addTagText]="'Agregar autor'")
-
-
+                    input([matDatepicker]="admissionDate", id="admission_date", (focus)="admissionDate.open()",
+                        name="admission_date", #admissionDate="ngModel", [(ngModel)]="pet.admission_date")
+                    mat-datepicker(#admissionDate="")
             .row
                 .col.s12.m6.m-top-50p(*ngIf="editar")
                     a.btn.btn-block.waves-effect.waves-block.grey((click)="onDelete()") Eliminar

@@ -26,12 +26,11 @@ import { InputFileConfig, InputFileModule } from 'ngx-input-file';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ColorSketchModule } from 'ngx-color/sketch';
-
-import { ColorBlockModule } from 'ngx-color/block'; // <color-block></color-block>
-import { ColorCircleModule } from 'ngx-color/circle'; // <color-circle></color-circle>
-import { ColorCompactModule } from 'ngx-color/compact'; // <color-compact></color-compact>
-import { ColorSliderModule } from 'ngx-color/slider'; // <color-slider></color-slider>
-import { ColorTwitterModule } from 'ngx-color/twitter'; // <color-twitter></color-twitter>
+import { ColorBlockModule } from 'ngx-color/block';
+import { ColorCircleModule } from 'ngx-color/circle';
+import { ColorCompactModule } from 'ngx-color/compact';
+import { ColorSliderModule } from 'ngx-color/slider';
+import { ColorTwitterModule } from 'ngx-color/twitter';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -62,6 +61,10 @@ import { PostAdminFormComponent } from './_components/post/post-admin-form/post-
 import { ModalComponent } from './_components/layout/modal/modal.component';
 import { SafeHtmlPipe } from './_pipes/safe-html.pipe';
 import { PetAdminFormComponent } from './_components/pet/pet-admin-form/pet-admin-form.component';
+import { AuthorService } from './_services/author.service';
+import { PetService } from './_services/pet.service';
+import { TasteService } from './_services/taste.service';
+import { UtilsService } from './_services/utils.service';
 
 const config: InputFileConfig = {};
 
@@ -133,7 +136,11 @@ const config: InputFileConfig = {};
         UserService,
         AuthService,
         AuthGuard,
-        PostService
+        PostService,
+        AuthorService,
+        PetService,
+        TasteService,
+        UtilsService
     ],
     entryComponents: [
         ModalComponent

@@ -83,4 +83,21 @@ export class PetService {
 
         return images;
     }
+
+    getImage(url: string, name: string) {
+        return new Promise(resolve => {
+            this.utilsService.getFileFromUrl(url, name).then(resp => {
+                const res = resp as File;
+
+                this.utilsService.getDataURLFromFile(res).then(respo => {
+                    const data = {
+                        file: res,
+                        preview: respo
+                    };
+
+                    resolve(data);
+                });
+            });
+        });
+    }
 }

@@ -1,7 +1,7 @@
 export class Age {
     key: string;
-    pet_age: string;
-    human_age: string;
+    pet_age: number;
+    human_age: number;
 
     constructor() {}
 }
