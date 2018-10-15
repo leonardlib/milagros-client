@@ -23,7 +23,7 @@
             .row
                 .col.s12.m-top-30p
                     ng-select([items]="tastes", [addTag]="true", [multiple]="true", bindLabel="name",
-                        [(ngModel)]="pet.tastes", bindValue="name", id="tastes",
+                        [(ngModel)]="tastesSelected", bindValue="name", id="tastes",
                         [notFoundText]="'No se encontraron gustos, escribe para agregar'", [loading]="loading",
                         [addTagText]="'Agregar'")
             .row

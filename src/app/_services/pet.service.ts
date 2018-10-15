@@ -4,10 +4,11 @@ import { Pet } from '../_models/pet';
 import { Observable } from 'rxjs';
 import { UtilsService } from './utils.service';
 import { Router } from '@angular/router';
-import { AuthorService } from './author.service';
 import * as moment from 'moment';
-import {Post} from '../_models/post';
-import {ImageModel} from '../_models/image';
+import { ImageModel } from '../_models/image';
+import { FurService } from './fur.service';
+import { Taste } from '../_models/taste';
+import { TasteService } from './taste.service';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,8 @@ export class PetService {
         private fireDatabase: AngularFireDatabase,
         public utilsService: UtilsService,
         private router: Router,
-        private authorService: AuthorService
+        private furService: FurService,
+        private tasteService: TasteService
     ) {}
 
     index(query: any = null) {
@@ -46,17 +48,11 @@ export class PetService {
             const startCreating = async () => {
                 // Then, replace pet images
                 pet.images = await this.uploadImages(pet.images);
-
-                /*
-                pet.age.pet_age = this.utilsService.calculateAge(pet.birthday);
-                pet.age.human_age = this.utilsService.petAgeToHumanAge(pet.age.pet_age);
                 pet.uid = this.utilsService.generateRandomUid();
 
                 this.furService.create(pet.fur);
-                this.tasteService.create(pet.tastes);
-
+                this.uploadTastes(pet.tastes);
                 this.petsRef.push(pet);
-                */
 
                 return true;
             };
@@ -69,6 +65,12 @@ export class PetService {
                 }
             });
         });
+    }
+
+    async uploadTastes(tastes: Taste[]) {
+        for (let index = 0; index < tastes.length; index++) {
+            await this.tasteService.create(tastes[index]);
+        }
     }
 
     async uploadImages(images: ImageModel[]) {
@@ -99,5 +101,22 @@ export class PetService {
                 });
             });
         });
+    }
+
+    calculatePetAge(pet: Pet) {
+        return moment().diff(pet.birthday, 'years', false);
+    }
+
+    petAgeToHumanAge(pet: Pet) {
+        const firstYear = 13;
+        const secondYear = 20;
+
+        if (pet.age.pet_age > 2) {
+            return secondYear + ((pet.age.pet_age - 2) * 5);
+        } else if (pet.age.pet_age === 1) {
+            return firstYear;
+        } else {
+            return secondYear;
+        }
     }
 }

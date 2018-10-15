@@ -300,3 +300,15 @@ mat-icon {
     border-top: 5px solid $primary-color !important;
 }
 /* End of text editor */
+
+/* Material calendar */
+.mat-calendar-body-selected {
+    background-color: $primary-color !important;
+}
+/* End of aterial calendar */
+
+/* Material snackbar */
+.mat-simple-snackbar-action {
+    color: $primary-color !important;
+}
+/* End of material snackbar */
