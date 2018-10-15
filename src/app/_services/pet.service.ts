@@ -49,11 +49,10 @@ export class PetService {
                 // Then, replace pet images
                 pet.images = await this.uploadImages(pet.images);
                 pet.uid = this.utilsService.generateRandomUid();
-
                 this.furService.create(pet.fur);
-                this.uploadTastes(pet.tastes);
-                this.petsRef.push(pet);
+                await this.uploadTastes(pet.tastes);
 
+                this.petsRef.push(pet);
                 return true;
             };
 
