@@ -34,7 +34,6 @@
         "@ngx-gallery/lightbox": "^3.1.2",
         "@ngx-share/core": "^6.0.1",
         "@swimlane/ngx-datatable": "^13.1.0",
-        "angular-froala-wysiwyg": "^2.8.5",
         "angular2-materialize": "^15.1.10",
         "angular2-moment": "^1.9.0",
         "angularfire2": "^5.0.2",
@@ -47,7 +46,9 @@
         "materialize-css": "^0.100.2",
         "ngx-color": "^2.0.4",
         "ngx-input-file": "^2.1.4",
+        "ngx-trumbowyg": "^6.0.5",
         "rxjs": "^6.3.2",
+        "trumbowyg": "^2.11.1",
         "zone.js": "^0.8.26"
     },
     "devDependencies": {

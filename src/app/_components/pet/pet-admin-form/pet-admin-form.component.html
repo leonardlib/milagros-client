@@ -21,7 +21,10 @@
       </div>
       <div class="row">
         <div class="col s12 m-top-30p">
-          <div [froalaEditor]="froalaOptions" id="description" name="description" [(ngModel)]="pet.description" #description="ngModel"></div>
+          <!--app-ngx-editor(id="description", name="description", [(ngModel)]="pet.description", #description="ngModel",[spellcheck]="true")
+          -->
+          <!--ngx-wig(id="description", name="description", [(ngModel)]="pet.description", #description="ngModel")-->
+          <div id="description" name="description" #description=""></div>
         </div>
       </div>
       <div class="row">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Pet } from '../../../_models/pet';
 import { ColorEvent } from 'ngx-color';
 import { Taste } from '../../../_models/taste';
@@ -16,6 +16,8 @@ import { DateAdapter } from '@angular/material/core';
 import { ImageModel } from '../../../_models/image';
 import * as moment from 'moment';
 
+declare var $: any;
+
 @Component({
     selector: 'app-pet-admin-form',
     templateUrl: './pet-admin-form.component.html',
@@ -31,6 +33,7 @@ export class PetAdminFormComponent implements OnInit {
     public loading = false;
     public froalaOptions: any = {};
     public editar: boolean;
+    @ViewChild('description') descriptionEditor: any;
 
     constructor(
         private tasteService: TasteService,
@@ -90,6 +93,11 @@ export class PetAdminFormComponent implements OnInit {
             this.tastes = tastes;
         });
         this.datepickerAdapter.setLocale('es');
+
+        $(this.descriptionEditor.nativeElement).trumbowyg({
+            lang: 'es',
+            svgPath: '../node_modules/trumbowyg/dist/ui/icons.svg'
+        });
     }
 
     getImages() {

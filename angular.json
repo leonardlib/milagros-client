@@ -29,17 +29,17 @@
                         "styles": [
                             "src/styles.scss",
                             "node_modules/materialize-css/dist/css/materialize.css",
-                            "node_modules/froala-editor/css/froala_editor.pkgd.min.css",
-                            "node_modules/froala-editor/css/froala_style.min.css",
                             "node_modules/font-awesome/css/font-awesome.css",
-                            "node_modules/material-design-icons/iconfont/material-icons.css"
+                            "node_modules/material-design-icons/iconfont/material-icons.css",
+                            "node_modules/trumbowyg/dist/ui/trumbowyg.min.css",
+                            "node_modules/trumbowyg/dist/ui/icons.svg"
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.js",
                             "node_modules/hammerjs/hammer.js",
                             "node_modules/materialize-css/dist/js/materialize.js",
-                            "node_modules/froala-editor/js/froala_editor.pkgd.min.js",
-                            "node_modules/froala-editor/js/languages/es.js"
+                            "node_modules/trumbowyg/dist/trumbowyg.min.js",
+                            "src/assets/editor/lang/es.min.js"
                         ]
                     },
                     "configurations": {

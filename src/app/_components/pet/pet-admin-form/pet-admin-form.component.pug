@@ -15,8 +15,10 @@
                     label(for="description") Descripción
             .row
                 .col.s12.m-top-30p
-                    div([froalaEditor]="froalaOptions", id="description", name="description", [(ngModel)]="pet.description",
-                        #description="ngModel")
+                    //app-ngx-editor(id="description", name="description", [(ngModel)]="pet.description", #description="ngModel",
+                        [spellcheck]="true")
+                    //ngx-wig(id="description", name="description", [(ngModel)]="pet.description", #description="ngModel")
+                    div(id="description", name="description", #description="")
             .row
                 .input-field.col.s12
                     label(for="tastes") Gustos

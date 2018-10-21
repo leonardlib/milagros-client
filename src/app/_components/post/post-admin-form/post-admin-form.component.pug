@@ -33,7 +33,7 @@
                     label(for="content") Contenido
             .row
                 .col.s12.m-top-30p
-                    div([froalaEditor]="froalaOptions", id="content", name="content", [(ngModel)]="post.content",
+                    //div([froalaEditor]="froalaOptions", id="content", name="content", [(ngModel)]="post.content",
                         #content="ngModel")
             .row
                 .col.s12.m6.m-top-50p(*ngIf="editar")

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterializeModule } from 'angular2-materialize';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, NgControl, ReactiveFormsModule} from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -23,7 +23,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { InputFileConfig, InputFileModule } from 'ngx-input-file';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { ColorBlockModule } from 'ngx-color/block';
@@ -31,6 +30,7 @@ import { ColorCircleModule } from 'ngx-color/circle';
 import { ColorCompactModule } from 'ngx-color/compact';
 import { ColorSliderModule } from 'ngx-color/slider';
 import { ColorTwitterModule } from 'ngx-color/twitter';
+import { NgxTrumbowygModule } from 'ngx-trumbowyg';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -121,8 +121,6 @@ const config: InputFileConfig = {};
         MatDatepickerModule,
         MatNativeDateModule,
         InputFileModule.forRoot(config),
-        FroalaEditorModule.forRoot(),
-        FroalaViewModule.forRoot(),
         MatDialogModule,
         ColorSketchModule,
         ColorBlockModule,
@@ -130,6 +128,7 @@ const config: InputFileConfig = {};
         ColorCompactModule,
         ColorSliderModule,
         ColorTwitterModule,
+        NgxTrumbowygModule,
         AppRoutingModule
     ],
     providers: [
