@@ -31,15 +31,16 @@
                             "node_modules/materialize-css/dist/css/materialize.css",
                             "node_modules/font-awesome/css/font-awesome.css",
                             "node_modules/material-design-icons/iconfont/material-icons.css",
-                            "node_modules/trumbowyg/dist/ui/trumbowyg.min.css",
-                            "node_modules/trumbowyg/dist/ui/icons.svg"
+                            "node_modules/quill/dist/quill.core.css",
+                            "node_modules/quill/dist/quill.bubble.css",
+                            "node_modules/quill/dist/quill.snow.css"
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.js",
                             "node_modules/hammerjs/hammer.js",
                             "node_modules/materialize-css/dist/js/materialize.js",
-                            "node_modules/trumbowyg/dist/trumbowyg.min.js",
-                            "src/assets/editor/lang/es.min.js"
+                            "node_modules/quill/dist/quill.core.js",
+                            "node_modules/quill/dist/quill.js"
                         ]
                     },
                     "configurations": {

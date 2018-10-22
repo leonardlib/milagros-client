@@ -33,8 +33,8 @@
                     label(for="content") Contenido
             .row
                 .col.s12.m-top-30p
-                    //div([froalaEditor]="froalaOptions", id="content", name="content", [(ngModel)]="post.content",
-                        #content="ngModel")
+                    quill-editor([(ngModel)]="post.content", id="content", name="content", #content="ngModel",
+                        [placeholder]="'Escribe aquí...'")
             .row
                 .col.s12.m6.m-top-50p(*ngIf="editar")
                     a.btn.btn-block.waves-effect.waves-block.grey((click)="onDelete()") Eliminar

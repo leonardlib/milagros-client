@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pet } from '../../../_models/pet';
 import { ColorEvent } from 'ngx-color';
 import { Taste } from '../../../_models/taste';
@@ -16,8 +16,6 @@ import { DateAdapter } from '@angular/material/core';
 import { ImageModel } from '../../../_models/image';
 import * as moment from 'moment';
 
-declare var $: any;
-
 @Component({
     selector: 'app-pet-admin-form',
     templateUrl: './pet-admin-form.component.html',
@@ -31,9 +29,7 @@ export class PetAdminFormComponent implements OnInit {
     public furs: Fur[] = [];
     public images: any[] = [];
     public loading = false;
-    public froalaOptions: any = {};
     public editar: boolean;
-    @ViewChild('description') descriptionEditor: any;
 
     constructor(
         private tasteService: TasteService,
@@ -46,23 +42,6 @@ export class PetAdminFormComponent implements OnInit {
         private furService: FurService,
         private datepickerAdapter: DateAdapter<any>
     ) {
-        const buttons = [
-            'fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript',
-            'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|',
-            'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink',
-            'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons',
-            'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'spellChecker', 'help',
-            'html', '|', 'undo', 'redo'
-        ];
-
-        this.froalaOptions = {
-            language: 'es',
-            toolbarButtons: buttons,
-            toolbarButtonsMD: buttons,
-            toolbarButtonsSM: buttons,
-            toolbarButtonsXS: buttons,
-            imageUploadURL: 'https://i.froala.com/upload?x'
-        };
         this.editar = false;
         this.pet.age = new Age();
         this.pet.sex = new Sex();
@@ -72,17 +51,6 @@ export class PetAdminFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.route.params.subscribe(params => {
-            const uid = params.uid;
-
-            this.utilsService.showSnackbar('Cargando...');
-            this.petService.show(uid).subscribe(response => {
-                this.pet = response[0] as Pet;
-                this.getImages();
-                this.editar = true;
-            });
-        });
-
         this.sexService.index().subscribe(sexs => {
             this.sexs = sexs;
         });
@@ -94,16 +62,16 @@ export class PetAdminFormComponent implements OnInit {
         });
         this.datepickerAdapter.setLocale('es');
 
-        $(this.descriptionEditor.nativeElement).trumbowyg({
-            lang: 'es',
-            svgPath: '../node_modules/trumbowyg/dist/ui/icons.svg'
-        });
-    }
+        this.route.params.subscribe(params => {
+            const uid = params.uid;
 
-    getImages() {
-        this.pet.images.forEach((image, index) => {
-            this.petService.getImage(image.url, '' + (index + 1)).then(res => {
-                this.images.push(res);
+            this.utilsService.showSnackbar('Cargando...');
+            this.petService.show(uid).subscribe(response => {
+                this.pet = response[0] as Pet;
+                this.getTastes();
+                this.getImages();
+                this.formatDates(1);
+                this.editar = true;
             });
         });
     }
@@ -122,9 +90,8 @@ export class PetAdminFormComponent implements OnInit {
 
             this.setTastes();
             this.setImages();
-            this.formatDates('YYYY-MM-DD');
+            this.formatDates();
             this.setAges();
-            this.formatDates('DD/MM/YYYY');
 
             if (this.editar) {
                 /*
@@ -161,6 +128,16 @@ export class PetAdminFormComponent implements OnInit {
         });
     }
 
+    getTastes() {
+        const tastesList: any = [];
+
+        this.pet.tastes.forEach(taste => {
+            tastesList.push(taste.name);
+        });
+
+        this.tastesSelected = tastesList;
+    }
+
     setImages() {
         this.images.forEach(image => {
             const auxImage = new ImageModel();
@@ -169,9 +146,17 @@ export class PetAdminFormComponent implements OnInit {
         });
     }
 
-    formatDates(format: string) {
-        this.pet.birthday = moment(this.pet.birthday).locale('es').format(format);
-        this.pet.admission_date = moment(this.pet.admission_date).locale('es').format(format);
+    getImages() {
+        this.pet.images.forEach((image, index) => {
+            this.petService.getImage(image.url, '' + (index + 1)).then(res => {
+                this.images.push(res);
+            });
+        });
+    }
+
+    formatDates(days: number = 0) {
+        this.pet.birthday = moment(this.pet.birthday).locale('es').add(days, 'days').format('YYYY-MM-DD');
+        this.pet.admission_date = moment(this.pet.admission_date).locale('es').add(days, 'days').format('YYYY-MM-DD');
     }
 
     setAges() {

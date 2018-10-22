@@ -58,6 +58,6 @@ export class PetAdminListComponent implements OnInit {
 
     onSelect(event: any) {
         const pet = event.selected[0] as Pet;
-        this.router.navigate(['/pet/edit/' + pet.uid]);
+        this.router.navigate(['/pet/admin/edit/' + pet.uid]);
     }
 }

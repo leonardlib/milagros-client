@@ -3,7 +3,7 @@
         h5 Listado de publicaciones
 .row
     .col.s12.m6.m-top-50p
-        a.btn.btn-block.waves-block.waves-effect.bg-primary.white-text([routerLink]="['/post/new']") Nueva publicación
+        a.btn.btn-block.waves-block.waves-effect.bg-primary.white-text([routerLink]="['/post/admin/new']") Nueva publicación
     .input-field.col.s12.m6.m-top-50p
         input(type="text", id="search", (keyup)="onFilter(search.value)", #search="")
         label(for="search") Buscar publicación

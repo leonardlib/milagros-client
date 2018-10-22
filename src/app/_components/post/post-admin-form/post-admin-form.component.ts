@@ -20,7 +20,6 @@ export class PostAdminFormComponent implements OnInit {
     public authors: Author[] = [];
     public loading = false;
     public images: any[] = [];
-    public froalaOptions: any = {};
     public editar: boolean;
 
     constructor(
@@ -31,23 +30,6 @@ export class PostAdminFormComponent implements OnInit {
         private dialog: MatDialog,
         private router: Router
     ) {
-        const buttons = [
-            'fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript',
-            'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|',
-            'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink',
-            'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons',
-            'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'spellChecker', 'help',
-            'html', '|', 'undo', 'redo'
-        ];
-
-        this.froalaOptions = {
-            language: 'es',
-            toolbarButtons: buttons,
-            toolbarButtonsMD: buttons,
-            toolbarButtonsSM: buttons,
-            toolbarButtonsXS: buttons,
-            imageUploadURL: 'https://i.froala.com/upload?x'
-        };
         this.editar = false;
         this.post.main_image = new ImageModel();
         this.post.author = new Author();

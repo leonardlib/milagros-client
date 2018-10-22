@@ -12,12 +12,12 @@ export class Pet {
     color: string;
     tastes: Taste[];
     images: ImageModel[];
-    birthday: string;
+    birthday: any;
     age: Age;
     sex: Sex;
     fur: Fur;
     adopted: boolean;
     sponsored: boolean;
-    admission_date: string;
-    egress_date: string;
+    admission_date: any;
+    egress_date: any;
 }

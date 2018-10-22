@@ -30,7 +30,7 @@ import { ColorCircleModule } from 'ngx-color/circle';
 import { ColorCompactModule } from 'ngx-color/compact';
 import { ColorSliderModule } from 'ngx-color/slider';
 import { ColorTwitterModule } from 'ngx-color/twitter';
-import { NgxTrumbowygModule } from 'ngx-trumbowyg';
+import { QuillModule } from 'ngx-quill'
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -128,7 +128,7 @@ const config: InputFileConfig = {};
         ColorCompactModule,
         ColorSliderModule,
         ColorTwitterModule,
-        NgxTrumbowygModule,
+        QuillModule,
         AppRoutingModule
     ],
     providers: [

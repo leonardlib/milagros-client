@@ -17,7 +17,12 @@ export class AdminGuard implements CanActivate {
     ): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.userService.current().then(user => {
-                return resolve(this.userService.verifyAdminEmail(user.email));
+                if (this.userService.verifyAdminEmail(user.email)) {
+                    resolve(true);
+                } else {
+                    this.router.navigate(['/auth']);
+                    return resolve(false);
+                }
             }, error => {
                 this.router.navigate(['/auth']);
                 return resolve(false);

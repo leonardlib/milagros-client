@@ -21,10 +21,7 @@
       </div>
       <div class="row">
         <div class="col s12 m-top-30p">
-          <!--app-ngx-editor(id="description", name="description", [(ngModel)]="pet.description", #description="ngModel",[spellcheck]="true")
-          -->
-          <!--ngx-wig(id="description", name="description", [(ngModel)]="pet.description", #description="ngModel")-->
-          <div id="description" name="description" #description=""></div>
+          <quill-editor [(ngModel)]="pet.description" id="description" name="description" #description="ngModel" [placeholder]="'Escribe aquí...'"></quill-editor>
         </div>
       </div>
       <div class="row">
@@ -54,7 +51,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input [matDatepicker]="datepicker" id="birthday" (focus)="datepicker.open()" name="birthday" #birthday="ngModel" [(ngModel)]="pet.birthday"/>
+          <input [matDatepicker]="datepicker" id="birthday" (focus)="datepicker.open()" name="birthday" #birthday="ngModel" [(ngModel)]="pet.birthday" [value]="pet.birthday"/>
           <mat-datepicker #datepicker=""></mat-datepicker>
         </div>
       </div>
@@ -85,7 +82,7 @@
       </div>
       <div class="row">
         <div class="col s12 m-top-30p">
-          <color-sketch [color]="'#000000'" (onChangeComplete)="onChangeColor($event)" id="color"></color-sketch>
+          <color-sketch [color]="(pet.color ? pet.color : '#000000')" (onChangeComplete)="onChangeColor($event)" id="color"></color-sketch>
         </div>
       </div>
       <div class="row">

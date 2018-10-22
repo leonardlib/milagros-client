@@ -15,10 +15,8 @@
                     label(for="description") Descripción
             .row
                 .col.s12.m-top-30p
-                    //app-ngx-editor(id="description", name="description", [(ngModel)]="pet.description", #description="ngModel",
-                        [spellcheck]="true")
-                    //ngx-wig(id="description", name="description", [(ngModel)]="pet.description", #description="ngModel")
-                    div(id="description", name="description", #description="")
+                    quill-editor([(ngModel)]="pet.description", id="description", name="description", #description="ngModel",
+                        [placeholder]="'Escribe aquí...'")
             .row
                 .input-field.col.s12
                     label(for="tastes") Gustos
@@ -40,7 +38,7 @@
             .row
                 .input-field.col.s12
                     input([matDatepicker]="datepicker", id="birthday", (focus)="datepicker.open()", name="birthday",
-                        #birthday="ngModel", [(ngModel)]="pet.birthday")
+                        #birthday="ngModel", [(ngModel)]="pet.birthday", [value]="pet.birthday")
                     mat-datepicker(#datepicker="")
             .row
                 .input-field.col.s12
@@ -63,7 +61,7 @@
                     label(for="color") Color principal del pelaje
             .row
                 .col.s12.m-top-30p
-                    color-sketch([color]="'#000000'", (onChangeComplete)="onChangeColor($event)", id="color")
+                    color-sketch([color]="(pet.color ? pet.color : '#000000')", (onChangeComplete)="onChangeColor($event)", id="color")
             .row
                 .input-field.col.s12
                     label(for="admission_date") Fecha de admisión

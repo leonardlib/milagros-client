@@ -43,16 +43,24 @@ const routes: Routes = [
     {
         path: 'post', component: UserInterfaceComponent, children: [
             { path: 'content/:uid', component: PostContentComponent },
-            { path: 'new', component: PostAdminFormComponent },
-            { path: 'edit/:uid', component: PostAdminFormComponent }
+            {
+                path: 'admin', canActivate: [AdminGuard], children: [
+                    { path: 'new', component: PostAdminFormComponent },
+                    { path: 'edit/:uid', component: PostAdminFormComponent }
+                ]
+            }
         ]
     },
     {
         path: 'pet', component: UserInterfaceComponent, children: [
             { path: '', component: PetHomeComponent },
             { path: 'characteristics/:uid', component: PetCharacteristicsComponent },
-            { path: 'new', component: PetAdminFormComponent },
-            { path: 'edit/:uid', component: PetAdminFormComponent }
+            {
+                path: 'admin', canActivate: [AdminGuard], children: [
+                    { path: 'new', component: PetAdminFormComponent },
+                    { path: 'edit/:uid', component: PetAdminFormComponent }
+                ]
+            }
         ]
     },
     {
