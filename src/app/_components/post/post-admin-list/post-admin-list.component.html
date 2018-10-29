@@ -1,12 +1,11 @@
 
 <div class="row">
   <div class="col s12">
-    <h5>Listado de publicaciones</h5>
+    <h5>Lista de publicaciones</h5>
   </div>
 </div>
 <div class="row">
-  <div class="col s12 m6 m-top-50p"><a class="btn btn-block waves-block waves-effect bg-primary white-text" [routerLink]="['/post/admin/new']">Nueva publicación</a></div>
-  <div class="input-field col s12 m6 m-top-50p">
+  <div class="input-field col s12">
     <input type="text" id="search" (keyup)="onFilter(search.value)" #search=""/>
     <label for="search">Buscar publicación</label>
   </div>
@@ -16,3 +15,5 @@
     <ngx-datatable class="bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="'auto'" [footerHeight]="'auto'" [limit]="10" [rowHeight]="'auto'" [reorderable]="reorderable" #table="" [messages]="messages" [selectionType]="'single'" (select)="onSelect($event)"></ngx-datatable>
   </div>
 </div>
+<!-- Actions button-->
+<div class="fixed-action-btn"><a class="btn-floating bg-primary btn-large" [routerLink]="['/admin/posts/new']" matTooltip="Nueva publicación" [matTooltipPosition]="'above'"><i class="large fa fa-plus"></i></a></div>

@@ -28,8 +28,8 @@ export class UtilsService {
     showSnackbar(text) {
         this.snackbar.open(text, 'OK', {
             duration: 3000,
-            horizontalPosition: 'center',
-            verticalPosition: 'bottom'
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
         });
     }
 

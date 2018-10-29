@@ -1,10 +1,8 @@
 .row
     .col.s12
-        h5 Listado de publicaciones
+        h5 Lista de publicaciones
 .row
-    .col.s12.m6.m-top-50p
-        a.btn.btn-block.waves-block.waves-effect.bg-primary.white-text([routerLink]="['/post/admin/new']") Nueva publicación
-    .input-field.col.s12.m6.m-top-50p
+    .input-field.col.s12
         input(type="text", id="search", (keyup)="onFilter(search.value)", #search="")
         label(for="search") Buscar publicación
 .row
@@ -13,3 +11,9 @@
             [columnMode]="'force'", [headerHeight]="'auto'", [footerHeight]="'auto'", [limit]="10",
             [rowHeight]="'auto'", [reorderable]="reorderable", #table="", [messages]="messages",
             [selectionType]="'single'", (select)="onSelect($event)")
+
+// Actions button
+.fixed-action-btn
+    a.btn-floating.bg-primary.btn-large([routerLink]="['/admin/posts/new']", matTooltip="Nueva publicación",
+        [matTooltipPosition]="'above'")
+        i.large.fa.fa-plus

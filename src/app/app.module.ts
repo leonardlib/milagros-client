@@ -11,6 +11,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
@@ -30,7 +31,7 @@ import { ColorCircleModule } from 'ngx-color/circle';
 import { ColorCompactModule } from 'ngx-color/compact';
 import { ColorSliderModule } from 'ngx-color/slider';
 import { ColorTwitterModule } from 'ngx-color/twitter';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -129,6 +130,7 @@ const config: InputFileConfig = {};
         ColorSliderModule,
         ColorTwitterModule,
         QuillModule,
+        MatTabsModule,
         AppRoutingModule
     ],
     providers: [

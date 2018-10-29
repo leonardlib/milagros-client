@@ -42,25 +42,13 @@ const routes: Routes = [
     },
     {
         path: 'post', component: UserInterfaceComponent, children: [
-            { path: 'content/:uid', component: PostContentComponent },
-            {
-                path: 'admin', canActivate: [AdminGuard], children: [
-                    { path: 'new', component: PostAdminFormComponent },
-                    { path: 'edit/:uid', component: PostAdminFormComponent }
-                ]
-            }
+            { path: 'content/:uid', component: PostContentComponent }
         ]
     },
     {
         path: 'pet', component: UserInterfaceComponent, children: [
             { path: '', component: PetHomeComponent },
-            { path: 'characteristics/:uid', component: PetCharacteristicsComponent },
-            {
-                path: 'admin', canActivate: [AdminGuard], children: [
-                    { path: 'new', component: PetAdminFormComponent },
-                    { path: 'edit/:uid', component: PetAdminFormComponent }
-                ]
-            }
+            { path: 'characteristics/:uid', component: PetCharacteristicsComponent }
         ]
     },
     {
@@ -88,8 +76,20 @@ const routes: Routes = [
         path: 'admin', component: UserInterfaceComponent, canActivate: [AdminGuard], children: [
             {
                 path: '', component: AdminHomeComponent, children: [
-                    { path: 'posts', component: PostAdminListComponent },
-                    { path: 'pets', component: PetAdminListComponent },
+                    {
+                        path: 'posts', children: [
+                            { path: '', component: PostAdminListComponent },
+                            { path: 'new', component: PostAdminFormComponent },
+                            { path: 'edit/:uid', component: PostAdminFormComponent }
+                        ]
+                    },
+                    {
+                        path: 'pets', children: [
+                            { path: '', component: PetAdminListComponent },
+                            { path: 'new', component: PetAdminFormComponent },
+                            { path: 'edit/:uid', component: PetAdminFormComponent }
+                        ]
+                    }
                 ]
             },
         ]

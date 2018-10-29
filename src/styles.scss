@@ -312,3 +312,15 @@ mat-icon {
     color: $primary-color !important;
 }
 /* End of material snackbar */
+
+/* Material tabs */
+.mat-tab-nav-bar {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: $primary-color !important;
+}
+/* End of Material tabs */
