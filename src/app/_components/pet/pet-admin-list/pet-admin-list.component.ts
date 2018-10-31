@@ -22,7 +22,7 @@ export class PetAdminListComponent implements OnInit {
         name: 'Pelaje'
     }, {
         prop: 'age.pet_age',
-        name: 'Edad'
+        name: 'Edad (años)'
     }];
     @ViewChild(DatatableComponent) table: DatatableComponent;
     public messages: any = {};
@@ -58,6 +58,6 @@ export class PetAdminListComponent implements OnInit {
 
     onSelect(event: any) {
         const pet = event.selected[0] as Pet;
-        this.router.navigate(['/pet/admin/edit/' + pet.uid]);
+        this.router.navigate(['/admin/pets/edit/' + pet.uid]);
     }
 }

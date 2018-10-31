@@ -1,77 +1,76 @@
-.container.min-height-100vh
-    .row.m-top-30p
-        .col.s12
-            h4(*ngIf="!editar") Nueva mascota
-            h4(*ngIf="editar") Editar mascota
-    .row.m-bottom-50p
-        .col.s12
-            .row
-                .input-field.col.s12
-                    input.validate(type="text", id="name", name="name", [(ngModel)]="pet.name",
-                        #name="ngModel", required)
-                    label(for="name", [class.active]="editar") Nombre
-            .row
-                .input-field.col.s12
-                    label(for="description") Descripción
-            .row
-                .col.s12.m-top-30p
-                    quill-editor([(ngModel)]="pet.description", id="description", name="description", #description="ngModel",
-                        [placeholder]="'Escribe aquí...'")
-            .row
-                .input-field.col.s12
-                    label(for="tastes") Gustos
-            .row
-                .col.s12.m-top-30p
-                    ng-select([items]="tastes", [addTag]="true", [multiple]="true", bindLabel="name",
-                        [(ngModel)]="tastesSelected", bindValue="name", id="tastes",
-                        [notFoundText]="'No se encontraron gustos, escribe para agregar'", [loading]="loading",
-                        [addTagText]="'Agregar'")
-            .row
-                .input-field.col.s12
-                    label(for="images") Fotografías
-            .row
-                .input-field.col.s12
-                    input-file([(ngModel)]="images", [fileAccept]="'image/*'", id="images", [fileLimit]="100")
-            .row
-                .input-field.col.s12
-                    label(for="birthday") Fecha de nacimiento
-            .row
-                .input-field.col.s12
-                    input([matDatepicker]="datepicker", id="birthday", (focus)="datepicker.open()", name="birthday",
-                        #birthday="ngModel", [(ngModel)]="pet.birthday", [value]="pet.birthday")
-                    mat-datepicker(#datepicker="")
-            .row
-                .input-field.col.s12
-                    label(for="sex") Sexo
-            .row
-                .col.s12.m-top-30p
-                    ng-select([items]="sexs", bindLabel="name", [(ngModel)]="pet.sex.name", bindValue="name", id="sex",
-                        [notFoundText]="'No se encontraron resultados'")
-            .row
-                .input-field.col.s12
-                    label(for="fur") Pelaje
-            .row
-                .col.s12.m-top-30p
-                    ng-select([items]="furs", [addTag]="true", bindLabel="name",
-                        [(ngModel)]="pet.fur.name", bindValue="name", id="fur",
-                        [notFoundText]="'No se encontraron tipos de pelaje, escribe para agregar'", [loading]="loading",
-                        [addTagText]="'Agregar'")
-            .row
-                .input-field.col.s12
-                    label(for="color") Color principal del pelaje
-            .row
-                .col.s12.m-top-30p
-                    color-sketch([color]="(pet.color ? pet.color : '#000000')", (onChangeComplete)="onChangeColor($event)", id="color")
-            .row
-                .input-field.col.s12
-                    label(for="admission_date") Fecha de admisión
-            .row
-                .input-field.col.s12
-                    input([matDatepicker]="admissionDate", id="admission_date", (focus)="admissionDate.open()",
-                        name="admission_date", #admissionDate="ngModel", [(ngModel)]="pet.admission_date")
-                    mat-datepicker(#admissionDate="")
-            .row
-                .col.s12.m6.m-top-50p(*ngIf="editar")
-                    a.btn.btn-block.waves-effect.waves-block.grey((click)="onDelete()") Eliminar
-                .col.s12.m-top-50p([class.m6]="editar")
-                    a.btn.btn-block.bg-primary.waves-effect.waves-block((click)="onSubmit()") Guardar
+.row
+    .col.s12
+        h5(*ngIf="!editar") Nueva mascota
+        h5(*ngIf="editar") Editar mascota
+.row
+    .col.s12
+        .row
+            .input-field.col.s12
+                input.validate(type="text", id="name", name="name", [(ngModel)]="pet.name",
+                    #name="ngModel", required)
+                label(for="name", [class.active]="editar") Nombre
+        .row
+            .input-field.col.s12
+                label(for="description") Descripción
+        .row
+            .col.s12.m-top-30p
+                quill-editor([(ngModel)]="pet.description", id="description", name="description", #description="ngModel",
+                    [placeholder]="'Escribe aquí...'")
+        .row
+            .input-field.col.s12
+                label(for="tastes") Gustos
+        .row
+            .col.s12.m-top-30p
+                ng-select([items]="tastes", [addTag]="true", [multiple]="true", bindLabel="name",
+                    [(ngModel)]="tastesSelected", bindValue="name", id="tastes",
+                    [notFoundText]="'No se encontraron gustos, escribe para agregar'", [loading]="loading",
+                    [addTagText]="'Agregar'")
+        .row
+            .input-field.col.s12
+                label(for="images") Fotografías
+        .row
+            .input-field.col.s12
+                input-file([(ngModel)]="images", [fileAccept]="'image/*'", id="images", [fileLimit]="100")
+        .row
+            .input-field.col.s12
+                label(for="birthday") Fecha de nacimiento
+        .row
+            .input-field.col.s12
+                input([matDatepicker]="datepicker", id="birthday", (focus)="datepicker.open()", name="birthday",
+                    #birthday="ngModel", [(ngModel)]="pet.birthday", [value]="pet.birthday", [min]="minDate", [max]="maxDate")
+                mat-datepicker(#datepicker="")
+        .row
+            .input-field.col.s12
+                label(for="sex") Sexo
+        .row
+            .col.s12.m-top-30p
+                ng-select([items]="sexs", bindLabel="name", [(ngModel)]="pet.sex.name", bindValue="name", id="sex",
+                    [notFoundText]="'No se encontraron resultados'")
+        .row
+            .input-field.col.s12
+                label(for="fur") Pelaje
+        .row
+            .col.s12.m-top-30p
+                ng-select([items]="furs", [addTag]="true", bindLabel="name",
+                    [(ngModel)]="pet.fur.name", bindValue="name", id="fur",
+                    [notFoundText]="'No se encontraron tipos de pelaje, escribe para agregar'", [loading]="loading",
+                    [addTagText]="'Agregar'")
+        .row
+            .input-field.col.s12
+                label(for="color") Color principal del pelaje
+        .row
+            .col.s12.m-top-30p
+                color-sketch([color]="(pet.color ? pet.color : '#000000')", (onChangeComplete)="onChangeColor($event)", id="color")
+        .row
+            .input-field.col.s12
+                label(for="admission_date") Fecha de admisión
+        .row
+            .input-field.col.s12
+                input([matDatepicker]="admissionDate", id="admission_date", (focus)="admissionDate.open()",
+                    name="admission_date", #admissionDate="ngModel", [(ngModel)]="pet.admission_date", [min]="minDate", [max]="maxDate")
+                mat-datepicker(#admissionDate="")
+        .row
+            .col.s12.m6.m-top-50p(*ngIf="editar")
+                a.btn.btn-block.waves-effect.waves-block.grey((click)="onDelete()") Eliminar
+            .col.s12.m-top-50p([class.m6]="editar")
+                a.btn.btn-block.bg-primary.waves-effect.waves-block((click)="onSubmit()") Guardar

@@ -1,12 +1,13 @@
 .row
     .col.s12
-        h5 Mascotas
+        h5 Lista de mascotas
 .row
-    .col.s12.m6.m-top-50p
-        a.btn.btn-block.waves-block.waves-effect.bg-primary.white-text([routerLink]="['/pet/admin/new']") Nueva mascota
-    .input-field.col.s12.m6.m-top-50p
+    .input-field.col.s12
         input(type="text", id="search", (keyup)="onFilter(search.value)", #search="")
         label(for="search") Buscar mascota
+.row
+    .col.s12
+        a.btn.btn-block.waves-block.waves-effect.bg-primary([routerLink]="['/admin/pets/new']") Agregar mascota
 .row
     .col.s12
         ngx-datatable.bootstrap([rows]="rows", [loadingIndicator]="loadingIndicator", [columns]="columns",

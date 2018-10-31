@@ -9,6 +9,7 @@ import { ImageModel } from '../_models/image';
 import { FurService } from './fur.service';
 import { Taste } from '../_models/taste';
 import { TasteService } from './taste.service';
+import {Post} from '../_models/post';
 
 @Injectable({
     providedIn: 'root'
@@ -44,15 +45,15 @@ export class PetService {
         return new Promise(resolve => {
             this.petsRef = this.fireDatabase.list<Pet>(this.basePath);
 
-            // Upload images to imgur
             const startCreating = async () => {
-                // Then, replace pet images
+                // Upload images to Imgur, then replace pet images
                 pet.images = await this.uploadImages(pet.images);
                 pet.uid = this.utilsService.generateRandomUid();
                 this.furService.create(pet.fur);
                 await this.uploadTastes(pet.tastes);
 
-                this.petsRef.push(pet);
+                const newRef = this.petsRef.push(pet);
+                pet.key = newRef.key;
                 return true;
             };
 
@@ -61,6 +62,69 @@ export class PetService {
                     resolve(pet);
                 } else {
                     resolve(null);
+                }
+            });
+        });
+    }
+
+    update(pet: Pet) {
+        return new Promise(resolve => {
+            this.petsRef = this.fireDatabase.list<Pet>(this.basePath);
+
+            const startUpdating = async () => {
+                // Delete images from Imgur
+                await this.deleteImages(pet.images);
+                // Upload images to Imgur, then replace pet images
+                pet.images = await this.uploadImages(pet['new_images']);
+                this.furService.create(pet.fur);
+                await this.uploadTastes(pet.tastes);
+
+                this.petsRef.update(pet.key + '', {
+                    uid: pet.uid,
+                    name: pet.name,
+                    description: pet.description,
+                    color: pet.color,
+                    tastes: pet.tastes,
+                    images: pet.images,
+                    birthday: pet.birthday,
+                    age: pet.age,
+                    sex: pet.sex,
+                    fur: pet.fur,
+                    adopted: pet.adopted,
+                    sponsored: pet.sponsored,
+                    admission_date: pet.admission_date,
+                    egress_date: pet.egress_date
+                });
+                return true;
+            };
+
+            startUpdating().then(res => {
+                if (res) {
+                    resolve(pet);
+                } else {
+                    resolve(null);
+                }
+            });
+        });
+    }
+
+    destroy(pet: Pet) {
+        return new Promise(resolve => {
+            this.petsRef = this.fireDatabase.list<Pet>(this.basePath);
+
+            const startDeleting = async () => {
+                // Delete images from Imgur
+                await this.deleteImages(pet.images);
+                return true;
+            };
+
+            startDeleting().then(res => {
+                if (res) {
+                    this.petsRef.remove(pet.key + '').then(response => {
+                        resolve(true);
+                    }, error => {
+                        resolve(false);
+                    });
                 }
             });
         });
@@ -83,6 +147,13 @@ export class PetService {
         }
 
         return images;
+    }
+
+    async deleteImages(images: ImageModel[]) {
+        console.log(images);
+        for (let index = 0; index < images.length; index++) {
+            await this.utilsService.deleteImageFromImgur(images[index].delete_hash);
+        }
     }
 
     getImage(url: string, name: string) {

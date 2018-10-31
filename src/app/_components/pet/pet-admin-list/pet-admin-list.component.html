@@ -1,15 +1,17 @@
 
 <div class="row">
   <div class="col s12">
-    <h5>Mascotas</h5>
+    <h5>Lista de mascotas</h5>
   </div>
 </div>
 <div class="row">
-  <div class="col s12 m6 m-top-50p"><a class="btn btn-block waves-block waves-effect bg-primary white-text" [routerLink]="['/pet/admin/new']">Nueva mascota</a></div>
-  <div class="input-field col s12 m6 m-top-50p">
+  <div class="input-field col s12">
     <input type="text" id="search" (keyup)="onFilter(search.value)" #search=""/>
     <label for="search">Buscar mascota</label>
   </div>
+</div>
+<div class="row">
+  <div class="col s12"><a class="btn btn-block waves-block waves-effect bg-primary" [routerLink]="['/admin/pets/new']">Agregar mascota</a></div>
 </div>
 <div class="row">
   <div class="col s12">

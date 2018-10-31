@@ -7,13 +7,10 @@
         label(for="search") Buscar publicación
 .row
     .col.s12
+        a.btn.btn-block.waves-block.waves-effect.bg-primary([routerLink]="['/admin/posts/new']") Agregar publicación
+.row
+    .col.s12
         ngx-datatable.bootstrap([rows]="rows", [loadingIndicator]="loadingIndicator", [columns]="columns",
             [columnMode]="'force'", [headerHeight]="'auto'", [footerHeight]="'auto'", [limit]="10",
             [rowHeight]="'auto'", [reorderable]="reorderable", #table="", [messages]="messages",
             [selectionType]="'single'", (select)="onSelect($event)")
-
-// Actions button
-.fixed-action-btn
-    a.btn-floating.bg-primary.btn-large([routerLink]="['/admin/posts/new']", matTooltip="Nueva publicación",
-        [matTooltipPosition]="'above'")
-        i.large.fa.fa-plus

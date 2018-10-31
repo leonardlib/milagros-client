@@ -15,11 +15,11 @@
     </div>
   </div>
   <div class="row" *ngIf="posts.length &gt; 0">
-    <div class="col s12 m6 m-top-30p" *ngFor="let post of posts">
+    <div class="col s12 m6 l4 m-top-30p" *ngFor="let post of posts">
       <div class="card medium">
         <div class="card-image"><img [src]="post.main_image.url"/><span class="card-title">{{ post.title }}</span></div>
         <div class="card-content">
-          <p class="text-justify" innerHtml="{{ post.content | slice:0:200 }}{{ post.content.length &gt; 200 ? '...' : '' }}"></p>
+          <p class="text-justify" innerHtml="{{ post.content | slice:0:175 }}{{ post.content.length &gt; 175 ? '...' : '' }}"></p>
         </div>
         <div class="card-action"><a class="left text-primary cursor-pointer" (click)="postService.goToDetail(post.uid)">Ver más</a><span class="right">{{ post.date }}</span></div>
       </div>

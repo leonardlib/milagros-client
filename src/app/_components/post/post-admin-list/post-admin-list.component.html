@@ -11,9 +11,10 @@
   </div>
 </div>
 <div class="row">
+  <div class="col s12"><a class="btn btn-block waves-block waves-effect bg-primary" [routerLink]="['/admin/posts/new']">Agregar publicación</a></div>
+</div>
+<div class="row">
   <div class="col s12">
     <ngx-datatable class="bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="'auto'" [footerHeight]="'auto'" [limit]="10" [rowHeight]="'auto'" [reorderable]="reorderable" #table="" [messages]="messages" [selectionType]="'single'" (select)="onSelect($event)"></ngx-datatable>
   </div>
 </div>
-<!-- Actions button-->
-<div class="fixed-action-btn"><a class="btn-floating bg-primary btn-large" [routerLink]="['/admin/posts/new']" matTooltip="Nueva publicación" [matTooltipPosition]="'above'"><i class="large fa fa-plus"></i></a></div>

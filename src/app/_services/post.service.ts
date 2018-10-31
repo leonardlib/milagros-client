@@ -51,7 +51,8 @@ export class PostService {
                     this.authorService.create(post.author).then(response => {
                         this.authorService.create(post.main_image.author);
                     });
-                    this.postsRef.push(post);
+                    const newRef = this.postsRef.push(post);
+                    post.key = newRef.key;
 
                     resolve(post);
                 } else {

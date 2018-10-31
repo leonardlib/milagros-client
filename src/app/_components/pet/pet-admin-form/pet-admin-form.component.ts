@@ -15,6 +15,7 @@ import { FurService } from '../../../_services/fur.service';
 import { DateAdapter } from '@angular/material/core';
 import { ImageModel } from '../../../_models/image';
 import * as moment from 'moment';
+import {ModalComponent} from '../../layout/modal/modal.component';
 
 @Component({
     selector: 'app-pet-admin-form',
@@ -30,6 +31,8 @@ export class PetAdminFormComponent implements OnInit {
     public images: any[] = [];
     public loading = false;
     public editar: boolean;
+    public minDate: any;
+    public maxDate: any;
 
     constructor(
         private tasteService: TasteService,
@@ -48,6 +51,11 @@ export class PetAdminFormComponent implements OnInit {
         this.pet.fur = new Fur();
         this.pet.tastes = [];
         this.pet.images = [];
+        this.pet.adopted = false;
+        this.pet.sponsored = false;
+        this.pet.egress_date = '';
+        this.minDate = new Date(1950, 0, 1);
+        this.maxDate = new Date();
     }
 
     ngOnInit() {
@@ -81,7 +89,33 @@ export class PetAdminFormComponent implements OnInit {
     }
 
     onDelete() {
-        console.log(this.pet);
+        const dialogRef = this.dialog.open(ModalComponent, {
+            width: '300px',
+            data: {
+                title: '¿Estás seguro de eliminar esta mascota?',
+                content: 'Esta acción no podrá revertirse, una vez eliminada no se podrá recuperar después.',
+                closeBtnText: 'Cancelar',
+                confirmBtnText: 'OK'
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.deletePet();
+            }
+        });
+    }
+
+    deletePet() {
+        this.utilsService.showSnackbar('Eliminando...');
+        this.petService.destroy(this.pet).then(response => {
+            if (response) {
+                this.utilsService.showSnackbar('Mascota eliminada');
+                this.router.navigate(['/admin/pets']);
+            } else {
+                this.utilsService.showSnackbar('No se ha podido eliminar esta mascota');
+            }
+        });
     }
 
     onSubmit() {
@@ -89,26 +123,26 @@ export class PetAdminFormComponent implements OnInit {
             this.utilsService.showSnackbar('Guardando...');
 
             this.setTastes();
-            this.setImages();
+            this.setImages(this.editar);
             this.formatDates();
             this.setAges();
 
             if (this.editar) {
-                /*
                 this.petService.update(this.pet).then(response => {
                     if (response) {
                         this.pet = response as Pet;
+                        this.formatDates(1);
                         this.utilsService.showSnackbar('La mascota ha sido guardada');
                     } else {
                         this.utilsService.showSnackbar('Ocurrió un error al guardar. Intenta de nuevo');
                     }
                 });
-                */
             } else {
                 this.petService.create(this.pet).then(response => {
                     if (response) {
                         this.pet = response as Pet;
                         this.editar = true;
+                        this.formatDates(1);
                         this.utilsService.showSnackbar('La mascota ha sido guardada');
                     } else {
                         this.utilsService.showSnackbar('Ocurrió un error al guardar. Intenta de nuevo');
@@ -138,11 +172,18 @@ export class PetAdminFormComponent implements OnInit {
         this.tastesSelected = tastesList;
     }
 
-    setImages() {
+    setImages(updating = false) {
+        this.pet['new_images'] = [];
+
         this.images.forEach(image => {
             const auxImage = new ImageModel();
             auxImage.url = image['preview'];
-            this.pet.images.push(auxImage);
+
+            if (updating) {
+                this.pet['new_images'].push(auxImage);
+            } else {
+                this.pet.images.push(auxImage);
+            }
         });
     }
 
