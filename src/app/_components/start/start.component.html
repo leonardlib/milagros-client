@@ -19,7 +19,7 @@
       <div class="card medium">
         <div class="card-image"><img [src]="post.main_image.url"/><span class="card-title">{{ post.title }}</span></div>
         <div class="card-content">
-          <p class="text-justify" innerHtml="{{ post.content | slice:0:175 }}{{ post.content.length &gt; 175 ? '...' : '' }}"></p>
+          <div class="text-justify" [innerHtml]="post.content"></div>
         </div>
         <div class="card-action"><a class="left text-primary cursor-pointer" (click)="postService.goToDetail(post.uid)">Ver más</a><span class="right">{{ post.date }}</span></div>
       </div>

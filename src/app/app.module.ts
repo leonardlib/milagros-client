@@ -11,7 +11,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTabsModule } from '@angular/material/tabs';
+import {MatTabNav, MatTabsModule} from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
@@ -66,6 +66,7 @@ import { AuthorService } from './_services/author.service';
 import { PetService } from './_services/pet.service';
 import { TasteService } from './_services/taste.service';
 import { UtilsService } from './_services/utils.service';
+import { DonateAdminComponent } from './_components/donate/donate-admin/donate-admin.component';
 
 const config: InputFileConfig = {};
 
@@ -95,7 +96,8 @@ const config: InputFileConfig = {};
         PostAdminFormComponent,
         ModalComponent,
         SafeHtmlPipe,
-        PetAdminFormComponent
+        PetAdminFormComponent,
+        DonateAdminComponent
     ],
     imports: [
         BrowserModule,

@@ -18,7 +18,7 @@ ng-template(#itemTemplate="", let-index="index", let-type="type", let-data="data
                     img([src]="post.main_image.url")
                     span.card-title {{ post.title }}
                 .card-content
-                    p.text-justify(innerHtml="{{ post.content | slice:0:175 }}{{ post.content.length > 175 ? '...' : '' }}")
+                    .text-justify([innerHtml]="post.content")
                 .card-action
                     a.left.text-primary.cursor-pointer((click)="postService.goToDetail(post.uid)") Ver más
                     span.right {{ post.date }}
