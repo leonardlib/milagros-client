@@ -86,7 +86,7 @@ export class PetService {
                     color: pet.color,
                     tastes: pet.tastes,
                     images: pet.images,
-                    birthday: pet.birthday,
+                    birthdate: pet.birthdate,
                     age: pet.age,
                     sex: pet.sex,
                     fur: pet.fur,
@@ -174,7 +174,7 @@ export class PetService {
     }
 
     calculatePetAge(pet: Pet) {
-        return moment().diff(pet.birthday, 'years', false);
+        return moment().diff(pet.birthdate, 'years', false);
     }
 
     petAgeToHumanAge(pet: Pet) {

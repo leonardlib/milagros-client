@@ -45,7 +45,7 @@ export class PostService {
                 if (res !== '') {
                     post.main_image.url = res['link'] + '';
                     post.main_image.delete_hash = res['deletehash'] + '';
-                    post.date = moment().locale('es').format('DD/MM/YYYY');
+                    post.date = moment().locale('es').format('YYYY-MM-DD');
                     post.uid = this.utilsService.generateRandomUid();
 
                     this.authorService.create(post.author).then(response => {
@@ -74,7 +74,7 @@ export class PostService {
                         if (res2) {
                             post.main_image.url = res2['link'] + '';
                             post.main_image.delete_hash = res2['deletehash'] + '';
-                            post.date = moment().locale('es').format('DD/MM/YYYY');
+                            post.date = moment().locale('es').format('YYYY-MM-DD');
 
                             this.authorService.create(post.author).then(response => {
                                 this.authorService.create(post.main_image.author);

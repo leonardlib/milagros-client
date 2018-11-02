@@ -67,6 +67,7 @@ import { PetService } from './_services/pet.service';
 import { TasteService } from './_services/taste.service';
 import { UtilsService } from './_services/utils.service';
 import { DonateAdminComponent } from './_components/donate/donate-admin/donate-admin.component';
+import {DonateService} from './_services/donate.service';
 
 const config: InputFileConfig = {};
 
@@ -143,7 +144,8 @@ const config: InputFileConfig = {};
         AuthorService,
         PetService,
         TasteService,
-        UtilsService
+        UtilsService,
+        DonateService
     ],
     entryComponents: [
         ModalComponent

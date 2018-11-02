@@ -50,8 +50,8 @@
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input [matDatepicker]="datepicker" id="birthday" (focus)="datepicker.open()" name="birthday" #birthday="ngModel" [(ngModel)]="pet.birthday" [value]="pet.birthday" [min]="minDate" [max]="maxDate"/>
-        <mat-datepicker #datepicker=""></mat-datepicker>
+        <input [matDatepicker]="datepicker" id="birthday" (focus)="datepicker.open()" name="birthday" #birthday="ngModel" [(ngModel)]="birthdate" [min]="minDate" [max]="maxDate"/>
+        <mat-datepicker #datepicker="" touchUi=""></mat-datepicker>
       </div>
     </div>
     <div class="row">
@@ -91,8 +91,8 @@
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <input [matDatepicker]="admissionDate" id="admission_date" (focus)="admissionDate.open()" name="admission_date" #admissionDate="ngModel" [(ngModel)]="pet.admission_date" [min]="minDate" [max]="maxDate"/>
-        <mat-datepicker #admissionDate=""></mat-datepicker>
+        <input [matDatepicker]="datepicker2" id="admission_date" (focus)="datepicker2.open()" name="admission_date" #admissionDateItem="ngModel" [(ngModel)]="admissionDate" [min]="minDate" [max]="maxDate"/>
+        <mat-datepicker #datepicker2="" touchUi=""></mat-datepicker>
       </div>
     </div>
     <div class="row">

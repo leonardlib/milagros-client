@@ -37,8 +37,8 @@
         .row
             .input-field.col.s12
                 input([matDatepicker]="datepicker", id="birthday", (focus)="datepicker.open()", name="birthday",
-                    #birthday="ngModel", [(ngModel)]="pet.birthday", [value]="pet.birthday", [min]="minDate", [max]="maxDate")
-                mat-datepicker(#datepicker="")
+                    #birthday="ngModel", [(ngModel)]="birthdate", [min]="minDate", [max]="maxDate")
+                mat-datepicker(#datepicker="", touchUi="")
         .row
             .input-field.col.s12
                 label(for="sex") Sexo
@@ -66,9 +66,9 @@
                 label(for="admission_date") Fecha de admisión
         .row
             .input-field.col.s12
-                input([matDatepicker]="admissionDate", id="admission_date", (focus)="admissionDate.open()",
-                    name="admission_date", #admissionDate="ngModel", [(ngModel)]="pet.admission_date", [min]="minDate", [max]="maxDate")
-                mat-datepicker(#admissionDate="")
+                input([matDatepicker]="datepicker2", id="admission_date", (focus)="datepicker2.open()",
+                    name="admission_date", #admissionDateItem="ngModel", [(ngModel)]="admissionDate", [min]="minDate", [max]="maxDate")
+                mat-datepicker(#datepicker2="", touchUi="")
         .row
             .col.s12.m6.m-top-50p(*ngIf="editar")
                 a.btn.btn-block.waves-effect.waves-block.grey((click)="onDelete()") Eliminar

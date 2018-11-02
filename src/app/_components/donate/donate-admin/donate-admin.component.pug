@@ -7,3 +7,15 @@
             .row
                 .col.s12.teal.p-2.lighten-2.white-text
                     span Solamente se muestran las donaciones hechas a través de la plataforma.
+.row
+    .input-field.col.s12
+        input(type="text", id="search", (keyup)="onFilter(search.value)", #search="")
+        label(for="search") Buscar donación
+.row
+    .col.s12
+        ngx-datatable.bootstrap([rows]="rows", [loadingIndicator]="loadingIndicator", [columns]="columns",
+            [columnMode]="'force'", [headerHeight]="'auto'", [footerHeight]="'auto'", [limit]="10",
+            [rowHeight]="'auto'", [reorderable]="reorderable", #table="", [messages]="messages")
+
+        ng-template(#dateTemplate="", let-row="row", let-value="value")
+            span {{ value | amLocale: 'es' | amDateFormat: 'DD/MM/YYYY' }}

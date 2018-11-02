@@ -14,16 +14,7 @@ export class PetAdminListComponent implements OnInit {
     public temp = [];
     public loadingIndicator = true;
     public reorderable = true;
-    public columns = [{
-        prop: 'name',
-        name: 'Nombre'
-    }, {
-        prop: 'fur.name',
-        name: 'Pelaje'
-    }, {
-        prop: 'age.pet_age',
-        name: 'Edad (años)'
-    }];
+    public columns = [];
     @ViewChild(DatatableComponent) table: DatatableComponent;
     public messages: any = {};
 
@@ -33,6 +24,16 @@ export class PetAdminListComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.columns = [{
+            prop: 'name',
+            name: 'Nombre'
+        }, {
+            prop: 'fur.name',
+            name: 'Pelaje'
+        }, {
+            prop: 'age.pet_age',
+            name: 'Edad (años)'
+        }];
         this.messages = {
             emptyMessage: 'Ningún resultado',
             totalMessage: 'en total'

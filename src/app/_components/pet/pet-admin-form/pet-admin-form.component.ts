@@ -33,6 +33,8 @@ export class PetAdminFormComponent implements OnInit {
     public editar: boolean;
     public minDate: any;
     public maxDate: any;
+    public birthdate: any;
+    public admissionDate: any;
 
     constructor(
         private tasteService: TasteService,
@@ -78,7 +80,7 @@ export class PetAdminFormComponent implements OnInit {
                 this.pet = response[0] as Pet;
                 this.getTastes();
                 this.getImages();
-                this.formatDates(1);
+                this.getDates();
                 this.editar = true;
             });
         });
@@ -88,50 +90,19 @@ export class PetAdminFormComponent implements OnInit {
         this.pet.color = event.color.hex;
     }
 
-    onDelete() {
-        const dialogRef = this.dialog.open(ModalComponent, {
-            width: '300px',
-            data: {
-                title: '¿Estás seguro de eliminar esta mascota?',
-                content: 'Esta acción no podrá revertirse, una vez eliminada no se podrá recuperar después.',
-                closeBtnText: 'Cancelar',
-                confirmBtnText: 'OK'
-            }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.deletePet();
-            }
-        });
-    }
-
-    deletePet() {
-        this.utilsService.showSnackbar('Eliminando...');
-        this.petService.destroy(this.pet).then(response => {
-            if (response) {
-                this.utilsService.showSnackbar('Mascota eliminada');
-                this.router.navigate(['/admin/pets']);
-            } else {
-                this.utilsService.showSnackbar('No se ha podido eliminar esta mascota');
-            }
-        });
-    }
-
     onSubmit() {
         if (this.validateForm()) {
             this.utilsService.showSnackbar('Guardando...');
 
             this.setTastes();
             this.setImages(this.editar);
-            this.formatDates();
+            this.setDates();
             this.setAges();
 
             if (this.editar) {
                 this.petService.update(this.pet).then(response => {
                     if (response) {
                         this.pet = response as Pet;
-                        this.formatDates(1);
                         this.utilsService.showSnackbar('La mascota ha sido guardada');
                     } else {
                         this.utilsService.showSnackbar('Ocurrió un error al guardar. Intenta de nuevo');
@@ -142,7 +113,6 @@ export class PetAdminFormComponent implements OnInit {
                     if (response) {
                         this.pet = response as Pet;
                         this.editar = true;
-                        this.formatDates(1);
                         this.utilsService.showSnackbar('La mascota ha sido guardada');
                     } else {
                         this.utilsService.showSnackbar('Ocurrió un error al guardar. Intenta de nuevo');
@@ -195,9 +165,14 @@ export class PetAdminFormComponent implements OnInit {
         });
     }
 
-    formatDates(days: number = 0) {
-        this.pet.birthday = moment(this.pet.birthday).locale('es').add(days, 'days').format('YYYY-MM-DD');
-        this.pet.admission_date = moment(this.pet.admission_date).locale('es').add(days, 'days').format('YYYY-MM-DD');
+    setDates() {
+        this.pet.birthdate = moment(this.birthdate).locale('es').format('YYYY-MM-DD');
+        this.pet.admission_date = moment(this.admissionDate).locale('es').format('YYYY-MM-DD');
+    }
+
+    getDates() {
+        this.birthdate = moment(this.pet.birthdate).locale('es').toDate();
+        this.admissionDate = moment(this.pet.admission_date).locale('es').toDate();
     }
 
     setAges() {
@@ -211,11 +186,41 @@ export class PetAdminFormComponent implements OnInit {
             this.pet.description && this.pet.description !== '' &&
             this.tastesSelected.length > 0 &&
             this.images.length > 0 &&
-            this.pet.birthday && this.pet.birthday !== '' &&
+            this.birthdate && this.birthdate !== '' &&
             this.pet.sex.name && this.pet.sex.name !== '' &&
             this.pet.fur.name && this.pet.fur.name !== '' &&
             this.pet.color && this.pet.color !== '' &&
-            this.pet.admission_date && this.pet.admission_date !== ''
+            this.admissionDate && this.admissionDate !== ''
         );
+    }
+
+    onDelete() {
+        const dialogRef = this.dialog.open(ModalComponent, {
+            width: '300px',
+            data: {
+                title: '¿Estás seguro de eliminar esta mascota?',
+                content: 'Esta acción no podrá revertirse, una vez eliminada no se podrá recuperar después.',
+                closeBtnText: 'Cancelar',
+                confirmBtnText: 'OK'
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.deletePet();
+            }
+        });
+    }
+
+    deletePet() {
+        this.utilsService.showSnackbar('Eliminando...');
+        this.petService.destroy(this.pet).then(response => {
+            if (response) {
+                this.utilsService.showSnackbar('Mascota eliminada');
+                this.router.navigate(['/admin/pets']);
+            } else {
+                this.utilsService.showSnackbar('No se ha podido eliminar esta mascota');
+            }
+        });
     }
 }

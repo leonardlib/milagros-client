@@ -14,16 +14,7 @@ export class PostAdminListComponent implements OnInit {
     public temp = [];
     public loadingIndicator = true;
     public reorderable = true;
-    public columns = [{
-        prop: 'title',
-        name: 'Título'
-    }, {
-        prop: 'author.name',
-        name: 'Autor'
-    }, {
-        prop: 'date',
-        name: 'Fecha'
-    }];
+    public columns = [];
     @ViewChild(DatatableComponent) table: DatatableComponent;
     public messages: any = {};
 
@@ -33,6 +24,16 @@ export class PostAdminListComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.columns = [{
+            prop: 'title',
+            name: 'Título'
+        }, {
+            prop: 'author.name',
+            name: 'Autor'
+        }, {
+            prop: 'date',
+            name: 'Fecha'
+        }];
         this.messages = {
             emptyMessage: 'Ningún resultado',
             totalMessage: 'en total'
