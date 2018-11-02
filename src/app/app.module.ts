@@ -33,6 +33,7 @@ import { ColorSliderModule } from 'ngx-color/slider';
 import { ColorTwitterModule } from 'ngx-color/twitter';
 import { QuillModule } from 'ngx-quill';
 import { AgmCoreModule } from '@agm/core';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -135,7 +136,11 @@ const config: InputFileConfig = {};
         ColorTwitterModule,
         QuillModule,
         MatTabsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        AgmCoreModule.forRoot({
+            apiKey: environment.gmaps.api_key
+        }),
+        Ng2SearchPipeModule
     ],
     providers: [
         UserService,

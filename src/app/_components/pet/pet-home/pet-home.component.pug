@@ -1,10 +1,10 @@
-.min-height-100vh
+.container.min-height-100vh
     .row.m-top-30p
-        .col.s12.m3
+        .col.s12.m3.m-top-10p
             form
                 .row
                     .input-field.col.s12
-                        input(type="text", id="search")
+                        input(type="text", id="search", [(ngModel)]="term")
                         label(for="search") Buscar mascota
                 .row
                     .p.col.s12
@@ -61,12 +61,24 @@
                         .col.s3.h-50p.black.m-2p.cursor-pointer()
         .col.s12.m9
             .row
-                .col.s12.m4
+                .col.s12.m6.m-top-10p(*ngFor="let pet of pets | filter: term")
                     .card
                         .card-image
-                            img(src="assets/img/logo-1.png")
-                            a.btn-floating.halfway-fab.waves-effect.waves-light.bg-primary()
+                            img([src]="pet.images[0].url")
+                            a.btn-floating.halfway-fab.waves-effect.waves-light.bg-primary(
+                                [routerLink]="['/pet/characteristics/' + pet.uid]")
                                 i.fa.fa-home
-                        .card-content
-                            span.card-title Titulo
-                            span Contenido
+                .col.s12.m6.m-top-10p(*ngFor="let pet of pets | filter: term")
+                    .card
+                        .card-image
+                            img([src]="pet.images[0].url")
+                            a.btn-floating.halfway-fab.waves-effect.waves-light.bg-primary(
+                            [routerLink]="['/pet/characteristics/' + pet.uid]")
+                                i.fa.fa-home
+                .col.s12.m6.m-top-10p(*ngFor="let pet of pets | filter: term")
+                    .card
+                        .card-image
+                            img([src]="pet.images[0].url")
+                            a.btn-floating.halfway-fab.waves-effect.waves-light.bg-primary(
+                            [routerLink]="['/pet/characteristics/' + pet.uid]")
+                                i.fa.fa-home

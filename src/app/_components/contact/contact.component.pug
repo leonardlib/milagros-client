@@ -56,4 +56,6 @@
                     i.fa.fa-whatsapp.fa-2x
         .col.s12.m9
             .row
-                .col.s12
+                .col.s12.center-align
+                    agm-map.w-100.h-450p([latitude]="lat", [longitude]="lng", [zoom]="zoom")
+                        agm-marker([latitude]="lat", [longitude]="lng")

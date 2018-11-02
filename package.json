@@ -45,6 +45,7 @@
         "jquery": "^3.3.1",
         "material-design-icons": "^3.0.1",
         "materialize-css": "^0.100.2",
+        "ng2-search-filter": "^0.4.7",
         "ngx-color": "^2.0.4",
         "ngx-input-file": "^2.1.4",
         "ngx-quill": "^3.6.0",
