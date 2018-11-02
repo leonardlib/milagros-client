@@ -32,6 +32,7 @@ import { ColorCompactModule } from 'ngx-color/compact';
 import { ColorSliderModule } from 'ngx-color/slider';
 import { ColorTwitterModule } from 'ngx-color/twitter';
 import { QuillModule } from 'ngx-quill';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
