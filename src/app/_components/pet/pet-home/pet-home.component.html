@@ -3,33 +3,25 @@
   <div class="row m-top-30p">
     <div class="col s12 m3 m-top-10p">
       <form>
-        <div class="row">
+        <div class="row" *ngIf="pets.length &gt; 0">
           <div class="input-field col s12">
             <input type="text" id="search" [(ngModel)]="term"/>
             <label for="search">Buscar mascota</label>
           </div>
         </div>
-        <div class="row">
-          <div class="p col s12">
-            <input class="filled-in" type="checkbox" id="hembra"/>
-            <label for="hembra">Hembra</label>
-          </div>
-          <div class="p col s12">
-            <input class="filled-in" type="checkbox" id="macho"/>
-            <label for="macho">Macho</label>
+        <div class="row" *ngIf="sexs.length &gt; 0">
+          <div class="p col s12" *ngFor="let sex of sexs">
+            <input class="filled-in" type="checkbox" [id]="sex.name"/>
+            <label [for]="sex.name">{{ sex.name }}</label>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="tastes.length &gt; 0">
           <div class="col s12"><span class="text-primary">Gustos</span></div>
         </div>
-        <div class="row">
-          <div class="p col s12">
-            <input class="filled-in" type="checkbox" id="pelota"/>
-            <label for="pelota">Jugar a la pelota</label>
-          </div>
-          <div class="p col s12">
-            <input class="filled-in" type="checkbox" id="correr"/>
-            <label for="correr">Correr</label>
+        <div class="row" *ngIf="tastes.length &gt; 0">
+          <div class="p col s12" *ngFor="let taste of tastes">
+            <input class="filled-in" type="checkbox" [id]="taste.name"/>
+            <label [for]="taste.name">{{ taste.name }}</label>
           </div>
         </div>
         <div class="row">
@@ -83,16 +75,6 @@
     </div>
     <div class="col s12 m9">
       <div class="row">
-        <div class="col s12 m6 m-top-10p" *ngFor="let pet of pets | filter: term">
-          <div class="card">
-            <div class="card-image"><img [src]="pet.images[0].url"/><a class="btn-floating halfway-fab waves-effect waves-light bg-primary" [routerLink]="['/pet/characteristics/' + pet.uid]"><i class="fa fa-home"></i></a></div>
-          </div>
-        </div>
-        <div class="col s12 m6 m-top-10p" *ngFor="let pet of pets | filter: term">
-          <div class="card">
-            <div class="card-image"><img [src]="pet.images[0].url"/><a class="btn-floating halfway-fab waves-effect waves-light bg-primary" [routerLink]="['/pet/characteristics/' + pet.uid]"><i class="fa fa-home"></i></a></div>
-          </div>
-        </div>
         <div class="col s12 m6 m-top-10p" *ngFor="let pet of pets | filter: term">
           <div class="card">
             <div class="card-image"><img [src]="pet.images[0].url"/><a class="btn-floating halfway-fab waves-effect waves-light bg-primary" [routerLink]="['/pet/characteristics/' + pet.uid]"><i class="fa fa-home"></i></a></div>

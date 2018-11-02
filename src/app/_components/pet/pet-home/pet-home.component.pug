@@ -2,27 +2,21 @@
     .row.m-top-30p
         .col.s12.m3.m-top-10p
             form
-                .row
+                .row(*ngIf="pets.length > 0")
                     .input-field.col.s12
                         input(type="text", id="search", [(ngModel)]="term")
                         label(for="search") Buscar mascota
-                .row
-                    .p.col.s12
-                        input.filled-in(type="checkbox", id="hembra")
-                        label(for="hembra") Hembra
-                    .p.col.s12
-                        input.filled-in(type="checkbox", id="macho")
-                        label(for="macho") Macho
-                .row
+                .row(*ngIf="sexs.length > 0")
+                    .p.col.s12(*ngFor="let sex of sexs")
+                        input.filled-in(type="checkbox", [id]="sex.name")
+                        label([for]="sex.name") {{ sex.name }}
+                .row(*ngIf="tastes.length > 0")
                     .col.s12
                         span.text-primary Gustos
-                .row
-                    .p.col.s12
-                        input.filled-in(type="checkbox", id="pelota")
-                        label(for="pelota") Jugar a la pelota
-                    .p.col.s12
-                        input.filled-in(type="checkbox", id="correr")
-                        label(for="correr") Correr
+                .row(*ngIf="tastes.length > 0")
+                    .p.col.s12(*ngFor="let taste of tastes")
+                        input.filled-in(type="checkbox", [id]="taste.name")
+                        label([for]="taste.name") {{ taste.name }}
                 .row
                     .col.s12
                         span.text-primary Edad
@@ -67,18 +61,4 @@
                             img([src]="pet.images[0].url")
                             a.btn-floating.halfway-fab.waves-effect.waves-light.bg-primary(
                                 [routerLink]="['/pet/characteristics/' + pet.uid]")
-                                i.fa.fa-home
-                .col.s12.m6.m-top-10p(*ngFor="let pet of pets | filter: term")
-                    .card
-                        .card-image
-                            img([src]="pet.images[0].url")
-                            a.btn-floating.halfway-fab.waves-effect.waves-light.bg-primary(
-                            [routerLink]="['/pet/characteristics/' + pet.uid]")
-                                i.fa.fa-home
-                .col.s12.m6.m-top-10p(*ngFor="let pet of pets | filter: term")
-                    .card
-                        .card-image
-                            img([src]="pet.images[0].url")
-                            a.btn-floating.halfway-fab.waves-effect.waves-light.bg-primary(
-                            [routerLink]="['/pet/characteristics/' + pet.uid]")
                                 i.fa.fa-home

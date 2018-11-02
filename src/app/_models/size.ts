@@ -1,4 +1,4 @@
-export class Fur {
+export class Size {
     key: number;
     name: string;
 

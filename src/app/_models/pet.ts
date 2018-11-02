@@ -3,6 +3,7 @@ import { Age } from './age';
 import { Sex } from './sex';
 import { Fur } from './fur';
 import { ImageModel } from './image';
+import {Size} from './size';
 
 export class Pet {
     key: string;
@@ -16,6 +17,7 @@ export class Pet {
     age: Age;
     sex: Sex;
     fur: Fur;
+    size: Size;
     adopted: boolean;
     sponsored: boolean;
     admission_date: any;
