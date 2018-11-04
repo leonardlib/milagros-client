@@ -5,7 +5,7 @@
       <form>
         <div class="row" *ngIf="pets.length &gt; 0">
           <div class="input-field col s12">
-            <input type="text" id="search" [(ngModel)]="term"/>
+            <input type="text" id="search" [(ngModel)]="term" name="search"/>
             <label for="search">Buscar mascota</label>
           </div>
         </div>
@@ -24,51 +24,39 @@
             <label [for]="taste.name">{{ taste.name }}</label>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="ageRanges.length &gt; 0">
           <div class="col s12"><span class="text-primary">Edad</span></div>
         </div>
-        <div class="row">
-          <div class="p col s12">
-            <input class="filled-in" type="checkbox" id="1"/>
-            <label for="1">1 año(s)</label>
-          </div>
-          <div class="p col s12">
-            <input class="filled-in" type="checkbox" id="2"/>
-            <label for="2">2 año(s)</label>
+        <div class="row" *ngIf="ageRanges.length &gt; 0">
+          <div class="p col s12" *ngFor="let ageRange of ageRanges">
+            <input class="filled-in" type="checkbox" [id]="ageRange.min"/>
+            <label [for]="ageRange.min" *ngIf="ageRange.show">De {{ ageRange.min }}{{ (ageRange.max < 99) ? ' a ' + ageRange.max : ' o más'  }} años</label>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="sizes.length &gt; 0">
           <div class="col s12"><span class="text-primary">Tamaño</span></div>
         </div>
-        <div class="row">
-          <div class="p col s12">
-            <input class="filled-in" type="checkbox" id="grande"/>
-            <label for="grande">Grande</label>
-          </div>
-          <div class="p col s12">
-            <input class="filled-in" type="checkbox" id="mediano"/>
-            <label for="mediano">Mediano</label>
+        <div class="row" *ngIf="sizes.length &gt; 0">
+          <div class="p col s12" *ngFor="let size of sizes">
+            <input class="filled-in" type="checkbox" [id]="size.name"/>
+            <label [for]="size.name">{{ size.name }}</label>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="furs.length &gt; 0">
           <div class="col s12"><span class="text-primary">Tipo de pelo</span></div>
         </div>
-        <div class="row">
-          <div class="p col s12">
-            <input class="filled-in" type="checkbox" id="pelo1"/>
-            <label for="pelo1">Rizado</label>
-          </div>
-          <div class="p col s12">
-            <input class="filled-in" type="checkbox" id="pelo2"/>
-            <label for="pelo2">Corto</label>
+        <div class="row" *ngIf="furs.length &gt; 0">
+          <div class="p col s12" *ngFor="let fur of furs">
+            <input class="filled-in" type="checkbox" [id]="fur.name"/>
+            <label [for]="fur.name">{{ fur.name }}</label>
           </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="colors.length &gt; 0">
           <div class="col s12"><span class="text-primary">Color</span></div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="colors.length &gt; 0">
           <div class="col s12">
-            <div class="col s3 h-50p black m-2p cursor-pointer"></div>
+            <div class="col s12 m4 h-50p m-2p cursor-pointer hover-border" *ngFor="let color of colors" [style.backgroundColor]="color" [style.border]="'solid 1px'" [class.border-active]="color === selectedColor" [style.borderColor]="(color === '#ffffff' || '#FFFFFF') ? '#000000' : color" (click)="onColorClick(color)"></div>
           </div>
         </div>
       </form>
@@ -76,9 +64,7 @@
     <div class="col s12 m9">
       <div class="row">
         <div class="col s12 m6 m-top-10p" *ngFor="let pet of pets | filter: term">
-          <div class="card">
-            <div class="card-image"><img [src]="pet.images[0].url"/><a class="btn-floating halfway-fab waves-effect waves-light bg-primary" [routerLink]="['/pet/characteristics/' + pet.uid]"><i class="fa fa-home"></i></a></div>
-          </div>
+          <div class="card small card-img" [style.backgroundImage]="'url('+ pet.images[0].url +')'"></div>
         </div>
       </div>
     </div>

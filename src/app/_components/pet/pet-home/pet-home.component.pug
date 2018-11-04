@@ -4,7 +4,7 @@
             form
                 .row(*ngIf="pets.length > 0")
                     .input-field.col.s12
-                        input(type="text", id="search", [(ngModel)]="term")
+                        input(type="text", id="search", [(ngModel)]="term", name="search")
                         label(for="search") Buscar mascota
                 .row(*ngIf="sexs.length > 0")
                     .p.col.s12(*ngFor="let sex of sexs")
@@ -17,48 +17,39 @@
                     .p.col.s12(*ngFor="let taste of tastes")
                         input.filled-in(type="checkbox", [id]="taste.name")
                         label([for]="taste.name") {{ taste.name }}
-                .row
+                .row(*ngIf="ageRanges.length > 0")
                     .col.s12
                         span.text-primary Edad
-                .row
-                    .p.col.s12
-                        input.filled-in(type="checkbox", id="1")
-                        label(for="1") 1 año(s)
-                    .p.col.s12
-                        input.filled-in(type="checkbox", id="2")
-                        label(for="2") 2 año(s)
-                .row
+                .row(*ngIf="ageRanges.length > 0")
+                    .p.col.s12(*ngFor="let ageRange of ageRanges")
+                        input.filled-in(type="checkbox", [id]="ageRange.min")
+                        label([for]="ageRange.min", *ngIf="ageRange.show") De {{ ageRange.min }}{{ (ageRange.max < 99) ? ' a ' + ageRange.max : ' o más'  }} años
+                .row(*ngIf="sizes.length > 0")
                     .col.s12
                         span.text-primary Tamaño
-                .row
-                    .p.col.s12
-                        input.filled-in(type="checkbox", id="grande")
-                        label(for="grande") Grande
-                    .p.col.s12
-                        input.filled-in(type="checkbox", id="mediano")
-                        label(for="mediano") Mediano
-                .row
+                .row(*ngIf="sizes.length > 0")
+                    .p.col.s12(*ngFor="let size of sizes")
+                        input.filled-in(type="checkbox", [id]="size.name")
+                        label([for]="size.name") {{ size.name }}
+                .row(*ngIf="furs.length > 0")
                     .col.s12
                         span.text-primary Tipo de pelo
-                .row
-                    .p.col.s12
-                        input.filled-in(type="checkbox", id="pelo1")
-                        label(for="pelo1") Rizado
-                    .p.col.s12
-                        input.filled-in(type="checkbox", id="pelo2")
-                        label(for="pelo2") Corto
-                .row
+                .row(*ngIf="furs.length > 0")
+                    .p.col.s12(*ngFor="let fur of furs")
+                        input.filled-in(type="checkbox", [id]="fur.name")
+                        label([for]="fur.name") {{ fur.name }}
+                .row(*ngIf="colors.length > 0")
                     .col.s12
                         span.text-primary Color
-                .row
+                .row(*ngIf="colors.length > 0")
                     .col.s12
-                        .col.s3.h-50p.black.m-2p.cursor-pointer()
+                        .col.s12.m4.h-50p.m-2p.cursor-pointer.hover-border(*ngFor="let color of colors",
+                            [style.backgroundColor]="color",
+                            [style.border]="'solid 1px'",
+                            [class.border-active]="color === selectedColor",
+                            [style.borderColor]="(color === '#ffffff' || '#FFFFFF') ? '#000000' : color",
+                            (click)="onColorClick(color)")
         .col.s12.m9
             .row
                 .col.s12.m6.m-top-10p(*ngFor="let pet of pets | filter: term")
-                    .card
-                        .card-image
-                            img([src]="pet.images[0].url")
-                            a.btn-floating.halfway-fab.waves-effect.waves-light.bg-primary(
-                                [routerLink]="['/pet/characteristics/' + pet.uid]")
-                                i.fa.fa-home
+                    .card.small.card-img([style.backgroundImage]="'url('+ pet.images[0].url +')'")

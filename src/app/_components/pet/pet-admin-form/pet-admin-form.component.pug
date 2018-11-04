@@ -18,6 +18,15 @@
                     [placeholder]="'Escribe aquí...'")
         .row
             .input-field.col.s12
+                label(for="size") Tamaño
+        .row
+            .col.s12.m-top-30p
+                ng-select([items]="sizes", [addTag]="true", bindLabel="name",
+                    [(ngModel)]="pet.size.name", bindValue="name", id="size",
+                    [notFoundText]="'No se encontraron tamaños, escribe para agregar'", [loading]="loading",
+                    [addTagText]="'Agregar'")
+        .row
+            .input-field.col.s12
                 label(for="tastes") Gustos
         .row
             .col.s12.m-top-30p

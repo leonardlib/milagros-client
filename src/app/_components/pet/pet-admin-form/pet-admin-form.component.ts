@@ -16,6 +16,8 @@ import { DateAdapter } from '@angular/material/core';
 import { ImageModel } from '../../../_models/image';
 import * as moment from 'moment';
 import {ModalComponent} from '../../layout/modal/modal.component';
+import {Size} from '../../../_models/size';
+import {SizeService} from '../../../_services/size.service';
 
 @Component({
     selector: 'app-pet-admin-form',
@@ -28,6 +30,7 @@ export class PetAdminFormComponent implements OnInit {
     public tastesSelected: any = [];
     public sexs: Sex[] = [];
     public furs: Fur[] = [];
+    public sizes: Size[] = [];
     public images: any[] = [];
     public loading = false;
     public editar: boolean;
@@ -45,12 +48,14 @@ export class PetAdminFormComponent implements OnInit {
         private router: Router,
         private sexService: SexService,
         private furService: FurService,
+        private sizeService: SizeService,
         private datepickerAdapter: DateAdapter<any>
     ) {
         this.editar = false;
         this.pet.age = new Age();
         this.pet.sex = new Sex();
         this.pet.fur = new Fur();
+        this.pet.size = new Size();
         this.pet.tastes = [];
         this.pet.images = [];
         this.pet.adopted = false;
@@ -66,6 +71,9 @@ export class PetAdminFormComponent implements OnInit {
         });
         this.furService.index().subscribe(furs => {
             this.furs = furs;
+        });
+        this.sizeService.index().subscribe(sizes => {
+            this.sizes = sizes;
         });
         this.tasteService.index().subscribe(tastes => {
             this.tastes = tastes;
@@ -128,7 +136,23 @@ export class PetAdminFormComponent implements OnInit {
         this.tastesSelected.forEach(taste => {
             const auxTaste = new Taste();
             auxTaste.name = taste;
-            this.pet.tastes.push(auxTaste);
+
+            if (this.pet.tastes.length > 0) {
+                let exists = false;
+
+                this.pet.tastes.forEach(petTaste => {
+                    if (petTaste.name.toLowerCase() === auxTaste.name.toLowerCase()) {
+                        exists = true;
+                        return;
+                    }
+                });
+
+                if (!exists) {
+                    this.pet.tastes.push(auxTaste);
+                }
+            } else {
+                this.pet.tastes.push(auxTaste);
+            }
         });
     }
 
@@ -189,6 +213,7 @@ export class PetAdminFormComponent implements OnInit {
             this.birthdate && this.birthdate !== '' &&
             this.pet.sex.name && this.pet.sex.name !== '' &&
             this.pet.fur.name && this.pet.fur.name !== '' &&
+            this.pet.size.name && this.pet.size.name !== '' &&
             this.pet.color && this.pet.color !== '' &&
             this.admissionDate && this.admissionDate !== ''
         );

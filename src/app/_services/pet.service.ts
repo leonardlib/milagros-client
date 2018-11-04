@@ -10,6 +10,7 @@ import { FurService } from './fur.service';
 import { Taste } from '../_models/taste';
 import { TasteService } from './taste.service';
 import {Post} from '../_models/post';
+import {SizeService} from './size.service';
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +25,7 @@ export class PetService {
         public utilsService: UtilsService,
         private router: Router,
         private furService: FurService,
+        private sizeService: SizeService,
         private tasteService: TasteService
     ) {}
 
@@ -50,6 +52,7 @@ export class PetService {
                 pet.images = await this.uploadImages(pet.images);
                 pet.uid = this.utilsService.generateRandomUid();
                 this.furService.create(pet.fur);
+                this.sizeService.create(pet.size);
                 await this.uploadTastes(pet.tastes);
 
                 const newRef = this.petsRef.push(pet);
@@ -77,6 +80,7 @@ export class PetService {
                 // Upload images to Imgur, then replace pet images
                 pet.images = await this.uploadImages(pet['new_images']);
                 this.furService.create(pet.fur);
+                this.sizeService.create(pet.size);
                 await this.uploadTastes(pet.tastes);
 
                 this.petsRef.update(pet.key + '', {
@@ -90,6 +94,7 @@ export class PetService {
                     age: pet.age,
                     sex: pet.sex,
                     fur: pet.fur,
+                    size: pet.size,
                     adopted: pet.adopted,
                     sponsored: pet.sponsored,
                     admission_date: pet.admission_date,

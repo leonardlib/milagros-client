@@ -328,3 +328,23 @@ mat-icon {
     background-color: $primary-color !important;
 }
 /* End of Material tabs */
+
+.hover-border:hover {
+    border: solid 5px $primary-color !important;
+}
+
+.border-active {
+    border: solid 5px $primary-color !important;
+}
+
+.h-350p {
+    height: 350px !important;
+}
+
+.card-img {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    // width: 100% !important;
+    @extend .h-350p;
+}
