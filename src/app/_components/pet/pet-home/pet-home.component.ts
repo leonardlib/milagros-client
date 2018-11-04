@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {PetService} from '../../../_services/pet.service';
 import {sa} from '@angular/core/src/render3';
 import {UtilsService} from '../../../_services/utils.service';
+import {Sex} from '../../../_models/sex';
+import {Taste} from '../../../_models/taste';
 
 @Component({
     selector: 'app-pet-home',
@@ -15,9 +17,16 @@ export class PetHomeComponent implements OnInit {
     public sizes: any = [];
     public furs: any = [];
     public colors: any = [];
-    public selectedColor: string;
     public ageRanges: any = [];
     public ages: any = [];
+
+    // Filters
+    public selectedColor: string;
+    public selectedSexs: any = [];
+    public selectedTastes: any = [];
+    public selectedAgeRanges: any = [];
+    public selectedSizes: any = [];
+    public selectedFurs: any = [];
 
     constructor(
         private petService: PetService,
@@ -47,14 +56,6 @@ export class PetHomeComponent implements OnInit {
             max: 99,
             show: false
         }];
-    }
-
-    onColorClick(color: string) {
-        if (this.selectedColor === color) {
-            this.selectedColor = null;
-        } else {
-            this.selectedColor = color;
-        }
     }
 
     setFilters() {
@@ -171,5 +172,36 @@ export class PetHomeComponent implements OnInit {
                 }
             });
         });
+    }
+
+    onColorClick(color: string) {
+        if (this.selectedColor === color) {
+            this.selectedColor = null;
+        } else {
+            this.selectedColor = color;
+        }
+    }
+
+    searchFilteredPets() {}
+
+    onCheckSex(sex: Sex) {
+        if (this.selectedSexs.length > 0) {
+            let exists = false;
+
+            this.selectedSexs.forEach(savedSex => {
+                if (sex.name.toLowerCase() === savedSex.name.toLowerCase()) {
+                    exists = true;
+                    return;
+                }
+            });
+
+            if (!exists) {
+                this.selectedSexs.push(sex);
+            }
+        } else {
+            this.selectedSexs.push(sex);
+        }
+
+        this.searchFilteredPets();
     }
 }

@@ -8,14 +8,14 @@
                         label(for="search") Buscar mascota
                 .row(*ngIf="sexs.length > 0")
                     .p.col.s12(*ngFor="let sex of sexs")
-                        input.filled-in(type="checkbox", [id]="sex.name")
+                        input.filled-in(type="checkbox", [id]="sex.name", (change)="onCheckSex(sex)")
                         label([for]="sex.name") {{ sex.name }}
                 .row(*ngIf="tastes.length > 0")
                     .col.s12
                         span.text-primary Gustos
                 .row(*ngIf="tastes.length > 0")
                     .p.col.s12(*ngFor="let taste of tastes")
-                        input.filled-in(type="checkbox", [id]="taste.name")
+                        input.filled-in(type="checkbox", [id]="taste.name", (change)="onCheckTaste(taste)")
                         label([for]="taste.name") {{ taste.name }}
                 .row(*ngIf="ageRanges.length > 0")
                     .col.s12
@@ -23,20 +23,21 @@
                 .row(*ngIf="ageRanges.length > 0")
                     .p.col.s12(*ngFor="let ageRange of ageRanges")
                         input.filled-in(type="checkbox", [id]="ageRange.min")
-                        label([for]="ageRange.min", *ngIf="ageRange.show") De {{ ageRange.min }}{{ (ageRange.max < 99) ? ' a ' + ageRange.max : ' o más'  }} años
+                        label([for]="ageRange.min", *ngIf="ageRange.show", (change)="onCheckAgeRange(ageRange)")
+                            | De {{ ageRange.min }}{{ (ageRange.max < 99) ? ' a ' + ageRange.max : ' o más'  }} años
                 .row(*ngIf="sizes.length > 0")
                     .col.s12
                         span.text-primary Tamaño
                 .row(*ngIf="sizes.length > 0")
                     .p.col.s12(*ngFor="let size of sizes")
-                        input.filled-in(type="checkbox", [id]="size.name")
+                        input.filled-in(type="checkbox", [id]="size.name", (change)="onCheckSize(size)")
                         label([for]="size.name") {{ size.name }}
                 .row(*ngIf="furs.length > 0")
                     .col.s12
                         span.text-primary Tipo de pelo
                 .row(*ngIf="furs.length > 0")
                     .p.col.s12(*ngFor="let fur of furs")
-                        input.filled-in(type="checkbox", [id]="fur.name")
+                        input.filled-in(type="checkbox", [id]="fur.name", (change)="onCheckFur(fur)")
                         label([for]="fur.name") {{ fur.name }}
                 .row(*ngIf="colors.length > 0")
                     .col.s12
