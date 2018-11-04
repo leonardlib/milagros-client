@@ -11,6 +11,9 @@ import { Taste } from '../_models/taste';
 import { TasteService } from './taste.service';
 import {Post} from '../_models/post';
 import {SizeService} from './size.service';
+import {Sex} from '../_models/sex';
+import {Size} from '../_models/size';
+import {Fur} from '../_models/fur';
 
 @Injectable({
     providedIn: 'root'

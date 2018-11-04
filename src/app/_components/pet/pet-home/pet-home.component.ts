@@ -4,6 +4,8 @@ import {sa} from '@angular/core/src/render3';
 import {UtilsService} from '../../../_services/utils.service';
 import {Sex} from '../../../_models/sex';
 import {Taste} from '../../../_models/taste';
+import {Size} from '../../../_models/size';
+import {Fur} from '../../../_models/fur';
 
 @Component({
     selector: 'app-pet-home',
@@ -12,6 +14,7 @@ import {Taste} from '../../../_models/taste';
 })
 export class PetHomeComponent implements OnInit {
     public pets: any = [];
+    public tempPets: any = [];
     public sexs: any = [];
     public tastes: any = [];
     public sizes: any = [];
@@ -22,11 +25,15 @@ export class PetHomeComponent implements OnInit {
 
     // Filters
     public selectedColor: string;
-    public selectedSexs: any = [];
+    public selectedSex: Sex = new Sex();
     public selectedTastes: any = [];
-    public selectedAgeRanges: any = [];
-    public selectedSizes: any = [];
-    public selectedFurs: any = [];
+    public selectedAgeRange: any = {
+        min: null,
+        max: null,
+        show: false
+    };
+    public selectedSize: Size = new Size();
+    public selectedFur: Fur = new Fur();
 
     constructor(
         private petService: PetService,
@@ -37,6 +44,7 @@ export class PetHomeComponent implements OnInit {
         this.utilsService.showSnackbar('Cargando...');
         this.petService.index().subscribe(pets => {
             this.pets = pets;
+            this.tempPets = [...pets];
             this.setFilters();
         });
         this.ageRanges = [{
@@ -63,36 +71,14 @@ export class PetHomeComponent implements OnInit {
 
         this.pets.forEach(pet => {
             // Sexs
-            if (this.sexs.length > 0) {
-                let exists = false;
-
-                this.sexs.forEach(savedSex => {
-                    if (savedSex.name.toLowerCase() === pet.sex.name.toLowerCase()) {
-                        exists = true;
-                        return;
-                    }
-                });
-
-                if (!exists) {
-                    this.sexs.push(pet.sex);
-                }
-            } else {
+            if (!this.utilsService.checkIfExists(this.sexs, pet.sex, 'name')) {
                 this.sexs.push(pet.sex);
             }
 
             // Tastes
             if (this.tastes.length > 0) {
                 pet.tastes.forEach(petTaste => {
-                    let exists = false;
-
-                    this.tastes.forEach(savedTaste => {
-                        if (savedTaste.name.toLowerCase() === petTaste.name.toLowerCase()) {
-                            exists = true;
-                            return;
-                        }
-                    });
-
-                    if (!exists) {
+                    if (!this.utilsService.checkIfExists(this.tastes, petTaste, 'name')) {
                         this.tastes.push(petTaste);
                     }
                 });
@@ -106,56 +92,17 @@ export class PetHomeComponent implements OnInit {
             this.ages.push(pet.age.pet_age);
 
             // Sizes
-            if (this.sizes.length > 0) {
-                let exists = false;
-
-                this.sizes.forEach(savedSize => {
-                    if (savedSize.name.toLowerCase() === pet.size.name.toLowerCase()) {
-                        exists = true;
-                        return;
-                    }
-                });
-
-                if (!exists) {
-                    this.sizes.push(pet.size);
-                }
-            } else {
+            if (!this.utilsService.checkIfExists(this.sizes, pet.size, 'name')) {
                 this.sizes.push(pet.size);
             }
 
             // Furs
-            if (this.furs.length > 0) {
-                let exists = false;
-
-                this.furs.forEach(savedFur => {
-                    if (savedFur.name.toLowerCase() === pet.fur.name.toLowerCase()) {
-                        exists = true;
-                        return;
-                    }
-                });
-
-                if (!exists) {
-                    this.furs.push(pet.fur);
-                }
-            } else {
+            if (!this.utilsService.checkIfExists(this.furs, pet.fur, 'name')) {
                 this.furs.push(pet.fur);
             }
 
             // Color
-            if (this.colors.length > 0) {
-                let exists = false;
-
-                this.colors.forEach(savedColor => {
-                    if (savedColor === pet.color) {
-                        exists = true;
-                        return;
-                    }
-                });
-
-                if (!exists) {
-                    this.colors.push(pet.color);
-                }
-            } else {
+            if (!this.utilsService.checkIfExists(this.colors, pet.color, '', false)) {
                 this.colors.push(pet.color);
             }
         });
@@ -174,34 +121,116 @@ export class PetHomeComponent implements OnInit {
         });
     }
 
+    filterPets() {
+        this.pets = this.tempPets;
+
+        // Sex
+        if (this.selectedSex.name && this.selectedSex.name !== '') {
+            this.pets = this.pets.filter(pet => pet.sex.name === this.selectedSex.name);
+        }
+
+        // Tastes
+        if (this.selectedTastes.length > 0) {
+            this.selectedTastes.forEach(savedTaste => {
+                this.pets = this.pets.filter(pet => {
+                    let equal = false;
+
+                    pet.tastes.forEach(petTaste => {
+                        if (savedTaste.name.toLowerCase() === petTaste.name.toLowerCase()) {
+                            equal = true;
+                            return;
+                        }
+                    });
+
+                    return equal;
+                });
+            });
+        }
+
+        // Age range
+        if (this.selectedAgeRange.min) {
+            this.pets = this.pets.filter(pet => (pet.age.pet_age >= this.selectedAgeRange.min && pet.age.pet_age <= this.selectedAgeRange.max));
+        }
+
+        // Size
+        if (this.selectedSize.name && this.selectedSize.name !== '') {
+            this.pets = this.pets.filter(pet => pet.size.name === this.selectedSize.name);
+        }
+
+        // Fur
+        if (this.selectedFur.name && this.selectedFur.name !== '') {
+            this.pets = this.pets.filter(pet => pet.fur.name === this.selectedFur.name);
+        }
+
+        // Color
+        if (this.selectedColor && this.selectedColor !== '') {
+            this.pets = this.pets.filter(pet => pet.color === this.selectedColor);
+        }
+    }
+
+    onCheckSex(sex: Sex) {
+        if (this.selectedSex.name.toLowerCase() === sex.name.toLowerCase()) {
+            this.selectedSex = new Sex();
+        } else {
+            this.selectedSex = sex;
+        }
+
+        this.filterPets();
+    }
+
+    onCheckTaste(taste: Taste, checked: boolean) {
+        if (checked) {
+            if (!this.utilsService.checkIfExists(this.selectedTastes, taste, 'name')) {
+                this.selectedTastes.push(taste);
+            }
+        } else {
+            this.utilsService.removeIfExists(this.selectedTastes, taste, 'name');
+        }
+
+        this.filterPets();
+    }
+
+    onCheckAgeRange(ageRange: any) {
+        if (this.selectedAgeRange.min === ageRange.min) {
+            this.selectedAgeRange = {
+                min: null,
+                max: null,
+                show: false
+            };
+        } else {
+            this.selectedAgeRange = ageRange;
+        }
+
+        this.filterPets();
+    }
+
+    onCheckSize(size: Size) {
+        if (this.selectedSize.name.toLowerCase() === size.name.toLowerCase()) {
+            this.selectedSize = new Size();
+        } else {
+            this.selectedSize = size;
+        }
+
+        this.filterPets();
+    }
+
+    onCheckFur(fur: Fur) {
+        if (this.selectedFur.name.toLowerCase() === fur.name.toLowerCase()) {
+            this.selectedFur = new Fur();
+        } else {
+            this.selectedFur = fur;
+        }
+
+        this.filterPets();
+    }
+
     onColorClick(color: string) {
         if (this.selectedColor === color) {
             this.selectedColor = null;
         } else {
             this.selectedColor = color;
         }
-    }
 
-    searchFilteredPets() {}
-
-    onCheckSex(sex: Sex) {
-        if (this.selectedSexs.length > 0) {
-            let exists = false;
-
-            this.selectedSexs.forEach(savedSex => {
-                if (sex.name.toLowerCase() === savedSex.name.toLowerCase()) {
-                    exists = true;
-                    return;
-                }
-            });
-
-            if (!exists) {
-                this.selectedSexs.push(sex);
-            }
-        } else {
-            this.selectedSexs.push(sex);
-        }
-
-        this.searchFilteredPets();
+        this.filterPets();
     }
 }

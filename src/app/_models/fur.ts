@@ -2,5 +2,7 @@ export class Fur {
     key: number;
     name: string;
 
-    constructor() {}
+    constructor() {
+        this.name = '';
+    }
 }

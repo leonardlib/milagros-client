@@ -6,6 +6,7 @@ import { AngularFireList } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {Sex} from '../_models/sex';
 declare var $: any;
 
 @Injectable({
@@ -139,5 +140,73 @@ export class UtilsService {
 
     generateRandomUid() {
         return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    }
+
+    checkIfExists(data: any, item: any, prop: string, isString: boolean = true) {
+        let exists = false;
+
+        if (data.length > 0) {
+            data.forEach(savedData => {
+                if (prop !== '') {
+                    if (isString) {
+                        if (item[prop].toLowerCase() === savedData[prop].toLowerCase()) {
+                            exists = true;
+                            return;
+                        }
+                    } else {
+                        if (item[prop] === savedData[prop]) {
+                            exists = true;
+                            return;
+                        }
+                    }
+                } else {
+                    if (isString) {
+                        if (item.toLowerCase() === savedData.toLowerCase()) {
+                            exists = true;
+                            return;
+                        }
+                    } else {
+                        if (item === savedData) {
+                            exists = true;
+                            return;
+                        }
+                    }
+                }
+            });
+        }
+
+        return exists;
+    }
+
+    removeIfExists(data: any, item: any, prop: string, isString: boolean = true) {
+        if (data.length > 0) {
+            data.forEach((savedData, index) => {
+                if (prop !== '') {
+                    if (isString) {
+                        if (item[prop].toLowerCase() === savedData[prop].toLowerCase()) {
+                            data.splice(index, 1);
+                            return;
+                        }
+                    } else {
+                        if (item[prop] === savedData[prop]) {
+                            data.splice(index, 1);
+                            return;
+                        }
+                    }
+                } else {
+                    if (isString) {
+                        if (item.toLowerCase() === savedData.toLowerCase()) {
+                            data.splice(index, 1);
+                            return;
+                        }
+                    } else {
+                        if (item === savedData) {
+                            data.splice(index, 1);
+                            return;
+                        }
+                    }
+                }
+            });
+        }
     }
 }
