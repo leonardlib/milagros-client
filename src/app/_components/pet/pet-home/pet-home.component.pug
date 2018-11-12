@@ -19,10 +19,10 @@
                         input.filled-in(type="checkbox", [id]="taste.name", #tasteCheck="",
                             (change)="onCheckTaste(taste, tasteCheck.checked)")
                         label([for]="taste.name") {{ taste.name }}
-                .row(*ngIf="ageRanges.length > 0")
+                .row(*ngIf="ageRanges.length > 0 && ages.length > 0")
                     .col.s12
                         span.text-primary Edad
-                .row(*ngIf="ageRanges.length > 0")
+                .row(*ngIf="ageRanges.length > 0 && ages.length > 0")
                     .p.col.s12(*ngFor="let ageRange of ageRanges")
                         input.filled-in(type="checkbox", [id]="ageRange.min", #ageRangeCheck="",
                             (change)="onCheckAgeRange(ageRange)", [checked]="ageRange.min === selectedAgeRange.min")
@@ -55,10 +55,17 @@
                             [class.border-active]="color === selectedColor",
                             [style.borderColor]="(color === '#ffffff' || '#FFFFFF') ? '#000000' : color",
                             (click)="onColorClick(color)")
+        .col.s12(*ngIf="ages.length < 1")
+            .row
+                .col.s12.center-align.text-primary.p-top-5
+                    h5 No se encontraron mascotas
         .col.s12.m9
-            .row(*ngIf="pets.length < 1")
+            .row(*ngIf="pets.length < 1 && ages.length > 0")
                 .col.s12.center-align.text-primary.p-top-5
                     h5 No se encontraron mascotas
             .row
-                .col.s12.m6.m-top-10p(*ngFor="let pet of pets | filter: term")
+                .col.s12.m6.m-top-10p.cursor-pointer(*ngFor="let pet of pets | filter: term", (click)="petService.goToDetail(pet.uid)")
                     .card.small.card-img([style.backgroundImage]="'url('+ pet.images[0].url +')'")
+                        .row.pet-card-detail-2.w-100
+                            .col.s12.white-text
+                                h5 {{ pet.name }}

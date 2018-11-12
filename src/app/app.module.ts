@@ -8,10 +8,11 @@ import {FormsModule, NgControl, ReactiveFormsModule} from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatTabNav, MatTabsModule} from '@angular/material/tabs';
+import { MatTabNav, MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
@@ -69,7 +70,7 @@ import { PetService } from './_services/pet.service';
 import { TasteService } from './_services/taste.service';
 import { UtilsService } from './_services/utils.service';
 import { DonateAdminComponent } from './_components/donate/donate-admin/donate-admin.component';
-import {DonateService} from './_services/donate.service';
+import { DonateService } from './_services/donate.service';
 
 const config: InputFileConfig = {};
 
@@ -111,13 +112,18 @@ const config: InputFileConfig = {};
         HttpClientJsonpModule,
         MaterializeModule,
         AngularFireModule.initializeApp(environment.firebase),
+        AngularFireStorageModule,
         AngularFirestoreModule,
         AngularFireAuthModule,
         AngularFireDatabaseModule,
         MatSnackBarModule,
         MatTooltipModule,
-        GalleryModule.forRoot(),
-        LightboxModule.forRoot(),
+        GalleryModule.forRoot({
+            counter: false
+        }),
+        LightboxModule.forRoot({
+            panelClass: 'fullscreen'
+        }),
         GallerizeModule,
         MomentModule,
         ShareModule.forRoot(),

@@ -20,6 +20,7 @@ import {Fur} from '../_models/fur';
 })
 export class PetService {
     private basePath = 'pet';
+    private storageBasePath = 'images/pet/';
     private petsRef: AngularFireList<any>;
     private pets: Observable<any[]>;
 
@@ -50,14 +51,17 @@ export class PetService {
         return new Promise(resolve => {
             this.petsRef = this.fireDatabase.list<Pet>(this.basePath);
 
+            // Set pet unique identifier
+            pet.uid = this.utilsService.generateRandomUid();
+
             const startCreating = async () => {
-                // Upload images to Imgur, then replace pet images
-                pet.images = await this.uploadImages(pet.images);
-                pet.uid = this.utilsService.generateRandomUid();
+                // Upload images, then replace pet images
+                pet.images = await this.uploadImages(pet.images, pet.uid);
                 this.furService.create(pet.fur);
                 this.sizeService.create(pet.size);
                 await this.uploadTastes(pet.tastes);
 
+                // Save pet and set new key
                 const newRef = this.petsRef.push(pet);
                 pet.key = newRef.key;
                 return true;
@@ -77,15 +81,20 @@ export class PetService {
         return new Promise(resolve => {
             this.petsRef = this.fireDatabase.list<Pet>(this.basePath);
 
+            // Renew pet unique identifier
+            pet.uid = this.utilsService.generateRandomUid();
+
             const startUpdating = async () => {
-                // Delete images from Imgur
+                // Delete images
                 await this.deleteImages(pet.images);
-                // Upload images to Imgur, then replace pet images
-                pet.images = await this.uploadImages(pet['new_images']);
+
+                // Upload images, then replace pet images
+                pet.images = await this.uploadImages(pet['new_images'], pet.uid);
                 this.furService.create(pet.fur);
                 this.sizeService.create(pet.size);
                 await this.uploadTastes(pet.tastes);
 
+                // Update pet data
                 this.petsRef.update(pet.key + '', {
                     uid: pet.uid,
                     name: pet.name,
@@ -103,6 +112,7 @@ export class PetService {
                     admission_date: pet.admission_date,
                     egress_date: pet.egress_date
                 });
+
                 return true;
             };
 
@@ -121,7 +131,7 @@ export class PetService {
             this.petsRef = this.fireDatabase.list<Pet>(this.basePath);
 
             const startDeleting = async () => {
-                // Delete images from Imgur
+                // Delete images
                 await this.deleteImages(pet.images);
                 return true;
             };
@@ -144,12 +154,13 @@ export class PetService {
         }
     }
 
-    async uploadImages(images: ImageModel[]) {
+    async uploadImages(images: ImageModel[], uid: string) {
         for (let index = 0; index < images.length; index++) {
-            await this.utilsService.uploadImageToImgur(images[index].url).then(res => {
+            const pathName = this.storageBasePath + uid + '-0' + (index + 1);
+
+            await this.utilsService.uploadFile(images[index].file, pathName).then(res => {
                 if (res !== '') {
-                    images[index].url = res['link'] + '';
-                    images[index].delete_hash = res['deletehash'] + '';
+                    images[index].url = res + '';
                 }
             });
         }
@@ -158,13 +169,12 @@ export class PetService {
     }
 
     async deleteImages(images: ImageModel[]) {
-        console.log(images);
         for (let index = 0; index < images.length; index++) {
-            await this.utilsService.deleteImageFromImgur(images[index].delete_hash);
+            await this.utilsService.deleteFile(images[index].url);
         }
     }
 
-    getImage(url: string, name: string) {
+    getImagePreview(url: string, name: string) {
         return new Promise(resolve => {
             this.utilsService.getFileFromUrl(url, name).then(resp => {
                 const res = resp as File;
@@ -196,5 +206,9 @@ export class PetService {
         } else {
             return secondYear;
         }
+    }
+
+    goToDetail(uid: string) {
+        this.router.navigate(['/pet/characteristics/' + uid]);
     }
 }

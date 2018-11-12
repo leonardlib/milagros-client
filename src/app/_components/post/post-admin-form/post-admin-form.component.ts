@@ -43,7 +43,7 @@ export class PostAdminFormComponent implements OnInit {
             this.utilsService.showSnackbar('Cargando...');
             this.postService.show(uid).subscribe(response => {
                 this.post = response[0] as Post;
-                this.postService.getMainImage(this.post).then(res => {
+                this.postService.getMainImagePreview(this.post).then(res => {
                     this.images[0] = res;
                 });
                 this.editar = true;
@@ -59,7 +59,7 @@ export class PostAdminFormComponent implements OnInit {
         if (this.validData()) {
             this.utilsService.showSnackbar('Guardando...');
             if (this.editar) {
-                this.post['new_image'] = this.images[0].preview;
+                this.post['new_image'].file = this.images[0].file;
                 this.postService.update(this.post).then(response => {
                     if (response) {
                         this.post = response as Post;
@@ -69,7 +69,7 @@ export class PostAdminFormComponent implements OnInit {
                     }
                 });
             } else {
-                this.post.main_image.url = this.images[0].preview;
+                this.post.main_image.file = this.images[0].file;
                 this.postService.create(this.post).then(response => {
                     if (response) {
                         this.post = response as Post;

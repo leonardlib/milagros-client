@@ -12,6 +12,7 @@ import * as moment from 'moment';
 })
 export class PostService {
     private basePath = 'post';
+    private storageBasePath = 'images/post/';
     private postsRef: AngularFireList<any>;
     private posts: Observable<any[]>;
 
@@ -40,20 +41,23 @@ export class PostService {
         return new Promise(resolve => {
             this.postsRef = this.fireDatabase.list<Post>(this.basePath);
 
-            // Upload main_image to imgur
-            this.utilsService.uploadImageToImgur(post.main_image.url).then(res => {
-                if (res !== '') {
-                    post.main_image.url = res['link'] + '';
-                    post.main_image.delete_hash = res['deletehash'] + '';
-                    post.date = moment().locale('es').format('YYYY-MM-DD');
-                    post.uid = this.utilsService.generateRandomUid();
+            // Set post unique identifier
+            post.uid = this.utilsService.generateRandomUid();
 
+            // Upload main_image
+            this.utilsService.uploadFile(post.main_image.file, this.storageBasePath + post.uid).then(res => {
+                if (res !== '') {
+                    post.main_image.url = res + '';
+                    post.date = moment().locale('es').format('YYYY-MM-DD');
+
+                    // Save post and image authors
                     this.authorService.create(post.author).then(response => {
                         this.authorService.create(post.main_image.author);
                     });
+
+                    // Save post and set new key
                     const newRef = this.postsRef.push(post);
                     post.key = newRef.key;
-
                     resolve(post);
                 } else {
                     resolve(null);
@@ -66,19 +70,24 @@ export class PostService {
         return new Promise(resolve => {
             this.postsRef = this.fireDatabase.list<Post>(this.basePath);
 
-            // Delete image from Imgur
-            this.utilsService.deleteImageFromImgur(post.main_image.delete_hash).then(res => {
+            // Renew post unique identifier
+            post.uid = this.utilsService.generateRandomUid();
+
+            // Delete image
+            this.utilsService.deleteFile(post.main_image.url).then(res => {
                 if (res) {
-                    // Upload new image to Imgur
-                    this.utilsService.uploadImageToImgur(post['new_image']).then(res2 => {
+                    // Upload new image
+                    this.utilsService.uploadFile(post['new_image'].file, this.storageBasePath + post.uid).then(res2 => {
                         if (res2) {
-                            post.main_image.url = res2['link'] + '';
-                            post.main_image.delete_hash = res2['deletehash'] + '';
+                            post.main_image.url = res2 + '';
                             post.date = moment().locale('es').format('YYYY-MM-DD');
 
+                            // Save post and image authors
                             this.authorService.create(post.author).then(response => {
                                 this.authorService.create(post.main_image.author);
                             });
+
+                            // Update post info
                             this.postsRef.update(post.key + '', {
                                 uid: post.uid,
                                 title: post.title,
@@ -104,7 +113,7 @@ export class PostService {
         return new Promise(resolve => {
             this.postsRef = this.fireDatabase.list<Post>(this.basePath);
 
-            this.utilsService.deleteImageFromImgur(post.main_image.delete_hash).then(res => {
+            this.utilsService.deleteFile(post.main_image.url).then(res => {
                 if (res) {
                     this.postsRef.remove(post.key + '').then(response => {
                         resolve(true);
@@ -122,7 +131,7 @@ export class PostService {
         this.router.navigate(['/post/content/' + uid]);
     }
 
-    getMainImage(post: Post) {
+    getMainImagePreview(post: Post) {
         return new Promise(resolve => {
             this.utilsService.getFileFromUrl(post.main_image.url, 'main_image').then(resp => {
                 const res = resp as File;

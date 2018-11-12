@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Gallery, GalleryRef } from '@ngx-gallery/core';
 import { UtilsService } from '../../../_services/utils.service';
+import {ActivatedRoute} from '@angular/router';
+import {Post} from '../../../_models/post';
+import {PetService} from '../../../_services/pet.service';
+import {Pet} from '../../../_models/pet';
 
 @Component({
     selector: 'app-pet-characteristics',
@@ -9,23 +13,39 @@ import { UtilsService } from '../../../_services/utils.service';
 })
 export class PetCharacteristicsComponent implements OnInit {
     public galleryRef: GalleryRef = null;
+    public pet: Pet = new Pet();
 
     constructor(
         private gallery: Gallery,
-        public utilsService: UtilsService
+        public utilsService: UtilsService,
+        private route: ActivatedRoute,
+        public petService: PetService
     ) {}
 
     ngOnInit() {
         this.galleryRef = this.gallery.ref('petGallery');
 
-        this.galleryRef.addImage({
-            src: 'https://i.imgur.com/zUvzL0F.jpg',
-            thumb: 'https://i.imgur.com/zUvzL0F.jpg'
-        });
+        this.route.params.subscribe(params => {
+            const uid = params.uid;
 
-        this.galleryRef.addImage({
-            src: 'https://i.imgur.com/zUvzL0F.jpg',
-            thumb: 'https://i.imgur.com/zUvzL0F.jpg'
+            this.utilsService.showSnackbar('Cargando...');
+            this.petService.show(uid).subscribe(response => {
+                this.pet = response[0] as Pet;
+                this.setImages();
+            });
         });
     }
+
+    setImages() {
+        this.pet.images.forEach(image => {
+            this.galleryRef.addImage({
+                src: image.url,
+                thumb: image.url
+            });
+        });
+    }
+
+    adopt() {}
+
+    sponsor() {}
 }

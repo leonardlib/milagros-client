@@ -47,23 +47,6 @@ export class PetHomeComponent implements OnInit {
             this.tempPets = [...pets];
             this.setFilters();
         });
-        this.ageRanges = [{
-            min: 0,
-            max: 1,
-            show: true
-        }, {
-            min: 2,
-            max: 3,
-            show: false
-        }, {
-            min: 4,
-            max: 5,
-            show: false
-        }, {
-            min: 6,
-            max: 99,
-            show: false
-        }];
     }
 
     setFilters() {
@@ -111,6 +94,24 @@ export class PetHomeComponent implements OnInit {
     }
 
     setAgeRanges() {
+        this.ageRanges = [{
+            min: 0,
+            max: 1,
+            show: false
+        }, {
+            min: 2,
+            max: 3,
+            show: false
+        }, {
+            min: 4,
+            max: 5,
+            show: false
+        }, {
+            min: 6,
+            max: 99,
+            show: false
+        }];
+
         this.ages.forEach(petAge => {
             this.ageRanges.forEach(range => {
                 if (petAge >= range.min && petAge <= range.max) {

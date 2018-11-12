@@ -4,7 +4,7 @@ export class ImageModel {
     key: string;
     author: Author;
     url: string;
-    delete_hash: string;
+    file: File;
 
     constructor() {}
 }

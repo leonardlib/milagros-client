@@ -1,27 +1,71 @@
 
-<gallery id="postGallery" [items]="images" [thumb]="false" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" [itemTemplate]="itemTemplate" *ngIf="posts.length &gt; 0"></gallery>
-<ng-template #itemTemplate="" let-index="index" let-type="type" let-data="data" let-currIndex="currIndex" *ngIf="posts.length &gt; 0">
-  <div class="row bottom-align" *ngIf="type === 'image' &amp;&amp; index === currIndex">
-    <div class="col s12 left-align">
-      <h4>{{ data.title }}</h4>
+<gallery id="postGallery" [thumb]="false" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" [itemTemplate]="itemTemplate" *ngIf="posts.length &gt; 0"></gallery>
+<ng-template #itemTemplate="" let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
+  <div class="row bottom-align w-100 bg-black-transparency" *ngIf="type === 'image' &amp;&amp; index === currIndex">
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <h4>{{ data.title }}</h4>
+        </div>
+        <div class="col s12"><a class="btn waves-effect bg-primary white-text" (click)="postService.goToDetail(data.uid)">Ver Más</a></div>
+      </div>
     </div>
-    <div class="col s12 left-align"><a class="btn waves-effect bg-primary white-text" (click)="postService.goToDetail(data.uid)">Ver Más</a></div>
   </div>
 </ng-template>
 <div class="container min-height-100vh">
-  <div class="row" *ngIf="posts.length &lt;= 0">
-    <div class="col s12 center-align text-primary p-top-5">
-      <h4>¡Lo sentimos!, aún no tenemos noticias, vuelve pronto.</h4>
+  <!-- Pets-->
+  <div class="row" *ngIf="pets.length &gt; 0">
+    <div class="col s12 text-primary m-top-30p">
+      <h5>Nuevos integrantes</h5>
+    </div>
+  </div>
+  <div class="row" *ngIf="pets.length &gt; 0">
+    <div class="col s12 m6">
+      <div class="col s12 hvr-grow m-top-10p cursor-pointer pet-card-1" [style.backgroundImage]="'url(' + pets[0].images[0].url + ')'" (click)="petService.goToDetail(pets[0].uid)">
+        <div class="container">
+          <div class="row pet-card-detail w-100">
+            <div class="col s12 white-text">
+              <h5>{{ pets[0].name }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <div class="col s12 hvr-grow m-top-10p cursor-pointer pet-card-2" [style.backgroundImage]="'url(' + pets[1].images[0].url + ')'" (click)="petService.goToDetail(pets[1].uid)" *ngIf="pets.length &gt; 1">
+        <div class="container">
+          <div class="row pet-card-detail w-100">
+            <div class="col s12 white-text">
+              <h5>{{ pets[1].name }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 hvr-grow m-top-10p cursor-pointer pet-card-2" [style.backgroundImage]="'url(' + pets[2].images[0].url + ')'" (click)="petService.goToDetail(pets[2].uid)" *ngIf="pets.length &gt; 2">
+        <div class="container">
+          <div class="row pet-card-detail w-100">
+            <div class="col s12 white-text">
+              <h5>{{ pets[2].name }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="pets.length &gt; 0">
+    <div class="col s12 center-align m-top-10p"><a class="text-primary cursor-pointer" [routerLink]="['/pet']">Ver todas las mascotas</a></div>
+  </div>
+  <!-- Posts-->
+  <div class="row" *ngIf="posts.length &gt; 0">
+    <div class="col s12 text-primary m-top-30p">
+      <h5>Artículos</h5>
     </div>
   </div>
   <div class="row" *ngIf="posts.length &gt; 0">
-    <div class="col s12 m6 l4 m-top-30p" *ngFor="let post of posts">
+    <div class="col s12 m6 l4 m-top-10p cursor-pointer" *ngFor="let post of posts" (click)="postService.goToDetail(post.uid)">
       <div class="card medium">
-        <div class="card-image"><img [src]="post.main_image.url"/><span class="card-title">{{ post.title }}</span></div>
-        <div class="card-content">
-          <div class="text-justify" [innerHtml]="post.content"></div>
-        </div>
-        <div class="card-action"><a class="left text-primary cursor-pointer" (click)="postService.goToDetail(post.uid)">Ver más</a><span class="right">{{ post.date }}</span></div>
+        <div class="card-image" [style.backgroundImage]="'url(' + post.main_image.url + ')'"></div>
+        <div class="card-content"><span class="grey-text lighten-4">{{ post.date | amLocale: 'es' | amDateFormat: 'LL' }}</span><br/><br/><span class="card-title">{{ post.title }}</span></div>
       </div>
     </div>
   </div>

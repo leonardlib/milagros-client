@@ -3,48 +3,46 @@
         .col.s12.m3
             .row
                 .col.s12
-                    h4 Dora
+                    h4 {{ pet.name }}
                 .col.s12
-                    span.text-primary Hembra
+                    span.text-primary {{ pet.sex.name }}
             .row
                 .col.s12
                     span.text-primary Edad
                 .col.s12
-                    span 6 año(s)
+                    span {{ pet.age.pet_age }} año(s) - {{ pet.age.human_age }} año(s) humanos
             .row
                 .col.s12
                     span.text-primary Tamaño
                 .col.s12
-                    span Chico
+                    span {{ pet.size.name }}
             .row
                 .col.s12
-                    span.text-primary Pelo
+                    span.text-primary Pelaje
                 .col.s12
-                    span Rizado
+                    span {{ pet.fur.name }}
             .row
                 .col.s12
                     span.text-primary Gustos
-                .col.s12
-                    span - Pelota
-                .col.s12
-                    span - Correr
+                .col.s12(*ngFor="let taste of pet.tastes")
+                    span - {{ taste.name }}
             .row
                 .col.s12
-                    a.btn.waves-effect.bg-primary.btn-block.waves-block()
+                    a.btn.waves-effect.bg-primary.btn-block.waves-block((click)="adopt()")
                         i.fa.fa-home
                         | &nbsp;
                         | Adoptar
             .row
                 .col.s12
-                    a.btn.waves-effect.teal.darken-1.btn-block.waves-block()
+                    a.btn.waves-effect.teal.darken-1.btn-block.waves-block((click)="sponsor()")
                         i.fa.fa-paw
                         | &nbsp;
                         | Apadrinar
         .col.s12.m9
             .row
                 .col.s12
-                    //gallery(id="petGallery", [items]="images", [autoPlay]="true", [counter]="false",
-                        [playerInterval]="5000", [imageSize]="contain")
+                    gallery.bg-transparent(id="petGallery", [autoPlay]="true", [counter]="false", [playerInterval]="5000",
+                        [imageSize]="contain", gallerize="")
 .w-100.grey.lighten-4.p-top-5.p-bottom-5.m-bottom-50p
     .container
         .row
@@ -55,4 +53,4 @@
             .col.s12.m9
                 .row
                     .col.s12
-                        p.text-justify Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In nibh mauris cursus mattis molestie a iaculis at erat. Purus ut faucibus pulvinar elementum integer enim neque volutpat ac. Pulvinar etiam non quam lacus suspendisse faucibus. Augue interdum velit euismod in pellentesque massa placerat duis. Potenti nullam ac tortor vitae purus faucibus ornare suspendisse. Ac placerat vestibulum lectus mauris ultrices eros in cursus. Risus at ultrices mi tempus imperdiet. Eget duis at tellus at urna condimentum. Aliquam purus sit amet luctus venenatis lectus.
+                        p.text-justify([innerHtml]="pet.description | safeHtml")

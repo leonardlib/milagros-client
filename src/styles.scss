@@ -1,12 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import '_variables.scss';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import '~@ngx-gallery/core/styles/scss/gallery';
-@import '~@ngx-gallery/core/styles/scss/lightbox';
 @import '~@swimlane/ngx-datatable/release/index.css';
 @import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
 @import "~@ng-select/ng-select/themes/material.theme.css";
+@import "~hover.css/css/hover.css";
 
 /* Font awesome icons */
 i {
@@ -152,7 +151,14 @@ button:focus {
 .bottom-align {
     bottom: 0 !important;
     top: auto !important;
+    left: 0 !important;
+    right: auto !important;
     position: absolute;
+    margin-bottom: 0 !important;
+}
+
+.bg-black-transparency {
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .text-justify {
@@ -347,4 +353,50 @@ mat-icon {
     background-size: cover !important;
     // width: 100% !important;
     @extend .h-350p;
+}
+
+.h-600p {
+    height: 600px !important;
+}
+
+.card-image {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    // width: 100% !important;
+    height: 300px !important;
+}
+
+.card-action {
+    border-top: none !important;
+}
+
+.pet-card-1 {
+    @extend .card-image;
+    height: 500px !important;
+}
+
+.pet-card-2 {
+    @extend .card-image;
+    height: 242.5px !important;
+}
+
+.pet-card-detail {
+    @extend .bottom-align;
+    left: 11px !important;
+    @extend .bg-black-transparency;
+}
+
+.pet-card-detail-2 {
+    position: absolute !important;
+    left: 11px !important;
+    bottom: 0 !important;
+    top: auto !important;
+    right: auto !important;
+    margin-bottom: 0 !important;
+    @extend .bg-black-transparency;
+}
+
+.bg-transparent {
+    background-color: transparent !important;
 }

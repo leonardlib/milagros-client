@@ -171,7 +171,7 @@ export class PetAdminFormComponent implements OnInit {
 
         this.images.forEach(image => {
             const auxImage = new ImageModel();
-            auxImage.url = image['preview'];
+            auxImage.file = image['file'];
 
             if (updating) {
                 this.pet['new_images'].push(auxImage);
@@ -183,7 +183,7 @@ export class PetAdminFormComponent implements OnInit {
 
     getImages() {
         this.pet.images.forEach((image, index) => {
-            this.petService.getImage(image.url, '' + (index + 1)).then(res => {
+            this.petService.getImagePreview(image.url, '' + (index + 1)).then(res => {
                 this.images.push(res);
             });
         });

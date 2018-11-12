@@ -3,11 +3,9 @@ import { MatSnackBar } from '@angular/material';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { AngularFireList } from '@angular/fire/database';
-import { map } from 'rxjs/operators';
+import {finalize, map} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {Sex} from '../_models/sex';
-declare var $: any;
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +15,7 @@ export class UtilsService {
         private snackbar: MatSnackBar,
         private authService: AuthService,
         private router: Router,
-        private http: HttpClient
+        private fireStorage: AngularFireStorage
     ) {}
 
     /**
@@ -95,6 +93,28 @@ export class UtilsService {
         });
     }
 
+    uploadFile(file: File, path: string) {
+        return new Promise(resolve => {
+            const fileRef = this.fireStorage.ref(path);
+            const task = this.fireStorage.upload(path, file);
+
+            task.then(res => {
+                fileRef.getDownloadURL().subscribe(url => {
+                    resolve(url);
+                }, error2 => {
+                    resolve('');
+                });
+            }, error => {
+                resolve('');
+            });
+        });
+    }
+
+    deleteFile(url: string) {
+        return this.fireStorage.storage.refFromURL(url).delete();
+    }
+
+    /*
     uploadImageToImgur(base64: string) {
         return new Promise(resolve => {
             const data = {
@@ -137,6 +157,7 @@ export class UtilsService {
             });
         });
     }
+    */
 
     generateRandomUid() {
         return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
