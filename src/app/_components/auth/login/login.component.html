@@ -11,12 +11,12 @@
         <div class="row">
           <div class="input-field col s12">
             <input class="validate" type="email" id="email" name="email" [(ngModel)]="user.email" #email="ngModel" [email]="true"/>
-            <label for="email">Correo</label><span class="red-text" *ngIf="email.invalid">Ingresa un correo valido</span>
+            <label for="email" [class.active]="user.email">Correo</label><span class="red-text" *ngIf="email.invalid">Ingresa un correo valido</span>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input type="password" id="password" name="password" [(ngModel)]="user.password" #password="ngModel"/>
+            <input type="password" id="password" name="password" [(ngModel)]="user.password" #password="ngModel" [class.active]="user.password"/>
             <label for="password">Contraseña</label>
           </div>
         </div>
@@ -33,10 +33,10 @@
               Google</a></div>
         </div>
         <div class="row">
-          <div class="col s12 center-align"><a class="text-primary cursor-pointer" [routerLink]="['/auth/register']">¿No tengo cuenta?</a></div>
+          <div class="col s12 center-align"><a class="text-primary cursor-pointer" [routerLink]="['/acceso/registro']">¿No tengo cuenta?</a></div>
         </div>
         <div class="row">
-          <div class="col s12 center-align"><a class="text-black cursor-pointer" [routerLink]="['/auth/forgot-password']">Olvidé mi contraseña</a></div>
+          <div class="col s12 center-align"><a class="text-black cursor-pointer" [routerLink]="['/acceso/recuperar-contraseña']">Olvidé mi contraseña</a></div>
         </div>
       </form>
     </div>

@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import {UtilsService} from '../_services/utils.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
     constructor(
-        public userService: UserService,
-        private router: Router
+        private userService: UserService,
+        private router: Router,
+        private utilsService: UtilsService
     ) {}
 
     canActivate(
@@ -17,10 +19,11 @@ export class AuthGuard implements CanActivate {
     ): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             this.userService.current().then(user => {
-                return resolve(true);
+                resolve(true);
             }, error => {
-                this.router.navigate(['/auth']);
-                return resolve(false);
+                this.utilsService.redirectUrl = state.url;
+                this.router.navigate(['/acceso']);
+                resolve(false);
             });
         });
     }

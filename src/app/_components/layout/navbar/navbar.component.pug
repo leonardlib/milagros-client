@@ -6,15 +6,15 @@
                 i.fa.fa-bars.fa-1-5x
             ul.right.hide-on-med-and-down(id="nav-mobile")
                 li([routerLinkActive]="'active'")
-                    a.cursor-pointer([routerLink]="['/home']") Inicio
+                    a.cursor-pointer([routerLink]="['/inicio']") Inicio
                 li([routerLinkActive]="'active'")
-                    a.cursor-pointer([routerLink]="['/pet']") Mascotas
+                    a.cursor-pointer([routerLink]="['/mascota']") Mascotas
                 li([routerLinkActive]="'active'")
-                    a.cursor-pointer([routerLink]="['/donate/store']") Donar
+                    a.cursor-pointer([routerLink]="['/donar/tienda']") Donar
                 li([routerLinkActive]="'active'")
-                    a.cursor-pointer([routerLink]="['/about']") ¿Quiénes somos?
+                    a.cursor-pointer([routerLink]="['/información']") ¿Quiénes somos?
                 li([routerLinkActive]="'active'", *ngIf="!user.email")
-                    a.cursor-pointer([routerLink]="['/auth']") Iniciar sesión
+                    a.cursor-pointer([routerLink]="['/acceso']") Iniciar sesión
                 li([routerLinkActive]="'active'", *ngIf="user.email")
                     a.cursor-pointer([routerLink]="[profileRoute]") Mi perfil
                 li(*ngIf="user.email")
@@ -23,15 +23,15 @@
                 li
                     img.cursor-pointer.brand-logo(src="assets/img/logo-2.png", [routerLink]="['/']")
                 li.m-top-70p([routerLinkActive]="'active'")
-                    a.cursor-pointer([routerLink]="['/home']") Inicio
+                    a.cursor-pointer([routerLink]="['/inicio']") Inicio
                 li([routerLinkActive]="'active'")
-                    a.cursor-pointer([routerLink]="['/pet']") Mascotas
+                    a.cursor-pointer([routerLink]="['/mascota']") Mascotas
                 li([routerLinkActive]="'active'")
-                    a.cursor-pointer([routerLink]="['/donate/store']") Donar
+                    a.cursor-pointer([routerLink]="['/donar/tienda']") Donar
                 li([routerLinkActive]="'active'")
-                    a.cursor-pointer([routerLink]="['/about']") ¿Quiénes somos?
+                    a.cursor-pointer([routerLink]="['/información']") ¿Quiénes somos?
                 li([routerLinkActive]="'active'", *ngIf="!user.email")
-                    a.cursor-pointer([routerLink]="['/auth']") Iniciar sesión
+                    a.cursor-pointer([routerLink]="['/acceso']") Iniciar sesión
                 li([routerLinkActive]="'active'", *ngIf="user.email")
                     a.cursor-pointer([routerLink]="[profileRoute]") Mi perfil
                 li(*ngIf="user.email")

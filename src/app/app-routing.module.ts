@@ -24,75 +24,80 @@ import { PostAdminListComponent } from './_components/post/post-admin-list/post-
 import { PostAdminFormComponent } from './_components/post/post-admin-form/post-admin-form.component';
 import { PetAdminFormComponent } from './_components/pet/pet-admin-form/pet-admin-form.component';
 import {DonateAdminComponent} from './_components/donate/donate-admin/donate-admin.component';
+import {PetAdoptComponent} from './_components/pet/pet-adopt/pet-adopt.component';
+import {CompleteProfileComponent} from './_components/profile/complete-profile/complete-profile.component';
+import {ProfileCompletedGuard} from './_guards/profile-completed.guard';
 
 const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'donate', redirectTo: 'donate/store', pathMatch: 'full' },
-    { path: 'admin', redirectTo: 'admin/posts', pathMatch: 'full' },
+    { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+    { path: 'donar', redirectTo: 'donar/tienda', pathMatch: 'full' },
+    { path: 'administrador', redirectTo: 'administrador/publicaciones', pathMatch: 'full' },
     {
-        path: 'auth', children: [
+        path: 'acceso', children: [
             { path: '', component: LoginComponent },
-            { path: 'register', component: RegisterComponent },
-            { path: 'forgot-password', component: SendPasswordResetEmailComponent }
+            { path: 'registro', component: RegisterComponent },
+            { path: 'recuperar-contraseña', component: SendPasswordResetEmailComponent }
         ]
     },
     {
-        path: 'home', component: UserInterfaceComponent, children: [
+        path: 'inicio', component: UserInterfaceComponent, children: [
             { path: '', component: StartComponent }
         ]
     },
     {
-        path: 'post', component: UserInterfaceComponent, children: [
-            { path: 'content/:uid', component: PostContentComponent }
+        path: 'publicación', component: UserInterfaceComponent, children: [
+            { path: 'contenido/:uid', component: PostContentComponent }
         ]
     },
     {
-        path: 'pet', component: UserInterfaceComponent, children: [
+        path: 'mascota', component: UserInterfaceComponent, children: [
             { path: '', component: PetHomeComponent },
-            { path: 'characteristics/:uid', component: PetCharacteristicsComponent }
+            { path: 'características/:uid', component: PetCharacteristicsComponent },
+            { path: 'adoptar/:uid', component: PetAdoptComponent, canActivate: [AuthGuard, ProfileCompletedGuard] }
         ]
     },
     {
-        path: 'donate', component: UserInterfaceComponent, children: [
+        path: 'donar', component: UserInterfaceComponent, children: [
             {
                 path: '', component: DonateHomeComponent, children: [
-                    { path: 'store', component: DonateStoreComponent },
-                    { path: 'card', component: DonateCardComponent },
-                    { path: 'item', component: DonateItemComponent }
+                    { path: 'tienda', component: DonateStoreComponent },
+                    { path: 'tarjeta', component: DonateCardComponent },
+                    { path: 'artículo', component: DonateItemComponent }
                 ]
             },
         ]
     },
     {
-        path: 'about', component: UserInterfaceComponent, children: [
+        path: 'información', component: UserInterfaceComponent, children: [
             { path: '', component: ContactComponent }
         ]
     },
     {
-        path: 'profile', component: UserInterfaceComponent, canActivate: [AuthGuard], children: [
-            { path: '', component: ProfileHomeComponent }
+        path: 'perfil', component: UserInterfaceComponent, canActivate: [AuthGuard], children: [
+            { path: '', component: ProfileHomeComponent },
+            { path: 'completar', component: CompleteProfileComponent }
         ]
     },
     {
-        path: 'admin', component: UserInterfaceComponent, canActivate: [AdminGuard], children: [
+        path: 'administrador', component: UserInterfaceComponent, canActivate: [AdminGuard], children: [
             {
                 path: '', component: AdminHomeComponent, children: [
                     {
-                        path: 'posts', children: [
+                        path: 'publicaciones', children: [
                             { path: '', component: PostAdminListComponent },
-                            { path: 'new', component: PostAdminFormComponent },
-                            { path: 'edit/:uid', component: PostAdminFormComponent }
+                            { path: 'nueva', component: PostAdminFormComponent },
+                            { path: 'editar/:uid', component: PostAdminFormComponent }
                         ]
                     },
                     {
-                        path: 'pets', children: [
+                        path: 'mascotas', children: [
                             { path: '', component: PetAdminListComponent },
-                            { path: 'new', component: PetAdminFormComponent },
-                            { path: 'edit/:uid', component: PetAdminFormComponent }
+                            { path: 'nueva', component: PetAdminFormComponent },
+                            { path: 'editar/:uid', component: PetAdminFormComponent }
                         ]
                     },
                     {
-                        path: 'donate', children: [
+                        path: 'donar', children: [
                             { path: '', component: DonateAdminComponent }
                         ]
                     }

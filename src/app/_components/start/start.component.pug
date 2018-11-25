@@ -41,7 +41,7 @@ ng-template(#itemTemplate="", let-index="index", let-type="type", let-data="data
                             h5 {{ pets[2].name }}
     .row(*ngIf="pets.length > 0")
         .col.s12.center-align.m-top-10p
-            a.text-primary.cursor-pointer([routerLink]="['/pet']") Ver todas las mascotas
+            a.text-primary.cursor-pointer([routerLink]="['/mascota']") Ver todas las mascotas
 
     // Posts
     .row(*ngIf="posts.length > 0")

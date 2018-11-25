@@ -46,8 +46,6 @@ export class StartComponent implements OnInit {
         this.mainPosts.forEach(item => {
             const post = item as Post;
 
-            console.log(post);
-
             this.galleryRef.addImage({
                 src: post.main_image.url,
                 thumb: post.main_image.url,

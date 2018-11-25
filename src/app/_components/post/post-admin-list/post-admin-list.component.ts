@@ -59,6 +59,6 @@ export class PostAdminListComponent implements OnInit {
 
     onSelect(event: any) {
         const post = event.selected[0] as Post;
-        this.router.navigate(['/admin/posts/edit/' + post.uid]);
+        this.router.navigate(['/administrador/publicaciones/editar/' + post.uid]);
     }
 }

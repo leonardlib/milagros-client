@@ -71,6 +71,8 @@ import { TasteService } from './_services/taste.service';
 import { UtilsService } from './_services/utils.service';
 import { DonateAdminComponent } from './_components/donate/donate-admin/donate-admin.component';
 import { DonateService } from './_services/donate.service';
+import { PetAdoptComponent } from './_components/pet/pet-adopt/pet-adopt.component';
+import { CompleteProfileComponent } from './_components/profile/complete-profile/complete-profile.component';
 
 const config: InputFileConfig = {};
 
@@ -101,7 +103,9 @@ const config: InputFileConfig = {};
         ModalComponent,
         SafeHtmlPipe,
         PetAdminFormComponent,
-        DonateAdminComponent
+        DonateAdminComponent,
+        PetAdoptComponent,
+        CompleteProfileComponent
     ],
     imports: [
         BrowserModule,

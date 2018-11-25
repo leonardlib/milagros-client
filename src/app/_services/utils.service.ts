@@ -11,6 +11,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
     providedIn: 'root'
 })
 export class UtilsService {
+    public redirectUrl: string;
+
     constructor(
         private snackbar: MatSnackBar,
         private authService: AuthService,
@@ -34,7 +36,7 @@ export class UtilsService {
 
     facebookLogin() {
         this.authService.facebookLogin().then(response => {
-            this.router.navigate(['/home']);
+            this.redirect();
         }, error => {
             this.showSnackbar('¡Ops!, ocurrió un error. Intenta de nuevo.');
         });
@@ -42,7 +44,7 @@ export class UtilsService {
 
     googleLogin() {
         this.authService.googleLogin().then(response => {
-            this.router.navigate(['/home']);
+            this.redirect();
         }, error => {
             this.showSnackbar('¡Ops!, ocurrió un error. Intenta de nuevo.');
         });
@@ -228,6 +230,15 @@ export class UtilsService {
                     }
                 }
             });
+        }
+    }
+
+    redirect() {
+        if (this.redirectUrl) {
+            this.router.navigate([this.redirectUrl]);
+            this.redirectUrl = null;
+        } else {
+            this.router.navigate(['/inicio']);
         }
     }
 }

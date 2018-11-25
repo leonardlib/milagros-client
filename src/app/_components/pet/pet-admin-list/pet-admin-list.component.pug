@@ -7,7 +7,8 @@
         label(for="search") Buscar mascota
 .row
     .col.s12
-        a.btn.btn-block.waves-block.waves-effect.bg-primary([routerLink]="['/admin/pets/new']") Agregar mascota
+        a.btn.btn-block.waves-block.waves-effect.bg-primary(
+            [routerLink]="['/administrador/mascotas/nueva']") Agregar mascota
 .row
     .col.s12
         ngx-datatable.bootstrap([rows]="rows", [loadingIndicator]="loadingIndicator", [columns]="columns",

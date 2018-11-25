@@ -242,7 +242,7 @@ export class PetAdminFormComponent implements OnInit {
         this.petService.destroy(this.pet).then(response => {
             if (response) {
                 this.utilsService.showSnackbar('Mascota eliminada');
-                this.router.navigate(['/admin/pets']);
+                this.router.navigate(['/administrador/mascotas']);
             } else {
                 this.utilsService.showSnackbar('No se ha podido eliminar esta mascota');
             }

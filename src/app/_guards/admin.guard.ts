@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import {UtilsService} from '../_services/utils.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AdminGuard implements CanActivate {
     constructor(
-        public userService: UserService,
-        private router: Router
+        private userService: UserService,
+        private router: Router,
+        private utilsService: UtilsService
     ) {}
 
     canActivate(
@@ -20,11 +22,13 @@ export class AdminGuard implements CanActivate {
                 if (this.userService.verifyAdminEmail(user.email)) {
                     resolve(true);
                 } else {
-                    this.router.navigate(['/auth']);
+                    this.utilsService.redirectUrl = state.url;
+                    this.router.navigate(['/acceso']);
                     return resolve(false);
                 }
             }, error => {
-                this.router.navigate(['/auth']);
+                this.utilsService.redirectUrl = state.url;
+                this.router.navigate(['/acceso']);
                 return resolve(false);
             });
         });

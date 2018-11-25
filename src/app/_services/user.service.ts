@@ -3,14 +3,26 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { environment } from '../../environments/environment';
+import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
+import {Observable} from 'rxjs';
+import {Post} from '../_models/post';
+import {Profile} from '../_models/profile';
+import {UtilsService} from './utils.service';
+import {User} from '../_models/user';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
+    private basePath = 'profile';
+    private profilesRef: AngularFireList<any>;
+    private profiles: Observable<any[]>;
+
     constructor(
         public database: AngularFirestore,
-        public fireAuth: AngularFireAuth
+        public fireAuth: AngularFireAuth,
+        private fireDatabase: AngularFireDatabase,
+        private utilsService: UtilsService
     ) {}
 
     current() {
@@ -51,5 +63,13 @@ export class UserService {
         });
 
         return exists;
+    }
+
+    getProfile(email: string) {
+        this.profilesRef = this.fireDatabase.list<Profile>(this.basePath, ref => {
+            return ref.orderByChild('email').equalTo(email);
+        });
+        this.profiles = this.utilsService.setKeys(this.profilesRef);
+        return this.profiles;
     }
 }

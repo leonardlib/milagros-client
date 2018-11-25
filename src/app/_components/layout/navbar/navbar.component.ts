@@ -26,9 +26,9 @@ export class NavbarComponent implements OnInit {
             this.user = user;
 
             if (this.userService.verifyAdminEmail(this.user.email)) {
-                this.profileRoute = '/admin';
+                this.profileRoute = '/administrador';
             } else {
-                this.profileRoute = '/profile';
+                this.profileRoute = '/perfil';
             }
         });
     }
@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
     logout() {
         this.authService.logout().then(response => {
             if (response) {
-                this.router.navigate(['/home']);
+                this.router.navigate(['/inicio']);
             }
         });
     }

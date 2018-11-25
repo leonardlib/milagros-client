@@ -7,7 +7,8 @@
         label(for="search") Buscar publicación
 .row
     .col.s12
-        a.btn.btn-block.waves-block.waves-effect.bg-primary([routerLink]="['/admin/posts/new']") Agregar publicación
+        a.btn.btn-block.waves-block.waves-effect.bg-primary(
+            [routerLink]="['/administrador/publicaciones/nueva']") Agregar publicación
 .row
     .col.s12
         ngx-datatable.bootstrap([rows]="rows", [loadingIndicator]="loadingIndicator", [columns]="columns",

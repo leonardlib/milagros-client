@@ -1,0 +1,23 @@
+
+<div class="container min-height-100vh">
+  <div class="row m-top-30p">
+    <div class="col s12">
+      <h5>Completa tu perfil</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <form #adoptForm="ngForm" (submit)="adoptForm.valid &amp;&amp; send()">
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" id="name" name="name" [(ngModel)]="profile.name" #nameInput="ngModel" [required]="true"/>
+            <label for="name">Nombre</label><span class="red-text" *ngIf="adoptForm.submitted &amp;&amp; nameInput.errors?.required">Ingresa un nombre válido</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12"><a class="btn btn-block waves-effect bg-primary white-text waves-block" type="submit">Continuar</a></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
