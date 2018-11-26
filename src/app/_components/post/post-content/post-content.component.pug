@@ -10,7 +10,7 @@
             blockquote.right Foto por {{ post.main_image.author.name }}
     .row
         .col.s12
-            p.text-justify([innerHtml]="post.content | safeHtml")
+            p.text-justify.img-to-100([innerHtml]="post.content | safeHtml")
     .row
         .col.s12.left-align
             blockquote Escrito por {{ post.author.name }}

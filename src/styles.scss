@@ -400,3 +400,7 @@ mat-icon {
 .bg-transparent {
     background-color: transparent !important;
 }
+
+p > img {
+    max-width: 100% !important;
+}

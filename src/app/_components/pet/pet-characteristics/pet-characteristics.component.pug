@@ -28,7 +28,7 @@
                     span - {{ taste.name }}
             .row
                 .col.s12
-                    a.btn.waves-effect.bg-primary.btn-block.waves-block((click)="adopt()")
+                    a.btn.waves-effect.bg-primary.btn-block.waves-block([routerLink]="['/mascota/adoptar/' + pet.uid]")
                         i.fa.fa-home
                         | &nbsp;
                         | Adoptar

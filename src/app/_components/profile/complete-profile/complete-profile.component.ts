@@ -13,5 +13,7 @@ export class CompleteProfileComponent implements OnInit {
 
     ngOnInit() {}
 
-    send() {}
+    send() {
+        console.log('hola');
+    }
 }
