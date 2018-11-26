@@ -7,6 +7,7 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
+        "pug-it": "pug src",
         "p-pug": "pug src/app",
         "w-pug": "pug src/app -P -w",
         "serve": "ng serve",
