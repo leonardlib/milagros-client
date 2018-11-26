@@ -22,6 +22,7 @@ export class PetHomeComponent implements OnInit {
     public colors: any = [];
     public ageRanges: any = [];
     public ages: any = [];
+    public term: any;
 
     // Filters
     public selectedColor: string;

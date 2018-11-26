@@ -14,6 +14,7 @@ import {Pet} from '../../../_models/pet';
 export class PetCharacteristicsComponent implements OnInit {
     public galleryRef: GalleryRef = null;
     public pet: Pet = new Pet();
+    public contain: any;
 
     constructor(
         private gallery: Gallery,
