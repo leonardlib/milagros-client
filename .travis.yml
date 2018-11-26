@@ -7,6 +7,8 @@ branches:
 before_script:
 - npm install -g @angular/cli
 script:
+- mv environment.ts src/environments
+- mv environment.prod.ts src/environments
 - ng build --prod
 deploy:
   provider: firebase
