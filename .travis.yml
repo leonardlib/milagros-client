@@ -5,10 +5,12 @@ branches:
   only:
   - prod
 before_script:
-- npm install -g @angular/cli
-script:
+- npm install -g --silent @angular/cli
+- tar -xzf environments-files.tar.gz
 - mv environment.ts src/environments
 - mv environment.prod.ts src/environments
+- npm run pug-it
+script:
 - ng build --prod
 deploy:
   provider: firebase
