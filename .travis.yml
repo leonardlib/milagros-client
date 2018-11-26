@@ -5,10 +5,18 @@ branches:
   only:
   - prod
 before_script:
+- npm install -g firebase-tools
 - npm install -g --silent @angular/cli
 - tar -xzf environments-files.tar.gz
 - npm run pug-it
-- npm run deploy
+script:
+- ng build --prod
+after_success:
+- firebase deploy --token $FIREBASE_TOKEN
+notifications:
+  email:
+    on_failure: change
+    on_success: change
 before_install:
 - openssl aes-256-cbc -K $encrypted_afaf48156f9c_key -iv $encrypted_afaf48156f9c_iv
   -in environments-files.tar.gz.enc -out environments-files.tar.gz -d
