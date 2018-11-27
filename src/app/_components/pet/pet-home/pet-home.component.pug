@@ -64,7 +64,7 @@
                 .col.s12.center-align.text-primary.p-top-5
                     h5 No se encontraron mascotas
             .row
-                .col.s12.m6.m-top-10p.cursor-pointer(*ngFor="let pet of pets | filter: term", (click)="petService.goToDetail(pet.uid)")
+                .col.s12.m6.m-top-10p.cursor-pointer.hvr-grow(*ngFor="let pet of pets | filter: term", (click)="petService.goToDetail(pet.uid)")
                     .card.small.card-img([style.backgroundImage]="'url('+ pet.images[0].url +')'")
                         .row.pet-card-detail-2.w-100
                             .col.s12.white-text

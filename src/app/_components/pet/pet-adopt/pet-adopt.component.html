@@ -1,0 +1,30 @@
+
+<div class="container min-height-100vh">
+  <div class="row m-top-30p">
+    <div class="col s12">
+      <h5>Una cosa más...</h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <p class="text-justify">
+        Es muy importante para nosotros saber que nuestras mascotas estarán en un hogar responsable una vez
+        que son adoptadas, es por eso que te pedimos que nos envíes algunas fotografías del lugar en el
+        que estará nuestro pequeñin, con el fin de garantizarle una vida feliz...
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <label for="photos">Te pedimos que las fotografías sean lo más claras posibles para evaluar de mejor manera el espacio</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+      <input-file id="photos" name="photos" [(ngModel)]="photosList" [fileAccept]="'image/*'" [fileLimit]="10" [sizeLimit]="2" (rejectedFile)="utilsService.rejectedFile()"></input-file>
+    </div>
+  </div>
+  <div class="row m-top-50p p-bottom-5">
+    <div class="col s12"><a class="btn btn-block waves-effect bg-primary white-text waves-block" (click)="send()">Enviar solicitud</a></div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 export class Profile {
+    key: string;
     user_email: string;
     name: string;
     last_name: string;
@@ -8,7 +9,19 @@ export class Profile {
     official_id: any;
     address_file: any;
 
-    constructor() {}
+    constructor(profile?: Profile) {
+        if (profile) {
+            this.key = profile.key;
+            this.user_email = profile.user_email;
+            this.name = profile.name;
+            this.last_name = profile.last_name;
+            this.mother_last_name = profile.mother_last_name;
+            this.phone = profile.phone;
+            this.uid = profile.uid;
+            this.official_id = profile.official_id;
+            this.address_file = profile.address_file;
+        }
+    }
 
     isCompleted() {
         return(

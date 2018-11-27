@@ -16,6 +16,7 @@ import {User} from '../_models/user';
 export class UserService {
     private basePath = 'profile';
     private profilesRef: AngularFireList<any>;
+    private storageBasePath = 'images/profile/';
     private profiles: Observable<any[]>;
 
     constructor(
@@ -67,9 +68,41 @@ export class UserService {
 
     getProfile(email: string) {
         this.profilesRef = this.fireDatabase.list<Profile>(this.basePath, ref => {
-            return ref.orderByChild('email').equalTo(email);
+            return ref.orderByChild('user_email').equalTo(email);
         });
         this.profiles = this.utilsService.setKeys(this.profilesRef);
         return this.profiles;
+    }
+
+    saveProfile(profile: Profile) {
+        return new Promise(resolve => {
+            this.profilesRef = this.fireDatabase.list<Profile>(this.basePath);
+
+            // Set profile unique identifier
+            profile.uid = this.utilsService.generateRandomUid();
+
+            // Upload files and then save profile
+            const filesPath = this.storageBasePath + profile.uid;
+            this.utilsService.uploadFile(profile.official_id, filesPath).then(res => {
+                if (res !== '') {
+                    profile.official_id = res + '';
+
+                    this.utilsService.uploadFile(profile.address_file, filesPath).then(res2 => {
+                        if (res2 !== '') {
+                            profile.address_file = res2 + '';
+
+                            // Save profile and set new key
+                            const newRef = this.profilesRef.push(profile);
+                            profile.key = newRef.key;
+                            resolve(profile);
+                        } else {
+                            resolve(null);
+                        }
+                    });
+                } else {
+                    resolve(null);
+                }
+            });
+        });
     }
 }

@@ -116,51 +116,6 @@ export class UtilsService {
         return this.fireStorage.storage.refFromURL(url).delete();
     }
 
-    /*
-    uploadImageToImgur(base64: string) {
-        return new Promise(resolve => {
-            const data = {
-                image: base64.substring(base64.indexOf('base64,') + 7, base64.length - 1),
-                type: 'base64'
-            };
-            const httpOptions = {
-                headers: new HttpHeaders({
-                    'Authorization': 'Client-ID ' + environment.imgur.client_id,
-                    'Accept': 'application/json'
-                })
-            };
-
-            this.http.post(environment.imgur.route, data, httpOptions).subscribe(response => {
-                if (response['success']) {
-                    resolve(response['data']);
-                } else {
-                    resolve('');
-                }
-            });
-        });
-    }
-
-    deleteImageFromImgur(delete_hash: string) {
-        return new Promise(resolve => {
-            const path = environment.imgur.route + '/' + delete_hash;
-            const httpOptions = {
-                headers: new HttpHeaders({
-                    'Authorization': 'Client-ID ' + environment.imgur.client_id,
-                    'Accept': 'application/json'
-                })
-            };
-
-            this.http.delete(path, httpOptions).subscribe(response => {
-                if (response['success']) {
-                    resolve(true);
-                } else {
-                    resolve(false);
-                }
-            });
-        });
-    }
-    */
-
     generateRandomUid() {
         return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     }
@@ -240,5 +195,9 @@ export class UtilsService {
         } else {
             this.router.navigate(['/inicio']);
         }
+    }
+
+    rejectedFile() {
+        this.showSnackbar('El archivo es demasiado pesado o no es el tipo requerido');
     }
 }

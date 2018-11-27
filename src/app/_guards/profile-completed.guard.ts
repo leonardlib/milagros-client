@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {Observable} from 'rxjs';
 import {UserService} from '../_services/user.service';
 import {Profile} from '../_models/profile';
 import {UtilsService} from '../_services/utils.service';
@@ -22,7 +21,7 @@ export class ProfileCompletedGuard implements CanActivate {
         return new Promise<boolean>(resolve => {
             this.userService.current().then(user => {
                 this.userService.getProfile(user.email).subscribe(response => {
-                    const profile = response[0] as Profile;
+                    const profile = new Profile(response[0]);
 
                     if (profile && profile.isCompleted()) {
                         resolve(true);
