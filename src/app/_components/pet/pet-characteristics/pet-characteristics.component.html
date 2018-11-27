@@ -24,13 +24,19 @@
         <div class="col s12"><span class="text-primary">Gustos</span></div>
         <div class="col s12" *ngFor="let taste of pet.tastes"><span>- {{ taste.name }}</span></div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="!pet.adopted &amp;&amp; !pet.in_adopted_process">
         <div class="col s12"><a class="btn waves-effect bg-primary btn-block waves-block" [routerLink]="['/mascota/adoptar/' + pet.uid]"><i class="fa fa-home"></i>&nbsp;
             Adoptar</a></div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="!pet.adopted &amp;&amp; !pet.in_adopted_process">
         <div class="col s12"><a class="btn waves-effect teal darken-1 btn-block waves-block" (click)="sponsor()"><i class="fa fa-paw"></i>&nbsp;
             Apadrinar</a></div>
+      </div>
+      <div class="row" *ngIf="pet.adopted">
+        <div class="col s12"><span class="text-primary">Se encuentra en un hogar responsable</span></div>
+      </div>
+      <div class="row" *ngIf="pet.in_adopted_process">
+        <div class="col s12"><span class="text-primary">Esta en proceso de adopción</span></div>
       </div>
     </div>
     <div class="col s12 m9">

@@ -14,15 +14,20 @@ import {SizeService} from './size.service';
 import {Sex} from '../_models/sex';
 import {Size} from '../_models/size';
 import {Fur} from '../_models/fur';
+import {AdoptRequest} from '../_models/adopt-request';
 
 @Injectable({
     providedIn: 'root'
 })
 export class PetService {
     private basePath = 'pet';
+    private adoptRequestBasePath = 'adopt_request';
     private storageBasePath = 'images/pet/';
+    private adoptStorageBasePath = 'images/adopt_request/';
     private petsRef: AngularFireList<any>;
+    private adoptRequestsRef: AngularFireList<any>;
     private pets: Observable<any[]>;
+    private adoptRequests: Observable<any[]>;
 
     constructor(
         private fireDatabase: AngularFireDatabase,
@@ -77,7 +82,7 @@ export class PetService {
         });
     }
 
-    update(pet: Pet) {
+    update(pet: Pet, changeImages: boolean = true) {
         return new Promise(resolve => {
             this.petsRef = this.fireDatabase.list<Pet>(this.basePath);
 
@@ -85,11 +90,14 @@ export class PetService {
             pet.uid = this.utilsService.generateRandomUid();
 
             const startUpdating = async () => {
-                // Delete images
-                await this.deleteImages(pet.images);
 
-                // Upload images, then replace pet images
-                pet.images = await this.uploadImages(pet['new_images'], pet.uid);
+                if (changeImages) {
+                    // Delete images
+                    await this.deleteImages(pet.images);
+                    // Upload images, then replace pet images
+                    pet.images = await this.uploadImages(pet['new_images'], pet.uid);
+                }
+
                 this.furService.create(pet.fur);
                 this.sizeService.create(pet.size);
                 await this.uploadTastes(pet.tastes);
@@ -108,6 +116,7 @@ export class PetService {
                     fur: pet.fur,
                     size: pet.size,
                     adopted: pet.adopted,
+                    in_adopted_process: pet.in_adopted_process,
                     sponsored: pet.sponsored,
                     admission_date: pet.admission_date,
                     egress_date: pet.egress_date

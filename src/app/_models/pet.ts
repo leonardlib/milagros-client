@@ -19,7 +19,10 @@ export class Pet {
     fur: Fur;
     size: Size;
     adopted: boolean;
+    in_adopted_process: boolean;
     sponsored: boolean;
     admission_date: any;
     egress_date: any;
+
+    constructor() {}
 }

@@ -59,6 +59,7 @@ export class PetAdminFormComponent implements OnInit {
         this.pet.tastes = [];
         this.pet.images = [];
         this.pet.adopted = false;
+        this.pet.in_adopted_process = false;
         this.pet.sponsored = false;
         this.pet.egress_date = '';
         this.minDate = new Date(1950, 0, 1);

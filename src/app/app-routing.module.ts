@@ -27,11 +27,13 @@ import {DonateAdminComponent} from './_components/donate/donate-admin/donate-adm
 import {PetAdoptComponent} from './_components/pet/pet-adopt/pet-adopt.component';
 import {CompleteProfileComponent} from './_components/profile/complete-profile/complete-profile.component';
 import {ProfileCompletedGuard} from './_guards/profile-completed.guard';
+import {ProfileAdoptRequestListComponent} from './_components/profile/profile-adopt-request-list/profile-adopt-request-list.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
     { path: 'donar', redirectTo: 'donar/tienda', pathMatch: 'full' },
     { path: 'administrador', redirectTo: 'administrador/publicaciones', pathMatch: 'full' },
+    { path: 'perfil', redirectTo: 'perfil/solicitudes', pathMatch: 'full' },
     {
         path: 'acceso', children: [
             { path: '', component: LoginComponent },
@@ -74,8 +76,12 @@ const routes: Routes = [
     },
     {
         path: 'perfil', component: UserInterfaceComponent, canActivate: [AuthGuard], children: [
-            { path: '', component: ProfileHomeComponent },
-            { path: 'completar', component: CompleteProfileComponent }
+            { path: 'completar', component: CompleteProfileComponent },
+            {
+                path: '', component: ProfileHomeComponent, children: [
+                    { path: 'solicitudes', component: ProfileAdoptRequestListComponent }
+                ]
+            }
         ]
     },
     {

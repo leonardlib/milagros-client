@@ -26,18 +26,24 @@
                     span.text-primary Gustos
                 .col.s12(*ngFor="let taste of pet.tastes")
                     span - {{ taste.name }}
-            .row
+            .row(*ngIf="!pet.adopted && !pet.in_adopted_process")
                 .col.s12
                     a.btn.waves-effect.bg-primary.btn-block.waves-block([routerLink]="['/mascota/adoptar/' + pet.uid]")
                         i.fa.fa-home
                         | &nbsp;
                         | Adoptar
-            .row
+            .row(*ngIf="!pet.adopted && !pet.in_adopted_process")
                 .col.s12
                     a.btn.waves-effect.teal.darken-1.btn-block.waves-block((click)="sponsor()")
                         i.fa.fa-paw
                         | &nbsp;
                         | Apadrinar
+            .row(*ngIf="pet.adopted")
+                .col.s12
+                    span.text-primary Se encuentra en un hogar responsable
+            .row(*ngIf="pet.in_adopted_process")
+                .col.s12
+                    span.text-primary Esta en proceso de adopción
         .col.s12.m9
             .row
                 .col.s12

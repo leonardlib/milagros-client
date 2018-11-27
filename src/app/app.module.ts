@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterializeModule } from 'angular2-materialize';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
-import {FormsModule, NgControl, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -12,7 +12,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTabNav, MatTabsModule } from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
@@ -73,6 +73,8 @@ import { DonateAdminComponent } from './_components/donate/donate-admin/donate-a
 import { DonateService } from './_services/donate.service';
 import { PetAdoptComponent } from './_components/pet/pet-adopt/pet-adopt.component';
 import { CompleteProfileComponent } from './_components/profile/complete-profile/complete-profile.component';
+import { ProfileAdoptRequestListComponent } from './_components/profile/profile-adopt-request-list/profile-adopt-request-list.component';
+import {AdoptRequestService} from './_services/adopt-request.service';
 
 const config: InputFileConfig = {};
 
@@ -105,7 +107,8 @@ const config: InputFileConfig = {};
         PetAdminFormComponent,
         DonateAdminComponent,
         PetAdoptComponent,
-        CompleteProfileComponent
+        CompleteProfileComponent,
+        ProfileAdoptRequestListComponent
     ],
     imports: [
         BrowserModule,
@@ -161,7 +164,8 @@ const config: InputFileConfig = {};
         PetService,
         TasteService,
         UtilsService,
-        DonateService
+        DonateService,
+        AdoptRequestService
     ],
     entryComponents: [
         ModalComponent
