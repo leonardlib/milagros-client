@@ -77,12 +77,12 @@ export class UserService {
     saveProfile(profile: Profile) {
         return new Promise(resolve => {
             this.profilesRef = this.fireDatabase.list<Profile>(this.basePath);
+            const filesPath = this.storageBasePath + profile.uid;
 
             // Set profile unique identifier
             profile.uid = this.utilsService.generateRandomUid();
 
             // Upload files and then save profile
-            const filesPath = this.storageBasePath + profile.uid;
             this.utilsService.uploadFile(profile.official_id, filesPath).then(res => {
                 if (res !== '') {
                     profile.official_id = res + '';
@@ -95,6 +95,59 @@ export class UserService {
                             const newRef = this.profilesRef.push(profile);
                             profile.key = newRef.key;
                             resolve(profile);
+                        } else {
+                            resolve(null);
+                        }
+                    });
+                } else {
+                    resolve(null);
+                }
+            });
+        });
+    }
+
+    updateProfile(profile: Profile) {
+        return new Promise(resolve => {
+            this.profilesRef = this.fireDatabase.list<Profile>(this.basePath);
+            const filesPath = this.storageBasePath + profile.uid;
+
+            // Renew profile unique identifier
+            profile.uid = this.utilsService.generateRandomUid();
+
+            // Remove files
+            this.utilsService.deleteFile(profile.official_id).then(res => {
+                if (res) {
+                    this.utilsService.deleteFile(profile.address_file).then(res2 => {
+                        if (res2) {
+                            // Upload files and then save profile
+                            this.utilsService.uploadFile(profile['new_oid'], filesPath).then(res3 => {
+                                if (res3 !== '') {
+                                    profile.official_id = res3 + '';
+
+                                    this.utilsService.uploadFile(profile['new_adf'], filesPath).then(res4 => {
+                                        if (res4 !== '') {
+                                            profile.address_file = res4 + '';
+
+                                            this.profilesRef.update(profile.key + '', {
+                                                user_email: profile.user_email,
+                                                name: profile.name,
+                                                last_name: profile.last_name,
+                                                mother_last_name: profile.mother_last_name,
+                                                phone: profile.phone,
+                                                uid: profile.uid,
+                                                official_id: profile.official_id,
+                                                address_file: profile.address_file
+                                            });
+
+                                            resolve(profile);
+                                        } else {
+                                            resolve(null);
+                                        }
+                                    });
+                                } else {
+                                    resolve(null);
+                                }
+                            });
                         } else {
                             resolve(null);
                         }

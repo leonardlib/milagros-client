@@ -75,6 +75,7 @@ import { PetAdoptComponent } from './_components/pet/pet-adopt/pet-adopt.compone
 import { CompleteProfileComponent } from './_components/profile/complete-profile/complete-profile.component';
 import { ProfileAdoptRequestListComponent } from './_components/profile/profile-adopt-request-list/profile-adopt-request-list.component';
 import {AdoptRequestService} from './_services/adopt-request.service';
+import { ProfilePersonalInfoComponent } from './_components/profile/profile-personal-info/profile-personal-info.component';
 
 const config: InputFileConfig = {};
 
@@ -108,7 +109,8 @@ const config: InputFileConfig = {};
         DonateAdminComponent,
         PetAdoptComponent,
         CompleteProfileComponent,
-        ProfileAdoptRequestListComponent
+        ProfileAdoptRequestListComponent,
+        ProfilePersonalInfoComponent
     ],
     imports: [
         BrowserModule,

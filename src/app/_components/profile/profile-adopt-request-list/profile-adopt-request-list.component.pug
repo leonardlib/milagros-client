@@ -1,5 +1,13 @@
 .row
     .col.s12
         ul.collection
-            li.collection-item.avatar(*ngIf="let adoptRequest of adoptRequestsList")
-                img.circle([src]="")
+            li.collection-item.avatar.cursor-pointer(*ngFor="let adoptRequest of adoptRequestsList",
+                (click)="petService.goToDetail(adoptRequest['pet'].uid)")
+                img.circle([src]="adoptRequest['pet'].images[0].url")
+                span.title {{ adoptRequest['pet'].name }}
+                p.grey-text.lighten-4 {{ adoptRequest.date | amLocale: 'es' | amDateFormat: 'LL' }}
+                a.secondary-content
+                    i.fa.fa-1-5x.fa-paw.waiting-color(*ngIf="!adoptRequest.approved", matTooltip="En proceso de adopción",
+                        [matTooltipPosition]="'above'")
+                    i.fa.fa-1-5x.fa-paw.success-color(*ngIf="adoptRequest.approved", matTooltip="En un hogar responsable",
+                        [matTooltipPosition]="'above'")

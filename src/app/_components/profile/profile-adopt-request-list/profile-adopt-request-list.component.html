@@ -1,3 +1,10 @@
-<p>
-  profile-adopt-request-list works!
-</p>
+
+<div class="row">
+  <div class="col s12">
+    <ul class="collection">
+      <li class="collection-item avatar cursor-pointer" *ngFor="let adoptRequest of adoptRequestsList" (click)="petService.goToDetail(adoptRequest['pet'].uid)"><img class="circle" [src]="adoptRequest['pet'].images[0].url"/><span class="title">{{ adoptRequest['pet'].name }}</span>
+        <p class="grey-text lighten-4">{{ adoptRequest.date | amLocale: 'es' | amDateFormat: 'LL' }}</p><a class="secondary-content"><i class="fa fa-1-5x fa-paw waiting-color" *ngIf="!adoptRequest.approved" matTooltip="En proceso de adopción" [matTooltipPosition]="'above'"></i><i class="fa fa-1-5x fa-paw success-color" *ngIf="adoptRequest.approved" matTooltip="En un hogar responsable" [matTooltipPosition]="'above'"></i></a>
+      </li>
+    </ul>
+  </div>
+</div>

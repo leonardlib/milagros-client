@@ -28,6 +28,7 @@ import {PetAdoptComponent} from './_components/pet/pet-adopt/pet-adopt.component
 import {CompleteProfileComponent} from './_components/profile/complete-profile/complete-profile.component';
 import {ProfileCompletedGuard} from './_guards/profile-completed.guard';
 import {ProfileAdoptRequestListComponent} from './_components/profile/profile-adopt-request-list/profile-adopt-request-list.component';
+import {ProfilePersonalInfoComponent} from './_components/profile/profile-personal-info/profile-personal-info.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -79,7 +80,8 @@ const routes: Routes = [
             { path: 'completar', component: CompleteProfileComponent },
             {
                 path: '', component: ProfileHomeComponent, children: [
-                    { path: 'solicitudes', component: ProfileAdoptRequestListComponent }
+                    { path: 'solicitudes', component: ProfileAdoptRequestListComponent },
+                    { path: 'información-personal', component: ProfilePersonalInfoComponent }
                 ]
             }
         ]

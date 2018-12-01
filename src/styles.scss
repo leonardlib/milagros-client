@@ -404,3 +404,19 @@ mat-icon {
 p > img {
     max-width: 100% !important;
 }
+
+.waiting-color {
+    color: $waiting-color !important;
+}
+
+.success-color {
+    color: $success-color !important;
+}
+
+.collection .collection-item.avatar {
+    min-height: auto !important;
+}
+
+.valign-text-top {
+    vertical-align: text-top !important;
+}

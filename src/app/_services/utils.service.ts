@@ -6,6 +6,7 @@ import { AngularFireList } from '@angular/fire/database';
 import {finalize, map} from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AngularFireStorage } from '@angular/fire/storage';
+import {Post} from '../_models/post';
 
 @Injectable({
     providedIn: 'root'
@@ -199,5 +200,22 @@ export class UtilsService {
 
     rejectedFile() {
         this.showSnackbar('El archivo es demasiado pesado o no es el tipo requerido');
+    }
+
+    getFilePreview(url: string, name: string) {
+        return new Promise(resolve => {
+            this.getFileFromUrl(url, name).then(resp => {
+                const res = resp as File;
+
+                this.getDataURLFromFile(res).then(respo => {
+                    const data = {
+                        file: res,
+                        preview: respo
+                    };
+
+                    resolve(data);
+                });
+            });
+        });
     }
 }
