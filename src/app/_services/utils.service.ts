@@ -3,10 +3,10 @@ import { MatSnackBar } from '@angular/material';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { AngularFireList } from '@angular/fire/database';
-import {finalize, map} from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
-import {Post} from '../_models/post';
+import {HttpClient} from '@angular/common/http';
+declare var $: any;
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +18,8 @@ export class UtilsService {
         private snackbar: MatSnackBar,
         private authService: AuthService,
         private router: Router,
-        private fireStorage: AngularFireStorage
+        private fireStorage: AngularFireStorage,
+        private http: HttpClient
     ) {}
 
     /**
@@ -216,6 +217,21 @@ export class UtilsService {
                     resolve(data);
                 });
             });
+        });
+    }
+
+    getTemplate(url: string) {
+        $('#html-inserted').load(url);
+        return $('#html-inserted').innerHTML;
+    }
+
+    sendMail(to: string, subject: string, html: string) {
+        const url = 'https://us-central1-milagros-0.cloudfunctions.net/helloWorld';
+
+        return this.http.post(url, {
+            to: to,
+            subject: subject,
+            html: html
         });
     }
 }

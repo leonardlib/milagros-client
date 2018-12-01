@@ -8,6 +8,7 @@ import {PetService} from '../../../_services/pet.service';
 import {UserService} from '../../../_services/user.service';
 import {User} from '../../../_models/user';
 import {AdoptRequestService} from '../../../_services/adopt-request.service';
+declare var $: any;
 
 @Component({
     selector: 'app-pet-adopt',
@@ -79,7 +80,12 @@ export class PetAdoptComponent implements OnInit {
         this.pet.in_adopted_process = true;
         this.petService.update(this.pet, false).then(response => {
             if (response !== null) {
-                this.router.navigate(['/perfil/solicitudes']);
+
+                // Send email
+                const template = this.utilsService.getTemplate('/src/mail_templates/mail_new_adopt_alert.template.html');
+                this.utilsService.sendMail(this.user.email, 'Solicitud de adopción', template);
+
+                // this.router.navigate(['/perfil/solicitudes']);
             } else {
                 this.utilsService.showSnackbar('Ocurrió un error al terminar tu solicitud, intenta de nuevo');
             }
