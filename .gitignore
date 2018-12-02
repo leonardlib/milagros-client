@@ -42,3 +42,6 @@ Thumbs.db
 /src/environments/environment.prod.ts
 /src/environments/environment.ts
 environments-files.tar.gz
+
+#functions
+/functions/node_modules
