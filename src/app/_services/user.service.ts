@@ -111,9 +111,6 @@ export class UserService {
             this.profilesRef = this.fireDatabase.list<Profile>(this.basePath);
             const filesPath = this.storageBasePath + profile.uid;
 
-            // Renew profile unique identifier
-            profile.uid = this.utilsService.generateRandomUid();
-
             // Remove files
             this.utilsService.deleteFile(profile.official_id).then(res => {
                 if (res) {

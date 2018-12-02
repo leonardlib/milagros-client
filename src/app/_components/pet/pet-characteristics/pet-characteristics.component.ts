@@ -45,8 +45,4 @@ export class PetCharacteristicsComponent implements OnInit {
             });
         });
     }
-
-    adopt() {}
-
-    sponsor() {}
 }

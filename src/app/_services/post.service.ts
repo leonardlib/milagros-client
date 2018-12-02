@@ -70,9 +70,6 @@ export class PostService {
         return new Promise(resolve => {
             this.postsRef = this.fireDatabase.list<Post>(this.basePath);
 
-            // Renew post unique identifier
-            post.uid = this.utilsService.generateRandomUid();
-
             // Delete image
             this.utilsService.deleteFile(post.main_image.url).then(res => {
                 if (res) {

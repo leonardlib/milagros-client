@@ -86,9 +86,6 @@ export class PetService {
         return new Promise(resolve => {
             this.petsRef = this.fireDatabase.list<Pet>(this.basePath);
 
-            // Renew pet unique identifier
-            pet.uid = this.utilsService.generateRandomUid();
-
             const startUpdating = async () => {
 
                 if (changeImages) {

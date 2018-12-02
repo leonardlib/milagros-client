@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { AngularFireList } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
 declare var $: any;
 
 @Injectable({
@@ -220,18 +221,40 @@ export class UtilsService {
         });
     }
 
-    getTemplate(url: string) {
-        $('#html-inserted').load(url);
-        return $('#html-inserted').innerHTML;
-    }
+    sendMail(to: string, subject: string, template: string) {
+        return new Promise(resolve => {
+            const httpOptions = {
+                headers: new HttpHeaders({
+                    'Content-Type':  'application/json',
+                    'Authorization': 'Bearer ' + environment.sendgrid.api_key
+                })
+            };
 
-    sendMail(to: string, subject: string, html: string) {
-        const url = 'https://us-central1-milagros-0.cloudfunctions.net/helloWorld';
+            $.get(template, data => {
+                const emailData = {
+                    personalizations: [{
+                        to: [{
+                            email: to
+                        }]
+                    }],
+                    from: {
+                        email: 'hola@milagrosdelrincon.mx'
+                    },
+                    subject: subject,
+                    content: [{
+                        type: 'text/html',
+                        value: data
+                    }]
+                };
 
-        return this.http.post(url, {
-            to: to,
-            subject: subject,
-            html: html
+                this.http.post(environment.sendgrid.send_url, emailData, httpOptions).subscribe(response => {
+                    if (response === null) {
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                });
+            });
         });
     }
 }

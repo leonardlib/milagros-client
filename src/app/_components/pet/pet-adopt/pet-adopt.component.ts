@@ -80,12 +80,17 @@ export class PetAdoptComponent implements OnInit {
         this.pet.in_adopted_process = true;
         this.petService.update(this.pet, false).then(response => {
             if (response !== null) {
+                // Send email to administrator
+                const template = 'assets/mail_templates/mail_new_adopt_alert.template.html';
+                this.utilsService.sendMail(this.user.email, 'Solicitud de adopción', template).then(res => {
+                    console.log(res);
 
-                // Send email
-                const template = this.utilsService.getTemplate('/src/mail_templates/mail_new_adopt_alert.template.html');
-                this.utilsService.sendMail(this.user.email, 'Solicitud de adopción', template);
-
-                // this.router.navigate(['/perfil/solicitudes']);
+                    if (res) {
+                        this.router.navigate(['/perfil/solicitudes']);
+                    } else {
+                        this.utilsService.showSnackbar('Ocurrió un error al terminar tu solicitud, intenta de nuevo');
+                    }
+                });
             } else {
                 this.utilsService.showSnackbar('Ocurrió un error al terminar tu solicitud, intenta de nuevo');
             }
