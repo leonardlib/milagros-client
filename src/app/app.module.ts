@@ -35,6 +35,8 @@ import { ColorTwitterModule } from 'ngx-color/twitter';
 import { QuillModule } from 'ngx-quill';
 import { AgmCoreModule } from '@agm/core';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 import { AppComponent } from './app.component';
 import { UserInterfaceComponent } from './_components/layout/user-interface/user-interface.component';
@@ -56,8 +58,6 @@ import { DonateHomeComponent } from './_components/donate/donate-home/donate-hom
 import { ContactComponent } from './_components/contact/contact.component';
 import { ProfileHomeComponent } from './_components/profile/profile-home/profile-home.component';
 import { AdminHomeComponent } from './_components/admin/admin-home/admin-home.component';
-import { DonateStoreComponent } from './_components/donate/donate-store/donate-store.component';
-import { DonateCardComponent } from './_components/donate/donate-card/donate-card.component';
 import { DonateItemComponent } from './_components/donate/donate-item/donate-item.component';
 import { PetAdminListComponent } from './_components/pet/pet-admin-list/pet-admin-list.component';
 import { PostAdminListComponent } from './_components/post/post-admin-list/post-admin-list.component';
@@ -76,6 +76,9 @@ import { CompleteProfileComponent } from './_components/profile/complete-profile
 import { ProfileAdoptRequestListComponent } from './_components/profile/profile-adopt-request-list/profile-adopt-request-list.component';
 import {AdoptRequestService} from './_services/adopt-request.service';
 import { ProfilePersonalInfoComponent } from './_components/profile/profile-personal-info/profile-personal-info.component';
+import { DonatePaypalComponent } from './_components/donate/donate-paypal/donate-paypal.component';
+import { DonateTiendaComponent } from './_components/donate/donate-tienda/donate-tienda.component';
+import {PaymentService} from './_services/payment.service';
 
 const config: InputFileConfig = {};
 
@@ -97,8 +100,6 @@ const config: InputFileConfig = {};
         ContactComponent,
         ProfileHomeComponent,
         AdminHomeComponent,
-        DonateStoreComponent,
-        DonateCardComponent,
         DonateItemComponent,
         PetAdminListComponent,
         PostAdminListComponent,
@@ -110,7 +111,9 @@ const config: InputFileConfig = {};
         PetAdoptComponent,
         CompleteProfileComponent,
         ProfileAdoptRequestListComponent,
-        ProfilePersonalInfoComponent
+        ProfilePersonalInfoComponent,
+        DonatePaypalComponent,
+        DonateTiendaComponent
     ],
     imports: [
         BrowserModule,
@@ -152,6 +155,8 @@ const config: InputFileConfig = {};
         QuillModule,
         MatTabsModule,
         AppRoutingModule,
+        NgxPayPalModule,
+        NgxCurrencyModule,
         AgmCoreModule.forRoot({
             apiKey: environment.gmaps.api_key
         }),
@@ -167,7 +172,8 @@ const config: InputFileConfig = {};
         TasteService,
         UtilsService,
         DonateService,
-        AdoptRequestService
+        AdoptRequestService,
+        PaymentService
     ],
     entryComponents: [
         ModalComponent

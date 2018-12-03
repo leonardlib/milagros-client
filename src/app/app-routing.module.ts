@@ -16,8 +16,6 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AdminGuard } from './_guards/admin.guard';
 import { ProfileHomeComponent } from './_components/profile/profile-home/profile-home.component';
 import { AdminHomeComponent } from './_components/admin/admin-home/admin-home.component';
-import { DonateStoreComponent } from './_components/donate/donate-store/donate-store.component';
-import { DonateCardComponent } from './_components/donate/donate-card/donate-card.component';
 import { DonateItemComponent } from './_components/donate/donate-item/donate-item.component';
 import { PetAdminListComponent } from './_components/pet/pet-admin-list/pet-admin-list.component';
 import { PostAdminListComponent } from './_components/post/post-admin-list/post-admin-list.component';
@@ -29,6 +27,8 @@ import {CompleteProfileComponent} from './_components/profile/complete-profile/c
 import {ProfileCompletedGuard} from './_guards/profile-completed.guard';
 import {ProfileAdoptRequestListComponent} from './_components/profile/profile-adopt-request-list/profile-adopt-request-list.component';
 import {ProfilePersonalInfoComponent} from './_components/profile/profile-personal-info/profile-personal-info.component';
+import {DonatePaypalComponent} from './_components/donate/donate-paypal/donate-paypal.component';
+import {DonateTiendaComponent} from './_components/donate/donate-tienda/donate-tienda.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -63,8 +63,8 @@ const routes: Routes = [
         path: 'donar', component: UserInterfaceComponent, children: [
             {
                 path: '', component: DonateHomeComponent, children: [
-                    { path: 'tienda', component: DonateStoreComponent },
-                    { path: 'tarjeta', component: DonateCardComponent },
+                    { path: 'paypal', component: DonatePaypalComponent },
+                    { path: 'tienda', component: DonateTiendaComponent },
                     { path: 'artículo', component: DonateItemComponent }
                 ]
             },

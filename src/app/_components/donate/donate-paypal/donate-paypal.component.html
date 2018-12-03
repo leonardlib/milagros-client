@@ -1,0 +1,31 @@
+
+<div class="row">
+  <div class="col s12">
+    <h5>En línea</h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12">
+    <p class="text-justify">
+      Puedes donar justo ahora cualquier cantidad igual o mayor a $10 MXN mediante
+      las tarjetas de crédito o débito participantes y/o a través de tu cuenta PayPal.
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col s12 center-align">
+    <form #donateForm="ngForm">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="amount" name="amount" currencyMask="" min="10" [(ngModel)]="paypalConfig.transactions[0].amount.total" [options]="{ align: 'left', allowNegative: false }" required="required" #amountInput="ngModel"/>
+          <label class="active" for="amount">Monto</label><span class="red-text" *ngIf="donateForm.errors?.invalid">Ingresa un monto valido</span>
+        </div>
+      </div>
+      <div class="row" *ngIf="paypalConfig.transactions[0].amount.total &gt;= 10">
+        <div class="col s12">
+          <ngx-paypal [config]="paypalConfig"></ngx-paypal>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

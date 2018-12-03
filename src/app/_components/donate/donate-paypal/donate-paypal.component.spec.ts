@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DonateStoreComponent } from './donate-store.component';
+import { DonatePaypalComponent } from './donate-paypal.component';
 
-describe('DonateStoreComponent', () => {
-  let component: DonateStoreComponent;
-  let fixture: ComponentFixture<DonateStoreComponent>;
+describe('DonatePaypalComponent', () => {
+  let component: DonatePaypalComponent;
+  let fixture: ComponentFixture<DonatePaypalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DonateStoreComponent ]
+      declarations: [ DonatePaypalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DonateStoreComponent);
+    fixture = TestBed.createComponent(DonatePaypalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

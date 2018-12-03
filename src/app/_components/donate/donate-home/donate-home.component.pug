@@ -14,13 +14,11 @@
     .row
         .col.s12
             nav(mat-tab-nav-bar="", mat-stretch-tabs="")
-                a.cursor-pointer(mat-tab-link="", [routerLink]="['/donar/tienda']", routerLinkActive="", #rla1="routerLinkActive",
-                    [active]="rla1.isActive") Tienda
-                a.cursor-pointer(mat-tab-link="", [routerLink]="['/donar/tarjeta']", routerLinkActive="", #rla2="routerLinkActive",
-                    [active]="rla2.isActive") Tarjeta
+                a.cursor-pointer(mat-tab-link="", [routerLink]="['/donar/paypal']", routerLinkActive="", #rla1="routerLinkActive",
+                    [active]="rla1.isActive") En línea
+                a.cursor-pointer(mat-tab-link="", [routerLink]="['/donar/tienda']", routerLinkActive="", #rla2="routerLinkActive",
+                    [active]="rla2.isActive") En tienda departamental
                 a.cursor-pointer(mat-tab-link="", [routerLink]="['/donar/artículo']", routerLinkActive="", #rla3="routerLinkActive",
                     [active]="rla3.isActive") Artículo(s)
-    .row
-        .col.s12
-            router-outlet
+    router-outlet
 
