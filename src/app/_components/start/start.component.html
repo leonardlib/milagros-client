@@ -1,5 +1,5 @@
 
-<gallery id="postGallery" [thumb]="false" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" [itemTemplate]="itemTemplate" *ngIf="posts.length &gt; 0"></gallery>
+<gallery id="postGallery" [thumb]="false" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" [itemTemplate]="itemTemplate" *ngIf="mainPosts.length &gt; 0 || mainPets.length &gt; 0"></gallery>
 <ng-template #itemTemplate="" let-index="index" let-type="type" let-data="data" let-currIndex="currIndex">
   <div class="row bottom-align w-100 bg-black-transparency" *ngIf="type === 'image' &amp;&amp; index === currIndex">
     <div class="container">
@@ -7,7 +7,7 @@
         <div class="col s12">
           <h4>{{ data.title }}</h4>
         </div>
-        <div class="col s12"><a class="btn waves-effect bg-primary white-text" (click)="postService.goToDetail(data.uid)">Ver Más</a></div>
+        <div class="col s12"><a class="btn waves-effect bg-primary white-text" (click)="postService.goToDetail(data.uid)" *ngIf="data.type === 'post'">Ver Más</a><a class="btn waves-effect bg-primary white-text" (click)="petService.goToDetail(data.uid)" *ngIf="data.type === 'pet'">Ver Más</a></div>
       </div>
     </div>
   </div>

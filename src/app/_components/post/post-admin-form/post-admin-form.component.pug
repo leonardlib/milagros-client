@@ -23,7 +23,7 @@
         .row
             .input-field.col.s12
                 label(for="main_image") Imagen principal
-        .row
+        .row.m-top-50p
             .col.s12
                 input-file([(ngModel)]="images", [fileAccept]="'image/*'", id="main_image", [fileLimit]="1")
         .row

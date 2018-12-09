@@ -11,7 +11,7 @@
     .row
         .input-field.col.s12
             label(for="photos") Te pedimos que las fotografías sean lo más claras posibles para evaluar de mejor manera el espacio
-    .row
+    .row.m-top-50p
         .col.s12
             input-file(id="photos", name="photos", [(ngModel)]="photosList", [fileAccept]="'image/*'", [fileLimit]="10",
                 [sizeLimit]="2", (rejectedFile)="utilsService.rejectedFile()")

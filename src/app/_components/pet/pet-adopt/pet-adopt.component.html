@@ -19,7 +19,7 @@
       <label for="photos">Te pedimos que las fotografías sean lo más claras posibles para evaluar de mejor manera el espacio</label>
     </div>
   </div>
-  <div class="row">
+  <div class="row m-top-50p">
     <div class="col s12">
       <input-file id="photos" name="photos" [(ngModel)]="photosList" [fileAccept]="'image/*'" [fileLimit]="10" [sizeLimit]="2" (rejectedFile)="utilsService.rejectedFile()"></input-file>
     </div>

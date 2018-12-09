@@ -37,7 +37,7 @@
         .row
             .input-field.col.s12
                 label(for="images") Fotografías
-        .row
+        .row.m-top-50p
             .input-field.col.s12
                 input-file([(ngModel)]="images", [fileAccept]="'image/*'", id="images", [fileLimit]="100")
         .row

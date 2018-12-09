@@ -41,7 +41,7 @@
             <label for="official-id">Identificación oficial vigente</label>
           </div>
         </div>
-        <div class="row">
+        <div class="row m-top-50p">
           <div class="col s12">
             <input-file id="official-id" name="official-id" [(ngModel)]="officialIdList" [fileLimit]="1" [sizeLimit]="2" (rejectedFile)="utilsService.rejectedFile()"></input-file>
           </div>
@@ -51,7 +51,7 @@
             <label for="address-file">Comprobante de domicilio</label>
           </div>
         </div>
-        <div class="row">
+        <div class="row m-top-50p">
           <div class="col s12">
             <input-file id="address-file" name="address-file" [(ngModel)]="addressFileList" [fileLimit]="1" [sizeLimit]="2" (rejectedFile)="utilsService.rejectedFile()"></input-file>
           </div>
