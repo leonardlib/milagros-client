@@ -37,7 +37,7 @@
                                     input.validate(type="email", id="email", name="email", [(ngModel)]="user.email", #emailInput="ngModel",
                                         [email]="true")
                                     label(for="email", [class.active]="user.email") Correo
-                                    span.red-text(*ngIf="email.invalid") Ingresa un correo valido
+                                    span.red-text(*ngIf="emailInput.invalid") Ingresa un correo valido
                             .row
                                 .input-field.col.s12
                                     input(type="password", id="password", name="password", [(ngModel)]="user.password",
@@ -45,7 +45,7 @@
                                     label(for="password") Contraseña
                             .row
                                 .col.s12
-                                    a.btn.btn-block.waves-effect.bg-primary.white-text.waves-block([class.disabled]="email.invalid",
+                                    a.btn.btn-block.waves-effect.bg-primary.white-text.waves-block([class.disabled]="emailInput.invalid",
                                     (click)="login()") Iniciar sesión
 
 
