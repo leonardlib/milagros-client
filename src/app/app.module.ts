@@ -79,6 +79,7 @@ import { ProfilePersonalInfoComponent } from './_components/profile/profile-pers
 import { DonatePaypalComponent } from './_components/donate/donate-paypal/donate-paypal.component';
 import { DonateTiendaComponent } from './_components/donate/donate-tienda/donate-tienda.component';
 import {PaymentService} from './_services/payment.service';
+import { PetSponsorComponent } from './_components/pet/pet-sponsor/pet-sponsor.component';
 
 const config: InputFileConfig = {};
 
@@ -113,7 +114,8 @@ const config: InputFileConfig = {};
         ProfileAdoptRequestListComponent,
         ProfilePersonalInfoComponent,
         DonatePaypalComponent,
-        DonateTiendaComponent
+        DonateTiendaComponent,
+        PetSponsorComponent
     ],
     imports: [
         BrowserModule,

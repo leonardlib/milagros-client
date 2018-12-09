@@ -29,6 +29,7 @@ import {ProfileAdoptRequestListComponent} from './_components/profile/profile-ad
 import {ProfilePersonalInfoComponent} from './_components/profile/profile-personal-info/profile-personal-info.component';
 import {DonatePaypalComponent} from './_components/donate/donate-paypal/donate-paypal.component';
 import {DonateTiendaComponent} from './_components/donate/donate-tienda/donate-tienda.component';
+import {PetSponsorComponent} from './_components/pet/pet-sponsor/pet-sponsor.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -56,7 +57,8 @@ const routes: Routes = [
         path: 'mascota', component: UserInterfaceComponent, children: [
             { path: '', component: PetHomeComponent },
             { path: 'caracteristicas/:uid', component: PetCharacteristicsComponent },
-            { path: 'adoptar/:uid', component: PetAdoptComponent, canActivate: [AuthGuard, ProfileCompletedGuard] }
+            { path: 'adoptar/:uid', component: PetAdoptComponent, canActivate: [AuthGuard, ProfileCompletedGuard] },
+            { path: 'apadrinar', component: PetSponsorComponent }
         ]
     },
     {

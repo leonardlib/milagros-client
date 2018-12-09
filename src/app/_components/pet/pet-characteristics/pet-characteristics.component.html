@@ -29,7 +29,7 @@
             Adoptar</a></div>
       </div>
       <div class="row" *ngIf="!pet.adopted &amp;&amp; !pet.in_adopted_process">
-        <div class="col s12"><a class="btn waves-effect teal darken-1 btn-block waves-block"><i class="fa fa-paw"></i>&nbsp;
+        <div class="col s12"><a class="btn waves-effect teal darken-1 btn-block waves-block" [routerLink]="['/mascota/apadrinar/']"><i class="fa fa-paw"></i>&nbsp;
             Apadrinar</a></div>
       </div>
       <div class="row" *ngIf="pet.adopted">
