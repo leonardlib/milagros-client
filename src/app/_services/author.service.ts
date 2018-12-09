@@ -41,19 +41,12 @@ export class AuthorService {
                 });
 
                 if (!exists) {
+                    author.uid = this.utilsService.generateRandomUid();
                     this.authorRef.push(author);
                 }
 
                 resolve(exists);
             });
         });
-    }
-
-    show(uid: string) {
-        this.authorRef = this.fireDatabase.list<Author>(this.basePath, ref => {
-            return ref.orderByChild('uid').equalTo(uid);
-        });
-        this.authors = this.utilsService.setKeys(this.authorRef);
-        return this.authors;
     }
 }

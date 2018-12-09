@@ -238,7 +238,7 @@ export class UtilsService {
                         }]
                     }],
                     from: {
-                        email: 'hola@milagrosdelrincon.mx'
+                        email: 'info@milagrosdelrincon.mx'
                     },
                     subject: subject,
                     content: [{

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { User } from '../../../_models/user';
 import { AuthService } from '../../../_services/auth.service';
 import { UtilsService } from '../../../_services/utils.service';
@@ -8,7 +8,7 @@ import { UtilsService } from '../../../_services/utils.service';
     templateUrl: './send-password-reset-email.component.html',
     styleUrls: ['./send-password-reset-email.component.scss']
 })
-export class SendPasswordResetEmailComponent implements OnInit {
+export class SendPasswordResetEmailComponent implements OnInit, OnDestroy {
     public user: User = new User();
     public mailSended = false;
 
@@ -17,7 +17,13 @@ export class SendPasswordResetEmailComponent implements OnInit {
         public utilsService: UtilsService
     ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        document.getElementById('image-div').classList.add('bg-image-3');
+    }
+
+    ngOnDestroy() {
+        document.getElementById('image-div').classList.remove('bg-image-3');
+    }
 
     sendMail() {
         this.authService.sendResetPasswordMail(this.user).then(response => {

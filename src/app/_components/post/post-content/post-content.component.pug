@@ -7,13 +7,19 @@
             img.responsive-img([src]="post.main_image.url")
     .row
         .col.s12
-            blockquote.right Foto por {{ post.main_image.author.name }}
+            blockquote.right(*ngIf="post.main_image.author.social_link")
+                | Foto por&nbsp;
+                a.text-primary([href]="post.main_image.author.social_link", target="_blank") @{{ post.main_image.author.name }}
+            blockquote.right(*ngIf="!post.main_image.author.social_link") Foto por {{ post.main_image.author.name }}
     .row
         .col.s12
             p.text-justify.img-to-100([innerHtml]="post.content | safeHtml")
     .row
         .col.s12.left-align
-            blockquote Escrito por {{ post.author.name }}
+            blockquote(*ngIf="post.author.social_link")
+                | Escrito por&nbsp;
+                a.text-primary([href]="post.author.social_link", target="_blank") @{{ post.author.name }}
+            blockquote(*ngIf="!post.author.social_link") Escrito por {{ post.author.name }}
     .row
         .col.s12
             span.grey-text.lighten-4 Publicado el {{ post.date | amLocale: 'es' | amDateFormat: 'LL' }}
@@ -22,35 +28,35 @@
             span Compartir esta publicación
             br
             button.btn.waves-effect.white-text.fb-bg-color.m-top-10p(shareButton="facebook", matTooltip="Compartir en Facebook",
-                [matTooltipPosition]="'above'")
+                [matTooltipPosition]="'above'", [description]="description")
                 i.fa.fa-facebook-official.fa-1-5x
             | &nbsp;
             | &nbsp;
             button.btn.waves-effect.white-text.tw-bg-color.m-top-10p(shareButton="twitter", matTooltip="Compartir en Twitter",
-                [matTooltipPosition]="'above'")
+                [matTooltipPosition]="'above'", [description]="description")
                 i.fa.fa-twitter.fa-1-5x
             | &nbsp;
             | &nbsp;
             button.btn.waves-effect.white-text.google-bg-color.m-top-10p(shareButton="google", matTooltip="Compartir en Google",
-                [matTooltipPosition]="'above'")
+                [matTooltipPosition]="'above'", [description]="description")
                 i.fa.fa-google-plus-official.fa-1-5x
             | &nbsp;
             | &nbsp;
             button.btn.waves-effect.white-text.wa-bg-color.m-top-10p(shareButton="whatsapp", matTooltip="Compartir en Whatsapp",
-                [matTooltipPosition]="'above'")
+                [matTooltipPosition]="'above'", [description]="description")
                 i.fa.fa-whatsapp.fa-1-5x
             | &nbsp;
             | &nbsp;
             button.btn.waves-effect.white-text.telegram-bg-color.m-top-10p(shareButton="telegram", matTooltip="Compartir en Telegram",
-                [matTooltipPosition]="'above'")
+                [matTooltipPosition]="'above'", [description]="description")
                 i.fa.fa-telegram.fa-1-5x
             | &nbsp;
             | &nbsp;
             button.btn.waves-effect.white-text.mail-bg-color.m-top-10p(shareButton="email", matTooltip="Compartir por correo",
-                [matTooltipPosition]="'above'")
+                [matTooltipPosition]="'above'", [description]="description")
                 i.fa.fa-inbox.fa-1-5x
             | &nbsp;
             | &nbsp;
             button.btn.waves-effect.white-text.link-bg-color.m-top-10p(shareButton="copy", matTooltip="Copiar enlace de la publicación",
-                [matTooltipPosition]="'above'")
+                [matTooltipPosition]="'above'", [description]="description")
                 i.fa.fa-link.fa-1-5x

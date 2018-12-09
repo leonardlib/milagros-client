@@ -125,7 +125,7 @@ export class PostService {
     }
 
     goToDetail(uid: string) {
-        this.router.navigate(['/publicación/contenido/' + uid]);
+        this.router.navigate(['/publicacion/contenido/' + uid]);
     }
 
     getMainImagePreview(post: Post) {

@@ -9,7 +9,7 @@
   <div class="col s12">
     <div class="row">
       <div class="input-field col s12">
-        <input class="validate" type="text" id="title" name="title" [(ngModel)]="post.title" #title="ngModel" required="required"/>
+        <input class="validate" type="text" id="title" name="title" [(ngModel)]="post.title" #titleInput="ngModel" required="required"/>
         <label for="title" [class.active]="editar">Título</label>
       </div>
     </div>
@@ -20,17 +20,29 @@
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <label for="main_image">Imagen principal</label>
+        <input class="validate" type="text" id="social-link-post-author" name="social-link-post-author" [(ngModel)]="post.author.social_link" #socialLinkInput="ngModel"/>
+        <label for="social-link-post-author" [class.active]="editar">Red social del autor de la publicación</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s12">
+        <label for="main_image">Imagen principal</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
         <input-file [(ngModel)]="images" [fileAccept]="'image/*'" id="main_image" [fileLimit]="1"></input-file>
       </div>
     </div>
     <div class="row">
       <div class="col s12"><span class="text-primary">Autor de la imagen principal</span>
         <ng-select [items]="authors" [addTag]="true" bindLabel="name" [(ngModel)]="post.main_image.author.name" bindValue="name" [notFoundText]="'Sin autores, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar autor'"></ng-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input class="validate" type="text" id="social-link-image-author" name="social-link-image-author" [(ngModel)]="post.main_image.author.social_link" #socialLinkImageInput="ngModel"/>
+        <label for="social-link-image-author" [class.active]="editar">Red social del autor de la imagen</label>
       </div>
     </div>
     <div class="row">

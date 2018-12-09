@@ -215,6 +215,6 @@ export class PetService {
     }
 
     goToDetail(uid: string) {
-        this.router.navigate(['/mascota/características/' + uid]);
+        this.router.navigate(['/mascota/caracteristicas/' + uid]);
     }
 }

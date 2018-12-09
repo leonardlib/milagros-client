@@ -39,7 +39,7 @@ const routes: Routes = [
         path: 'acceso', children: [
             { path: '', component: LoginComponent },
             { path: 'registro', component: RegisterComponent },
-            { path: 'recuperar-contraseña', component: SendPasswordResetEmailComponent }
+            { path: 'recuperar-cuenta', component: SendPasswordResetEmailComponent }
         ]
     },
     {
@@ -48,14 +48,14 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'publicación', component: UserInterfaceComponent, children: [
+        path: 'publicacion', component: UserInterfaceComponent, children: [
             { path: 'contenido/:uid', component: PostContentComponent }
         ]
     },
     {
         path: 'mascota', component: UserInterfaceComponent, children: [
             { path: '', component: PetHomeComponent },
-            { path: 'características/:uid', component: PetCharacteristicsComponent },
+            { path: 'caracteristicas/:uid', component: PetCharacteristicsComponent },
             { path: 'adoptar/:uid', component: PetAdoptComponent, canActivate: [AuthGuard, ProfileCompletedGuard] }
         ]
     },
@@ -65,13 +65,13 @@ const routes: Routes = [
                 path: '', component: DonateHomeComponent, children: [
                     { path: 'paypal', component: DonatePaypalComponent },
                     { path: 'tienda', component: DonateTiendaComponent },
-                    { path: 'artículo', component: DonateItemComponent }
+                    { path: 'articulo', component: DonateItemComponent }
                 ]
             },
         ]
     },
     {
-        path: 'información', component: UserInterfaceComponent, children: [
+        path: 'informacion', component: UserInterfaceComponent, children: [
             { path: '', component: ContactComponent }
         ]
     },
@@ -81,7 +81,7 @@ const routes: Routes = [
             {
                 path: '', component: ProfileHomeComponent, children: [
                     { path: 'solicitudes', component: ProfileAdoptRequestListComponent },
-                    { path: 'información-personal', component: ProfilePersonalInfoComponent }
+                    { path: 'informacion-personal', component: ProfilePersonalInfoComponent }
                 ]
             }
         ]

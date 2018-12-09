@@ -420,3 +420,73 @@ p > img {
 .valign-text-top {
     vertical-align: text-top !important;
 }
+
+/* Cover images */
+.bg-image-1 {
+    background: url("assets/img/cover-1.jpg") no-repeat center !important;
+    background-size: cover !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    height: auto !important;
+    opacity: 0.6 !important;
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    z-index: -1 !important;
+}
+
+.bg-image-2 {
+    background: url("assets/img/cover-2.jpg") no-repeat center !important;
+    background-size: cover !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    opacity: 0.6 !important;
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    z-index: -1 !important;
+}
+
+.bg-image-3 {
+    background: url("assets/img/cover-3.jpg") no-repeat center !important;
+    background-size: cover !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    opacity: 0.6 !important;
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    z-index: -1 !important;
+}
+/* End of cover images */
+
+@media only screen and (max-width: 768px) {
+    .bg-image-1 {
+        background: white none !important;
+    }
+
+    .bg-image-2 {
+        background: white none !important;
+    }
+
+    .bg-image-3 {
+        background: white none !important;
+    }
+}
+
+.middle-component {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    height: auto;
+    min-height: 100%;
+    width: 100%;
+}

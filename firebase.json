@@ -1,22 +1,51 @@
 {
-  "hosting": {
-    "public": "dist/milagros-client",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
+    "hosting": {
+        "public": "dist/milagros-client",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "rewrites": [
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ]
+    },
+    "database": {
+        "rules": "database.rules.json"
+    },
+    "storage": {
+        "rules": "storage.rules"
+    },
+    "headers": [
+        {
+            "source": "/index.html",
+            "headers": [
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "*"
+                }
+            ]
+        },
+        {
+            "source" : "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+            "headers" : [
+                {
+                    "key" : "Access-Control-Allow-Origin",
+                    "value" : "*"
+                }
+            ]
+        },
+        {
+            "source": "**/*.@(jpg|jpeg|gif|png)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "max-age=7200"
+                }
+            ]
+        }
     ]
-  },
-  "database": {
-    "rules": "database.rules.json"
-  },
-  "storage": {
-    "rules": "storage.rules"
-  }
 }

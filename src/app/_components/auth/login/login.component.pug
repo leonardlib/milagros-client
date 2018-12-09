@@ -1,44 +1,51 @@
-.container
-    .row.m-top-30p
-        .col.s12.m6.offset-m3.grey.lighten-4.p-5
-            img.responsive-img(src="assets/img/logo-1.png")
-            form(#formLogin="ngForm").col.s12.m-top-30p
-                .row
-                    .col.s12.left-align
-                        h5.text-black Iniciar sesión
-                .row
-                    .input-field.col.s12
-                        input.validate(type="email", id="email", name="email", [(ngModel)]="user.email", #email="ngModel",
-                            [email]="true")
-                        label(for="email", [class.active]="user.email") Correo
-                        span.red-text(*ngIf="email.invalid") Ingresa un correo valido
-                .row
-                    .input-field.col.s12
-                        input(type="password", id="password", name="password", [(ngModel)]="user.password",
-                            #password="ngModel", [class.active]="user.password")
-                        label(for="password") Contraseña
-                .row
-                    .col.s12
-                        a.btn.btn-block.waves-effect.bg-primary.white-text.waves-block([class.disabled]="email.invalid",
-                            (click)="login()") Iniciar sesión
-                .row
-                    .col.s12.center-align
-                        span Puedes iniciar sesión con
-                .row
-                    .col.s12.m6.m-top-10p
-                        a.btn.waves-effect.blue.darken-1.btn-block.waves-block((click)="utilsService.facebookLogin()")
-                            i.fa.fa-facebook
-                            | &nbsp;
-                            | Facebook
-                    .col.s12.m6.m-top-10p
-                        a.btn.waves-effect.deep-orange.darken-2.btn-block.waves-block((click)="utilsService.googleLogin()")
-                            i.fa.fa-google
-                            | &nbsp;
-                            | Google
-                .row
-                    .col.s12.center-align
-                        a.text-primary.cursor-pointer([routerLink]="['/acceso/registro']") ¿No tengo cuenta?
-                .row
-                    .col.s12.center-align
-                        a.text-black.cursor-pointer([routerLink]="['/acceso/recuperar-contraseña']") Olvidé mi contraseña
+.w-100.h-100(id="image-div")
+.w-100.h-100.middle-component
+    .container.h-100.valign-wrapper
+        .row.m-top-30p
+            .col.s12.m8.offset-m2.grey.lighten-4.p-5
+                .row.valign-wrapper
+                    .col.s12.m6
+                        img.responsive-img(src="assets/img/logo-1.png")
+                        form.col.s12.m-top-30p
+                            .row
+                                .col.s12.center-align
+                                    span Puedes iniciar sesión con
+                            .row
+                                .col.s12.m6.m-top-10p
+                                    a.btn.waves-effect.blue.darken-1.btn-block.waves-block((click)="utilsService.facebookLogin()")
+                                        i.fa.fa-facebook
+                                        | &nbsp;
+                                        | Facebook
+                                .col.s12.m6.m-top-10p
+                                    a.btn.waves-effect.deep-orange.darken-2.btn-block.waves-block((click)="utilsService.googleLogin()")
+                                        i.fa.fa-google
+                                        | &nbsp;
+                                        | Google
+                            .row
+                                .col.s12.center-align
+                                    a.text-primary.cursor-pointer([routerLink]="['/acceso/registro']") ¿No tengo cuenta?
+                            .row
+                                .col.s12.center-align
+                                    a.text-black.cursor-pointer([routerLink]="['/acceso/recuperar-cuenta']") Olvidé mi contraseña
+                    .col.s12.m6
+                        form.col.s12.m-top-30p
+                            .row
+                                .col.s12.left-align
+                                    h5.text-black Iniciar sesión
+                            .row
+                                .input-field.col.s12
+                                    input.validate(type="email", id="email", name="email", [(ngModel)]="user.email", #emailInput="ngModel",
+                                        [email]="true")
+                                    label(for="email", [class.active]="user.email") Correo
+                                    span.red-text(*ngIf="email.invalid") Ingresa un correo valido
+                            .row
+                                .input-field.col.s12
+                                    input(type="password", id="password", name="password", [(ngModel)]="user.password",
+                                        #passwordInput="ngModel", [class.active]="user.password")
+                                    label(for="password") Contraseña
+                            .row
+                                .col.s12
+                                    a.btn.btn-block.waves-effect.bg-primary.white-text.waves-block([class.disabled]="email.invalid",
+                                    (click)="login()") Iniciar sesión
+
 

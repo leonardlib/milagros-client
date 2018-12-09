@@ -10,7 +10,8 @@
   </div>
   <div class="row">
     <div class="col s12">
-      <blockquote class="right">Foto por {{ post.main_image.author.name }}</blockquote>
+      <blockquote class="right" *ngIf="post.main_image.author.social_link">Foto por&nbsp;<a class="text-primary" [href]="post.main_image.author.social_link" target="_blank">@{{ post.main_image.author.name }}</a></blockquote>
+      <blockquote class="right" *ngIf="!post.main_image.author.social_link">Foto por {{ post.main_image.author.name }}</blockquote>
     </div>
   </div>
   <div class="row">
@@ -20,7 +21,8 @@
   </div>
   <div class="row">
     <div class="col s12 left-align">
-      <blockquote>Escrito por {{ post.author.name }}</blockquote>
+      <blockquote *ngIf="post.author.social_link">Escrito por&nbsp;<a class="text-primary" [href]="post.author.social_link" target="_blank">@{{ post.author.name }}</a></blockquote>
+      <blockquote *ngIf="!post.author.social_link">Escrito por {{ post.author.name }}</blockquote>
     </div>
   </div>
   <div class="row">
@@ -28,19 +30,19 @@
   </div>
   <div class="row left-align m-top-50p m-bottom-50p">
     <div class="col s12"><span>Compartir esta publicación</span><br/>
-      <button class="btn waves-effect white-text fb-bg-color m-top-10p" shareButton="facebook" matTooltip="Compartir en Facebook" [matTooltipPosition]="'above'"><i class="fa fa-facebook-official fa-1-5x"></i></button>&nbsp;
+      <button class="btn waves-effect white-text fb-bg-color m-top-10p" shareButton="facebook" matTooltip="Compartir en Facebook" [matTooltipPosition]="'above'" [description]="description"><i class="fa fa-facebook-official fa-1-5x"></i></button>&nbsp;
       &nbsp;
-      <button class="btn waves-effect white-text tw-bg-color m-top-10p" shareButton="twitter" matTooltip="Compartir en Twitter" [matTooltipPosition]="'above'"><i class="fa fa-twitter fa-1-5x"></i></button>&nbsp;
+      <button class="btn waves-effect white-text tw-bg-color m-top-10p" shareButton="twitter" matTooltip="Compartir en Twitter" [matTooltipPosition]="'above'" [description]="description"><i class="fa fa-twitter fa-1-5x"></i></button>&nbsp;
       &nbsp;
-      <button class="btn waves-effect white-text google-bg-color m-top-10p" shareButton="google" matTooltip="Compartir en Google" [matTooltipPosition]="'above'"><i class="fa fa-google-plus-official fa-1-5x"></i></button>&nbsp;
+      <button class="btn waves-effect white-text google-bg-color m-top-10p" shareButton="google" matTooltip="Compartir en Google" [matTooltipPosition]="'above'" [description]="description"><i class="fa fa-google-plus-official fa-1-5x"></i></button>&nbsp;
       &nbsp;
-      <button class="btn waves-effect white-text wa-bg-color m-top-10p" shareButton="whatsapp" matTooltip="Compartir en Whatsapp" [matTooltipPosition]="'above'"><i class="fa fa-whatsapp fa-1-5x"></i></button>&nbsp;
+      <button class="btn waves-effect white-text wa-bg-color m-top-10p" shareButton="whatsapp" matTooltip="Compartir en Whatsapp" [matTooltipPosition]="'above'" [description]="description"><i class="fa fa-whatsapp fa-1-5x"></i></button>&nbsp;
       &nbsp;
-      <button class="btn waves-effect white-text telegram-bg-color m-top-10p" shareButton="telegram" matTooltip="Compartir en Telegram" [matTooltipPosition]="'above'"><i class="fa fa-telegram fa-1-5x"></i></button>&nbsp;
+      <button class="btn waves-effect white-text telegram-bg-color m-top-10p" shareButton="telegram" matTooltip="Compartir en Telegram" [matTooltipPosition]="'above'" [description]="description"><i class="fa fa-telegram fa-1-5x"></i></button>&nbsp;
       &nbsp;
-      <button class="btn waves-effect white-text mail-bg-color m-top-10p" shareButton="email" matTooltip="Compartir por correo" [matTooltipPosition]="'above'"><i class="fa fa-inbox fa-1-5x"></i></button>&nbsp;
+      <button class="btn waves-effect white-text mail-bg-color m-top-10p" shareButton="email" matTooltip="Compartir por correo" [matTooltipPosition]="'above'" [description]="description"><i class="fa fa-inbox fa-1-5x"></i></button>&nbsp;
       &nbsp;
-      <button class="btn waves-effect white-text link-bg-color m-top-10p" shareButton="copy" matTooltip="Copiar enlace de la publicación" [matTooltipPosition]="'above'"><i class="fa fa-link fa-1-5x"></i></button>
+      <button class="btn waves-effect white-text link-bg-color m-top-10p" shareButton="copy" matTooltip="Copiar enlace de la publicación" [matTooltipPosition]="'above'" [description]="description"><i class="fa fa-link fa-1-5x"></i></button>
     </div>
   </div>
 </div>

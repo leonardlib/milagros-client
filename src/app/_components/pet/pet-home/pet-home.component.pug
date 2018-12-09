@@ -60,7 +60,7 @@
                 .col.s12.center-align.text-primary.p-top-5
                     h5 No se encontraron mascotas
         .col.s12.m9
-            .row(*ngIf="pets.length < 1 && ages.length > 0")
+            .row(*ngIf="(pets | filter: term).length === 0 && ages.length > 0")
                 .col.s12.center-align.text-primary.p-top-5
                     h5 No se encontraron mascotas
             .row

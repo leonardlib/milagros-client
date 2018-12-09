@@ -12,6 +12,7 @@ import { ShareButtons } from '@ngx-share/core';
 })
 export class PostContentComponent implements OnInit {
     public post: Post = new Post();
+    public description: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -21,6 +22,8 @@ export class PostContentComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.description = 'Échale un vistazo a la publicación de Milagros del Rincón:';
+
         this.route.params.subscribe(params => {
             const uid = params.uid;
 
