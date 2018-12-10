@@ -17,8 +17,20 @@
   </div>
   <div class="row">
     <div class="col s12">
-      <nav mat-tab-nav-bar="" mat-stretch-tabs=""><a class="cursor-pointer" mat-tab-link="" [routerLink]="['/donar/paypal']" routerLinkActive="" #rla1="routerLinkActive" [active]="rla1.isActive">En línea</a><a class="cursor-pointer" mat-tab-link="" [routerLink]="['/donar/tienda']" routerLinkActive="" #rla2="routerLinkActive" [active]="rla2.isActive">En tienda departamental</a><a class="cursor-pointer" mat-tab-link="" [routerLink]="['/donar/articulo']" routerLinkActive="" #rla3="routerLinkActive" [active]="rla3.isActive">Artículo(s)</a></nav>
+      <mat-tab-group mat-stretch-tabs="">
+        <mat-tab>
+          <ng-template mat-tab-label=""><i class="fa fa-credit-card fa-1-5x"></i>&nbsp;&nbsp;Donar ahora</ng-template>
+          <app-donate-paypal></app-donate-paypal>
+        </mat-tab>
+        <mat-tab>
+          <ng-template class="truncate" mat-tab-label=""><i class="fa fa-bank fa-1-5x"></i>&nbsp;&nbsp;Mediante depósito o transferencia</ng-template>
+          <app-donate-tienda></app-donate-tienda>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label=""><i class="fa fa-gift fa-1-5x"></i>&nbsp;&nbsp;Donar artículo(s)</ng-template>
+          <app-donate-item></app-donate-item>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
-  <router-outlet></router-outlet>
 </div>

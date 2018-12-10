@@ -33,7 +33,6 @@ import {PetSponsorComponent} from './_components/pet/pet-sponsor/pet-sponsor.com
 
 const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-    { path: 'donar', redirectTo: 'donar/tienda', pathMatch: 'full' },
     { path: 'administrador', redirectTo: 'administrador/publicaciones', pathMatch: 'full' },
     { path: 'perfil', redirectTo: 'perfil/solicitudes', pathMatch: 'full' },
     {
@@ -63,13 +62,7 @@ const routes: Routes = [
     },
     {
         path: 'donar', component: UserInterfaceComponent, children: [
-            {
-                path: '', component: DonateHomeComponent, children: [
-                    { path: 'paypal', component: DonatePaypalComponent },
-                    { path: 'tienda', component: DonateTiendaComponent },
-                    { path: 'articulo', component: DonateItemComponent }
-                ]
-            },
+            { path: '', component: DonateHomeComponent }
         ]
     },
     {

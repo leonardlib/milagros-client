@@ -38,7 +38,7 @@ export class AdoptRequestService {
                 adoptRequest.approved = false;
                 adoptRequest.date = moment().locale('es').format('YYYY-MM-DD');
 
-                // Save pet and set new key
+                // Save adopt request and set new key
                 const newRef = this.adoptRequestsRef.push(adoptRequest);
                 adoptRequest.key = newRef.key;
                 return true;

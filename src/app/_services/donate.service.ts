@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { UtilsService } from './utils.service';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import {Fur} from '../_models/fur';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,23 @@ export class DonateService {
         this.donationRef = this.fireDatabase.list<Donation>(this.basePath, query);
         this.donations = this.utilsService.setKeys(this.donationRef);
         return this.donations;
+    }
+
+    create(donation: Donation) {
+        return new Promise(resolve => {
+            this.donationRef = this.fireDatabase.list<Donation>(this.basePath);
+            this.donations = this.utilsService.setKeys(this.donationRef);
+
+            // Set donation unique identifier
+            donation.uid = this.utilsService.generateRandomUid();
+
+            // Set donation date
+            donation.date = moment().locale('es').format('YYYY-MM-DD');
+
+            // Save donation and set new key
+            const newRef = this.donationRef.push(donation);
+            donation.key = newRef.key;
+            resolve(donation);
+        });
     }
 }

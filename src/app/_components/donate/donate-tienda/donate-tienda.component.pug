@@ -1,0 +1,25 @@
+.container.p-top-5.p-bottom-5
+    .row
+        .col.s12
+            h5 Cuando tengas oportunidad...
+    .row
+        .col.s12
+            p.text-justify
+                | Puedes donar cuando tengas la oportunidad, a través de un deposito bancario o transferencia
+                | electrónica. Abajo puedes ver nuestra cuenta para apoyarnos. ¡Muchas gracias!
+    .row
+        .col.s12.center-align
+            form(#donateForm="ngForm")
+                .row
+                    .input-field.col.s12
+                        label Tarjeta de débito Banamex (OXXO Saldazo)
+                .row.m-top-50p
+                    .col.s12.center-align
+                        span.font-xx-large {{ oxxoCard }}
+                .row
+                    .col.s12
+                        p.grey-text.lighten-4.text-justify
+                            | El deposito bancario puede realizarse en cualquier sucursal Banamex, en caja o
+                            | cajero automático. También puedes depositar en cualquier sucursal de OXXO. Para
+                            | transferencia bancaria puede ser desde cualquier banca electrónica como
+                            | Transfer de Banamex.

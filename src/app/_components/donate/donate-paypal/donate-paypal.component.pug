@@ -1,20 +1,35 @@
-.row
-    .col.s12
-        h5 En línea
-.row
-    .col.s12
-        p.text-justify
-            | Puedes donar justo ahora cualquier cantidad igual o mayor a $10 MXN mediante
-            | las tarjetas de crédito o débito participantes y/o a través de tu cuenta PayPal.
-.row
-    .col.s12.center-align
-        form(#donateForm="ngForm")
-            .row
-                .input-field.col.s12
-                    input(id="amount", name="amount", currencyMask="", min="10", [(ngModel)]="paypalConfig.transactions[0].amount.total",
-                        [options]="{ align: 'left', allowNegative: false }", required, #amountInput="ngModel")
-                    label.active(for="amount") Monto
-                    span.red-text(*ngIf="donateForm.errors?.invalid") Ingresa un monto valido
-            .row(*ngIf="paypalConfig.transactions[0].amount.total >= 10")
-                .col.s12
-                    ngx-paypal([config]="paypalConfig")
+.container.p-top-5.p-bottom-5
+    .row
+        .col.s12
+            h5 Ayúdanos en segundos...
+    .row
+        .col.s12
+            p.text-justify
+                | Puedes donar justo ahora mediante las tarjetas de crédito o débito participantes
+                | y/o a través de tu cuenta PayPal.
+            p.left.grey-text.lighten-4.text-justify
+                | El nombre y correo electrónico sólamente son para fines de gratificación, puedes
+                | realizar la donación sin escribirlos si así lo deseas.
+    .row
+        .col.s12.center-align
+            form(#donateForm="ngForm")
+                .row
+                    .input-field.col.s12
+                        input(type="text", id="name", name="name", [(ngModel)]="donation.name", #nameInput="ngModel",
+                            required)
+                        label.active(for="name", [class.active]="donation.name") Nombre
+                .row
+                    .input-field.col.s12
+                        input(type="email", id="email", name="email", [(ngModel)]="donation.email", #emailInput="ngModel",
+                            required, [email]="true")
+                        label.active(for="name", [class.active]="donation.email") Correo electrónico
+                .row
+                    .input-field.col.s12
+                        input.font-x-large(id="amount", name="amount", currencyMask="", required, #amountInput="ngModel",
+                            [(ngModel)]="paypalConfig.transactions[0].amount.total",
+                            [options]="{ align: 'left', allowNegative: false }")
+                        label.active(for="amount") Monto
+                        span.left.grey-text.lighten-4 El monto debe ser mayor o igual a $5.00 MXN
+                .row.m-top-50p(*ngIf="paypalConfig.transactions[0].amount.total >= 5")
+                    .col.s12
+                        ngx-paypal([config]="paypalConfig")
