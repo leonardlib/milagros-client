@@ -4,6 +4,7 @@ export class Donation {
     name: string;
     email: string;
     amount: number;
+    description: string;
     date: string;
 
     constructor() {}

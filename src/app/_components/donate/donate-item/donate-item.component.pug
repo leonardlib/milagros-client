@@ -1,1 +1,35 @@
-h5 Artículo
+.container.p-top-5.p-bottom-5
+    .row
+        .col.s12
+            h5 Haz felices a nuestras mascotas...
+    .row
+        .col.s12
+            p.text-justify
+                | Puedes donar cualquier artículo que nos sirva para alimentar y cuidar a todas nuestras mascotas
+                | y/o para mejorar el espacio en el que conviven o cualquier cosa que se te ocurra, nosotros te avisaremos
+                | si podemos aceptarlo o no.
+    .row
+        .col.s12.center-align
+            form(#donateItemForm="ngForm", (submit)="donate()")
+                .row
+                    .input-field.col.s12
+                        input(type="text", id="name", name="name", [(ngModel)]="donation.name", #nameInput="ngModel",
+                            required)
+                        label.active(for="name", [class.active]="donation.name") Nombre
+                        span.red-text(*ngIf="donateItemForm.submitted && nameInput.errors?.required") Ingresa un nombre
+                .row
+                    .input-field.col.s12
+                        input(type="email", id="email", name="email", [(ngModel)]="donation.email", #emailInput="ngModel",
+                            required, [email]="true")
+                        label.active(for="name", [class.active]="donation.email") Correo electrónico
+                        span.red-text(*ngIf="donateItemForm.submitted && emailInput.errors?.required") Ingresa un correo
+                        span.red-text(*ngIf="donateItemForm.submitted && emailInput.errors?.invalid") Ingresa un correo valido
+                .row
+                    .input-field.col.s12
+                        textarea.materialize-textarea(id="description", name="description", [(ngModel)]="donation.description",
+                            #descriptionInput="ngModel", required)
+                        label.active(for="description", [class.active]="donation.description") Cuéntanos que quieres donar y por qué
+                        span.red-text(*ngIf="donateItemForm.submitted && descriptionInput.errors?.required") Ingresa una descripción
+                .row.m-top-50p
+                    .col.s12
+                        button.btn.waves-effect.bg-primary.white-text.col.s12(type="submit") Enviar solicitud

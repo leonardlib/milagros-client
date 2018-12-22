@@ -22,13 +22,13 @@
       <form #donateForm="ngForm">
         <div class="row">
           <div class="input-field col s12">
-            <input type="text" id="name" name="name" [(ngModel)]="donation.name" #nameInput="ngModel" required="required"/>
+            <input type="text" id="name" name="name" [(ngModel)]="donation.name" #nameInput="ngModel"/>
             <label class="active" for="name" [class.active]="donation.name">Nombre</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input type="email" id="email" name="email" [(ngModel)]="donation.email" #emailInput="ngModel" required="required" [email]="true"/>
+            <input type="email" id="email" name="email" [(ngModel)]="donation.email" #emailInput="ngModel" [email]="true"/>
             <label class="active" for="name" [class.active]="donation.email">Correo electrónico</label>
           </div>
         </div>

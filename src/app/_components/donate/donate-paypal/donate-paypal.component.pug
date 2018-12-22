@@ -15,13 +15,12 @@
             form(#donateForm="ngForm")
                 .row
                     .input-field.col.s12
-                        input(type="text", id="name", name="name", [(ngModel)]="donation.name", #nameInput="ngModel",
-                            required)
+                        input(type="text", id="name", name="name", [(ngModel)]="donation.name", #nameInput="ngModel")
                         label.active(for="name", [class.active]="donation.name") Nombre
                 .row
                     .input-field.col.s12
                         input(type="email", id="email", name="email", [(ngModel)]="donation.email", #emailInput="ngModel",
-                            required, [email]="true")
+                            [email]="true")
                         label.active(for="name", [class.active]="donation.email") Correo electrónico
                 .row
                     .input-field.col.s12

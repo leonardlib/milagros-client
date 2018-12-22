@@ -30,10 +30,12 @@ export class UtilsService {
      * @date 10/09/2018
      */
     showSnackbar(text) {
-        this.snackbar.open(text, 'OK', {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top'
+        setTimeout(() => {
+            this.snackbar.open(text, 'OK', {
+                duration: 3000,
+                horizontalPosition: 'right',
+                verticalPosition: 'top'
+            });
         });
     }
 

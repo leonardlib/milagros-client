@@ -218,6 +218,27 @@ button:focus {
     border-bottom: 1px solid $primary-color !important;
     box-shadow: 0 1px 0 0 $primary-color !important;
 }
+
+/* label focus color */
+.input-field textarea:focus + label {
+    color: $primary-color !important;
+}
+/* label underline focus color */
+.input-field textarea:focus {
+    border-bottom: 1px solid $primary-color !important;
+    box-shadow: 0 1px 0 0 $primary-color !important;
+}
+/* valid color */
+.input-field textarea.valid {
+    border-bottom: 1px solid $primary-color !important;
+    box-shadow: 0 1px 0 0 $primary-color !important;
+}
+/* invalid color */
+.input-field textarea.invalid {
+    border-bottom: 1px solid $primary-color !important;
+    box-shadow: 0 1px 0 0 $primary-color !important;
+}
+
 /* icon prefix focus color */
 .input-field .prefix.active {
     color: $primary-color !important;
