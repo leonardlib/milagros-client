@@ -1,5 +1,10 @@
 
-<div class="row">
+<div class="row" *ngIf="adoptRequestsList?.length &lt;= 0">
+  <div class="col s12 center-align">
+    <h5 class="text-primary">No has hecho solicitudes de adopción</h5><br/><a class="btn btn-block waves-block waves-effect white-text bg-primary" routerLink="/mascota">Ver mascotas</a>
+  </div>
+</div>
+<div class="row" *ngIf="adoptRequestsList?.length &gt; 0">
   <div class="col s12">
     <ul class="collection">
       <li class="collection-item avatar cursor-pointer" *ngFor="let adoptRequest of adoptRequestsList" (click)="petService.goToDetail(adoptRequest['pet'].uid)"><img class="circle" [src]="adoptRequest['pet'].images[0].url"/><span class="title">{{ adoptRequest['pet'].name }}</span>

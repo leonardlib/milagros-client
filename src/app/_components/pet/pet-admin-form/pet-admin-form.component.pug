@@ -68,7 +68,7 @@
             .input-field.col.s12
                 label(for="color") Color principal del pelaje
         .row
-            .col.s12.m-top-30p
+            .col.s12.m6.offset-m3.m-top-30p
                 color-sketch([color]="(pet.color ? pet.color : '#000000')", (onChangeComplete)="onChangeColor($event)", id="color")
         .row
             .input-field.col.s12

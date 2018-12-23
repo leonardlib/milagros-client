@@ -5,7 +5,19 @@ export class Donation {
     email: string;
     amount: number;
     description: string;
+    is_money: boolean;
     date: string;
+    address: Address;
 
-    constructor() {}
+    constructor() {
+        this.address = new Address();
+    }
+}
+
+export class Address {
+    street: string;
+    outdoor_number: string;
+    interior_number: string;
+    colony: string;
+    city: string;
 }

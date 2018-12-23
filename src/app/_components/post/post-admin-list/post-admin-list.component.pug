@@ -15,3 +15,6 @@
             [columnMode]="'force'", [headerHeight]="'auto'", [footerHeight]="'auto'", [limit]="10",
             [rowHeight]="'auto'", [reorderable]="reorderable", #table="", [messages]="messages",
             [selectionType]="'single'", (select)="onSelect($event)")
+
+        ng-template(#dateTemplate="", let-row="row", let-value="value")
+            span {{ value | amLocale: 'es' | amDateFormat: 'DD/MM/YYYY' }}

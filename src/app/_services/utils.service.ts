@@ -223,7 +223,7 @@ export class UtilsService {
         });
     }
 
-    sendMail(to: string, subject: string, template: string) {
+    sendMail(to: any, subject: string, title: string, content: string, button: string, href: string) {
         return new Promise(resolve => {
             const httpOptions = {
                 headers: new HttpHeaders({
@@ -232,20 +232,33 @@ export class UtilsService {
                 })
             };
 
-            $.get(template, data => {
+            $.get('assets/mail_templates/general.template.html', data => {
+                const div = $('<div></div>').html(data)[0];
+                $(div).find('#encabezado')[0].innerHTML = title;
+                $(div).find('#descripcion')[0].innerHTML = content;
+                $(div).find('#boton')[0].innerHTML = button;
+                $(div).find('#boton')[0].href = href;
+                const result = div.innerHTML;
+
+                const emails = [];
+                to.forEach(item => {
+                    emails.push({
+                        email: item
+                    });
+                });
+
                 const emailData = {
                     personalizations: [{
-                        to: [{
-                            email: to
-                        }]
+                        to: emails
                     }],
                     from: {
-                        email: 'info@milagrosdelrincon.mx'
+                        email: 'info@milagrosdelrincon.mx',
+                        name: 'Milagros del Rincón'
                     },
                     subject: subject,
                     content: [{
                         type: 'text/html',
-                        value: data
+                        value: result
                     }]
                 };
 

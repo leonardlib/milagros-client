@@ -59,7 +59,10 @@ export class PostAdminFormComponent implements OnInit {
         if (this.validData()) {
             this.utilsService.showSnackbar('Guardando...');
             if (this.editar) {
-                this.post['new_image'].file = this.images[0].file;
+                this.post['new_image'] = {
+                    file: this.images[0].file
+                };
+
                 this.postService.update(this.post).then(response => {
                     if (response) {
                         this.post = response as Post;

@@ -1,5 +1,5 @@
 export class Author {
-    key: number;
+    key: string;
     uid: string;
     name: string;
     social_link: string;

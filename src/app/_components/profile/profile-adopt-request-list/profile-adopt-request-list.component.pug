@@ -1,4 +1,9 @@
-.row
+.row(*ngIf="adoptRequestsList?.length <= 0")
+    .col.s12.center-align
+        h5.text-primary No has hecho solicitudes de adopción
+        br
+        a.btn.btn-block.waves-block.waves-effect.white-text.bg-primary(routerLink="/mascota") Ver mascotas
+.row(*ngIf="adoptRequestsList?.length > 0")
     .col.s12
         ul.collection
             li.collection-item.avatar.cursor-pointer(*ngFor="let adoptRequest of adoptRequestsList",

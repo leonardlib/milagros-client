@@ -67,6 +67,7 @@ export class DonatePaypalComponent implements OnInit {
 
     completedPayment() {
         this.donation.amount = this.paypalConfig.transactions[0].amount.total;
+        this.donation.is_money = true;
 
         this.donateService.create(this.donation).then(response => {
             if (response !== null) {

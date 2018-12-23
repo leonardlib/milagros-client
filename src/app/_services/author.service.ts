@@ -42,10 +42,17 @@ export class AuthorService {
 
                 if (!exists) {
                     author.uid = this.utilsService.generateRandomUid();
-                    this.authorRef.push(author);
+                    const newRef = this.authorRef.push(author);
+                    author.key = newRef.key;
+                } else {
+                    this.authorRef.update(author.key + '', {
+                        uid: author.uid,
+                        name: author.name,
+                        social_link: author.social_link
+                    });
                 }
 
-                resolve(exists);
+                resolve(author);
             });
         });
     }

@@ -16,5 +16,6 @@
 <div class="row">
   <div class="col s12">
     <ngx-datatable class="bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="'auto'" [footerHeight]="'auto'" [limit]="10" [rowHeight]="'auto'" [reorderable]="reorderable" #table="" [messages]="messages" [selectionType]="'single'" (select)="onSelect($event)"></ngx-datatable>
+    <ng-template #dateTemplate="" let-row="row" let-value="value"><span>{{ value | amLocale: 'es' | amDateFormat: 'DD/MM/YYYY' }}</span></ng-template>
   </div>
 </div>

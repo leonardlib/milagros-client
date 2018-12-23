@@ -15,24 +15,60 @@
     </div>
   </div>
   <div class="row">
-    <div class="col s12 center-align">
+    <div class="col s12">
       <form #donateItemForm="ngForm" (submit)="donate()">
         <div class="row">
           <div class="input-field col s12">
             <input type="text" id="name" name="name" [(ngModel)]="donation.name" #nameInput="ngModel" required="required"/>
-            <label class="active" for="name" [class.active]="donation.name">Nombre</label><span class="red-text" *ngIf="donateItemForm.submitted &amp;&amp; nameInput.errors?.required">Ingresa un nombre</span>
+            <label for="name" [class.active]="donation?.name">Nombre</label><span class="grey-text lighten-4" *ngIf="donateItemForm.submitted &amp;&amp; nameInput.errors?.required">Ingresa un nombre</span>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <input type="email" id="email" name="email" [(ngModel)]="donation.email" #emailInput="ngModel" required="required" [email]="true"/>
-            <label class="active" for="name" [class.active]="donation.email">Correo electrónico</label><span class="red-text" *ngIf="donateItemForm.submitted &amp;&amp; emailInput.errors?.required">Ingresa un correo</span><span class="red-text" *ngIf="donateItemForm.submitted &amp;&amp; emailInput.errors?.invalid">Ingresa un correo valido</span>
+            <label for="name" [class.active]="donation?.email">Correo electrónico</label><span class="grey-text lighten-4" *ngIf="donateItemForm.submitted &amp;&amp; emailInput.errors?.required">Ingresa un correo</span><span class="grey-text lighten-4" *ngIf="donateItemForm.submitted &amp;&amp; emailInput.errors?.invalid">Ingresa un correo valido</span>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
             <textarea class="materialize-textarea" id="description" name="description" [(ngModel)]="donation.description" #descriptionInput="ngModel" required="required"></textarea>
-            <label class="active" for="description" [class.active]="donation.description">Cuéntanos que quieres donar y por qué</label><span class="red-text" *ngIf="donateItemForm.submitted &amp;&amp; descriptionInput.errors?.required">Ingresa una descripción</span>
+            <label for="description" [class.active]="donation?.description">Cuéntanos que quieres donar y por qué</label><span class="grey-text lighten-4" *ngIf="donateItemForm.submitted &amp;&amp; descriptionInput.errors?.required">Ingresa una descripción</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <p class="text-justify">
+              Escribenos tu dirección o el lugar a donde podemos pasar a recoger el artículo o los artículos
+              que quieres donar.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" id="street" name="street" [(ngModel)]="donation.address.street" #streetInput="ngModel" required="required"/>
+            <label for="street" [class.active]="donation?.address?.street">Calle</label><span class="grey-text lighten-4" *ngIf="donateItemForm.submitted &amp;&amp; streetInput.errors?.required">Ingresa una calle</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12 m6">
+            <input type="text" id="outdoor" name="outdoor" [(ngModel)]="donation.address.outdoor_number" #outdoorInput="ngModel" required="required"/>
+            <label for="outdoor" [class.active]="donation?.address?.outdoor_number">Número exterior</label><span class="grey-text lighten-4" *ngIf="donateItemForm.submitted &amp;&amp; outdoorInput.errors?.required">Ingresa un número exterior</span>
+          </div>
+          <div class="input-field col s12 m6">
+            <input type="text" id="interior" name="interior" [(ngModel)]="donation.address.interior_number" #interiorInput="ngModel"/>
+            <label for="interior" [class.active]="donation?.address?.interior_number">Número interior</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" id="colony" name="colony" [(ngModel)]="donation.address.colony" #colonyInput="ngModel" required="required"/>
+            <label for="colony" [class.active]="donation?.address?.colony">Colonia</label><span class="grey-text lighten-4" *ngIf="donateItemForm.submitted &amp;&amp; colonyInput.errors?.required">Ingresa una colonia</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" id="city" name="city" [(ngModel)]="donation.address.city" #cityInput="ngModel" required="required"/>
+            <label for="city" [class.active]="donation?.address?.city">Ciudad</label><span class="grey-text lighten-4" *ngIf="donateItemForm.submitted &amp;&amp; cityInput.errors?.required">Ingresa una ciudad</span>
           </div>
         </div>
         <div class="row m-top-50p">

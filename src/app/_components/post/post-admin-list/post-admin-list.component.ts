@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import { PostService } from '../../../_services/post.service';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Post } from '../../../_models/post';
@@ -16,6 +16,7 @@ export class PostAdminListComponent implements OnInit {
     public reorderable = true;
     public columns = [];
     @ViewChild(DatatableComponent) table: DatatableComponent;
+    @ViewChild('dateTemplate') dateTemplate: TemplateRef<any>;
     public messages: any = {};
 
     constructor(
@@ -32,7 +33,8 @@ export class PostAdminListComponent implements OnInit {
             name: 'Autor'
         }, {
             prop: 'date',
-            name: 'Fecha'
+            name: 'Fecha',
+            cellTemplate: this.dateTemplate
         }];
         this.messages = {
             emptyMessage: 'Ningún resultado',

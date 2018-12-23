@@ -78,6 +78,7 @@ export class PetAdoptComponent implements OnInit {
     }
 
     updatePet() {
+        this.utilsService.showSnackbar('Actualizando mascota...');
         this.pet.in_adopted_process = true;
         this.petService.update(this.pet, false).then(response => {
             if (response !== null) {
@@ -89,9 +90,18 @@ export class PetAdoptComponent implements OnInit {
     }
 
     sendEmailToAdmin() {
-        const template = 'assets/mail_templates/mail_new_adopt_alert.template.html';
+        this.utilsService.showSnackbar('Notificando a Milagros del Rincón...');
+        const description = 'Se registró una nueva solicitud de adopción en la plataforma de Milagros del Rincón, '
+            + 'en cuanto puedas, échale un vistazo y decide si es aprobada o no.';
 
-        this.utilsService.sendMail(environment.admin_mails[0], 'Solicitud de adopción', template).then(res => {
+        this.utilsService.sendMail(
+            environment.admin_mails,
+            'Solicitud de adopción',
+            '¡Hola!',
+            description,
+            'Ver lista de solicitudes',
+            ''
+        ).then(res => {
             if (res) {
                 this.sendEmailToUser();
             } else {
@@ -101,9 +111,18 @@ export class PetAdoptComponent implements OnInit {
     }
 
     sendEmailToUser() {
-        const template = 'assets/mail_templates/mail_new_adopt_user_alert.template.html';
+        const title = '¡Hola ' + this.user.email + '!';
+        const description = 'Tu solicitud de adopción ha sido registrada exitosamente en la plataforma, '
+            + 'nosotros te avisaremos si es aceptada o no.<br/><br/>¡Mucha suerte!';
 
-        this.utilsService.sendMail(this.user.email, 'Solicitud de adopción', template).then(res => {
+        this.utilsService.sendMail(
+            environment.admin_mails,
+            'Solicitud de adopción',
+            title,
+            description,
+            'Ver mi solicitud',
+            ''
+        ).then(res => {
             if (res) {
                 this.router.navigate(['/perfil/solicitudes']);
             } else {

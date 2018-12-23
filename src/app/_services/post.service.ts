@@ -72,36 +72,34 @@ export class PostService {
 
             // Delete image
             this.utilsService.deleteFile(post.main_image.url).then(res => {
-                if (res) {
-                    // Upload new image
-                    this.utilsService.uploadFile(post['new_image'].file, this.storageBasePath + post.uid).then(res2 => {
-                        if (res2) {
-                            post.main_image.url = res2 + '';
-                            post.date = moment().locale('es').format('YYYY-MM-DD');
+                // Upload new image
+                this.utilsService.uploadFile(post['new_image'].file, this.storageBasePath + post.uid).then(res2 => {
+                    if (res2) {
+                        post.main_image.url = res2 + '';
+                        post.date = moment().locale('es').format('YYYY-MM-DD');
 
-                            // Save post and image authors
-                            this.authorService.create(post.author).then(response => {
-                                this.authorService.create(post.main_image.author);
-                            });
+                        // Save post and image authors
+                        this.authorService.create(post.author).then(response => {
+                            this.authorService.create(post.main_image.author);
+                        });
 
-                            // Update post info
-                            this.postsRef.update(post.key + '', {
-                                uid: post.uid,
-                                title: post.title,
-                                main_image: post.main_image,
-                                content: post.content,
-                                author: post.author,
-                                date: post.date
-                            });
+                        // Update post info
+                        this.postsRef.update(post.key + '', {
+                            uid: post.uid,
+                            title: post.title,
+                            main_image: post.main_image,
+                            content: post.content,
+                            author: post.author,
+                            date: post.date
+                        });
 
-                            resolve(post);
-                        } else {
-                            resolve(null);
-                        }
-                    });
-                } else {
-                    resolve(null);
-                }
+                        resolve(post);
+                    } else {
+                        resolve(null);
+                    }
+                });
+            }).catch(error => {
+                resolve(null);
             });
         });
     }

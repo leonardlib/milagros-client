@@ -9,27 +9,60 @@
                 | y/o para mejorar el espacio en el que conviven o cualquier cosa que se te ocurra, nosotros te avisaremos
                 | si podemos aceptarlo o no.
     .row
-        .col.s12.center-align
+        .col.s12
             form(#donateItemForm="ngForm", (submit)="donate()")
                 .row
                     .input-field.col.s12
                         input(type="text", id="name", name="name", [(ngModel)]="donation.name", #nameInput="ngModel",
                             required)
-                        label.active(for="name", [class.active]="donation.name") Nombre
-                        span.red-text(*ngIf="donateItemForm.submitted && nameInput.errors?.required") Ingresa un nombre
+                        label(for="name", [class.active]="donation?.name") Nombre
+                        span.grey-text.lighten-4(*ngIf="donateItemForm.submitted && nameInput.errors?.required") Ingresa un nombre
                 .row
                     .input-field.col.s12
                         input(type="email", id="email", name="email", [(ngModel)]="donation.email", #emailInput="ngModel",
                             required, [email]="true")
-                        label.active(for="name", [class.active]="donation.email") Correo electrónico
-                        span.red-text(*ngIf="donateItemForm.submitted && emailInput.errors?.required") Ingresa un correo
-                        span.red-text(*ngIf="donateItemForm.submitted && emailInput.errors?.invalid") Ingresa un correo valido
+                        label(for="name", [class.active]="donation?.email") Correo electrónico
+                        span.grey-text.lighten-4(*ngIf="donateItemForm.submitted && emailInput.errors?.required") Ingresa un correo
+                        span.grey-text.lighten-4(*ngIf="donateItemForm.submitted && emailInput.errors?.invalid") Ingresa un correo valido
                 .row
                     .input-field.col.s12
                         textarea.materialize-textarea(id="description", name="description", [(ngModel)]="donation.description",
                             #descriptionInput="ngModel", required)
-                        label.active(for="description", [class.active]="donation.description") Cuéntanos que quieres donar y por qué
-                        span.red-text(*ngIf="donateItemForm.submitted && descriptionInput.errors?.required") Ingresa una descripción
+                        label(for="description", [class.active]="donation?.description") Cuéntanos que quieres donar y por qué
+                        span.grey-text.lighten-4(*ngIf="donateItemForm.submitted && descriptionInput.errors?.required") Ingresa una descripción
+                .row
+                    .col.s12
+                        p.text-justify
+                            | Escribenos tu dirección o el lugar a donde podemos pasar a recoger el artículo o los artículos
+                            | que quieres donar.
+                .row
+                    .input-field.col.s12
+                        input(type="text", id="street", name="street", [(ngModel)]="donation.address.street",
+                            #streetInput="ngModel", required)
+                        label(for="street", [class.active]="donation?.address?.street") Calle
+                        span.grey-text.lighten-4(*ngIf="donateItemForm.submitted && streetInput.errors?.required") Ingresa una calle
+                .row
+                    .input-field.col.s12.m6
+                        input(type="text", id="outdoor", name="outdoor", [(ngModel)]="donation.address.outdoor_number",
+                            #outdoorInput="ngModel", required)
+                        label(for="outdoor", [class.active]="donation?.address?.outdoor_number") Número exterior
+                        span.grey-text.lighten-4(*ngIf="donateItemForm.submitted && outdoorInput.errors?.required") Ingresa un número exterior
+                    .input-field.col.s12.m6
+                        input(type="text", id="interior", name="interior", [(ngModel)]="donation.address.interior_number",
+                            #interiorInput="ngModel")
+                        label(for="interior", [class.active]="donation?.address?.interior_number") Número interior
+                .row
+                    .input-field.col.s12
+                        input(type="text", id="colony", name="colony", [(ngModel)]="donation.address.colony",
+                            #colonyInput="ngModel", required)
+                        label(for="colony", [class.active]="donation?.address?.colony") Colonia
+                        span.grey-text.lighten-4(*ngIf="donateItemForm.submitted && colonyInput.errors?.required") Ingresa una colonia
+                .row
+                    .input-field.col.s12
+                        input(type="text", id="city", name="city", [(ngModel)]="donation.address.city",
+                            #cityInput="ngModel", required)
+                        label(for="city", [class.active]="donation?.address?.city") Ciudad
+                        span.grey-text.lighten-4(*ngIf="donateItemForm.submitted && cityInput.errors?.required") Ingresa una ciudad
                 .row.m-top-50p
                     .col.s12
                         button.btn.waves-effect.bg-primary.white-text.col.s12(type="submit") Enviar solicitud
