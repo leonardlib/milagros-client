@@ -4,14 +4,12 @@
             h5 Configuración
     .row
         .col.s12
-            nav(mat-tab-nav-bar="", mat-stretch-tabs="")
-                a.cursor-pointer(mat-tab-link="", [routerLink]="['/administrador/publicaciones']",
-                    routerLinkActive="", #rla1="routerLinkActive", [active]="rla1.isActive") Publicaciones
-                a.cursor-pointer(mat-tab-link="", [routerLink]="['/administrador/mascotas']",
-                    routerLinkActive="", #rla2="routerLinkActive", [active]="rla2.isActive") Mascotas
-                a.cursor-pointer(mat-tab-link="", [routerLink]="['/administrador/donar']",
-                    routerLinkActive="", #rla3="routerLinkActive", [active]="rla3.isActive") Donaciones
-    .row
-        .col.s12
-            .container.p-top-5.p-bottom-5
-                router-outlet
+            mat-tab-group(mat-stretch-tabs="")
+                mat-tab(label="Publicaciones")
+                    app-post-admin-list
+                mat-tab(label="Mascotas")
+                    app-pet-admin-list
+                mat-tab(label="Solicitudes de adopción")
+                    app-adopt-requests-admin
+                mat-tab(label="Donaciones")
+                    app-donate-admin

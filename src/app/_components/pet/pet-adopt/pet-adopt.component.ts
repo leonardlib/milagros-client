@@ -41,6 +41,8 @@ export class PetAdoptComponent implements OnInit {
 
                 this.userService.current().then(user => {
                     this.user = user;
+                }).catch(error => {
+                    this.user = new User();
                 });
             });
         });

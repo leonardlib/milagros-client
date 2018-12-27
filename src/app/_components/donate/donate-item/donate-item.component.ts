@@ -30,6 +30,10 @@ export class DonateItemComponent implements OnInit {
             this.user = user;
             this.donation.name = this.user.name;
             this.donation.email = this.user.email;
+        }).catch(error => {
+            this.user = new User();
+            this.donation.name = '';
+            this.donation.email = '';
         });
     }
 

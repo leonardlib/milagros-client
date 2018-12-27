@@ -1,0 +1,19 @@
+.container.p-top-5.p-bottom-5
+    .row(*ngIf="adoptRequestsList?.length <= 0")
+        .col.s12.center-align
+            h5.text-primary No se han hecho solicitudes de adopción
+
+    ng-container(*ngIf="adoptRequestsList?.length > 0")
+        .row
+            .col.s12
+                h5 Solicitudes de adopción
+        .row
+            .col.s12
+                ul.collection
+                    li.collection-item.avatar.cursor-pointer(*ngFor="let adoptRequest of adoptRequestsList",
+                        (click)="adoptRequestService.goToDetail(adoptRequest.uid)")
+                        img.circle([src]="adoptRequest['pet']?.images[0].url")
+                        span.title {{ adoptRequest['pet']?.name }}
+                        p.grey-text.lighten-4 {{ adoptRequest?.date | amLocale: 'es' | amDateFormat: 'LL' }}
+                        span.secondary-content.grey-text.lighten-4(*ngIf="!adoptRequest?.approved") No se ha validado
+                        span.secondary-content.text-primary(*ngIf="adoptRequest?.approved") Adoptado

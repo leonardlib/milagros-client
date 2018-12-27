@@ -26,6 +26,10 @@ export class CompleteProfileComponent implements OnInit {
             this.user = user;
             this.profile.name = this.user.name;
             this.profile.user_email = this.user.email;
+        }).catch(error => {
+            this.user = new User();
+            this.profile.name = '';
+            this.profile.user_email = '';
         });
     }
 

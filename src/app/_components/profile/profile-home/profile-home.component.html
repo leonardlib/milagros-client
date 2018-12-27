@@ -7,14 +7,14 @@
   </div>
   <div class="row">
     <div class="col s12">
-      <nav mat-tab-nav-bar="" mat-stretch-tabs=""><a class="cursor-pointer" mat-tab-link="" [routerLink]="['/perfil/solicitudes']" routerLinkActive="" #rla1="routerLinkActive" [active]="rla1.isActive">Solicitudes de adopción</a><a class="cursor-pointer" mat-tab-link="" [routerLink]="['/perfil/informacion-personal']" routerLinkActive="" #rla2="routerLinkActive" [active]="rla2.isActive">Información personal</a></nav>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col s12">
-      <div class="container p-top-5 p-bottom-5">
-        <router-outlet></router-outlet>
-      </div>
+      <mat-tab-group mat-stretch-tabs="">
+        <mat-tab label="Solicitudes de adopción">
+          <app-profile-adopt-request-list></app-profile-adopt-request-list>
+        </mat-tab>
+        <mat-tab label="Información personal">
+          <app-profile-personal-info></app-profile-personal-info>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
 </div>

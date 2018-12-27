@@ -1,27 +1,37 @@
 
-<div class="row">
-  <div class="col s12">
-    <h5>Listado de donaciones</h5>
-  </div>
-</div>
-<div class="row">
-  <div class="col s12">
-    <div class="container">
-      <div class="row">
-        <div class="col s12 teal p-2 lighten-2 white-text center-align"><span>Solamente se muestran las donaciones hechas a través de la plataforma.</span></div>
-      </div>
+<div class="container p-top-5 p-bottom-5">
+  <div class="row" *ngIf="donations?.length &lt;= 0">
+    <div class="col s12 center-align">
+      <h5 class="text-primary">No se han hecho donaciones</h5>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="input-field col s12">
-    <input type="text" id="search" (keyup)="onFilter(search.value)" #search=""/>
-    <label for="search">Buscar donación</label>
-  </div>
-</div>
-<div class="row">
-  <div class="col s12">
-    <ngx-datatable class="bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator" [columns]="columns" [columnMode]="'force'" [headerHeight]="'auto'" [footerHeight]="'auto'" [limit]="10" [rowHeight]="'auto'" [reorderable]="reorderable" #table="" [messages]="messages"></ngx-datatable>
-    <ng-template #dateTemplate="" let-row="row" let-value="value"><span>{{ value | amLocale: 'es' | amDateFormat: 'DD/MM/YYYY' }}</span></ng-template>
-  </div>
+  <ng-container *ngIf="donations?.length &gt; 0">
+    <div class="row">
+      <div class="col s12">
+        <h5>Lista de donaciones</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <div class="container">
+          <div class="row">
+            <div class="col s12 teal p-2 lighten-2 white-text center-align"><span>Solamente se muestran las donaciones monetarias hechas a través de la plataforma.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <ul class="collection">
+          <li class="collection-item avatar no-list-item-padding" *ngFor="let donation of donations"><span class="title">{{ donation?.name }}</span>
+            <p class="grey-text lighten-4">{{ donation?.email }}<br/>{{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}</p><span class="secondary-content text-primary">{{ donation?.amount | currency }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 m6"><span class="font-large">{{ donations?.length }} en total</span></div>
+      <div class="col s12 m6 right-align"><span class="font-large text-primary">{{ totalAmount | currency }}</span></div>
+    </div>
+  </ng-container>
 </div>

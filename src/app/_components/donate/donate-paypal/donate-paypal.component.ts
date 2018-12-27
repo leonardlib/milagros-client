@@ -28,8 +28,12 @@ export class DonatePaypalComponent implements OnInit {
 
         this.userService.current().then(user => {
             this.user = user;
-            this.donation.name = this.user.name || '';
-            this.donation.email = this.user.email || '';
+            this.donation.name = this.user.name;
+            this.donation.email = this.user.email;
+        }).catch(error => {
+            this.user = new User();
+            this.donation.name = '';
+            this.donation.email = '';
         });
     }
 

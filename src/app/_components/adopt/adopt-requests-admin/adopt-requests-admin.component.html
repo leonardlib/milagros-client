@@ -1,0 +1,24 @@
+
+<div class="container p-top-5 p-bottom-5">
+  <div class="row" *ngIf="adoptRequestsList?.length &lt;= 0">
+    <div class="col s12 center-align">
+      <h5 class="text-primary">No se han hecho solicitudes de adopción</h5>
+    </div>
+  </div>
+  <ng-container *ngIf="adoptRequestsList?.length &gt; 0">
+    <div class="row">
+      <div class="col s12">
+        <h5>Solicitudes de adopción</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <ul class="collection">
+          <li class="collection-item avatar cursor-pointer" *ngFor="let adoptRequest of adoptRequestsList" (click)="adoptRequestService.goToDetail(adoptRequest.uid)"><img class="circle" [src]="adoptRequest['pet']?.images[0].url"/><span class="title">{{ adoptRequest['pet']?.name }}</span>
+            <p class="grey-text lighten-4">{{ adoptRequest?.date | amLocale: 'es' | amDateFormat: 'LL' }}</p><span class="secondary-content grey-text lighten-4" *ngIf="!adoptRequest?.approved">No se ha validado</span><span class="secondary-content text-primary" *ngIf="adoptRequest?.approved">Adoptado</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </ng-container>
+</div>

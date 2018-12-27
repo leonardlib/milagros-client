@@ -35,6 +35,8 @@ export class ProfilePersonalInfoComponent implements OnInit {
                     this.editar = false;
                 }
             });
+        }).catch(error => {
+            this.user = new User();
         });
     }
 

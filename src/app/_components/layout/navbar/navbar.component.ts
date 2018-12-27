@@ -30,6 +30,8 @@ export class NavbarComponent implements OnInit {
             } else {
                 this.profileRoute = '/perfil';
             }
+        }).catch(error => {
+            this.user = new User();
         });
     }
 

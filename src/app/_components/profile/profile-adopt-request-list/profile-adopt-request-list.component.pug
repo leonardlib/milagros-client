@@ -1,18 +1,19 @@
-.row(*ngIf="adoptRequestsList?.length <= 0")
-    .col.s12.center-align
-        h5.text-primary No has hecho solicitudes de adopción
-        br
-        a.btn.btn-block.waves-block.waves-effect.white-text.bg-primary(routerLink="/mascota") Ver mascotas
-.row(*ngIf="adoptRequestsList?.length > 0")
-    .col.s12
-        ul.collection
-            li.collection-item.avatar.cursor-pointer(*ngFor="let adoptRequest of adoptRequestsList",
-                (click)="petService.goToDetail(adoptRequest['pet'].uid)")
-                img.circle([src]="adoptRequest['pet'].images[0].url")
-                span.title {{ adoptRequest['pet'].name }}
-                p.grey-text.lighten-4 {{ adoptRequest.date | amLocale: 'es' | amDateFormat: 'LL' }}
-                a.secondary-content
-                    i.fa.fa-1-5x.fa-paw.waiting-color(*ngIf="!adoptRequest.approved", matTooltip="En proceso de adopción",
-                        [matTooltipPosition]="'above'")
-                    i.fa.fa-1-5x.fa-paw.success-color(*ngIf="adoptRequest.approved", matTooltip="En un hogar responsable",
-                        [matTooltipPosition]="'above'")
+.container.p-top-5.p-bottom-5
+    .row(*ngIf="adoptRequestsList?.length <= 0")
+        .col.s12.center-align
+            h5.text-primary No has hecho solicitudes de adopción
+            br
+            a.btn.btn-block.waves-block.waves-effect.white-text.bg-primary(routerLink="/mascota") Ver mascotas
+    .row(*ngIf="adoptRequestsList?.length > 0")
+        .col.s12
+            ul.collection
+                li.collection-item.avatar.cursor-pointer(*ngFor="let adoptRequest of adoptRequestsList",
+                    (click)="petService.goToDetail(adoptRequest['pet'].uid)")
+                    img.circle([src]="adoptRequest['pet'].images[0].url")
+                    span.title {{ adoptRequest['pet'].name }}
+                    p.grey-text.lighten-4 {{ adoptRequest.date | amLocale: 'es' | amDateFormat: 'LL' }}
+                    a.secondary-content
+                        i.fa.fa-1-5x.fa-paw.waiting-color(*ngIf="!adoptRequest.approved", matTooltip="En proceso de adopción",
+                            [matTooltipPosition]="'above'")
+                        i.fa.fa-1-5x.fa-paw.success-color(*ngIf="adoptRequest.approved", matTooltip="En un hogar responsable",
+                            [matTooltipPosition]="'above'")

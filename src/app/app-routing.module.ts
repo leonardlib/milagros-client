@@ -30,11 +30,11 @@ import {ProfilePersonalInfoComponent} from './_components/profile/profile-person
 import {DonatePaypalComponent} from './_components/donate/donate-paypal/donate-paypal.component';
 import {DonateTiendaComponent} from './_components/donate/donate-tienda/donate-tienda.component';
 import {PetSponsorComponent} from './_components/pet/pet-sponsor/pet-sponsor.component';
+import {AdoptRequestsAdminComponent} from './_components/adopt/adopt-requests-admin/adopt-requests-admin.component';
+import {AdoptRequestDetailComponent} from './_components/adopt/adopt-request-detail/adopt-request-detail.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
-    { path: 'administrador', redirectTo: 'administrador/publicaciones', pathMatch: 'full' },
-    { path: 'perfil', redirectTo: 'perfil/solicitudes', pathMatch: 'full' },
     {
         path: 'acceso', children: [
             { path: '', component: LoginComponent },
@@ -73,37 +73,23 @@ const routes: Routes = [
     {
         path: 'perfil', component: UserInterfaceComponent, canActivate: [AuthGuard], children: [
             { path: 'completar', component: CompleteProfileComponent },
-            {
-                path: '', component: ProfileHomeComponent, children: [
-                    { path: 'solicitudes', component: ProfileAdoptRequestListComponent },
-                    { path: 'informacion-personal', component: ProfilePersonalInfoComponent }
-                ]
-            }
+            { path: '', component: ProfileHomeComponent }
         ]
     },
     {
         path: 'administrador', component: UserInterfaceComponent, canActivate: [AdminGuard], children: [
+            { path: '', component: AdminHomeComponent },
             {
-                path: '', component: AdminHomeComponent, children: [
-                    {
-                        path: 'publicaciones', children: [
-                            { path: '', component: PostAdminListComponent },
-                            { path: 'nueva', component: PostAdminFormComponent },
-                            { path: 'editar/:uid', component: PostAdminFormComponent }
-                        ]
-                    },
-                    {
-                        path: 'mascotas', children: [
-                            { path: '', component: PetAdminListComponent },
-                            { path: 'nueva', component: PetAdminFormComponent },
-                            { path: 'editar/:uid', component: PetAdminFormComponent }
-                        ]
-                    },
-                    {
-                        path: 'donar', children: [
-                            { path: '', component: DonateAdminComponent }
-                        ]
-                    }
+                path: 'publicaciones', children: [
+                    { path: 'nueva', component: PostAdminFormComponent },
+                    { path: 'editar/:uid', component: PostAdminFormComponent }
+                ]
+            },
+            {
+                path: 'mascotas', children: [
+                    { path: 'nueva', component: PetAdminFormComponent },
+                    { path: 'editar/:uid', component: PetAdminFormComponent },
+                    { path: 'adoptar/solicitud/:uid', component: AdoptRequestDetailComponent }
                 ]
             },
         ]

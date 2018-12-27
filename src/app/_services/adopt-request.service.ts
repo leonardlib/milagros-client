@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {UtilsService} from './utils.service';
 import {ImageModel} from '../_models/image';
 import * as moment from 'moment';
-import {Pet} from '../_models/pet';
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -18,8 +18,15 @@ export class AdoptRequestService {
 
     constructor(
         private fireDatabase: AngularFireDatabase,
-        public utilsService: UtilsService
+        public utilsService: UtilsService,
+        private router: Router
     ) {}
+
+    index(query: any = null) {
+        this.adoptRequestsRef = this.fireDatabase.list<AdoptRequest>(this.basePath, query);
+        this.adoptRequests = this.utilsService.setKeys(this.adoptRequestsRef);
+        return this.adoptRequests;
+    }
 
     create(adoptRequest: AdoptRequest) {
         return new Promise(resolve => {
@@ -97,5 +104,9 @@ export class AdoptRequestService {
                 });
             });
         });
+    }
+
+    goToDetail(uid: string) {
+        this.router.navigate(['/administrador/mascotas/adoptar/solicitud/' + uid]);
     }
 }

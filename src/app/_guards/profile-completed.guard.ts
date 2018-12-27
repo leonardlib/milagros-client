@@ -35,6 +35,10 @@ export class ProfileCompletedGuard implements CanActivate {
                     this.router.navigate(['/perfil/completar']);
                     resolve(false);
                 });
+            }).catch(error => {
+                this.utilsService.redirectUrl = state.url;
+                this.router.navigate(['/acceso']);
+                resolve(false);
             });
         });
     }

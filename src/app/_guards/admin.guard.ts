@@ -17,7 +17,7 @@ export class AdminGuard implements CanActivate {
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
+        return new Promise<boolean>(resolve => {
             this.userService.current().then(user => {
                 if (this.userService.verifyAdminEmail(user.email)) {
                     resolve(true);
@@ -26,7 +26,7 @@ export class AdminGuard implements CanActivate {
                     this.router.navigate(['/acceso']);
                     return resolve(false);
                 }
-            }, error => {
+            }).catch(error => {
                 this.utilsService.redirectUrl = state.url;
                 this.router.navigate(['/acceso']);
                 return resolve(false);

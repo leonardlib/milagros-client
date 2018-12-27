@@ -1,21 +1,30 @@
-.row
-    .col.s12
-        h5 Listado de donaciones
-.row
-    .col.s12
-        .container
-            .row
-                .col.s12.teal.p-2.lighten-2.white-text.center-align
-                    span Solamente se muestran las donaciones hechas a través de la plataforma.
-.row
-    .input-field.col.s12
-        input(type="text", id="search", (keyup)="onFilter(search.value)", #search="")
-        label(for="search") Buscar donación
-.row
-    .col.s12
-        ngx-datatable.bootstrap([rows]="rows", [loadingIndicator]="loadingIndicator", [columns]="columns",
-            [columnMode]="'force'", [headerHeight]="'auto'", [footerHeight]="'auto'", [limit]="10",
-            [rowHeight]="'auto'", [reorderable]="reorderable", #table="", [messages]="messages")
+.container.p-top-5.p-bottom-5
+    .row(*ngIf="donations?.length <= 0")
+        .col.s12.center-align
+            h5.text-primary No se han hecho donaciones
 
-        ng-template(#dateTemplate="", let-row="row", let-value="value")
-            span {{ value | amLocale: 'es' | amDateFormat: 'DD/MM/YYYY' }}
+    ng-container(*ngIf="donations?.length > 0")
+        .row
+            .col.s12
+                h5 Lista de donaciones
+        .row
+            .col.s12
+                .container
+                    .row
+                        .col.s12.teal.p-2.lighten-2.white-text.center-align
+                            span Solamente se muestran las donaciones monetarias hechas a través de la plataforma.
+        .row
+            .col.s12
+                ul.collection
+                    li.collection-item.avatar.no-list-item-padding(*ngFor="let donation of donations")
+                        span.title {{ donation?.name }}
+                        p.grey-text.lighten-4
+                            | {{ donation?.email }}
+                            br
+                            | {{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}
+                        span.secondary-content.text-primary {{ donation?.amount | currency }}
+        .row
+            .col.s12.m6
+                span.font-large {{ donations?.length }} en total
+            .col.s12.m6.right-align
+                span.font-large.text-primary {{ totalAmount | currency }}

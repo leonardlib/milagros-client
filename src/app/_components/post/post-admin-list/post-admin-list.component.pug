@@ -1,20 +1,21 @@
-.row
-    .col.s12
-        h5 Lista de publicaciones
-.row
-    .input-field.col.s12
-        input(type="text", id="search", (keyup)="onFilter(search.value)", #search="")
-        label(for="search") Buscar publicación
-.row
-    .col.s12
-        a.btn.btn-block.waves-block.waves-effect.bg-primary(
-            [routerLink]="['/administrador/publicaciones/nueva']") Agregar publicación
-.row
-    .col.s12
-        ngx-datatable.bootstrap([rows]="rows", [loadingIndicator]="loadingIndicator", [columns]="columns",
-            [columnMode]="'force'", [headerHeight]="'auto'", [footerHeight]="'auto'", [limit]="10",
-            [rowHeight]="'auto'", [reorderable]="reorderable", #table="", [messages]="messages",
-            [selectionType]="'single'", (select)="onSelect($event)")
+.container.p-top-5.p-bottom-5
+    .row
+        .col.s12
+            h5 Lista de publicaciones
+    .row
+        .input-field.col.s12
+            input(type="text", id="search", (keyup)="onFilter(search.value)", #search="")
+            label(for="search") Buscar publicación
+    .row
+        .col.s12
+            a.btn.btn-block.waves-block.waves-effect.bg-primary(
+                [routerLink]="['/administrador/publicaciones/nueva']") Agregar publicación
+    .row
+        .col.s12
+            ngx-datatable.bootstrap([rows]="rows", [loadingIndicator]="loadingIndicator", [columns]="columns",
+                [columnMode]="'force'", [headerHeight]="'auto'", [footerHeight]="'auto'", [limit]="10",
+                [rowHeight]="'auto'", [reorderable]="reorderable", #table="", [messages]="messages",
+                [selectionType]="'single'", (select)="onSelect($event)")
 
-        ng-template(#dateTemplate="", let-row="row", let-value="value")
-            span {{ value | amLocale: 'es' | amDateFormat: 'DD/MM/YYYY' }}
+            ng-template(#dateTemplate="", let-row="row", let-value="value")
+                span {{ value | amLocale: 'es' | amDateFormat: 'DD/MM/YYYY' }}

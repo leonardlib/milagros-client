@@ -44,4 +44,10 @@ export class DonateService {
             resolve(donation);
         });
     }
+
+    onlyMoney(isMoney: boolean = true) {
+        return this.index(ref => {
+            return ref.orderByChild('is_money').equalTo(isMoney);
+        });
+    }
 }

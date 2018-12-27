@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterializeModule } from 'angular2-materialize';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -22,6 +22,7 @@ import { ShareModule } from '@ngx-share/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { InputFileConfig, InputFileModule } from 'ngx-input-file';
@@ -80,6 +81,8 @@ import { DonatePaypalComponent } from './_components/donate/donate-paypal/donate
 import { DonateTiendaComponent } from './_components/donate/donate-tienda/donate-tienda.component';
 import {PaymentService} from './_services/payment.service';
 import { PetSponsorComponent } from './_components/pet/pet-sponsor/pet-sponsor.component';
+import { AdoptRequestsAdminComponent } from './_components/adopt/adopt-requests-admin/adopt-requests-admin.component';
+import { AdoptRequestDetailComponent } from './_components/adopt/adopt-request-detail/adopt-request-detail.component';
 
 const config: InputFileConfig = {};
 
@@ -115,7 +118,9 @@ const config: InputFileConfig = {};
         ProfilePersonalInfoComponent,
         DonatePaypalComponent,
         DonateTiendaComponent,
-        PetSponsorComponent
+        PetSponsorComponent,
+        AdoptRequestsAdminComponent,
+        AdoptRequestDetailComponent
     ],
     imports: [
         BrowserModule,
@@ -159,6 +164,7 @@ const config: InputFileConfig = {};
         AppRoutingModule,
         NgxPayPalModule,
         NgxCurrencyModule,
+        MatSlideToggleModule,
         AgmCoreModule.forRoot({
             apiKey: environment.gmaps.api_key
         }),

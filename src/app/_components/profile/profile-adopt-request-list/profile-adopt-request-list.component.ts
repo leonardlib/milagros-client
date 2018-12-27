@@ -38,6 +38,8 @@ export class ProfileAdoptRequestListComponent implements OnInit {
                     });
                 });
             });
+        }).catch(error => {
+            this.user = new User();
         });
     }
 }
