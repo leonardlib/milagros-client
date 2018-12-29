@@ -12,8 +12,11 @@
                 ul.collection
                     li.collection-item.avatar.cursor-pointer(*ngFor="let adoptRequest of adoptRequestsList",
                         (click)="adoptRequestService.goToDetail(adoptRequest.uid)")
-                        img.circle([src]="adoptRequest['pet']?.images[0].url")
-                        span.title {{ adoptRequest['pet']?.name }}
+                        img.circle(src="{{ adoptRequest?.pet?.images[0]?.url }}")
+                        span.title {{ adoptRequest?.pet?.name }}
                         p.grey-text.lighten-4 {{ adoptRequest?.date | amLocale: 'es' | amDateFormat: 'LL' }}
-                        span.secondary-content.grey-text.lighten-4(*ngIf="!adoptRequest?.approved") No se ha validado
-                        span.secondary-content.text-primary(*ngIf="adoptRequest?.approved") Adoptado
+                        a.secondary-content
+                            i.fa.fa-1-5x.fa-paw.waiting-color(*ngIf="!adoptRequest?.approved", matTooltip="No se ha aprobado",
+                                [matTooltipPosition]="'above'")
+                            i.fa.fa-1-5x.fa-paw.success-color(*ngIf="adoptRequest?.approved", matTooltip="En un hogar responsable",
+                                [matTooltipPosition]="'above'")

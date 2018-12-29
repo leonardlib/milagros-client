@@ -89,7 +89,7 @@ const routes: Routes = [
                 path: 'mascotas', children: [
                     { path: 'nueva', component: PetAdminFormComponent },
                     { path: 'editar/:uid', component: PetAdminFormComponent },
-                    { path: 'adoptar/solicitud/:uid', component: AdoptRequestDetailComponent }
+                    { path: 'adoptar/:uid', component: AdoptRequestDetailComponent }
                 ]
             },
         ]

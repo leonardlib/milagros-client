@@ -1,4 +1,78 @@
-.container
-    .row
+.container.min-height-100vh
+    .row.m-top-30p
         .col.s12
-            h1 Hola
+            h5 Datos de la mascota
+    .row
+        .col.s12.m3
+            .row
+                .col.s12
+                    span.text-primary Nombre
+                .col.s12
+                    span {{ adoptRequest?.pet?.name }}
+            .row
+                .col.s12
+                    span.text-primary Sexo
+                .col.s12
+                    span {{ adoptRequest?.pet?.sex?.name }}
+            .row
+                .col.s12
+                    span.text-primary Edad
+                .col.s12
+                    span {{ adoptRequest?.pet?.age?.pet_age }} año(s) - {{ adoptRequest?.pet?.age?.human_age }} año(s) humanos
+            .row
+                .col.s12
+                    span.text-primary Tamaño
+                .col.s12
+                    span {{ adoptRequest?.pet?.size?.name }}
+            .row
+                .col.s12
+                    span.text-primary Pelaje
+                .col.s12
+                    span {{ adoptRequest?.pet?.fur?.name }}
+            .row
+                .col.s12
+                    span.text-primary Gustos
+                .col.s12(*ngFor="let taste of adoptRequest?.pet?.tastes")
+                    span - {{ taste.name }}
+        .col.s12.m9
+            .row
+                .col.s12
+                    gallery.bg-transparent(id="petGallery", [autoPlay]="true", [counter]="false", [playerInterval]="5000",
+                        [imageSize]="contain", gallerize="")
+.w-100.grey.lighten-4.p-top-5.p-bottom-5.m-bottom-50p
+    .container
+        .row
+            .col.s12
+                h5(*ngIf="!adoptRequest?.approved") Datos del solicitante
+                h5(*ngIf="adoptRequest?.approved") Datos del tutor
+        .row
+            .col.s12
+                span.text-primary Nombre
+            .col.s12
+                span {{ profile?.name }} {{ profile?.last_name }} {{ profile?.mother_last_name }}
+        .row
+            .col.s12
+                span.text-primary Correo electrónico
+            .col.s12
+                span {{ profile?.user_email }}
+        .row
+            .col.s12
+                span.text-primary Teléfono
+            .col.s12
+                span {{ profile?.phone }}
+        .row
+            .col.s12
+                span.text-primary Identificación oficial
+            .col.s12.m-top-10p
+                a.cursor-pointer.text-primary(href="{{ profile?.official_id }}", target="_blank")
+                    i.font-xx-large.fa.fa-file
+        .row
+            .col.s12
+                span.text-primary Comprobante de domicilio
+            .col.s12.m-top-10p
+                a.cursor-pointer.text-primary(href="{{ profile?.address_file }}", target="_blank")
+                    i.font-xx-large.fa-file
+.container.m-bottom-50p
+    .row(*ngIf="!adoptRequest?.approved")
+        .col.s12
+            a.btn.btn-block.waves-block.waves-effect.bg-primary.white-text((click)="approveAdoptRequest()") Aprobar solicitud

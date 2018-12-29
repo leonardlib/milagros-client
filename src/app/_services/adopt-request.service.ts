@@ -6,6 +6,7 @@ import {UtilsService} from './utils.service';
 import {ImageModel} from '../_models/image';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
+import {Pet} from '../_models/pet';
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +25,14 @@ export class AdoptRequestService {
 
     index(query: any = null) {
         this.adoptRequestsRef = this.fireDatabase.list<AdoptRequest>(this.basePath, query);
+        this.adoptRequests = this.utilsService.setKeys(this.adoptRequestsRef);
+        return this.adoptRequests;
+    }
+
+    show(uid: string) {
+        this.adoptRequestsRef = this.fireDatabase.list<AdoptRequest>(this.basePath, ref => {
+            return ref.orderByChild('uid').equalTo(uid);
+        });
         this.adoptRequests = this.utilsService.setKeys(this.adoptRequestsRef);
         return this.adoptRequests;
     }
@@ -107,6 +116,6 @@ export class AdoptRequestService {
     }
 
     goToDetail(uid: string) {
-        this.router.navigate(['/administrador/mascotas/adoptar/solicitud/' + uid]);
+        this.router.navigate(['/administrador/mascotas/adoptar/' + uid]);
     }
 }
