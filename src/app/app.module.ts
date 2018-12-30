@@ -83,6 +83,8 @@ import {PaymentService} from './_services/payment.service';
 import { PetSponsorComponent } from './_components/pet/pet-sponsor/pet-sponsor.component';
 import { AdoptRequestsAdminComponent } from './_components/adopt/adopt-requests-admin/adopt-requests-admin.component';
 import { AdoptRequestDetailComponent } from './_components/adopt/adopt-request-detail/adopt-request-detail.component';
+import { DonateItemAdminComponent } from './_components/donate/donate-item-admin/donate-item-admin.component';
+import { DonateItemDetailAdminComponent } from './_components/donate/donate-item-detail-admin/donate-item-detail-admin.component';
 
 const config: InputFileConfig = {};
 
@@ -120,7 +122,9 @@ const config: InputFileConfig = {};
         DonateTiendaComponent,
         PetSponsorComponent,
         AdoptRequestsAdminComponent,
-        AdoptRequestDetailComponent
+        AdoptRequestDetailComponent,
+        DonateItemAdminComponent,
+        DonateItemDetailAdminComponent
     ],
     imports: [
         BrowserModule,

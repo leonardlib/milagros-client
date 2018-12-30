@@ -6,6 +6,7 @@ import { UtilsService } from './utils.service';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import {Fur} from '../_models/fur';
+import {AdoptRequest} from '../_models/adopt-request';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,14 @@ export class DonateService {
 
     index(query: any = null) {
         this.donationRef = this.fireDatabase.list<Donation>(this.basePath, query);
+        this.donations = this.utilsService.setKeys(this.donationRef);
+        return this.donations;
+    }
+
+    show(uid: string) {
+        this.donationRef = this.fireDatabase.list<Donation>(this.basePath, ref => {
+            return ref.orderByChild('uid').equalTo(uid);
+        });
         this.donations = this.utilsService.setKeys(this.donationRef);
         return this.donations;
     }
@@ -45,9 +54,40 @@ export class DonateService {
         });
     }
 
-    onlyMoney(isMoney: boolean = true) {
+    update(donation: Donation) {
+        return new Promise(resolve => {
+            this.donationRef = this.fireDatabase.list<Donation>(this.basePath);
+            this.donations = this.utilsService.setKeys(this.donationRef);
+
+            if (donation.collected) {
+                // Set collected date
+                donation.collected_date = moment().locale('es').format('YYYY-MM-DD');
+            }
+
+            // Update donation
+            this.donationRef.update(donation.key + '', {
+                name: donation.name,
+                email: donation.email,
+                amount: donation.amount,
+                description: donation.description,
+                is_money: donation.is_money,
+                collected: donation.collected,
+                collected_date: donation.collected_date,
+                date: donation.date,
+                address: donation.address
+            });
+
+            resolve(donation);
+        });
+    }
+
+    byMoney(isMoney: boolean = true) {
         return this.index(ref => {
             return ref.orderByChild('is_money').equalTo(isMoney);
         });
+    }
+
+    goToDetail(uid: string) {
+        this.router.navigate(['/administrador/donacion/' + uid]);
     }
 }

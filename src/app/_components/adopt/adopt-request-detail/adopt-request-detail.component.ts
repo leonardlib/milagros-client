@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Pet} from '../../../_models/pet';
 import {AdoptRequest} from '../../../_models/adopt-request';
-import {User} from '../../../_models/user';
 import {UtilsService} from '../../../_services/utils.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {PetService} from '../../../_services/pet.service';
 import {UserService} from '../../../_services/user.service';
 import {AdoptRequestService} from '../../../_services/adopt-request.service';
@@ -17,9 +16,10 @@ import {Profile} from '../../../_models/profile';
 })
 export class AdoptRequestDetailComponent implements OnInit {
     public adoptRequest: AdoptRequest = new AdoptRequest();
-    public user: User = new User();
+    public pet: Pet = new Pet();
     public profile: Profile = new Profile();
     public galleryRef: GalleryRef = null;
+    public placeGalleryRef: GalleryRef = null;
     public contain: any;
 
     constructor(
@@ -28,12 +28,12 @@ export class AdoptRequestDetailComponent implements OnInit {
         private petService: PetService,
         private userService: UserService,
         private adoptRequestService: AdoptRequestService,
-        private router: Router,
         private gallery: Gallery
     ) {}
 
     ngOnInit() {
         this.galleryRef = this.gallery.ref('petGallery');
+        this.placeGalleryRef = this.gallery.ref('placeGallery');
 
         this.route.params.subscribe(params => {
             const uid = params.uid;
@@ -41,10 +41,11 @@ export class AdoptRequestDetailComponent implements OnInit {
             this.utilsService.showSnackbar('Cargando...');
             this.adoptRequestService.show(uid).subscribe(adoptRequests => {
                 this.adoptRequest = adoptRequests[0] as AdoptRequest;
+                this.setImages();
 
                 this.petService.show(this.adoptRequest.pet_uid).subscribe(pets => {
-                    this.adoptRequest['pet'] = pets[0] as Pet;
-                    this.setImages();
+                    this.pet = pets[0] as Pet;
+                    this.setPetImages();
                 });
 
                 this.userService.getProfile(this.adoptRequest.user_email).subscribe(profiles => {
@@ -55,7 +56,16 @@ export class AdoptRequestDetailComponent implements OnInit {
     }
 
     setImages() {
-        this.adoptRequest['pet'].images.forEach(image => {
+        this.adoptRequest.place_images.forEach(image => {
+            this.placeGalleryRef.addImage({
+                src: image.url,
+                thumb: image.url
+            });
+        });
+    }
+
+    setPetImages() {
+        this.pet.images.forEach(image => {
             this.galleryRef.addImage({
                 src: image.url,
                 thumb: image.url
@@ -64,6 +74,50 @@ export class AdoptRequestDetailComponent implements OnInit {
     }
 
     approveAdoptRequest() {
-        console.log('GG');
+        this.adoptRequest.approved = true;
+
+        this.utilsService.showSnackbar('Aprobando solicitud...');
+        this.adoptRequestService.update(this.adoptRequest, false).then(response => {
+            if (response !== null) {
+                this.updatePet();
+            } else {
+                this.utilsService.showSnackbar('Ocurrió un error al aprobar la solicitud, intenta de nuevo');
+            }
+        });
+    }
+
+    updatePet() {
+        this.utilsService.showSnackbar('Actualizando mascota...');
+        this.pet.adopted = true;
+        this.pet.in_adopted_process = false;
+        this.petService.update(this.pet, false).then(response => {
+            if (response !== null) {
+                this.sendEmailToUser();
+            } else {
+                this.utilsService.showSnackbar('Ocurrió un error al aprobar la solicitud, intenta de nuevo');
+            }
+        });
+    }
+
+    sendEmailToUser() {
+        const title = '¡Hola ' + this.profile.name + '!';
+        const description = 'Tu solicitud de adopción de la mascota "' + this.pet.name
+            + '" ha sido revisada y aprobada, tienes 10 días para pasar por ella a la dirección que aparece más abajo'
+            + ' o envianos un correo a adopciones@milagrosdelrincon.mx si te gustaría que nosotros la llevemos.<br/><br/>¡Muchas gracias!';
+
+        this.utilsService.sendMail(
+            [this.profile.user_email],
+            '¡Felicidades!',
+            title,
+            description,
+            'Ver mi adopción',
+            ''
+        ).then(res => {
+            if (res) {
+                this.utilsService.showSnackbar('Se aprobó la solicitud y se notificó al usuario.');
+            } else {
+                this.utilsService.showSnackbar('Ocurrió un error al al aprobar solicitud, intenta de nuevo');
+            }
+        });
     }
 }

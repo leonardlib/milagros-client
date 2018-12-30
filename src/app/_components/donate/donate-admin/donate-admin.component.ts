@@ -20,7 +20,7 @@ export class DonateAdminComponent implements OnInit {
 
     ngOnInit() {
         this.utilsService.showSnackbar('Cargando...');
-        this.donateService.onlyMoney().subscribe(donations => {
+        this.donateService.byMoney().subscribe(donations => {
             this.donations = donations;
             this.sumAmount();
         });

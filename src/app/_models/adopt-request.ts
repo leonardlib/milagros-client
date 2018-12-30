@@ -8,6 +8,7 @@ export class AdoptRequest {
     pet_uid: string;
     date: string;
     approved: boolean;
+    approved_date: string;
 
     constructor() {}
 }

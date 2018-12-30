@@ -1,41 +1,41 @@
 
 <div class="container min-height-100vh">
   <div class="row m-top-30p">
-    <div class="col s12">
-      <h5>Datos de la mascota</h5>
-    </div>
-  </div>
-  <div class="row">
     <div class="col s12 m3">
       <div class="row">
+        <div class="col s12">
+          <h5>Datos de la mascota</h5>
+        </div>
+      </div>
+      <div class="row">
         <div class="col s12"><span class="text-primary">Nombre</span></div>
-        <div class="col s12"><span>{{ adoptRequest?.pet?.name }}</span></div>
+        <div class="col s12"><span>{{ pet?.name }}</span></div>
       </div>
       <div class="row">
         <div class="col s12"><span class="text-primary">Sexo</span></div>
-        <div class="col s12"><span>{{ adoptRequest?.pet?.sex?.name }}</span></div>
+        <div class="col s12"><span>{{ pet?.sex?.name }}</span></div>
       </div>
       <div class="row">
         <div class="col s12"><span class="text-primary">Edad</span></div>
-        <div class="col s12"><span>{{ adoptRequest?.pet?.age?.pet_age }} año(s) - {{ adoptRequest?.pet?.age?.human_age }} año(s) humanos</span></div>
+        <div class="col s12"><span>{{ pet?.age?.pet_age }} año(s) - {{ pet?.age?.human_age }} año(s) humanos</span></div>
       </div>
       <div class="row">
         <div class="col s12"><span class="text-primary">Tamaño</span></div>
-        <div class="col s12"><span>{{ adoptRequest?.pet?.size?.name }}</span></div>
+        <div class="col s12"><span>{{ pet?.size?.name }}</span></div>
       </div>
       <div class="row">
         <div class="col s12"><span class="text-primary">Pelaje</span></div>
-        <div class="col s12"><span>{{ adoptRequest?.pet?.fur?.name }}</span></div>
+        <div class="col s12"><span>{{ pet?.fur?.name }}</span></div>
       </div>
       <div class="row">
         <div class="col s12"><span class="text-primary">Gustos</span></div>
-        <div class="col s12" *ngFor="let taste of adoptRequest?.pet?.tastes"><span>- {{ taste.name }}</span></div>
+        <div class="col s12" *ngFor="let taste of pet?.tastes"><span>- {{ taste.name }}</span></div>
       </div>
     </div>
     <div class="col s12 m9">
       <div class="row">
         <div class="col s12">
-          <gallery class="bg-transparent" id="petGallery" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" gallerize=""></gallery>
+          <gallery class="bg-transparent" id="petGallery" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" gallerize="gallerize-1"></gallery>
         </div>
       </div>
     </div>
@@ -44,30 +44,41 @@
 <div class="w-100 grey lighten-4 p-top-5 p-bottom-5 m-bottom-50p">
   <div class="container">
     <div class="row">
-      <div class="col s12">
-        <h5 *ngIf="!adoptRequest?.approved">Datos del solicitante</h5>
-        <h5 *ngIf="adoptRequest?.approved">Datos del tutor</h5>
+      <div class="col s12 m3">
+        <div class="row">
+          <div class="col s12">
+            <h5 *ngIf="!adoptRequest?.approved">Datos del solicitante</h5>
+            <h5 *ngIf="adoptRequest?.approved">Datos del tutor</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12"><span class="text-primary">Nombre</span></div>
+          <div class="col s12"><span>{{ profile?.name }} {{ profile?.last_name }} {{ profile?.mother_last_name }}</span></div>
+        </div>
+        <div class="row">
+          <div class="col s12"><span class="text-primary">Correo electrónico</span></div>
+          <div class="col s12"><span>{{ profile?.user_email }}</span></div>
+        </div>
+        <div class="row">
+          <div class="col s12"><span class="text-primary">Teléfono</span></div>
+          <div class="col s12"><span>{{ profile?.phone }}</span></div>
+        </div>
+        <div class="row">
+          <div class="col s12"><span class="text-primary">Identificación oficial</span></div>
+          <div class="col s12 m-top-10p"><a class="cursor-pointer text-primary" href="{{ profile?.official_id }}" target="_blank"><i class="font-xx-large fa fa-file"></i></a></div>
+        </div>
+        <div class="row">
+          <div class="col s12"><span class="text-primary">Comprobante de domicilio</span></div>
+          <div class="col s12 m-top-10p"><a class="cursor-pointer text-primary" href="{{ profile?.address_file }}" target="_blank"><i class="font-xx-large fa-file"></i></a></div>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col s12"><span class="text-primary">Nombre</span></div>
-      <div class="col s12"><span>{{ profile?.name }} {{ profile?.last_name }} {{ profile?.mother_last_name }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s12"><span class="text-primary">Correo electrónico</span></div>
-      <div class="col s12"><span>{{ profile?.user_email }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s12"><span class="text-primary">Teléfono</span></div>
-      <div class="col s12"><span>{{ profile?.phone }}</span></div>
-    </div>
-    <div class="row">
-      <div class="col s12"><span class="text-primary">Identificación oficial</span></div>
-      <div class="col s12 m-top-10p"><a class="cursor-pointer text-primary" href="{{ profile?.official_id }}" target="_blank"><i class="font-xx-large fa fa-file"></i></a></div>
-    </div>
-    <div class="row">
-      <div class="col s12"><span class="text-primary">Comprobante de domicilio</span></div>
-      <div class="col s12 m-top-10p"><a class="cursor-pointer text-primary" href="{{ profile?.address_file }}" target="_blank"><i class="font-xx-large fa-file"></i></a></div>
+      <div class="col s12 m9">
+        <div class="row">
+          <div class="col s12">
+            <gallery class="bg-transparent" id="placeGallery" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" gallerize="gallerize-2"></gallery>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

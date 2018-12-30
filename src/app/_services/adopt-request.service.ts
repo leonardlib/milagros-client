@@ -6,7 +6,6 @@ import {UtilsService} from './utils.service';
 import {ImageModel} from '../_models/image';
 import * as moment from 'moment';
 import {Router} from '@angular/router';
-import {Pet} from '../_models/pet';
 
 @Injectable({
     providedIn: 'root'
@@ -61,6 +60,50 @@ export class AdoptRequestService {
             };
 
             startCreating().then(res => {
+                if (res) {
+                    resolve(adoptRequest);
+                } else {
+                    resolve(null);
+                }
+            });
+        });
+    }
+
+    update(adoptRequest: AdoptRequest, changeImages: boolean = true) {
+        return new Promise(resolve => {
+            this.adoptRequestsRef = this.fireDatabase.list<AdoptRequest>(this.basePath);
+
+            const startUpdating = async () => {
+
+                if (changeImages) {
+                    // Delete images
+                    await this.deleteImages(adoptRequest.place_images);
+                    // Upload images, then replace adopt request images
+                    adoptRequest.place_images = await this.uploadImages(
+                        adoptRequest.place_images,
+                        adoptRequest.uid
+                    );
+                }
+
+                if (adoptRequest.approved) {
+                    adoptRequest.approved_date = moment().locale('es').format('YYYY-MM-DD');
+                }
+
+                // Update adopt request
+                this.adoptRequestsRef.update(adoptRequest.key + '', {
+                    uid: adoptRequest.uid,
+                    place_images: adoptRequest.place_images,
+                    user_email: adoptRequest.user_email,
+                    pet_uid: adoptRequest.pet_uid,
+                    date: adoptRequest.date,
+                    approved: adoptRequest.approved,
+                    approved_date: adoptRequest.approved_date
+                });
+
+                return true;
+            };
+
+            startUpdating().then(res => {
                 if (res) {
                     resolve(adoptRequest);
                 } else {

@@ -32,6 +32,7 @@ import {DonateTiendaComponent} from './_components/donate/donate-tienda/donate-t
 import {PetSponsorComponent} from './_components/pet/pet-sponsor/pet-sponsor.component';
 import {AdoptRequestsAdminComponent} from './_components/adopt/adopt-requests-admin/adopt-requests-admin.component';
 import {AdoptRequestDetailComponent} from './_components/adopt/adopt-request-detail/adopt-request-detail.component';
+import {DonateItemDetailAdminComponent} from './_components/donate/donate-item-detail-admin/donate-item-detail-admin.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -92,6 +93,7 @@ const routes: Routes = [
                     { path: 'adoptar/:uid', component: AdoptRequestDetailComponent }
                 ]
             },
+            { path: 'donacion/:uid', component: DonateItemDetailAdminComponent }
         ]
     },
     { path: 'blank', component: PageNotFoundComponent },

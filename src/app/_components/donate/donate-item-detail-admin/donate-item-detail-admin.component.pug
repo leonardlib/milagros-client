@@ -1,0 +1,59 @@
+.container.min-height-100vh
+    .row.m-top-30p
+        .col.s12.m6
+            .row
+                .col.s12
+                    h5 Datos de la donación
+            .row
+                .col.s12
+                    span.text-primary Nombre
+                .col.s12
+                    span {{ donation?.name }}
+            .row
+                .col.s12
+                    span.text-primary Correo
+                .col.s12
+                    span {{ donation?.email }}
+            .row
+                .col.s12
+                    span.text-primary Fecha de la solicitud
+                .col.s12
+                    span {{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}
+            .row
+                .col.s12
+                    span.text-primary Descripción
+                .col.s12
+                    p.text-justify {{ donation?.description }}
+        .col.s12.m6
+            .row
+                .col.s12
+                    h5 Dirección
+            .row
+                .col.s12
+                    span.text-primary Calle
+                .col.s12
+                    span {{ donation?.address?.street }}
+            .row
+                .col.s6([class.s12]="!donation?.address?.interior_number")
+                    span.text-primary Número exterior
+                .col.s6(*ngIf="donation?.address?.interior_number")
+                    span.text-primary Número interior
+                .col.s6([class.s12]="!donation?.address?.interior_number")
+                    span {{ donation?.address?.outdoor_number }}
+                .col.s6(*ngIf="donation?.address?.interior_number")
+                    span {{ donation?.address?.interior_number }}
+            .row
+                .col.s12
+                    span.text-primary Colonia
+                .col.s12
+                    span {{ donation?.address?.colony }}
+            .row
+                .col.s12
+                    span.text-primary Ciudad
+                .col.s12
+                    span {{ donation?.address?.city }}
+    .row
+        .col.s12(*ngIf="!donation?.approved")
+            a.btn.btn-block.waves-block.waves-effect.bg-primary.white-text((click)="approve()") Aprobar donación
+        .col.s12(*ngIf="!donation?.collected && donation?.approved")
+            a.btn.btn-block.waves-block.waves-effect.bg-primary.white-text((click)="markCollected()") Marcar donación como recogida

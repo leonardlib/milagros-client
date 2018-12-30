@@ -6,6 +6,9 @@ export class Donation {
     amount: number;
     description: string;
     is_money: boolean;
+    collected: boolean;
+    collected_date: string;
+    approved: boolean;
     date: string;
     address: Address;
 

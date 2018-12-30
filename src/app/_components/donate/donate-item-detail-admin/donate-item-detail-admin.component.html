@@ -1,0 +1,59 @@
+
+<div class="container min-height-100vh">
+  <div class="row m-top-30p">
+    <div class="col s12 m6">
+      <div class="row">
+        <div class="col s12">
+          <h5>Datos de la donación</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12"><span class="text-primary">Nombre</span></div>
+        <div class="col s12"><span>{{ donation?.name }}</span></div>
+      </div>
+      <div class="row">
+        <div class="col s12"><span class="text-primary">Correo</span></div>
+        <div class="col s12"><span>{{ donation?.email }}</span></div>
+      </div>
+      <div class="row">
+        <div class="col s12"><span class="text-primary">Fecha de la solicitud</span></div>
+        <div class="col s12"><span>{{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}</span></div>
+      </div>
+      <div class="row">
+        <div class="col s12"><span class="text-primary">Descripción</span></div>
+        <div class="col s12">
+          <p class="text-justify">{{ donation?.description }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m6">
+      <div class="row">
+        <div class="col s12">
+          <h5>Dirección</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12"><span class="text-primary">Calle</span></div>
+        <div class="col s12"><span>{{ donation?.address?.street }}</span></div>
+      </div>
+      <div class="row">
+        <div class="col s6" [class.s12]="!donation?.address?.interior_number"><span class="text-primary">Número exterior</span></div>
+        <div class="col s6" *ngIf="donation?.address?.interior_number"><span class="text-primary">Número interior</span></div>
+        <div class="col s6" [class.s12]="!donation?.address?.interior_number"><span>{{ donation?.address?.outdoor_number }}</span></div>
+        <div class="col s6" *ngIf="donation?.address?.interior_number"><span>{{ donation?.address?.interior_number }}</span></div>
+      </div>
+      <div class="row">
+        <div class="col s12"><span class="text-primary">Colonia</span></div>
+        <div class="col s12"><span>{{ donation?.address?.colony }}</span></div>
+      </div>
+      <div class="row">
+        <div class="col s12"><span class="text-primary">Ciudad</span></div>
+        <div class="col s12"><span>{{ donation?.address?.city }}</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12" *ngIf="!donation?.approved"><a class="btn btn-block waves-block waves-effect bg-primary white-text" (click)="approve()">Aprobar donación</a></div>
+    <div class="col s12" *ngIf="!donation?.collected &amp;&amp; donation?.approved"><a class="btn btn-block waves-block waves-effect bg-primary white-text" (click)="markCollected()">Marcar donación como recogida</a></div>
+  </div>
+</div>
