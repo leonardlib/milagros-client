@@ -7,30 +7,30 @@
                         input(type="text", id="name", name="name", [(ngModel)]="profile.name", #nameInput="ngModel",
                             [required]="true")
                         label(for="name", [class.active]="profile.name") Nombre
-                        span.red-text(*ngIf="adoptForm.submitted && nameInput.errors?.required") Ingresa un nombre válido
+                        span.grey-text.lighten-4(*ngIf="adoptForm.submitted && nameInput.errors?.required") Ingresa un nombre válido
                 .row
                     .input-field.col.s12.m6
                         input(type="text", id="last-name", name="last-name", [(ngModel)]="profile.last_name", #lastNameInput="ngModel",
                             [required]="true")
                         label(for="last-name", [class.active]="profile.last_name") Apellido paterno
-                        span.red-text(*ngIf="adoptForm.submitted && lastNameInput.errors?.required") Ingresa un apellido paterno válido
+                        span.grey-text.lighten-4(*ngIf="adoptForm.submitted && lastNameInput.errors?.required") Ingresa un apellido paterno válido
                     .input-field.col.s12.m6
                         input(type="text", id="mother-last-name", name="mother-last-name", [(ngModel)]="profile.mother_last_name",
                             #motherLastNameInput="ngModel", [required]="true")
                         label(for="mother-last-name", [class.active]="profile.mother_last_name") Apellido materno
-                        span.red-text(*ngIf="adoptForm.submitted && motherLastNameInput.errors?.required") Ingresa un apellido materno válido
+                        span.grey-text.lighten-4(*ngIf="adoptForm.submitted && motherLastNameInput.errors?.required") Ingresa un apellido materno válido
                 .row
                     .input-field.col.s12
                         input(type="email", id="email", name="email", [(ngModel)]="profile.user_email", #emailInput="ngModel",
                             [required]="true", [email]="true")
                         label(for="email", [class.active]="profile.user_email") Correo electrónico
-                        span.red-text(*ngIf="adoptForm.submitted && emailInput.errors?.required") Ingresa un correo válido
+                        span.grey-text.lighten-4(*ngIf="adoptForm.submitted && emailInput.errors?.required") Ingresa un correo válido
                 .row
                     .input-field.col.s12
                         input(type="text", id="phone", name="phone", [(ngModel)]="profile.phone", #phoneInput="ngModel",
                             [required]="true", pattern="[0-9]+", minlength="10", maxlength="10")
                         label(for="phone", [class.active]="profile.phone") Teléfono (10 dígitos)
-                        span.red-text(*ngIf="adoptForm.submitted && phoneInput.errors?.required") Ingresa un teléfono válido
+                        span.grey-text.lighten-4(*ngIf="adoptForm.submitted && phoneInput.errors?.required") Ingresa un teléfono válido
                 .row
                     .input-field.col.s12
                         label(for="official-id") Identificación oficial vigente

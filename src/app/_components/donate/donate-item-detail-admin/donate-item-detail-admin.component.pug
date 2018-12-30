@@ -1,5 +1,15 @@
 .container.min-height-100vh
     .row.m-top-30p
+        .col.s12
+            i.fa.fa-1-5x.fa-circle.waiting-color(*ngIf="!donation?.approved")
+            i.fa.fa-1-5x.fa-circle.orange-text(*ngIf="donation?.approved && !donation?.collected")
+            i.fa.fa-1-5x.fa-circle.success-color(*ngIf="donation?.approved && donation?.collected")
+            | &nbsp;
+            | &nbsp;
+            span(*ngIf="!donation?.approved") No se ha aprobado
+            span(*ngIf="donation?.approved && !donation?.collected") No se ha recogido
+            span(*ngIf="donation?.approved && donation?.collected") Aprobada y recogida
+    .row
         .col.s12.m6
             .row
                 .col.s12
@@ -24,6 +34,19 @@
                     span.text-primary Descripción
                 .col.s12
                     p.text-justify {{ donation?.description }}
+            .row.m-bottom-0(*ngIf="!donation?.approved")
+                .col.s12
+                    span.text-primary Fecha estimada en que se recogera el artículo o los artículos
+            .row(*ngIf="!donation?.approved")
+                .input-field.col.s12
+                    input([matDatepicker]="datepicker", id="date", (focus)="datepicker.open()", name="date",
+                        #dateInput="ngModel", [(ngModel)]="donation.collected_estimated_date", [min]="minDate")
+                    mat-datepicker(#datepicker="", touchUi="")
+            .row(*ngIf="donation?.approved")
+                .col.s12
+                    span.text-primary Fecha estimada en que se recogera el artículo o los artículos
+                .col.s12
+                    span {{ donation?.collected_estimated_date | amLocale: 'es' | amDateFormat: 'LL' }}
         .col.s12.m6
             .row
                 .col.s12
@@ -52,24 +75,18 @@
                     span.text-primary Ciudad
                 .col.s12
                     span {{ donation?.address?.city }}
-            .row(*ngIf="!donation?.approved")
-                .input-field.col.s12
-                    label(for="date") Fecha estimada en que se recogera el artículo o los artículos
-                .input-field.col.s12
-                    input([matDatepicker]="datepicker", id="date", (focus)="datepicker.open()", name="date",
-                        #dateInput="ngModel", [(ngModel)]="donation.collected_estimated_date", [min]="minDate")
-                    mat-datepicker(#datepicker="", touchUi="")
-            .row(*ngIf="donation?.approved")
-                .col.s12
-                    span.text-primary Fecha estimada en que se recogera el artículo o los artículos
-                .col.s12
-                    span {{ donation?.collected_estimated_date | amLocale: 'es' | amDateFormat: 'LL' }}
             .row(*ngIf="donation?.collected")
                 .col.s12
                     span.text-primary Fecha en que se recogió el artículo o los artículos
                 .col.s12
                     span {{ donation?.collected_date | amLocale: 'es' | amDateFormat: 'LL' }}
-    .row.m-bottom-50p
+    .row
+        .col.s12
+            span.text-primary Fotografías
+        .col.s12.m6.offset-m3
+            gallery.bg-transparent(id="donationGallery", [autoPlay]="true", [counter]="false", [playerInterval]="5000",
+                [imageSize]="contain", gallerize="")
+    .row.m-bottom-50p.m-top-50p
         .col.s12(*ngIf="!donation?.approved")
             a.btn.btn-block.waves-block.waves-effect.bg-primary.white-text((click)="approve()") Aprobar donación
         .col.s12(*ngIf="!donation?.collected && donation?.approved")

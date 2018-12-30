@@ -7,12 +7,14 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import {Fur} from '../_models/fur';
 import {AdoptRequest} from '../_models/adopt-request';
+import {ImageModel} from '../_models/image';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DonateService {
     private basePath = 'donation';
+    private storageBasePath = 'images/donation/';
     private donationRef: AngularFireList<any>;
     private donations: Observable<any[]>;
 
@@ -39,25 +41,39 @@ export class DonateService {
     create(donation: Donation) {
         return new Promise(resolve => {
             this.donationRef = this.fireDatabase.list<Donation>(this.basePath);
-            this.donations = this.utilsService.setKeys(this.donationRef);
 
             // Set donation unique identifier
             donation.uid = this.utilsService.generateRandomUid();
 
-            // Set donation date
-            donation.date = moment().locale('es').format('YYYY-MM-DD');
+            const startCreating = async () => {
+                // Upload images, then replace donate images
+                donation.images = await this.uploadImages(
+                    donation.images,
+                    donation.uid
+                );
 
-            // Save donation and set new key
-            const newRef = this.donationRef.push(donation);
-            donation.key = newRef.key;
-            resolve(donation);
+                // Set donation date
+                donation.date = moment().locale('es').format('YYYY-MM-DD');
+
+                // Save donation and set new key
+                const newRef = this.donationRef.push(donation);
+                donation.key = newRef.key;
+                return true;
+            };
+
+            startCreating().then(res => {
+                if (res) {
+                    resolve(donation);
+                } else {
+                    resolve(null);
+                }
+            });
         });
     }
 
     update(donation: Donation) {
         return new Promise(resolve => {
             this.donationRef = this.fireDatabase.list<Donation>(this.basePath);
-            this.donations = this.utilsService.setKeys(this.donationRef);
 
             if (donation.approved && !donation.collected) {
                 // Set collected estimated date
@@ -81,11 +97,26 @@ export class DonateService {
                 collected_date: donation.collected_date,
                 collected_estimated_date: donation.collected_estimated_date,
                 date: donation.date,
-                address: donation.address
+                address: donation.address,
+                images: donation.images
             });
 
             resolve(donation);
         });
+    }
+
+    async uploadImages(images: ImageModel[], uid: string) {
+        for (let index = 0; index < images.length; index++) {
+            const pathName = this.storageBasePath + uid + '-0' + (index + 1);
+
+            await this.utilsService.uploadFile(images[index].file, pathName).then(res => {
+                if (res !== '') {
+                    images[index].url = res + '';
+                }
+            });
+        }
+
+        return images;
     }
 
     orderBy(prop: string, value: any) {

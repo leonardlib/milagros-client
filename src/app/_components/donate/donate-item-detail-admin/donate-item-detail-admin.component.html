@@ -1,6 +1,11 @@
 
 <div class="container min-height-100vh">
   <div class="row m-top-30p">
+    <div class="col s12"><i class="fa fa-1-5x fa-circle waiting-color" *ngIf="!donation?.approved"></i><i class="fa fa-1-5x fa-circle orange-text" *ngIf="donation?.approved &amp;&amp; !donation?.collected"></i><i class="fa fa-1-5x fa-circle success-color" *ngIf="donation?.approved &amp;&amp; donation?.collected"></i>&nbsp;
+      &nbsp;<span *ngIf="!donation?.approved">No se ha aprobado</span><span *ngIf="donation?.approved &amp;&amp; !donation?.collected">No se ha recogido</span><span *ngIf="donation?.approved &amp;&amp; donation?.collected">Aprobada y recogida</span>
+    </div>
+  </div>
+  <div class="row">
     <div class="col s12 m6">
       <div class="row">
         <div class="col s12">
@@ -24,6 +29,19 @@
         <div class="col s12">
           <p class="text-justify">{{ donation?.description }}</p>
         </div>
+      </div>
+      <div class="row m-bottom-0" *ngIf="!donation?.approved">
+        <div class="col s12"><span class="text-primary">Fecha estimada en que se recogera el artículo o los artículos</span></div>
+      </div>
+      <div class="row" *ngIf="!donation?.approved">
+        <div class="input-field col s12">
+          <input [matDatepicker]="datepicker" id="date" (focus)="datepicker.open()" name="date" #dateInput="ngModel" [(ngModel)]="donation.collected_estimated_date" [min]="minDate"/>
+          <mat-datepicker #datepicker="" touchUi=""></mat-datepicker>
+        </div>
+      </div>
+      <div class="row" *ngIf="donation?.approved">
+        <div class="col s12"><span class="text-primary">Fecha estimada en que se recogera el artículo o los artículos</span></div>
+        <div class="col s12"><span>{{ donation?.collected_estimated_date | amLocale: 'es' | amDateFormat: 'LL' }}</span></div>
       </div>
     </div>
     <div class="col s12 m6">
@@ -50,26 +68,19 @@
         <div class="col s12"><span class="text-primary">Ciudad</span></div>
         <div class="col s12"><span>{{ donation?.address?.city }}</span></div>
       </div>
-      <div class="row" *ngIf="!donation?.approved">
-        <div class="input-field col s12">
-          <label for="date">Fecha estimada en que se recogera el artículo o los artículos</label>
-        </div>
-        <div class="input-field col s12">
-          <input [matDatepicker]="datepicker" id="date" (focus)="datepicker.open()" name="date" #dateInput="ngModel" [(ngModel)]="donation.collected_estimated_date" [min]="minDate"/>
-          <mat-datepicker #datepicker="" touchUi=""></mat-datepicker>
-        </div>
-      </div>
-      <div class="row" *ngIf="donation?.approved">
-        <div class="col s12"><span class="text-primary">Fecha estimada en que se recogera el artículo o los artículos</span></div>
-        <div class="col s12"><span>{{ donation?.collected_estimated_date | amLocale: 'es' | amDateFormat: 'LL' }}</span></div>
-      </div>
       <div class="row" *ngIf="donation?.collected">
         <div class="col s12"><span class="text-primary">Fecha en que se recogió el artículo o los artículos</span></div>
         <div class="col s12"><span>{{ donation?.collected_date | amLocale: 'es' | amDateFormat: 'LL' }}</span></div>
       </div>
     </div>
   </div>
-  <div class="row m-bottom-50p">
+  <div class="row">
+    <div class="col s12"><span class="text-primary">Fotografías</span></div>
+    <div class="col s12 m6 offset-m3">
+      <gallery class="bg-transparent" id="donationGallery" [autoPlay]="true" [counter]="false" [playerInterval]="5000" [imageSize]="contain" gallerize=""></gallery>
+    </div>
+  </div>
+  <div class="row m-bottom-50p m-top-50p">
     <div class="col s12" *ngIf="!donation?.approved"><a class="btn btn-block waves-block waves-effect bg-primary white-text" (click)="approve()">Aprobar donación</a></div>
     <div class="col s12" *ngIf="!donation?.collected &amp;&amp; donation?.approved"><a class="btn btn-block waves-block waves-effect bg-primary white-text" (click)="markCollected()">Marcar donación como recogida</a></div>
   </div>

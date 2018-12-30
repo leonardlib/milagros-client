@@ -36,6 +36,16 @@
           </div>
         </div>
         <div class="row">
+          <div class="input-field col s12">
+            <label for="images">Fotografías</label>
+          </div>
+        </div>
+        <div class="row m-top-10p">
+          <div class="input-field col s12">
+            <input-file [(ngModel)]="images" [fileAccept]="'image/*'" id="images" [fileLimit]="100" name="images"></input-file>
+          </div>
+        </div>
+        <div class="row">
           <div class="col s12">
             <p class="text-justify">
               Escribenos tu dirección o el lugar a donde podemos pasar a recoger el artículo o los artículos

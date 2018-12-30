@@ -37,7 +37,7 @@
                                     input.validate(type="email", id="email", name="email", [(ngModel)]="user.email", #emailInput="ngModel",
                                         [email]="true")
                                     label(for="email", [class.active]="user.email") Correo
-                                    span.red-text(*ngIf="emailInput.invalid") Ingresa un correo valido
+                                    span.grey-text.lighten-4(*ngIf="emailInput.invalid") Ingresa un correo valido
                             .row
                                 .input-field.col.s12
                                     input(type="password", id="password", name="password", [(ngModel)]="user.password",

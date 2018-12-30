@@ -7,6 +7,7 @@ import {UserService} from '../../../_services/user.service';
 import {DonateService} from '../../../_services/donate.service';
 import {Router} from '@angular/router';
 import {environment} from '../../../../environments/environment';
+import {ImageModel} from '../../../_models/image';
 
 @Component({
     selector: 'app-donate-item',
@@ -17,6 +18,7 @@ export class DonateItemComponent implements OnInit {
     @ViewChild('donateItemForm') form: NgForm;
     public user: User = new User();
     public donation: Donation = new Donation();
+    public images: any[] = [];
 
     constructor(
         private utilsService: UtilsService,
@@ -32,20 +34,27 @@ export class DonateItemComponent implements OnInit {
             this.donation.email = this.user.email;
         }).catch(error => {
             this.user = new User();
-            this.donation.name = '';
-            this.donation.email = '';
         });
     }
 
     donate() {
-        if (this.form.valid) {
+        if (this.form.valid && this.images.length > 0) {
             this.saveDonation();
+        } else {
+            this.utilsService.showSnackbar('Completa la información');
         }
     }
 
     saveDonation() {
         this.donation.amount = 0;
         this.donation.is_money = false;
+
+        this.images.forEach(image => {
+            const auxImage = new ImageModel();
+            auxImage.file = image['file'];
+
+            this.donation.images.push(auxImage);
+        });
 
         this.utilsService.showSnackbar('Enviando tu solicitud...');
         this.donateService.create(this.donation).then(response => {
@@ -91,7 +100,7 @@ export class DonateItemComponent implements OnInit {
             ''
         ).then(res => {
             if (res) {
-                this.router.navigate(['/perfil/solicitudes']);
+                this.router.navigate(['/perfil']);
             } else {
                 this.utilsService.showSnackbar('Ocurrió un error al terminar tu solicitud, intenta de nuevo');
             }

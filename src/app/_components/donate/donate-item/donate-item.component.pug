@@ -31,6 +31,12 @@
                         label(for="description", [class.active]="donation?.description") Cuéntanos que quieres donar y por qué
                         span.grey-text.lighten-4(*ngIf="donateItemForm.submitted && descriptionInput.errors?.required") Ingresa una descripción
                 .row
+                    .input-field.col.s12
+                        label(for="images") Fotografías
+                .row.m-top-10p
+                    .input-field.col.s12
+                        input-file([(ngModel)]="images", [fileAccept]="'image/*'", id="images", [fileLimit]="100", name="images")
+                .row
                     .col.s12
                         p.text-justify
                             | Escribenos tu dirección o el lugar a donde podemos pasar a recoger el artículo o los artículos

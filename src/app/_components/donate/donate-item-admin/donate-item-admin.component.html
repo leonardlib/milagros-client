@@ -15,10 +15,10 @@
       <div class="col s12">
         <ul class="collection">
           <li class="collection-item avatar cursor-pointer no-list-item-padding" *ngFor="let donation of noCollectedDonations" (click)="donateService.goToDetail(donation.uid)"><span class="title">{{ donation?.name }}</span>
-            <p class="grey-text lighten-4">{{ donation?.email }}<br/>{{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}</p><a class="secondary-content"><i class="fa fa-1-5x fa-ban waiting-color" matTooltip="No se ha recogido" [matTooltipPosition]="'above'"></i></a>
+            <p class="grey-text lighten-4">{{ donation?.email }}<br/>{{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}</p><a class="secondary-content"><i class="fa fa-1-5x fa-circle waiting-color" matTooltip="No se ha aprobado" [matTooltipPosition]="'above'" *ngIf="!donation?.approved"></i><i class="fa fa-1-5x fa-circle orange-text" matTooltip="No se ha recogido" [matTooltipPosition]="'above'" *ngIf="donation?.approved"></i></a>
           </li>
           <li class="collection-item avatar cursor-pointer no-list-item-padding" *ngFor="let donation of collectedDonations" (click)="donateService.goToDetail(donation.uid)"><span class="title">{{ donation?.name }}</span>
-            <p class="grey-text lighten-4">{{ donation?.email }}<br/>{{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}</p><a class="secondary-content"><i class="fa fa-1-5x fa-check success-color" matTooltip="Donación recogida" [matTooltipPosition]="'above'"></i></a>
+            <p class="grey-text lighten-4">{{ donation?.email }}<br/>{{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}</p><a class="secondary-content"><i class="fa fa-1-5x fa-circle success-color" matTooltip="Donación aprobada y recogida" [matTooltipPosition]="'above'"></i></a>
           </li>
         </ul>
       </div>

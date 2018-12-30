@@ -18,7 +18,10 @@
                             br
                             | {{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}
                         a.secondary-content
-                            i.fa.fa-1-5x.fa-ban.waiting-color(matTooltip="No se ha recogido", [matTooltipPosition]="'above'")
+                            i.fa.fa-1-5x.fa-circle.waiting-color(matTooltip="No se ha aprobado", [matTooltipPosition]="'above'",
+                                *ngIf="!donation?.approved")
+                            i.fa.fa-1-5x.fa-circle.orange-text(matTooltip="No se ha recogido", [matTooltipPosition]="'above'",
+                                *ngIf="donation?.approved")
                     li.collection-item.avatar.cursor-pointer.no-list-item-padding(*ngFor="let donation of collectedDonations",
                         (click)="donateService.goToDetail(donation.uid)")
                         span.title {{ donation?.name }}
@@ -27,4 +30,4 @@
                             br
                             | {{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}
                         a.secondary-content
-                            i.fa.fa-1-5x.fa-check.success-color(matTooltip="Donación recogida", [matTooltipPosition]="'above'")
+                            i.fa.fa-1-5x.fa-circle.success-color(matTooltip="Donación aprobada y recogida", [matTooltipPosition]="'above'")

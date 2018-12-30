@@ -12,6 +12,7 @@ export class Donation {
     approved: boolean;
     date: string;
     address: Address;
+    images: any;
 
     constructor() {
         this.uid = '';
@@ -25,6 +26,7 @@ export class Donation {
         this.collected_estimated_date = '';
         this.approved = false;
         this.date = '';
+        this.images = [];
 
         this.address = new Address();
         this.address.street = '';
