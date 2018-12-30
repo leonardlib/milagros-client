@@ -10,6 +10,8 @@ import {UtilsService} from '../../../_services/utils.service';
 })
 export class DonateItemAdminComponent implements OnInit {
     public donations: any = [];
+    public collectedDonations: any = [];
+    public noCollectedDonations: any = [];
 
     constructor(
         public donateService: DonateService,
@@ -19,8 +21,19 @@ export class DonateItemAdminComponent implements OnInit {
 
     ngOnInit() {
         this.utilsService.showSnackbar('Cargando...');
-        this.donateService.byMoney(false).subscribe(donations => {
+        this.donateService.orderBy('is_money', false).subscribe(donations => {
             this.donations = donations;
+            this.filterDonations();
+        });
+    }
+
+    filterDonations() {
+        this.donations.forEach(donation => {
+            if (donation.collected) {
+                this.collectedDonations.push(donation);
+            } else {
+                this.noCollectedDonations.push(donation);
+            }
         });
     }
 }

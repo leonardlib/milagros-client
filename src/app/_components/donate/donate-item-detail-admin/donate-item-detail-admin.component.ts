@@ -3,6 +3,8 @@ import {DonateService} from '../../../_services/donate.service';
 import {UtilsService} from '../../../_services/utils.service';
 import {Donation} from '../../../_models/donation';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DateAdapter} from '@angular/material';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-donate-item-detail-admin',
@@ -11,14 +13,19 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class DonateItemDetailAdminComponent implements OnInit {
     public donation: Donation = new Donation();
+    public minDate: any;
 
     constructor(
         private donateService: DonateService,
         public utilsService: UtilsService,
-        private route: ActivatedRoute
-    ) {}
+        private route: ActivatedRoute,
+        private datepickerAdapter: DateAdapter<any>
+    ) {
+        this.minDate = new Date();
+    }
 
     ngOnInit() {
+        this.datepickerAdapter.setLocale('es');
         this.route.params.subscribe(params => {
             const uid = params.uid;
 
@@ -41,13 +48,16 @@ export class DonateItemDetailAdminComponent implements OnInit {
         this.donation.collected = true;
         this.donateService.update(this.donation).then(donation => {
             this.donation = donation as Donation;
+            this.utilsService.showSnackbar('Se marco como recogida la donación');
         });
     }
 
     sendEmailToUser() {
         const title = '¡Hola ' + this.donation.email + '!';
         const description = 'Hemos visto tu solicitud de donación de artículo, y queremos darte las gracias por apoyarnos. ' +
-            'En los próximos días te estaremos visitando para recoger el o los artículos.<br/><br/>¡Muchísimas gracias!';
+            'Te estaremos visitando aproximadamente el ' +
+            moment(this.donation.collected_estimated_date).locale('es').format('LL') +
+            ' para recoger el artículo o los artículos que nos quieres donar.<br/><br/>¡Muchísimas gracias!';
 
         this.utilsService.sendMail(
             [this.donation.email],

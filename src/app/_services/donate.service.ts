@@ -59,6 +59,11 @@ export class DonateService {
             this.donationRef = this.fireDatabase.list<Donation>(this.basePath);
             this.donations = this.utilsService.setKeys(this.donationRef);
 
+            if (donation.approved && !donation.collected) {
+                // Set collected estimated date
+                donation.collected_estimated_date = moment(donation.collected_estimated_date).locale('es').format('YYYY-MM-DD');
+            }
+
             if (donation.collected) {
                 // Set collected date
                 donation.collected_date = moment().locale('es').format('YYYY-MM-DD');
@@ -72,7 +77,9 @@ export class DonateService {
                 description: donation.description,
                 is_money: donation.is_money,
                 collected: donation.collected,
+                approved: donation.approved,
                 collected_date: donation.collected_date,
+                collected_estimated_date: donation.collected_estimated_date,
                 date: donation.date,
                 address: donation.address
             });
@@ -81,9 +88,9 @@ export class DonateService {
         });
     }
 
-    byMoney(isMoney: boolean = true) {
+    orderBy(prop: string, value: any) {
         return this.index(ref => {
-            return ref.orderByChild('is_money').equalTo(isMoney);
+            return ref.orderByChild(prop).equalTo(value);
         });
     }
 

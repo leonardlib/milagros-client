@@ -50,9 +50,26 @@
         <div class="col s12"><span class="text-primary">Ciudad</span></div>
         <div class="col s12"><span>{{ donation?.address?.city }}</span></div>
       </div>
+      <div class="row" *ngIf="!donation?.approved">
+        <div class="input-field col s12">
+          <label for="date">Fecha estimada en que se recogera el artículo o los artículos</label>
+        </div>
+        <div class="input-field col s12">
+          <input [matDatepicker]="datepicker" id="date" (focus)="datepicker.open()" name="date" #dateInput="ngModel" [(ngModel)]="donation.collected_estimated_date" [min]="minDate"/>
+          <mat-datepicker #datepicker="" touchUi=""></mat-datepicker>
+        </div>
+      </div>
+      <div class="row" *ngIf="donation?.approved">
+        <div class="col s12"><span class="text-primary">Fecha estimada en que se recogera el artículo o los artículos</span></div>
+        <div class="col s12"><span>{{ donation?.collected_estimated_date | amLocale: 'es' | amDateFormat: 'LL' }}</span></div>
+      </div>
+      <div class="row" *ngIf="donation?.collected">
+        <div class="col s12"><span class="text-primary">Fecha en que se recogió el artículo o los artículos</span></div>
+        <div class="col s12"><span>{{ donation?.collected_date | amLocale: 'es' | amDateFormat: 'LL' }}</span></div>
+      </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row m-bottom-50p">
     <div class="col s12" *ngIf="!donation?.approved"><a class="btn btn-block waves-block waves-effect bg-primary white-text" (click)="approve()">Aprobar donación</a></div>
     <div class="col s12" *ngIf="!donation?.collected &amp;&amp; donation?.approved"><a class="btn btn-block waves-block waves-effect bg-primary white-text" (click)="markCollected()">Marcar donación como recogida</a></div>
   </div>

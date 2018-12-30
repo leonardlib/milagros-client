@@ -10,7 +10,7 @@
         .row
             .col.s12
                 ul.collection
-                    li.collection-item.avatar.cursor-pointer.no-list-item-padding(*ngFor="let donation of donations",
+                    li.collection-item.avatar.cursor-pointer.no-list-item-padding(*ngFor="let donation of noCollectedDonations",
                         (click)="donateService.goToDetail(donation.uid)")
                         span.title {{ donation?.name }}
                         p.grey-text.lighten-4
@@ -18,7 +18,13 @@
                             br
                             | {{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}
                         a.secondary-content
-                            i.fa.fa-1-5x.fa-ban.waiting-color(*ngIf="!donation?.collected", matTooltip="No se ha recogido",
-                                [matTooltipPosition]="'above'")
-                            i.fa.fa-1-5x.fa-check.success-color(*ngIf="donation?.collected", matTooltip="Donación recogida",
-                                [matTooltipPosition]="'above'")
+                            i.fa.fa-1-5x.fa-ban.waiting-color(matTooltip="No se ha recogido", [matTooltipPosition]="'above'")
+                    li.collection-item.avatar.cursor-pointer.no-list-item-padding(*ngFor="let donation of collectedDonations",
+                        (click)="donateService.goToDetail(donation.uid)")
+                        span.title {{ donation?.name }}
+                        p.grey-text.lighten-4
+                            | {{ donation?.email }}
+                            br
+                            | {{ donation?.date | amLocale: 'es' | amDateFormat: 'LL' }}
+                        a.secondary-content
+                            i.fa.fa-1-5x.fa-check.success-color(matTooltip="Donación recogida", [matTooltipPosition]="'above'")

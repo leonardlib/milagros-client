@@ -10,5 +10,13 @@ export class AdoptRequest {
     approved: boolean;
     approved_date: string;
 
-    constructor() {}
+    constructor() {
+        this.uid = '';
+        this.place_images = [];
+        this.user_email = '';
+        this.pet_uid = '';
+        this.date = '';
+        this.approved = false;
+        this.approved_date = '';
+    }
 }
