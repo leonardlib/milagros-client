@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import { Post } from '../../../_models/post';
 import { Author } from '../../../_models/author';
 import { AuthorService } from '../../../_services/author.service';
 import { UtilsService } from '../../../_services/utils.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../../../_services/post.service';
-import { ImageModel } from '../../../_models/image';
 import { ModalComponent } from '../../layout/modal/modal.component';
 import { MatDialog } from '@angular/material';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-post-admin-form',
@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material';
     changeDetection: ChangeDetectionStrategy.Default
 })
 export class PostAdminFormComponent implements OnInit {
+    @ViewChild('postForm') form: NgForm;
     public post: Post = new Post();
     public authors: Author[] = [];
     public loading = false;
@@ -31,23 +32,22 @@ export class PostAdminFormComponent implements OnInit {
         private router: Router
     ) {
         this.editar = false;
-        this.post.main_image = new ImageModel();
-        this.post.author = new Author();
-        this.post.main_image.author = new Author();
     }
 
     ngOnInit() {
         this.route.params.subscribe(params => {
             const uid = params.uid;
 
-            this.utilsService.showSnackbar('Cargando...');
-            this.postService.show(uid).subscribe(response => {
-                this.post = response[0] as Post;
-                this.postService.getMainImagePreview(this.post).then(res => {
-                    this.images[0] = res;
+            if (uid) {
+                this.utilsService.showSnackbar('Cargando...');
+                this.postService.show(uid).subscribe(response => {
+                    this.post = response[0] as Post;
+                    this.postService.getMainImagePreview(this.post).then(res => {
+                        this.images[0] = res;
+                    });
+                    this.editar = true;
                 });
-                this.editar = true;
-            });
+            }
         });
 
         this.authorService.index().subscribe(authors => {
@@ -120,7 +120,7 @@ export class PostAdminFormComponent implements OnInit {
 
     validData() {
         return (
-            this.post.title && this.post.title !== '' &&
+            this.form.valid &&
             this.post.content && this.post.content !== '' &&
             this.images.length > 0 &&
             this.post.author && this.post.author.name !== '' &&

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {PetService} from '../../../_services/pet.service';
-import {sa} from '@angular/core/src/render3';
 import {UtilsService} from '../../../_services/utils.service';
 import {Sex} from '../../../_models/sex';
 import {Taste} from '../../../_models/taste';
@@ -151,7 +150,9 @@ export class PetHomeComponent implements OnInit {
 
         // Age range
         if (this.selectedAgeRange.min) {
-            this.pets = this.pets.filter(pet => (pet.age.pet_age >= this.selectedAgeRange.min && pet.age.pet_age <= this.selectedAgeRange.max));
+            this.pets = this.pets.filter(pet => (
+                pet.age.pet_age >= this.selectedAgeRange.min && pet.age.pet_age <= this.selectedAgeRange.max
+            ));
         }
 
         // Size

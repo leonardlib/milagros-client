@@ -13,11 +13,11 @@
                     a.cursor-pointer([routerLink]="['/donar']") Donar
                 li([routerLinkActive]="'active'")
                     a.cursor-pointer([routerLink]="['/informacion']") ¿Quiénes somos?
-                li([routerLinkActive]="'active'", *ngIf="!user.email")
+                li([routerLinkActive]="'active'", *ngIf="!user?.email")
                     a.cursor-pointer([routerLink]="['/acceso']") Iniciar sesión
-                li([routerLinkActive]="'active'", *ngIf="user.email")
+                li([routerLinkActive]="'active'", *ngIf="user?.email")
                     a.cursor-pointer([routerLink]="[profileRoute]") Mi perfil
-                li(*ngIf="user.email")
+                li(*ngIf="user?.email")
                     a.cursor-pointer((click)="logout()") Cerrar sesión
             ul.side-nav(id="mobile")
                 li
@@ -30,9 +30,9 @@
                     a.cursor-pointer([routerLink]="['/donar']") Donar
                 li([routerLinkActive]="'active'")
                     a.cursor-pointer([routerLink]="['/informacion']") ¿Quiénes somos?
-                li([routerLinkActive]="'active'", *ngIf="!user.email")
+                li([routerLinkActive]="'active'", *ngIf="!user?.email")
                     a.cursor-pointer([routerLink]="['/acceso']") Iniciar sesión
-                li([routerLinkActive]="'active'", *ngIf="user.email")
+                li([routerLinkActive]="'active'", *ngIf="user?.email")
                     a.cursor-pointer([routerLink]="[profileRoute]") Mi perfil
-                li(*ngIf="user.email")
+                li(*ngIf="user?.email")
                     a.cursor-pointer((click)="logout()") Cerrar sesión

@@ -4,5 +4,9 @@ export class Author {
     name: string;
     social_link: string;
 
-    constructor() {}
+    constructor() {
+        this.uid = '';
+        this.name = '';
+        this.social_link = '';
+    }
 }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DonateService} from '../../../_services/donate.service';
 import {UtilsService} from '../../../_services/utils.service';
 import {Donation} from '../../../_models/donation';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {DateAdapter} from '@angular/material';
 import * as moment from 'moment';
 import {Gallery, GalleryRef} from '@ngx-gallery/core';

@@ -3,45 +3,45 @@
         .col.s12.m3
             .row
                 .col.s12
-                    h4 {{ pet.name }}
+                    h4 {{ pet?.name }}
                 .col.s12
-                    span.text-primary {{ pet.sex.name }}
+                    span.text-primary {{ pet?.sex?.name }}
             .row
                 .col.s12
                     span.text-primary Edad
                 .col.s12
-                    span {{ pet.age.pet_age }} año(s) - {{ pet.age.human_age }} año(s) humanos
+                    span {{ pet?.age?.pet_age }} año(s) - {{ pet?.age?.human_age }} año(s) humanos
             .row
                 .col.s12
                     span.text-primary Tamaño
                 .col.s12
-                    span {{ pet.size.name }}
+                    span {{ pet?.size?.name }}
             .row
                 .col.s12
                     span.text-primary Pelaje
                 .col.s12
-                    span {{ pet.fur.name }}
+                    span {{ pet?.fur?.name }}
             .row
                 .col.s12
                     span.text-primary Gustos
-                .col.s12(*ngFor="let taste of pet.tastes")
+                .col.s12(*ngFor="let taste of pet?.tastes")
                     span - {{ taste.name }}
-            .row(*ngIf="!pet.adopted && !pet.in_adopted_process")
+            .row(*ngIf="!pet?.adopted && !pet?.in_adopted_process")
                 .col.s12
                     a.btn.waves-effect.bg-primary.btn-block.waves-block([routerLink]="['/mascota/adoptar/' + pet.uid]")
                         i.fa.fa-home
                         | &nbsp;
                         | Adoptar
-            .row(*ngIf="!pet.adopted && !pet.in_adopted_process")
+            .row(*ngIf="!pet?.adopted && !pet?.in_adopted_process")
                 .col.s12
                     a.btn.waves-effect.teal.darken-1.btn-block.waves-block([routerLink]="['/mascota/apadrinar/']")
                         i.fa.fa-paw
                         | &nbsp;
                         | Apadrinar
-            .row(*ngIf="pet.adopted")
+            .row(*ngIf="pet?.adopted")
                 .col.s12
                     span.text-primary Se encuentra en un hogar responsable
-            .row(*ngIf="pet.in_adopted_process")
+            .row(*ngIf="pet?.in_adopted_process")
                 .col.s12
                     span.text-primary Esta en proceso de adopción
         .col.s12.m9
@@ -49,7 +49,7 @@
                 .col.s12
                     gallery.bg-transparent(id="petGallery", [autoPlay]="true", [counter]="false", [playerInterval]="5000",
                         [imageSize]="contain", gallerize="")
-.w-100.grey.lighten-4.p-top-5.p-bottom-5.m-bottom-50p(*ngIf="pet.description")
+.w-100.grey.lighten-4.p-top-5.p-bottom-5.m-bottom-50p(*ngIf="pet?.description")
     .container
         .row
             .col.s12.m3
@@ -59,4 +59,4 @@
             .col.s12.m9
                 .row
                     .col.s12
-                        p.text-justify([innerHtml]="pet.description | safeHtml")
+                        p.text-justify([innerHtml]="pet?.description | safeHtml")

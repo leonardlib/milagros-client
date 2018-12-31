@@ -1,7 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { User } from '../../../_models/user';
 import { AuthService } from '../../../_services/auth.service';
 import { UtilsService } from '../../../_services/utils.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-send-password-reset-email',
@@ -9,8 +10,9 @@ import { UtilsService } from '../../../_services/utils.service';
     styleUrls: ['./send-password-reset-email.component.scss']
 })
 export class SendPasswordResetEmailComponent implements OnInit, OnDestroy {
+    @ViewChild('resetForm') form: NgForm;
     public user: User = new User();
-    public mailSended = false;
+    public mailSent = false;
 
     constructor(
         private authService: AuthService,
@@ -18,6 +20,7 @@ export class SendPasswordResetEmailComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        this.utilsService.showSnackbar('Cargando...');
         document.getElementById('image-div').classList.add('bg-image-3');
     }
 
@@ -26,10 +29,14 @@ export class SendPasswordResetEmailComponent implements OnInit, OnDestroy {
     }
 
     sendMail() {
-        this.authService.sendResetPasswordMail(this.user).then(response => {
-            this.mailSended = true;
-        }, error => {
-            this.utilsService.showSnackbar('¡Ops!, ocurrió un error. Intenta de nuevo.');
-        });
+        if (this.form.valid) {
+            this.utilsService.showSnackbar('Enviando instrucciones...');
+            this.authService.sendResetPasswordMail(this.user).then(response => {
+                this.utilsService.showSnackbar('Instrucciones enviadas, verifica tu correo');
+                this.mailSent = true;
+            }, error => {
+                this.utilsService.showSnackbar('¡Ops!, ocurrió un error. Intenta de nuevo.');
+            });
+        }
     }
 }

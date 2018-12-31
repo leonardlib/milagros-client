@@ -4,38 +4,38 @@
     <div class="col s12 m3">
       <div class="row">
         <div class="col s12">
-          <h4>{{ pet.name }}</h4>
+          <h4>{{ pet?.name }}</h4>
         </div>
-        <div class="col s12"><span class="text-primary">{{ pet.sex.name }}</span></div>
+        <div class="col s12"><span class="text-primary">{{ pet?.sex?.name }}</span></div>
       </div>
       <div class="row">
         <div class="col s12"><span class="text-primary">Edad</span></div>
-        <div class="col s12"><span>{{ pet.age.pet_age }} año(s) - {{ pet.age.human_age }} año(s) humanos</span></div>
+        <div class="col s12"><span>{{ pet?.age?.pet_age }} año(s) - {{ pet?.age?.human_age }} año(s) humanos</span></div>
       </div>
       <div class="row">
         <div class="col s12"><span class="text-primary">Tamaño</span></div>
-        <div class="col s12"><span>{{ pet.size.name }}</span></div>
+        <div class="col s12"><span>{{ pet?.size?.name }}</span></div>
       </div>
       <div class="row">
         <div class="col s12"><span class="text-primary">Pelaje</span></div>
-        <div class="col s12"><span>{{ pet.fur.name }}</span></div>
+        <div class="col s12"><span>{{ pet?.fur?.name }}</span></div>
       </div>
       <div class="row">
         <div class="col s12"><span class="text-primary">Gustos</span></div>
-        <div class="col s12" *ngFor="let taste of pet.tastes"><span>- {{ taste.name }}</span></div>
+        <div class="col s12" *ngFor="let taste of pet?.tastes"><span>- {{ taste.name }}</span></div>
       </div>
-      <div class="row" *ngIf="!pet.adopted &amp;&amp; !pet.in_adopted_process">
+      <div class="row" *ngIf="!pet?.adopted &amp;&amp; !pet?.in_adopted_process">
         <div class="col s12"><a class="btn waves-effect bg-primary btn-block waves-block" [routerLink]="['/mascota/adoptar/' + pet.uid]"><i class="fa fa-home"></i>&nbsp;
             Adoptar</a></div>
       </div>
-      <div class="row" *ngIf="!pet.adopted &amp;&amp; !pet.in_adopted_process">
+      <div class="row" *ngIf="!pet?.adopted &amp;&amp; !pet?.in_adopted_process">
         <div class="col s12"><a class="btn waves-effect teal darken-1 btn-block waves-block" [routerLink]="['/mascota/apadrinar/']"><i class="fa fa-paw"></i>&nbsp;
             Apadrinar</a></div>
       </div>
-      <div class="row" *ngIf="pet.adopted">
+      <div class="row" *ngIf="pet?.adopted">
         <div class="col s12"><span class="text-primary">Se encuentra en un hogar responsable</span></div>
       </div>
-      <div class="row" *ngIf="pet.in_adopted_process">
+      <div class="row" *ngIf="pet?.in_adopted_process">
         <div class="col s12"><span class="text-primary">Esta en proceso de adopción</span></div>
       </div>
     </div>
@@ -48,7 +48,7 @@
     </div>
   </div>
 </div>
-<div class="w-100 grey lighten-4 p-top-5 p-bottom-5 m-bottom-50p" *ngIf="pet.description">
+<div class="w-100 grey lighten-4 p-top-5 p-bottom-5 m-bottom-50p" *ngIf="pet?.description">
   <div class="container">
     <div class="row">
       <div class="col s12 m3">
@@ -61,7 +61,7 @@
       <div class="col s12 m9">
         <div class="row">
           <div class="col s12">
-            <p class="text-justify" [innerHtml]="pet.description | safeHtml"></p>
+            <p class="text-justify" [innerHtml]="pet?.description | safeHtml"></p>
           </div>
         </div>
       </div>

@@ -2,33 +2,33 @@
 <div class="container p-top-5 p-bottom-5">
   <div class="row">
     <div class="col s12">
-      <form #adoptForm="ngForm" (submit)="adoptForm.valid &amp;&amp; send()">
+      <form #adoptForm="ngForm" (submit)="send()">
         <div class="row">
           <div class="input-field col s12">
-            <input type="text" id="name" name="name" [(ngModel)]="profile.name" #nameInput="ngModel" [required]="true"/>
-            <label for="name" [class.active]="profile.name">Nombre</label><span class="grey-text lighten-4" *ngIf="adoptForm.submitted &amp;&amp; nameInput.errors?.required">Ingresa un nombre válido</span>
+            <input type="text" id="name" name="name" [(ngModel)]="profile.name" #nameInput="ngModel" required="required"/>
+            <label for="name" [class.active]="profile?.name">Nombre</label><span class="grey-text lighten-4" *ngIf="adoptForm.submitted &amp;&amp; nameInput.errors?.required">Ingresa un nombre válido</span>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12 m6">
-            <input type="text" id="last-name" name="last-name" [(ngModel)]="profile.last_name" #lastNameInput="ngModel" [required]="true"/>
-            <label for="last-name" [class.active]="profile.last_name">Apellido paterno</label><span class="grey-text lighten-4" *ngIf="adoptForm.submitted &amp;&amp; lastNameInput.errors?.required">Ingresa un apellido paterno válido</span>
+            <input type="text" id="last-name" name="last-name" [(ngModel)]="profile.last_name" #lastNameInput="ngModel" required="required"/>
+            <label for="last-name" [class.active]="profile?.last_name">Apellido paterno</label><span class="grey-text lighten-4" *ngIf="adoptForm.submitted &amp;&amp; lastNameInput.errors?.required">Ingresa un apellido paterno válido</span>
           </div>
           <div class="input-field col s12 m6">
-            <input type="text" id="mother-last-name" name="mother-last-name" [(ngModel)]="profile.mother_last_name" #motherLastNameInput="ngModel" [required]="true"/>
-            <label for="mother-last-name" [class.active]="profile.mother_last_name">Apellido materno</label><span class="grey-text lighten-4" *ngIf="adoptForm.submitted &amp;&amp; motherLastNameInput.errors?.required">Ingresa un apellido materno válido</span>
+            <input type="text" id="mother-last-name" name="mother-last-name" [(ngModel)]="profile.mother_last_name" #motherLastNameInput="ngModel" required="required"/>
+            <label for="mother-last-name" [class.active]="profile?.mother_last_name">Apellido materno</label><span class="grey-text lighten-4" *ngIf="adoptForm.submitted &amp;&amp; motherLastNameInput.errors?.required">Ingresa un apellido materno válido</span>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input type="email" id="email" name="email" [(ngModel)]="profile.user_email" #emailInput="ngModel" [required]="true" [email]="true"/>
-            <label for="email" [class.active]="profile.user_email">Correo electrónico</label><span class="grey-text lighten-4" *ngIf="adoptForm.submitted &amp;&amp; emailInput.errors?.required">Ingresa un correo válido</span>
+            <input type="email" id="email" name="email" [(ngModel)]="profile.user_email" #emailInput="ngModel" required="required" [email]="true"/>
+            <label for="email" [class.active]="profile?.user_email">Correo electrónico</label><span class="grey-text lighten-4" *ngIf="adoptForm.submitted &amp;&amp; emailInput.errors?.required">Ingresa un correo</span><span class="grey-text lighten-4" *ngIf="adoptForm.submitted &amp;&amp; emailInput.errors?.email">Ingresa un correo válido</span>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <input type="text" id="phone" name="phone" [(ngModel)]="profile.phone" #phoneInput="ngModel" [required]="true" pattern="[0-9]+" minlength="10" maxlength="10"/>
-            <label for="phone" [class.active]="profile.phone">Teléfono (10 dígitos)</label><span class="grey-text lighten-4" *ngIf="adoptForm.submitted &amp;&amp; phoneInput.errors?.required">Ingresa un teléfono válido</span>
+            <input type="text" id="phone" name="phone" [(ngModel)]="profile.phone" #phoneInput="ngModel" required="required" pattern="[0-9]+" minlength="10" maxlength="10"/>
+            <label for="phone" [class.active]="profile?.phone">Teléfono (10 dígitos)</label><span class="grey-text lighten-4" *ngIf="adoptForm.submitted &amp;&amp; phoneInput.errors?.required">Ingresa un teléfono válido</span>
           </div>
         </div>
         <div class="row">

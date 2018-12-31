@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Profile} from '../../../_models/profile';
 import {UtilsService} from '../../../_services/utils.service';
 import {UserService} from '../../../_services/user.service';
 import {User} from '../../../_models/user';
-import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-complete-profile',
@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
     styleUrls: ['./complete-profile.component.scss']
 })
 export class CompleteProfileComponent implements OnInit {
+    @ViewChild('adoptForm') form: NgForm;
     public profile: Profile = new Profile();
     public officialIdList: any = [];
     public addressFileList: any = [];
@@ -28,8 +29,6 @@ export class CompleteProfileComponent implements OnInit {
             this.profile.user_email = this.user.email;
         }).catch(error => {
             this.user = new User();
-            this.profile.name = '';
-            this.profile.user_email = '';
         });
     }
 
@@ -54,7 +53,8 @@ export class CompleteProfileComponent implements OnInit {
 
     validateFiles() {
         return (
-            this.officialIdList.length > 0
+            this.form.valid
+            && this.officialIdList.length > 0
             && this.addressFileList.length > 0
         );
     }

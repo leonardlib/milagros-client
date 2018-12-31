@@ -1,28 +1,28 @@
 .container.min-height-100vh
     .row.m-top-30p
         .col.s12.left-align
-            h3 {{ post.title }}
+            h3 {{ post?.title }}
     .row
         .col.s12.center-align
-            img.responsive-img([src]="post.main_image.url")
+            img.responsive-img(src="{{ post?.main_image?.url }}")
     .row
         .col.s12
-            blockquote.right(*ngIf="post.main_image.author.social_link")
+            blockquote.right(*ngIf="post?.main_image?.author?.social_link")
                 | Foto por&nbsp;
-                a.text-primary([href]="post.main_image.author.social_link", target="_blank") @{{ post.main_image.author.name }}
-            blockquote.right(*ngIf="!post.main_image.author.social_link") Foto por {{ post.main_image.author.name }}
+                a.text-primary(href="{{ post?.main_image?.author?.social_link }}", target="_blank") @{{ post?.main_image?.author?.name }}
+            blockquote.right(*ngIf="!post?.main_image?.author?.social_link") Foto por {{ post?.main_image?.author?.name }}
     .row
         .col.s12
-            p.text-justify.img-to-100([innerHtml]="post.content | safeHtml")
+            p.text-justify.img-to-100([innerHtml]="post?.content | safeHtml")
     .row
         .col.s12.left-align
-            blockquote(*ngIf="post.author.social_link")
+            blockquote(*ngIf="post?.author?.social_link")
                 | Escrito por&nbsp;
-                a.text-primary([href]="post.author.social_link", target="_blank") @{{ post.author.name }}
-            blockquote(*ngIf="!post.author.social_link") Escrito por {{ post.author.name }}
+                a.text-primary(href="{{ post?.author?.social_link }}", target="_blank") @{{ post?.author?.name }}
+            blockquote(*ngIf="!post?.author?.social_link") Escrito por {{ post?.author?.name }}
     .row
         .col.s12
-            span.grey-text.lighten-4 Publicado el {{ post.date | amLocale: 'es' | amDateFormat: 'LL' }}
+            span.grey-text.lighten-4 Publicado el {{ post?.date | amLocale: 'es' | amDateFormat: 'LL' }}
     .row.left-align.m-top-50p.m-bottom-50p
         .col.s12
             span Compartir esta publicación

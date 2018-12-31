@@ -16,19 +16,21 @@
                 .row
                     .input-field.col.s12
                         input(type="text", id="name", name="name", [(ngModel)]="donation.name", #nameInput="ngModel")
-                        label.active(for="name", [class.active]="donation.name") Nombre
+                        label.active(for="name", [class.active]="donation?.name") Nombre
                 .row
                     .input-field.col.s12
                         input(type="email", id="email", name="email", [(ngModel)]="donation.email", #emailInput="ngModel",
                             [email]="true")
-                        label.active(for="name", [class.active]="donation.email") Correo electrónico
+                        label.active(for="name", [class.active]="donation?.email") Correo electrónico
                 .row
                     .input-field.col.s12
-                        input.font-x-large(id="amount", name="amount", currencyMask="", required, #amountInput="ngModel",
-                            [(ngModel)]="paypalConfig.transactions[0].amount.total",
-                            [options]="{ align: 'left', allowNegative: false }")
-                        label.active(for="amount") Monto
+                        label(for="amount") Monto
+                .row
+                    .input-field.col.s12
+                        input.font-xx-large.border-bottom-0(id="amount", name="amount", currencyMask="",
+                            required, #amountInput="ngModel", [(ngModel)]="paypalConfig.transactions[0].amount.total",
+                            [options]="{ align: 'center', allowNegative: false }")
                         span.left.grey-text.lighten-4 El monto debe ser mayor o igual a $5.00 MXN
-                .row.m-top-50p(*ngIf="paypalConfig.transactions[0].amount.total >= 5")
+                .row.m-top-50p(*ngIf="paypalConfig?.transactions[0]?.amount?.total >= 5")
                     .col.s12
                         ngx-paypal([config]="paypalConfig")

@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Profile} from '../../../_models/profile';
 import {User} from '../../../_models/user';
 import {UtilsService} from '../../../_services/utils.service';
 import {UserService} from '../../../_services/user.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-profile-personal-info',
@@ -10,6 +11,7 @@ import {UserService} from '../../../_services/user.service';
     styleUrls: ['./profile-personal-info.component.scss']
 })
 export class ProfilePersonalInfoComponent implements OnInit {
+    @ViewChild('adoptForm') form: NgForm;
     public profile: Profile = new Profile();
     public officialIdList: any = [];
     public addressFileList: any = [];
@@ -90,7 +92,8 @@ export class ProfilePersonalInfoComponent implements OnInit {
 
     validateFiles() {
         return (
-            this.officialIdList.length > 0
+            this.form.valid
+            && this.officialIdList.length > 0
             && this.addressFileList.length > 0
         );
     }

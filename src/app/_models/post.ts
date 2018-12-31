@@ -10,5 +10,12 @@ export class Post {
     author: Author;
     date: string;
 
-    constructor() {}
+    constructor() {
+        this.uid = '';
+        this.title = '';
+        this.main_image = new ImageModel();
+        this.content = '';
+        this.author = new Author();
+        this.date = '';
+    }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Gallery, GalleryRef } from '@ngx-gallery/core';
 import { UtilsService } from '../../../_services/utils.service';
 import {ActivatedRoute} from '@angular/router';
-import {Post} from '../../../_models/post';
 import {PetService} from '../../../_services/pet.service';
 import {Pet} from '../../../_models/pet';
 

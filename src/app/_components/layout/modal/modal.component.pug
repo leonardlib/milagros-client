@@ -1,9 +1,9 @@
 .row
     .col.s12
-        h1(mat-dialog-title="") {{ data.title }}
+        h1(mat-dialog-title="") {{ data?.title }}
 .row
     .col.s12(mat-dialog-content="")
-        p {{ data.content }}
+        p {{ data?.content }}
 .row.right(mat-dialog-actions="")
     .col.s12.p-bottom-5
-        button.btn.btn-block.waves-effect.waves-block.bg-primary([mat-dialog-close]="true") {{ data.confirmBtnText }}
+        button.btn.btn-block.waves-effect.waves-block.bg-primary([mat-dialog-close]="true") {{ data?.confirmBtnText }}

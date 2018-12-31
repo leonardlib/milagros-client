@@ -28,6 +28,7 @@ export class DonateItemComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        this.utilsService.showSnackbar('Cargando...');
         this.userService.current().then(user => {
             this.user = user;
             this.donation.name = this.user.name;
@@ -46,9 +47,6 @@ export class DonateItemComponent implements OnInit {
     }
 
     saveDonation() {
-        this.donation.amount = 0;
-        this.donation.is_money = false;
-
         this.images.forEach(image => {
             const auxImage = new ImageModel();
             auxImage.file = image['file'];

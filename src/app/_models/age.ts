@@ -3,5 +3,8 @@ export class Age {
     pet_age: number;
     human_age: number;
 
-    constructor() {}
+    constructor() {
+        this.pet_age = 0;
+        this.human_age = 0;
+    }
 }

@@ -2,52 +2,52 @@
     .row.m-top-30p
         .col.s12.m3.m-top-10p
             form
-                .row(*ngIf="pets.length > 0")
+                .row(*ngIf="pets?.length > 0")
                     .input-field.col.s12
                         input(type="text", id="search", [(ngModel)]="term", name="search")
                         label(for="search") Buscar mascota
-                .row(*ngIf="sexs.length > 0")
+                .row(*ngIf="sexs?.length > 0")
                     .p.col.s12(*ngFor="let sex of sexs")
-                        input.filled-in(type="checkbox", [id]="sex.name", #sexCheck="",
-                            (change)="onCheckSex(sex)", [checked]="sex.name === selectedSex.name")
-                        label([for]="sex.name") {{ sex.name }}
-                .row(*ngIf="tastes.length > 0")
+                        input.filled-in(type="checkbox", [id]="sex?.name", #sexCheck="",
+                            (change)="onCheckSex(sex)", [checked]="sex?.name === selectedSex?.name")
+                        label([for]="sex?.name") {{ sex?.name }}
+                .row(*ngIf="tastes?.length > 0")
                     .col.s12
                         span.text-primary Gustos
-                .row(*ngIf="tastes.length > 0")
+                .row(*ngIf="tastes?.length > 0")
                     .p.col.s12(*ngFor="let taste of tastes")
-                        input.filled-in(type="checkbox", [id]="taste.name", #tasteCheck="",
+                        input.filled-in(type="checkbox", [id]="taste?.name", #tasteCheck="",
                             (change)="onCheckTaste(taste, tasteCheck.checked)")
-                        label([for]="taste.name") {{ taste.name }}
-                .row(*ngIf="ageRanges.length > 0 && ages.length > 0")
+                        label([for]="taste?.name") {{ taste?.name }}
+                .row(*ngIf="ageRanges?.length > 0 && ages?.length > 0")
                     .col.s12
                         span.text-primary Edad
-                .row(*ngIf="ageRanges.length > 0 && ages.length > 0")
+                .row(*ngIf="ageRanges?.length > 0 && ages?.length > 0")
                     .p.col.s12(*ngFor="let ageRange of ageRanges")
-                        input.filled-in(type="checkbox", [id]="ageRange.min", #ageRangeCheck="",
-                            (change)="onCheckAgeRange(ageRange)", [checked]="ageRange.min === selectedAgeRange.min")
-                        label([for]="ageRange.min", *ngIf="ageRange.show", (change)="onCheckAgeRange(ageRange)")
-                            | De {{ ageRange.min }}{{ (ageRange.max < 99) ? ' a ' + ageRange.max : ' o más'  }} años
-                .row(*ngIf="sizes.length > 0")
+                        input.filled-in(type="checkbox", [id]="ageRange?.min", #ageRangeCheck="",
+                            (change)="onCheckAgeRange(ageRange)", [checked]="ageRange?.min === selectedAgeRange?.min")
+                        label([for]="ageRange?.min", *ngIf="ageRange?.show", (change)="onCheckAgeRange(ageRange)")
+                            | De {{ ageRange?.min }}{{ (ageRange?.max < 99) ? ' a ' + ageRange?.max : ' o más'  }} años
+                .row(*ngIf="sizes?.length > 0")
                     .col.s12
                         span.text-primary Tamaño
-                .row(*ngIf="sizes.length > 0")
+                .row(*ngIf="sizes?.length > 0")
                     .p.col.s12(*ngFor="let size of sizes")
-                        input.filled-in(type="checkbox", [id]="size.name", #sizeCheck="",
-                            (change)="onCheckSize(size)", [checked]="size.name === selectedSize.name")
-                        label([for]="size.name") {{ size.name }}
-                .row(*ngIf="furs.length > 0")
+                        input.filled-in(type="checkbox", [id]="size?.name", #sizeCheck="",
+                            (change)="onCheckSize(size)", [checked]="size?.name === selectedSize?.name")
+                        label([for]="size?.name") {{ size?.name }}
+                .row(*ngIf="furs?.length > 0")
                     .col.s12
                         span.text-primary Tipo de pelo
-                .row(*ngIf="furs.length > 0")
+                .row(*ngIf="furs?.length > 0")
                     .p.col.s12(*ngFor="let fur of furs")
-                        input.filled-in(type="checkbox", [id]="fur.name", #furCheck="",
-                            (change)="onCheckFur(fur)", [checked]="fur.name === selectedFur.name")
-                        label([for]="fur.name") {{ fur.name }}
-                .row(*ngIf="colors.length > 0")
+                        input.filled-in(type="checkbox", [id]="fur?.name", #furCheck="",
+                            (change)="onCheckFur(fur)", [checked]="fur?.name === selectedFur?.name")
+                        label([for]="fur?.name") {{ fur?.name }}
+                .row(*ngIf="colors?.length > 0")
                     .col.s12
                         span.text-primary Color
-                .row(*ngIf="colors.length > 0")
+                .row(*ngIf="colors?.length > 0")
                     .col.s12
                         .col.s12.m4.h-50p.m-2p.cursor-pointer.hover-border(*ngFor="let color of colors",
                             [style.backgroundColor]="color",
@@ -55,17 +55,17 @@
                             [class.border-active]="color === selectedColor",
                             [style.borderColor]="(color === '#ffffff' || '#FFFFFF') ? '#000000' : color",
                             (click)="onColorClick(color)")
-        .col.s12(*ngIf="ages.length < 1")
+        .col.s12(*ngIf="ages?.length < 1")
             .row
                 .col.s12.center-align.text-primary.p-top-5
                     h5 No se encontraron mascotas
         .col.s12.m9
-            .row(*ngIf="(pets | filter: term).length === 0 && ages.length > 0")
+            .row(*ngIf="(pets | filter: term).length === 0 && ages?.length > 0")
                 .col.s12.center-align.text-primary.p-top-5
                     h5 No se encontraron mascotas
             .row
                 .col.s12.m6.m-top-10p.cursor-pointer.hvr-grow(*ngFor="let pet of pets | filter: term", (click)="petService.goToDetail(pet.uid)")
-                    .card.small.card-img([style.backgroundImage]="'url('+ pet.images[0].url +')'")
+                    .card.small.card-img([style.backgroundImage]="'url('+ pet?.images[0]?.url +')'")
                         .row.pet-card-detail-2.w-100
                             .col.s12.white-text
-                                h5 {{ pet.name }}
+                                h5 {{ pet?.name }}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Pet } from '../../../_models/pet';
 import { ColorEvent } from 'ngx-color';
 import { Taste } from '../../../_models/taste';
@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from '../../../_services/utils.service';
 import { PetService } from '../../../_services/pet.service';
 import { MatDialog } from '@angular/material';
-import { Age } from '../../../_models/age';
 import { Sex } from '../../../_models/sex';
 import { Fur } from '../../../_models/fur';
 import { SexService } from '../../../_services/sex.service';
@@ -18,6 +17,7 @@ import * as moment from 'moment';
 import {ModalComponent} from '../../layout/modal/modal.component';
 import {Size} from '../../../_models/size';
 import {SizeService} from '../../../_services/size.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-pet-admin-form',
@@ -25,6 +25,7 @@ import {SizeService} from '../../../_services/size.service';
     styleUrls: ['./pet-admin-form.component.scss']
 })
 export class PetAdminFormComponent implements OnInit {
+    @ViewChild('petForm') form: NgForm;
     public pet: Pet = new Pet();
     public tastes: Taste[] = [];
     public tastesSelected: any = [];
@@ -52,16 +53,6 @@ export class PetAdminFormComponent implements OnInit {
         private datepickerAdapter: DateAdapter<any>
     ) {
         this.editar = false;
-        this.pet.age = new Age();
-        this.pet.sex = new Sex();
-        this.pet.fur = new Fur();
-        this.pet.size = new Size();
-        this.pet.tastes = [];
-        this.pet.images = [];
-        this.pet.adopted = false;
-        this.pet.in_adopted_process = false;
-        this.pet.sponsored = false;
-        this.pet.egress_date = '';
         this.minDate = new Date(1950, 0, 1);
         this.maxDate = new Date();
     }
@@ -83,15 +74,17 @@ export class PetAdminFormComponent implements OnInit {
 
         this.route.params.subscribe(params => {
             const uid = params.uid;
-
             this.utilsService.showSnackbar('Cargando...');
-            this.petService.show(uid).subscribe(response => {
-                this.pet = response[0] as Pet;
-                this.getTastes();
-                this.getImages();
-                this.getDates();
-                this.editar = true;
-            });
+
+            if (uid) {
+                this.petService.show(uid).subscribe(response => {
+                    this.pet = response[0] as Pet;
+                    this.getTastes();
+                    this.getImages();
+                    this.getDates();
+                    this.editar = true;
+                });
+            }
         });
     }
 
@@ -207,7 +200,7 @@ export class PetAdminFormComponent implements OnInit {
 
     validateForm() {
         return (
-            this.pet.name && this.pet.name !== '' &&
+            this.form.valid &&
             this.pet.description && this.pet.description !== '' &&
             this.tastesSelected.length > 0 &&
             this.images.length > 0 &&

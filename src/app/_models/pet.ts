@@ -3,7 +3,7 @@ import { Age } from './age';
 import { Sex } from './sex';
 import { Fur } from './fur';
 import { ImageModel } from './image';
-import {Size} from './size';
+import { Size } from './size';
 
 export class Pet {
     key: string;
@@ -24,5 +24,22 @@ export class Pet {
     admission_date: any;
     egress_date: any;
 
-    constructor() {}
+    constructor() {
+        this.uid = '';
+        this.name = '';
+        this.description = '';
+        this.color = '';
+        this.tastes = [];
+        this.images = [];
+        this.birthdate = '';
+        this.age = new Age();
+        this.sex = new Sex();
+        this.fur = new Fur();
+        this.size = new Size();
+        this.adopted = false;
+        this.in_adopted_process = false;
+        this.sponsored = false;
+        this.admission_date = '';
+        this.egress_date = '';
+    }
 }

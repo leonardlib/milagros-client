@@ -3,6 +3,7 @@ import { User } from '../../../_models/user';
 import { UserService } from '../../../_services/user.service';
 import { AuthService } from '../../../_services/auth.service';
 import { Router } from '@angular/router';
+import {UtilsService} from '../../../_services/utils.service';
 declare var $: any;
 
 @Component({
@@ -17,10 +18,12 @@ export class NavbarComponent implements OnInit {
     constructor(
         private userService: UserService,
         private authService: AuthService,
+        private utilsService: UtilsService,
         private router: Router
     ) {}
 
     ngOnInit() {
+        this.utilsService.showSnackbar('Cargando...');
         $('.button-collapse').sideNav();
         this.userService.current().then(user => {
             this.user = user;

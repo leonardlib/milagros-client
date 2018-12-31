@@ -20,6 +20,15 @@ export class Profile {
             this.uid = profile.uid;
             this.official_id = profile.official_id;
             this.address_file = profile.address_file;
+        } else {
+            this.user_email = '';
+            this.name = '';
+            this.last_name = '';
+            this.mother_last_name = '';
+            this.phone = '';
+            this.uid = '';
+            this.official_id = '';
+            this.address_file = '';
         }
     }
 

@@ -28,24 +28,25 @@
                                 .col.s12.center-align
                                     a.text-black.cursor-pointer([routerLink]="['/acceso/recuperar-cuenta']") Olvidé mi contraseña
                     .col.s12.m6
-                        form.col.s12.m-top-30p
+                        form.col.s12.m-top-30p(#loginForm="ngForm", (submit)="login()")
                             .row
                                 .col.s12.left-align
                                     h5.text-black Iniciar sesión
                             .row
                                 .input-field.col.s12
-                                    input.validate(type="email", id="email", name="email", [(ngModel)]="user.email", #emailInput="ngModel",
-                                        [email]="true")
-                                    label(for="email", [class.active]="user.email") Correo
-                                    span.grey-text.lighten-4(*ngIf="emailInput.invalid") Ingresa un correo valido
+                                    input(type="email", id="email", name="email", [(ngModel)]="user.email", #emailInput="ngModel",
+                                        [email]="true", required)
+                                    label(for="email", [class.active]="user?.email") Correo
+                                    span.grey-text.lighten-4(*ngIf="loginForm.submitted && emailInput.errors?.required") Ingresa el correo
+                                    span.grey-text.lighten-4(*ngIf="loginForm.submitted && emailInput.errors?.email") Ingresa un correo valido
                             .row
                                 .input-field.col.s12
                                     input(type="password", id="password", name="password", [(ngModel)]="user.password",
-                                        #passwordInput="ngModel", [class.active]="user.password")
-                                    label(for="password") Contraseña
+                                        #passwordInput="ngModel", required)
+                                    label(for="password", [class.active]="user?.password") Contraseña
+                                    span.grey-text.lighten-4(*ngIf="loginForm.submitted && passwordInput.errors?.required") Ingresa la contraseña
                             .row
                                 .col.s12
-                                    a.btn.btn-block.waves-effect.bg-primary.white-text.waves-block([class.disabled]="emailInput.invalid",
-                                    (click)="login()") Iniciar sesión
+                                    button.btn.waves-effect.bg-primary.white-text.col.s12(type="submit") Iniciar sesión
 
 

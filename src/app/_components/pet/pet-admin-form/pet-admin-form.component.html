@@ -1,113 +1,119 @@
 
-<div class="row">
-  <div class="col s12">
-    <h5 *ngIf="!editar">Nueva mascota</h5>
-    <h5 *ngIf="editar">Editar mascota</h5>
+<div class="container min-height-100vh">
+  <div class="row m-top-30p">
+    <div class="col s12">
+      <h5 *ngIf="!editar">Nueva mascota</h5>
+      <h5 *ngIf="editar">Editar mascota</h5>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col s12">
-    <div class="row">
-      <div class="input-field col s12">
-        <input class="validate" type="text" id="name" name="name" [(ngModel)]="pet.name" #name="ngModel" required="required"/>
-        <label for="name" [class.active]="editar">Nombre</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <label for="description">Descripción</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 m-top-30p">
-        <quill-editor [(ngModel)]="pet.description" id="description" name="description" #description="ngModel" [placeholder]="'Escribe aquí...'"></quill-editor>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <label for="size">Tamaño</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 m-top-30p">
-        <ng-select [items]="sizes" [addTag]="true" bindLabel="name" [(ngModel)]="pet.size.name" bindValue="name" id="size" [notFoundText]="'No se encontraron tamaños, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar'"></ng-select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <label for="tastes">Gustos</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 m-top-30p">
-        <ng-select [items]="tastes" [addTag]="true" [multiple]="true" bindLabel="name" [(ngModel)]="tastesSelected" bindValue="name" id="tastes" [notFoundText]="'No se encontraron gustos, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar'"></ng-select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <label for="images">Fotografías</label>
-      </div>
-    </div>
-    <div class="row m-top-50p">
-      <div class="input-field col s12">
-        <input-file [(ngModel)]="images" [fileAccept]="'image/*'" id="images" [fileLimit]="100"></input-file>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <label for="birthday">Fecha de nacimiento</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input [matDatepicker]="datepicker" id="birthday" (focus)="datepicker.open()" name="birthday" #birthday="ngModel" [(ngModel)]="birthdate" [min]="minDate" [max]="maxDate"/>
-        <mat-datepicker #datepicker="" touchUi=""></mat-datepicker>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <label for="sex">Sexo</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 m-top-30p">
-        <ng-select [items]="sexs" bindLabel="name" [(ngModel)]="pet.sex.name" bindValue="name" id="sex" [notFoundText]="'No se encontraron resultados'"></ng-select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <label for="fur">Pelaje</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 m-top-30p">
-        <ng-select [items]="furs" [addTag]="true" bindLabel="name" [(ngModel)]="pet.fur.name" bindValue="name" id="fur" [notFoundText]="'No se encontraron tipos de pelaje, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar'"></ng-select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <label for="color">Color principal del pelaje</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 m6 offset-m3 m-top-30p">
-        <color-sketch [color]="(pet.color ? pet.color : '#000000')" (onChangeComplete)="onChangeColor($event)" id="color"></color-sketch>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <label for="admission_date">Fecha de admisión</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input [matDatepicker]="datepicker2" id="admission_date" (focus)="datepicker2.open()" name="admission_date" #admissionDateItem="ngModel" [(ngModel)]="admissionDate" [min]="minDate" [max]="maxDate"/>
-        <mat-datepicker #datepicker2="" touchUi=""></mat-datepicker>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col s12 m6 m-top-50p" *ngIf="editar"><a class="btn btn-block waves-effect waves-block grey" (click)="onDelete()">Eliminar</a></div>
-      <div class="col s12 m-top-50p" [class.m6]="editar"><a class="btn btn-block bg-primary waves-effect waves-block" (click)="onSubmit()">Guardar</a></div>
+  <div class="row">
+    <div class="col s12">
+      <form #petForm="ngForm" (submit)="onSubmit()">
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" id="name" name="name" [(ngModel)]="pet.name" #nameInput="ngModel" required="required"/>
+            <label for="name" [class.active]="pet?.name">Nombre</label><span class="grey-text lighten-4" *ngIf="petForm.submitted &amp;&amp; nameInput.errors?.required">Ingresa un nombre</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="description">Descripción</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m-top-30p">
+            <quill-editor [(ngModel)]="pet.description" id="description" name="description" #descriptionInput="ngModel" [placeholder]="'Escribe aquí...'"></quill-editor>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="size">Tamaño</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m-top-30p">
+            <ng-select [items]="sizes" [addTag]="true" bindLabel="name" [(ngModel)]="pet.size.name" bindValue="name" id="size" name="size" [notFoundText]="'No se encontraron tamaños, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar'"></ng-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="tastes">Gustos</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m-top-30p">
+            <ng-select [items]="tastes" [addTag]="true" [multiple]="true" bindLabel="name" [(ngModel)]="tastesSelected" bindValue="name" id="tastes" name="tastes" [notFoundText]="'No se encontraron gustos, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar'"></ng-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="images">Fotografías</label>
+          </div>
+        </div>
+        <div class="row m-top-50p">
+          <div class="input-field col s12">
+            <input-file [(ngModel)]="images" [fileAccept]="'image/*'" id="images" [fileLimit]="100" name="images"></input-file>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="birthday">Fecha de nacimiento</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input [matDatepicker]="datepicker" id="birthday" (focus)="datepicker.open()" name="birthday" #birthdayInput="ngModel" [(ngModel)]="birthdate" [min]="minDate" [max]="maxDate"/>
+            <mat-datepicker #datepicker="" touchUi=""></mat-datepicker>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="sex">Sexo</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m-top-30p">
+            <ng-select [items]="sexs" bindLabel="name" [(ngModel)]="pet.sex.name" bindValue="name" id="sex" [notFoundText]="'No se encontraron resultados'" name="sex"></ng-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="fur">Pelaje</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m-top-30p">
+            <ng-select [items]="furs" [addTag]="true" bindLabel="name" [(ngModel)]="pet.fur.name" bindValue="name" id="fur" name="fur" [notFoundText]="'No se encontraron tipos de pelaje, escribe para agregar'" [loading]="loading" [addTagText]="'Agregar'"></ng-select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="color">Color principal del pelaje</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m6 offset-m3 m-top-30p">
+            <color-sketch [color]="(pet?.color ? pet?.color : '#000000')" (onChangeComplete)="onChangeColor($event)" id="color" name="color"></color-sketch>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="admission_date">Fecha de admisión</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input [matDatepicker]="datepicker2" id="admission_date" (focus)="datepicker2.open()" name="admission_date" #admissionDateInput="ngModel" [(ngModel)]="admissionDate" [min]="minDate" [max]="maxDate"/>
+            <mat-datepicker #datepicker2="" touchUi=""></mat-datepicker>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12 m6 m-top-50p" *ngIf="editar"><a class="btn btn-block waves-effect waves-block grey" (click)="onDelete()">Eliminar</a></div>
+          <div class="col s12 m-top-50p" [class.m6]="editar">
+            <button class="btn bg-primary waves-effect white-text col s12" type="submit">Guardar</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

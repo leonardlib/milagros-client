@@ -6,5 +6,9 @@ export class ImageModel {
     url: string;
     file: File;
 
-    constructor() {}
+    constructor() {
+        this.author = new Author();
+        this.url = '';
+        this.file = null;
+    }
 }

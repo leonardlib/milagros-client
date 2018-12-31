@@ -32,8 +32,6 @@ export class DonatePaypalComponent implements OnInit {
             this.donation.email = this.user.email;
         }).catch(error => {
             this.user = new User();
-            this.donation.name = '';
-            this.donation.email = '';
         });
     }
 
@@ -76,7 +74,27 @@ export class DonatePaypalComponent implements OnInit {
         this.donateService.create(this.donation).then(response => {
             if (response !== null) {
                 this.utilsService.showSnackbar('¡Muchas gracias por tu donación!, has ayudado a todas nuestras mascotas.');
+
+                if (this.donation.name && this.donation.email) {
+                    this.sendEmailToUser();
+                }
             }
         });
+    }
+
+    sendEmailToUser() {
+        const title = '¡Hola ' + this.donation.name + '!';
+        const description = 'Estamos muy agradecidos por tu donación, ahora eres parte de Milagros del Rincón, ' +
+            'con esto has ayudado a todos nuestros pequeñines a vivir en óptimas condiciones y a poder darles una mejor ' +
+            'vida en general. Nos encantaría que nos visitaras, te esperamos con los brazos abiertos.<br/><br/>¡Muchísimas gracias!';
+
+        this.utilsService.sendMail(
+            [this.donation.email],
+            '¡Muchas gracias!',
+            title,
+            description,
+            'Ver mascotas',
+            ''
+        );
     }
 }

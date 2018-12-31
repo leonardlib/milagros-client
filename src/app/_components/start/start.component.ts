@@ -21,10 +21,12 @@ export class StartComponent implements OnInit {
     constructor(
         public postService: PostService,
         public petService: PetService,
-        private gallery: Gallery
+        private gallery: Gallery,
+        private utilsService: UtilsService
     ) {}
 
     ngOnInit() {
+        this.utilsService.showSnackbar('Cargando...');
         this.galleryRef = this.gallery.ref('postGallery');
 
         this.postService.index().subscribe(posts => {

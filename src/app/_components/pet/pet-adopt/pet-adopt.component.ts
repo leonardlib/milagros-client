@@ -9,6 +9,7 @@ import {UserService} from '../../../_services/user.service';
 import {User} from '../../../_models/user';
 import {AdoptRequestService} from '../../../_services/adopt-request.service';
 import {environment} from '../../../../environments/environment';
+import {Profile} from '../../../_models/profile';
 declare var $: any;
 
 @Component({
@@ -21,6 +22,7 @@ export class PetAdoptComponent implements OnInit {
     public adoptRequest: AdoptRequest = new AdoptRequest();
     public pet: Pet = new Pet();
     public user: User = new User();
+    public profile: Profile = new Profile();
 
     constructor(
         public utilsService: UtilsService,
@@ -41,6 +43,10 @@ export class PetAdoptComponent implements OnInit {
 
                 this.userService.current().then(user => {
                     this.user = user;
+
+                    this.userService.getProfile(this.user.email).subscribe(profiles => {
+                        this.profile = profiles[0] as Profile;
+                    });
                 }).catch(error => {
                     this.user = new User();
                 });
@@ -113,12 +119,12 @@ export class PetAdoptComponent implements OnInit {
     }
 
     sendEmailToUser() {
-        const title = '¡Hola ' + this.user.email + '!';
+        const title = '¡Hola ' + this.profile.name + '!';
         const description = 'Tu solicitud de adopción ha sido registrada exitosamente en la plataforma, '
             + 'nosotros te avisaremos si es aceptada o no.<br/><br/>¡Mucha suerte!';
 
         this.utilsService.sendMail(
-            environment.admin_mails,
+            [this.user.email],
             'Solicitud de adopción',
             title,
             description,

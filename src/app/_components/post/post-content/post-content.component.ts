@@ -3,7 +3,6 @@ import { Post } from '../../../_models/post';
 import { ActivatedRoute } from '@angular/router';
 import { UtilsService } from '../../../_services/utils.service';
 import { PostService } from '../../../_services/post.service';
-import { ShareButtons } from '@ngx-share/core';
 
 @Component({
     selector: 'app-post-content',
@@ -17,12 +16,11 @@ export class PostContentComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         public utilsService: UtilsService,
-        public postService: PostService,
-        public share: ShareButtons
+        public postService: PostService
     ) {}
 
     ngOnInit() {
-        this.description = 'Échale un vistazo a la publicación de Milagros del Rincón:';
+        this.description = 'Échale un vistazo a la publicación de Milagros del Rincón';
 
         this.route.params.subscribe(params => {
             const uid = params.uid;
