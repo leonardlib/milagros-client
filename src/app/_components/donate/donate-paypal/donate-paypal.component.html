@@ -11,41 +11,13 @@
         Puedes donar justo ahora mediante las tarjetas de crédito o débito participantes
         y/o a través de tu cuenta PayPal.
       </p>
-      <p class="left grey-text lighten-4 text-justify">
-        El nombre y correo electrónico sólamente son para fines de gratificación, puedes
-        realizar la donación sin escribirlos si así lo deseas.
-      </p>
     </div>
   </div>
   <div class="row">
     <div class="col s12 center-align">
       <form #donateForm="ngForm">
         <div class="row">
-          <div class="input-field col s12">
-            <input type="text" id="name" name="name" [(ngModel)]="donation.name" #nameInput="ngModel"/>
-            <label class="active" for="name" [class.active]="donation?.name">Nombre</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input type="email" id="email" name="email" [(ngModel)]="donation.email" #emailInput="ngModel" [email]="true"/>
-            <label class="active" for="name" [class.active]="donation?.email">Correo electrónico</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <label for="amount">Monto</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input class="font-xx-large border-bottom-0" id="amount" name="amount" currencyMask="" required="required" #amountInput="ngModel" [(ngModel)]="paypalConfig.transactions[0].amount.total" [options]="{ align: 'center', allowNegative: false }"/><span class="left grey-text lighten-4">El monto debe ser mayor o igual a $5.00 MXN</span>
-          </div>
-        </div>
-        <div class="row m-top-50p" *ngIf="paypalConfig?.transactions[0]?.amount?.total &gt;= 5">
-          <div class="col s12">
-            <ngx-paypal [config]="paypalConfig"></ngx-paypal>
-          </div>
+          <div class="col s12"><a class="btn btn-block waves-effect waves-block bg-primary white-text" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=4S8TUBSYQLEKS&amp;source=url">Donar</a></div>
         </div>
       </form>
     </div>

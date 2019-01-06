@@ -7,30 +7,10 @@
             p.text-justify
                 | Puedes donar justo ahora mediante las tarjetas de crédito o débito participantes
                 | y/o a través de tu cuenta PayPal.
-            p.left.grey-text.lighten-4.text-justify
-                | El nombre y correo electrónico sólamente son para fines de gratificación, puedes
-                | realizar la donación sin escribirlos si así lo deseas.
     .row
         .col.s12.center-align
             form(#donateForm="ngForm")
                 .row
-                    .input-field.col.s12
-                        input(type="text", id="name", name="name", [(ngModel)]="donation.name", #nameInput="ngModel")
-                        label.active(for="name", [class.active]="donation?.name") Nombre
-                .row
-                    .input-field.col.s12
-                        input(type="email", id="email", name="email", [(ngModel)]="donation.email", #emailInput="ngModel",
-                            [email]="true")
-                        label.active(for="name", [class.active]="donation?.email") Correo electrónico
-                .row
-                    .input-field.col.s12
-                        label(for="amount") Monto
-                .row
-                    .input-field.col.s12
-                        input.font-xx-large.border-bottom-0(id="amount", name="amount", currencyMask="",
-                            required, #amountInput="ngModel", [(ngModel)]="paypalConfig.transactions[0].amount.total",
-                            [options]="{ align: 'center', allowNegative: false }")
-                        span.left.grey-text.lighten-4 El monto debe ser mayor o igual a $5.00 MXN
-                .row.m-top-50p(*ngIf="paypalConfig?.transactions[0]?.amount?.total >= 5")
                     .col.s12
-                        ngx-paypal([config]="paypalConfig")
+                        a.btn.btn-block.waves-effect.waves-block.bg-primary.white-text(href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4S8TUBSYQLEKS&source=url")
+                            | Donar
