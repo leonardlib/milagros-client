@@ -26,9 +26,10 @@ ng-template(#itemTemplate="", let-index="index", let-type="type", let-data="data
                         .col.s12.white-text
                             h5 {{ pets[0]?.name }}
         .col.s12.m6
-            .col.s12.hvr-grow.m-top-10p.cursor-pointer.pet-card-2(
+            .col.s12.hvr-grow.m-top-10p.cursor-pointer(
                 [style.backgroundImage]="'url(' + pets[1]?.images[0]?.url + ')'",
-                (click)="petService.goToDetail(pets[1].uid)", *ngIf="pets?.length > 1")
+                (click)="petService.goToDetail(pets[1].uid)", *ngIf="pets?.length > 1",
+                [class.pet-card-1]="pets?.length === 2", [class.pet-card-2]="pets?.length > 2")
                 .container
                     .row.pet-card-detail.w-100
                         .col.s12.white-text
@@ -40,14 +41,14 @@ ng-template(#itemTemplate="", let-index="index", let-type="type", let-data="data
                     .row.pet-card-detail.w-100
                         .col.s12.white-text
                             h5 {{ pets[2]?.name }}
-    .row(*ngIf="pets?.length > 0")
+    .row(*ngIf="pets?.length > 3")
         .col.s12.center-align.m-top-10p
             a.text-primary.cursor-pointer([routerLink]="['/mascota']") Ver todas las mascotas
 
     // Posts
     .row(*ngIf="posts?.length > 0")
         .col.s12.text-primary.m-top-30p
-            h5 Artículos
+            h5 Artículos de blog
     .row(*ngIf="posts?.length > 0")
         .col.s12.m6.l4.m-top-10p.cursor-pointer(*ngFor="let post of posts", (click)="postService.goToDetail(post.uid)")
             .card.medium

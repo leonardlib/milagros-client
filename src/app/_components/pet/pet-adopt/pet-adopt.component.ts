@@ -132,7 +132,7 @@ export class PetAdoptComponent implements OnInit {
             ''
         ).then(res => {
             if (res) {
-                this.router.navigate(['/perfil/solicitudes']);
+                this.router.navigate(['/perfil']);
             } else {
                 this.utilsService.showSnackbar('Ocurrió un error al terminar tu solicitud, intenta de nuevo');
             }

@@ -4,6 +4,7 @@ import { Author } from '../_models/author';
 import { Observable } from 'rxjs';
 import { UtilsService } from './utils.service';
 import { Router } from '@angular/router';
+import {Post} from '../_models/post';
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +26,14 @@ export class AuthorService {
         return this.authors;
     }
 
+    show(uid: string) {
+        this.authorRef = this.fireDatabase.list<Author>(this.basePath, ref => {
+            return ref.orderByChild('uid').equalTo(uid);
+        });
+        this.authors = this.utilsService.setKeys(this.authorRef);
+        return this.authors;
+    }
+
     create(author: Author) {
         return new Promise(resolve => {
             this.authorRef = this.fireDatabase.list<Author>(this.basePath);
@@ -34,7 +43,7 @@ export class AuthorService {
                 let exists = false;
 
                 list.forEach(auxAuthor => {
-                    if (author.name.toLowerCase() === auxAuthor.name.toLowerCase()) {
+                    if (author.uid === auxAuthor.uid) {
                         exists = true;
                         return;
                     }

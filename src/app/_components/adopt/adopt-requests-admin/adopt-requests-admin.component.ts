@@ -11,6 +11,8 @@ import {Pet} from '../../../_models/pet';
 })
 export class AdoptRequestsAdminComponent implements OnInit {
     public adoptRequestsList: any = [];
+    public adoptRequestsListAdopted: any = [];
+    public noAdoptRequestsListAdopted: any = [];
 
     constructor(
         public adoptRequestService: AdoptRequestService,
@@ -30,6 +32,12 @@ export class AdoptRequestsAdminComponent implements OnInit {
         this.adoptRequestsList.forEach(adoptRequest => {
             this.petService.show(adoptRequest.pet_uid).subscribe(pets => {
                 adoptRequest['pet'] = pets[0] as Pet;
+
+                if (adoptRequest['pet'].adopted && adoptRequest.approved) {
+                    this.adoptRequestsListAdopted.push(adoptRequest);
+                } else {
+                    this.noAdoptRequestsListAdopted.push(adoptRequest);
+                }
             });
         });
     }

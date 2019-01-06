@@ -1,6 +1,11 @@
 
 <div class="container min-height-100vh">
   <div class="row m-top-30p">
+    <div class="col s12"><i class="fa fa-1-5x fa-circle waiting-color" *ngIf="!adoptRequest?.approved"></i><i class="fa fa-1-5x fa-circle orange-text" *ngIf="adoptRequest?.approved &amp;&amp; !pet?.adopted"></i><i class="fa fa-1-5x fa-circle success-color" *ngIf="adoptRequest?.approved &amp;&amp; pet?.adopted"></i>&nbsp;
+      &nbsp;<span *ngIf="!adoptRequest?.approved">No se ha aprobado</span><span *ngIf="adoptRequest?.approved &amp;&amp; !pet?.adopted">En proceso de adopción</span><span *ngIf="adoptRequest?.approved &amp;&amp; pet?.adopted">En un hogar responsable</span>
+    </div>
+  </div>
+  <div class="row">
     <div class="col s12 m3">
       <div class="row">
         <div class="col s12">

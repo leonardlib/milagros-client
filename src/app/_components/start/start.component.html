@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="col s12 m6">
-      <div class="col s12 hvr-grow m-top-10p cursor-pointer pet-card-2" [style.backgroundImage]="'url(' + pets[1]?.images[0]?.url + ')'" (click)="petService.goToDetail(pets[1].uid)" *ngIf="pets?.length &gt; 1">
+      <div class="col s12 hvr-grow m-top-10p cursor-pointer" [style.backgroundImage]="'url(' + pets[1]?.images[0]?.url + ')'" (click)="petService.goToDetail(pets[1].uid)" *ngIf="pets?.length &gt; 1" [class.pet-card-1]="pets?.length === 2" [class.pet-card-2]="pets?.length &gt; 2">
         <div class="container">
           <div class="row pet-card-detail w-100">
             <div class="col s12 white-text">
@@ -52,13 +52,13 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="pets?.length &gt; 0">
+  <div class="row" *ngIf="pets?.length &gt; 3">
     <div class="col s12 center-align m-top-10p"><a class="text-primary cursor-pointer" [routerLink]="['/mascota']">Ver todas las mascotas</a></div>
   </div>
   <!-- Posts-->
   <div class="row" *ngIf="posts?.length &gt; 0">
     <div class="col s12 text-primary m-top-30p">
-      <h5>Artículos</h5>
+      <h5>Artículos de blog</h5>
     </div>
   </div>
   <div class="row" *ngIf="posts?.length &gt; 0">

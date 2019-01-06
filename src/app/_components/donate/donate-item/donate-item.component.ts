@@ -65,7 +65,7 @@ export class DonateItemComponent implements OnInit {
     sendEmailToAdmin() {
         this.utilsService.showSnackbar('Notificando a Milagros del Rincón...');
 
-        const description = 'Alguien quiere donar algún artículo a Milagros del Rincón, '
+        const description = this.donation.name + ' quiere donar algún artículo a Milagros del Rincón, '
             + 'en cuanto puedas, entra a la plataforma, échale un vistazo y decide si aceptan o no.';
 
         this.utilsService.sendMail(
@@ -98,7 +98,7 @@ export class DonateItemComponent implements OnInit {
             ''
         ).then(res => {
             if (res) {
-                this.router.navigate(['/perfil']);
+                this.utilsService.showSnackbar('Hemos recibido tu solicitud, muy pronto nos pondremos en contacto contigo. ¡Gracias!');
             } else {
                 this.utilsService.showSnackbar('Ocurrió un error al terminar tu solicitud, intenta de nuevo');
             }

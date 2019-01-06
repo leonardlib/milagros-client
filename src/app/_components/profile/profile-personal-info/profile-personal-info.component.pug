@@ -34,14 +34,14 @@
                         span.grey-text.lighten-4(*ngIf="adoptForm.submitted && phoneInput.errors?.required") Ingresa un teléfono válido
                 .row
                     .input-field.col.s12
-                        label(for="official-id") Identificación oficial vigente
+                        label(for="official-id") Identificación oficial vigente (fotografía)
                 .row.m-top-50p
                     .col.s12
                         input-file(id="official-id", name="official-id", [(ngModel)]="officialIdList", [fileLimit]="1",
                             [sizeLimit]="2", (rejectedFile)="utilsService.rejectedFile()", [fileAccept]="'image/*'")
                 .row
                     .input-field.col.s12
-                        label(for="address-file") Comprobante de domicilio
+                        label(for="address-file") Comprobante de domicilio (fotografía)
                 .row.m-top-50p
                     .col.s12
                         input-file(id="address-file", name="address-file", [(ngModel)]="addressFileList", [fileLimit]="1",

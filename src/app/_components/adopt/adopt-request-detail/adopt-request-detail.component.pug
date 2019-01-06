@@ -1,5 +1,15 @@
 .container.min-height-100vh
     .row.m-top-30p
+        .col.s12
+            i.fa.fa-1-5x.fa-circle.waiting-color(*ngIf="!adoptRequest?.approved")
+            i.fa.fa-1-5x.fa-circle.orange-text(*ngIf="adoptRequest?.approved && !pet?.adopted")
+            i.fa.fa-1-5x.fa-circle.success-color(*ngIf="adoptRequest?.approved && pet?.adopted")
+            | &nbsp;
+            | &nbsp;
+            span(*ngIf="!adoptRequest?.approved") No se ha aprobado
+            span(*ngIf="adoptRequest?.approved && !pet?.adopted") En proceso de adopción
+            span(*ngIf="adoptRequest?.approved && pet?.adopted") En un hogar responsable
+    .row
         .col.s12.m3
             .row
                 .col.s12

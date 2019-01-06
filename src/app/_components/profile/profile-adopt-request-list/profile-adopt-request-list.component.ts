@@ -14,7 +14,8 @@ import {UtilsService} from '../../../_services/utils.service';
 })
 export class ProfileAdoptRequestListComponent implements OnInit {
     public user: User = new User();
-    public adoptRequestsList: any = [];
+    public adoptRequestsListAdopted: any = [];
+    public noAdoptRequestsListAdopted: any = [];
 
     constructor(
         private userService: UserService,
@@ -34,7 +35,12 @@ export class ProfileAdoptRequestListComponent implements OnInit {
 
                     this.petService.show(adoptRequest.pet_uid).subscribe(pets => {
                         adoptRequest['pet'] = pets[0] as Pet;
-                        this.adoptRequestsList.push(adoptRequest);
+
+                        if (adoptRequest['pet'].adopted && adoptRequest.approved) {
+                            this.adoptRequestsListAdopted.push(adoptRequest);
+                        } else {
+                            this.noAdoptRequestsListAdopted.push(adoptRequest);
+                        }
                     });
                 });
             });

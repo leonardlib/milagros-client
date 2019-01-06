@@ -38,22 +38,22 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <label for="official-id">Identificación oficial vigente</label>
+            <label for="official-id">Identificación oficial vigente (fotografía)</label>
           </div>
         </div>
         <div class="row m-top-50p">
           <div class="col s12">
-            <input-file id="official-id" name="official-id" [(ngModel)]="officialIdList" [fileLimit]="1" [sizeLimit]="2" (rejectedFile)="utilsService.rejectedFile()"></input-file>
+            <input-file id="official-id" name="official-id" [(ngModel)]="officialIdList" [fileLimit]="1" [sizeLimit]="2" (rejectedFile)="utilsService.rejectedFile()" [fileAccept]="'image/*'"></input-file>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <label for="address-file">Comprobante de domicilio</label>
+            <label for="address-file">Comprobante de domicilio (fotografía)</label>
           </div>
         </div>
         <div class="row m-top-50p">
           <div class="col s12">
-            <input-file id="address-file" name="address-file" [(ngModel)]="addressFileList" [fileLimit]="1" [sizeLimit]="2" (rejectedFile)="utilsService.rejectedFile()"></input-file>
+            <input-file id="address-file" name="address-file" [(ngModel)]="addressFileList" [fileLimit]="1" [sizeLimit]="2" (rejectedFile)="utilsService.rejectedFile()" [fileAccept]="'image/*'"></input-file>
           </div>
         </div>
         <div class="row m-top-50p p-bottom-5">

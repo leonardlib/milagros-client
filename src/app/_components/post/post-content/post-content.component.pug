@@ -8,7 +8,7 @@
     .row
         .col.s12
             blockquote.right(*ngIf="post?.main_image?.author?.social_link")
-                | Foto por&nbsp;
+                | Fotografía por&nbsp;
                 a.text-primary(href="{{ post?.main_image?.author?.social_link }}", target="_blank") @{{ post?.main_image?.author?.name }}
             blockquote.right(*ngIf="!post?.main_image?.author?.social_link") Foto por {{ post?.main_image?.author?.name }}
     .row

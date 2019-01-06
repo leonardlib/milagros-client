@@ -6,6 +6,7 @@ import { UtilsService } from './utils.service';
 import { Router } from '@angular/router';
 import { AuthorService } from './author.service';
 import * as moment from 'moment';
+import {Author} from '../_models/author';
 
 @Injectable({
     providedIn: 'root'
@@ -52,13 +53,21 @@ export class PostService {
 
                     // Save post and image authors
                     this.authorService.create(post.author).then(response => {
-                        this.authorService.create(post.main_image.author);
-                    });
+                        const author = response as Author;
+                        post.author_uid = author.uid;
 
-                    // Save post and set new key
-                    const newRef = this.postsRef.push(post);
-                    post.key = newRef.key;
-                    resolve(post);
+                        this.authorService.create(post.main_image.author).then(res3 => {
+                            const imgAuthor = res3 as Author;
+                            post.main_image.author_uid = imgAuthor.uid;
+
+                            // Save post and set new key
+                            delete post.author;
+                            delete post.main_image.author;
+                            const newRef = this.postsRef.push(post);
+                            post.key = newRef.key;
+                            resolve(post);
+                        });
+                    });
                 } else {
                     resolve(null);
                 }
@@ -80,20 +89,28 @@ export class PostService {
 
                         // Save post and image authors
                         this.authorService.create(post.author).then(response => {
-                            this.authorService.create(post.main_image.author);
-                        });
+                            const author = response as Author;
+                            post.author_uid = author.uid;
 
-                        // Update post info
-                        this.postsRef.update(post.key + '', {
-                            uid: post.uid,
-                            title: post.title,
-                            main_image: post.main_image,
-                            content: post.content,
-                            author: post.author,
-                            date: post.date
-                        });
+                            this.authorService.create(post.main_image.author).then(res3 => {
+                                const imgAuthor = res3 as Author;
+                                post.main_image.author_uid = imgAuthor.uid;
 
-                        resolve(post);
+                                // Update post info
+                                delete post.author;
+                                delete post.main_image.author;
+                                this.postsRef.update(post.key + '', {
+                                    uid: post.uid,
+                                    title: post.title,
+                                    main_image: post.main_image,
+                                    content: post.content,
+                                    author_uid: post.author_uid,
+                                    date: post.date
+                                });
+
+                                resolve(post);
+                            });
+                        });
                     } else {
                         resolve(null);
                     }

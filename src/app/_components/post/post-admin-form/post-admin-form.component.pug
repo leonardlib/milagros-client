@@ -15,13 +15,14 @@
                 .row
                     .col.s12
                         span.text-primary Autor de la publicación
-                        ng-select([items]="authors", [addTag]="true", bindLabel="name", [(ngModel)]="post.author.name",
-                            bindValue="name", [notFoundText]="'Sin autores, escribe para agregar'", id="author", name="author",
+                        ng-select([items]="authors", [addTag]="true", bindLabel="name", [ngModel]="post?.author?.name",
+                            (ngModelChange)="post.author.name = $event", bindValue="name",
+                            [notFoundText]="'Sin autores, escribe para agregar'", id="author", name="author",
                             [loading]="loading", [addTagText]="'Agregar autor'")
                 .row
                     .input-field.col.s12
                         input(type="text", id="social-link-post-author", name="social-link-post-author",
-                            [(ngModel)]="post.author.social_link", #socialLinkInput="ngModel")
+                            [ngModel]="post?.author?.social_link", (ngModelChange)="post.author.social_link = $event", #socialLinkInput="ngModel")
                         label(for="social-link-post-author", [class.active]="post?.author?.social_link") Red social del autor de la publicación
                 .row
                     .input-field.col.s12
@@ -32,13 +33,15 @@
                 .row
                     .col.s12
                         span.text-primary Autor de la imagen principal
-                        ng-select([items]="authors", [addTag]="true", bindLabel="name", [(ngModel)]="post.main_image.author.name",
+                        ng-select([items]="authors", [addTag]="true", bindLabel="name", [ngModel]="post?.main_image?.author?.name",
+                            (ngModelChange)="post.main_image.author.name = $event",
                             bindValue="name", [notFoundText]="'Sin autores, escribe para agregar'", id="author-2", name="author-2",
                             [loading]="loading", [addTagText]="'Agregar autor'")
                 .row
                     .input-field.col.s12
                         input.validate(type="text", id="social-link-image-author", name="social-link-image-author",
-                            [(ngModel)]="post.main_image.author.social_link", #socialLinkImageInput="ngModel")
+                            [ngModel]="post?.main_image?.author?.social_link", (ngModelChange)="post.main_image.author.social_link = $event",
+                            #socialLinkImageInput="ngModel")
                         label(for="social-link-image-author", [class.active]="post?.main_image?.author?.social_link") Red social del autor de la imagen
                 .row
                     .input-field.col.s12

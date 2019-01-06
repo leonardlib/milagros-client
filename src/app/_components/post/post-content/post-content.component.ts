@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../../../_models/post';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { UtilsService } from '../../../_services/utils.service';
 import { PostService } from '../../../_services/post.service';
+import {Author} from '../../../_models/author';
+import {AuthorService} from '../../../_services/author.service';
+import {MatDialog} from '@angular/material';
 
 @Component({
     selector: 'app-post-content',
@@ -16,7 +19,8 @@ export class PostContentComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         public utilsService: UtilsService,
-        public postService: PostService
+        public postService: PostService,
+        private authorService: AuthorService
     ) {}
 
     ngOnInit() {
@@ -27,8 +31,18 @@ export class PostContentComponent implements OnInit {
 
             this.utilsService.showSnackbar('Cargando...');
             this.postService.show(uid).subscribe(response => {
-                this.post = response[0] as Post;
+                this.post = new Post(response[0] as Post);
+                this.getAuthors();
             });
+        });
+    }
+
+    getAuthors() {
+        this.authorService.show(this.post.author_uid).subscribe(res => {
+            this.post.author = new Author(res[0] as Author);
+        });
+        this.authorService.show(this.post.main_image.author_uid).subscribe(res => {
+            this.post.main_image.author = new Author(res[0] as Author);
         });
     }
 }

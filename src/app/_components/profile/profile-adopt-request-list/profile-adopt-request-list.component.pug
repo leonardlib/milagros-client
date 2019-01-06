@@ -7,13 +7,21 @@
     .row(*ngIf="adoptRequestsList?.length > 0")
         .col.s12
             ul.collection
-                li.collection-item.avatar.cursor-pointer(*ngFor="let adoptRequest of adoptRequestsList",
+                li.collection-item.avatar.cursor-pointer(*ngFor="let adoptRequest of noAdoptRequestsListAdopted",
                     (click)="petService.goToDetail(adoptRequest['pet'].uid)")
                     img.circle(src="{{ adoptRequest?.pet?.images[0]?.url }}")
                     span.title {{ adoptRequest?.pet?.name }}
                     p.grey-text.lighten-4 {{ adoptRequest?.date | amLocale: 'es' | amDateFormat: 'LL' }}
                     a.secondary-content
-                        i.fa.fa-1-5x.fa-paw.waiting-color(*ngIf="!adoptRequest?.approved", matTooltip="En proceso de adopción",
+                        i.fa.fa-1-5x.fa-paw.waiting-color(*ngIf="!adoptRequest?.approved", matTooltip="No se ha aprobado",
                             [matTooltipPosition]="'above'")
-                        i.fa.fa-1-5x.fa-paw.success-color(*ngIf="adoptRequest?.approved", matTooltip="En un hogar responsable",
-                            [matTooltipPosition]="'above'")
+                        i.fa.fa-1-5x.fa-paw.orange-text(*ngIf="adoptRequest?.approved && !adoptRequest?.pet?.adopted",
+                            matTooltip="En proceso de adopción", [matTooltipPosition]="'above'")
+                li.collection-item.avatar.cursor-pointer(*ngFor="let adoptRequest of adoptRequestsListAdopted",
+                    (click)="petService.goToDetail(adoptRequest['pet'].uid)")
+                    img.circle(src="{{ adoptRequest?.pet?.images[0]?.url }}")
+                    span.title {{ adoptRequest?.pet?.name }}
+                    p.grey-text.lighten-4 {{ adoptRequest?.date | amLocale: 'es' | amDateFormat: 'LL' }}
+                    a.secondary-content
+                        i.fa.fa-1-5x.fa-paw.success-color(*ngIf="adoptRequest?.approved && adoptRequest?.pet?.adopted",
+                            matTooltip="En un hogar responsable", [matTooltipPosition]="'above'")

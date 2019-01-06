@@ -50,8 +50,9 @@ export class PetAdminListComponent implements OnInit {
     }
 
     onFilter(value: string) {
+        const val = value.toLowerCase();
         const data = this.temp.filter(d => {
-            return d.name.toLowerCase().indexOf(value) !== -1 || !value;
+            return d.name.toLowerCase().indexOf(val) !== -1 || !val;
         });
         this.rows = data;
         this.table.offset = 0;

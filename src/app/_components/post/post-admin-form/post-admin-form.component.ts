@@ -41,7 +41,8 @@ export class PostAdminFormComponent implements OnInit {
             if (uid) {
                 this.utilsService.showSnackbar('Cargando...');
                 this.postService.show(uid).subscribe(response => {
-                    this.post = response[0] as Post;
+                    this.post = new Post(response[0] as Post);
+                    this.getAuthors();
                     this.postService.getMainImagePreview(this.post).then(res => {
                         this.images[0] = res;
                     });
@@ -55,6 +56,15 @@ export class PostAdminFormComponent implements OnInit {
         });
     }
 
+    getAuthors() {
+        this.authorService.show(this.post.author_uid).subscribe(res => {
+            this.post.author = new Author(res[0] as Author);
+        });
+        this.authorService.show(this.post.main_image.author_uid).subscribe(res => {
+            this.post.main_image.author = new Author(res[0] as Author);
+        });
+    }
+
     onSubmit() {
         if (this.validData()) {
             this.utilsService.showSnackbar('Guardando...');
@@ -65,7 +75,7 @@ export class PostAdminFormComponent implements OnInit {
 
                 this.postService.update(this.post).then(response => {
                     if (response) {
-                        this.post = response as Post;
+                        this.post = new Post(response as Post);
                         this.utilsService.showSnackbar('La publicación ha sido guardada');
                     } else {
                         this.utilsService.showSnackbar('Ocurrió un error al guardar. Intenta de nuevo');
@@ -75,8 +85,9 @@ export class PostAdminFormComponent implements OnInit {
                 this.post.main_image.file = this.images[0].file;
                 this.postService.create(this.post).then(response => {
                     if (response) {
-                        this.post = response as Post;
+                        this.post = new Post(response as Post);
                         this.editar = true;
+                        this.getAuthors();
                         this.utilsService.showSnackbar('La publicación ha sido guardada');
                     } else {
                         this.utilsService.showSnackbar('Ocurrió un error al guardar. Intenta de nuevo');

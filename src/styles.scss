@@ -487,6 +487,8 @@ p > img {
 }
 /* End of cover images */
 
+/* Background images in auth pages */
+/*
 @media only screen and (max-width: 768px) {
     .bg-image-1 {
         background: white none !important;
@@ -500,6 +502,7 @@ p > img {
         background: white none !important;
     }
 }
+*/
 
 .middle-component {
     position: absolute;
@@ -534,4 +537,8 @@ p > img {
 
 .border-bottom-0 {
     border-bottom: none !important;
+}
+
+.drag-target {
+    display: none !important;
 }
