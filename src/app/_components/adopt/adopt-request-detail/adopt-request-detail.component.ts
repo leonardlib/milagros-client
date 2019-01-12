@@ -102,8 +102,9 @@ export class AdoptRequestDetailComponent implements OnInit {
     sendEmailToUser() {
         const title = '¡Hola ' + this.profile.name + '!';
         const description = 'Tu solicitud de adopción de la mascota "' + this.pet.name
-            + '" ha sido revisada y aprobada, tienes 10 días para pasar por ella a la dirección que aparece más abajo'
-            + ' o envianos un correo a adopciones@milagrosdelrincon.mx si te gustaría que nosotros la llevemos.<br/><br/>¡Muchas gracias!';
+            + '" ha sido revisada y aprobada, tienes 10 días para pasar por ella a la dirección que aparece más abajo. Es necesario '
+            + 'que descargues el contrato de adopción que anexamos en este correo y lo entregues firmado el día que nos visites.'
+            + '<br/><br/>¡Muchas gracias!';
 
         this.utilsService.sendMail(
             [this.profile.user_email],
@@ -111,7 +112,8 @@ export class AdoptRequestDetailComponent implements OnInit {
             title,
             description,
             'Ver mi adopción',
-            ''
+            '',
+            true
         ).then(res => {
             if (res) {
                 this.utilsService.showSnackbar('Se aprobó la solicitud y se notificó al usuario.');

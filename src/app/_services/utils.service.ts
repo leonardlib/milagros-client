@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/storage';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {ResponseContentType} from '@angular/http';
 declare var $: any;
 
 @Injectable({
@@ -223,7 +224,7 @@ export class UtilsService {
         });
     }
 
-    sendMail(to: any, subject: string, title: string, content: string, button: string, href: string) {
+    sendMail(to: any, subject: string, title: string, content: string, button: string, href: string, send_contract: boolean = false) {
         return new Promise(resolve => {
             const httpOptions = {
                 headers: new HttpHeaders({
@@ -262,13 +263,42 @@ export class UtilsService {
                     }]
                 };
 
-                this.http.post(environment.sendgrid.send_url, emailData, httpOptions).subscribe(response => {
-                    if (response === null) {
-                        resolve(true);
-                    } else {
-                        resolve(false);
-                    }
-                });
+                if (send_contract) {
+                    const path = 'assets/docs/contrato_adopcion_pdf.pdf';
+                    const name = 'contrato_adopcion.pdf';
+
+                    this.getFileFromUrl(path, name).then(resp => {
+                        const res = resp as File;
+
+                        this.getDataURLFromFile(res).then(respo => {
+                            const varchar = '' + respo;
+                            const base64 = varchar.split(',')[1];
+
+                            emailData['attachments'] = [{
+                                content: base64,
+                                type: 'text/pdf',
+                                filename: name,
+
+                            }];
+
+                            this.http.post(environment.sendgrid.send_url, emailData, httpOptions).subscribe(response => {
+                                if (response === null) {
+                                    resolve(true);
+                                } else {
+                                    resolve(false);
+                                }
+                            });
+                        });
+                    });
+                } else {
+                    this.http.post(environment.sendgrid.send_url, emailData, httpOptions).subscribe(response => {
+                        if (response === null) {
+                            resolve(true);
+                        } else {
+                            resolve(false);
+                        }
+                    });
+                }
             });
         });
     }
